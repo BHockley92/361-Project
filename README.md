@@ -21,8 +21,7 @@ Include a breif description of all work done and more specifically, include whet
 
 If you would like further clarification, please email [me](mailto://bhockley92@gmail.com).
 
-Teamwork & Project Practices
-=======================
+###Teamwork & Project Practices
 
 Since this course involves doing most of the design, planning, architecture etc much in advance, we will implement only a subset of the [Agile][1] method of development, that is:
 
@@ -32,8 +31,7 @@ Since this course involves doing most of the design, planning, architecture etc 
 
 Additionally, everyone will share the same **style rules** (TBD), so as to not make git have an epileptic fit due to code formatting, and the **Dev** branch will undergo [Continuous Integration][2], making sure no tests break, style is respected, and other features which will depend on language and tools used.
 
-Source Control
-============
+###Source Control
 
 Benjamin's Workflow is great, so follow that one. Here's a few details on how you do it:
 
@@ -46,16 +44,14 @@ Benjamin's Workflow is great, so follow that one. Here's a few details on how yo
   - If all tests pass, create a **Pull Request** to Dev.
   - Someone else must then review the changes before accepting and merging the pull request.
 
-Definition of Done
-==============
+###Definition of Done
 
 - All tests pass.
 - The new code is covered by new test cases.
 - If the End User can verify this functionality, it must be acceptance tested by another team member.
 - The code conforms to style guidelines.
 
-Coding Practices
-=============
+###Coding Practices
 
 TBD
 
