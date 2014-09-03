@@ -3,7 +3,7 @@
 
 Where all of the information from our project will be stored.
 
-###Workflow:
+###Workflow
 The workflow we will be using is described in the image below.
 
 ![github workflow](http://nvie.com/img/2009/12/Screen-shot-2009-12-24-at-11.32.03.png)
