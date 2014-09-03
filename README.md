@@ -25,7 +25,7 @@ If you would like further clarification, please email [me](mailto://bhockley92@g
 
 Since this course involves doing most of the design, planning, architecture etc much in advance, we will implement only a subset of the [Agile][1] method of development, that is:
 
-- **Sprints** (2 weeks) and **sprint planning** meetings (once a week, at the beginning of the sprint).
+- **Sprints** (2 weeks) and **sprint planning** meetings (at the beginning of the sprint).
 - Work units divided into **Tasks** lasting < 8 hour, tracked on some kind of board with statuses (to do, ongoing, testing, done, ...)
 - **Test-driven development** (i.e. write the tests before the bulk of your code).
 
