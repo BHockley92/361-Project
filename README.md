@@ -1,7 +1,7 @@
 361-Project
 ===========
 
-Where all of the information from our project will be stored.
+Where all of the information for our project will be stored.
 
 ###Workflow
 The workflow we will be using is described in the image below.
