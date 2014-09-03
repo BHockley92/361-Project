@@ -35,7 +35,7 @@ Additionally, everyone will share the same **style rules** (TBD), so as to not m
 
 Benjamin's Workflow is great, so follow that one. Here's a few details on how you do it:
 
-- **Master** branch is (ideally) bug free, containing tested and approved changes. This one rarely gets updated until nearing project completion.
+- **Master** branch is (ideally) bug free, containing tested and approved changes. This one rarely gets updated until major feature completion.
 - **Dev** branch containing approved changes, but not acceptance tested (prone to bugs from pull requests not thoroughly tested, which happens).
 - Branches for each **Task** (ideally a task is not strongly linked to another, but often this happens, giving a branch for a cluster of similar Tasks).
 - When your Task is **Done** (see Definition of Done, below), you may:
