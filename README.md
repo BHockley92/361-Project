@@ -56,5 +56,9 @@ Benjamin's Workflow is great, so follow that one. Here's a few details on how yo
 
 TBD
 
+###Development Management
+
+For ease of tracking development tasks and task assignment, we will be using Trello. Create an account [here](https://trello.com/signup) and [email](mailto://bhockley92@gmail.com) or message Ben with your Trello username (found by clicking on the nameplate in the top right, and then clicking on profile) to be added to the board.
+
 [1]: http://en.wikipedia.org/wiki/Agile_software_development
 [2]: http://en.wikipedia.org/wiki/Continuous_integration
