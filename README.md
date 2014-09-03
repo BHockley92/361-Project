@@ -27,7 +27,7 @@ Since this course involves doing most of the design, planning, architecture etc 
 
 - **Sprints** (2 weeks) and **sprint planning** meetings (at the beginning of the sprint).
 - Work units divided into **Tasks** lasting < 8 hour, tracked on some kind of board with statuses (to do, ongoing, testing, done, ...)
-- Weekly Scrum meetings, to talk about the work done and to do, and discuss any problems encountered or side-effects others should be aware of.
+- Weekly **Scrum meetings**, to talk about the work done and to do, and discuss any problems encountered or side-effects others should be aware of.
 - **Test-driven development** (i.e. write the tests before the bulk of your code).
 
 Additionally, everyone will share the same **style rules** (TBD), so as to not make git have an epileptic fit due to code formatting, and the **Dev** branch will undergo [Continuous Integration][2], making sure no tests break, style is respected, and other features which will depend on language and tools used.
