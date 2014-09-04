@@ -17,7 +17,7 @@ Since we are not using an API, it will be adjusted as follows for software.
 3. Bug fixes (Game no longer crashes when clicking enter) will move a version from 1.1.1 to 1.1.2
 
 Note: When submitting, a description of the submission is **REQUIRED**
-Include a breif description of all work done and more specifically, include whether you have made a bug fix, a feature addition, or an overhaul/addition of a system.
+Include a brief description of all work done and more specifically, include whether you have made a bug fix, a feature addition, or an overhaul/addition of a system.
 
 If you would like further clarification, please email [me](mailto://bhockley92@gmail.com).
 
