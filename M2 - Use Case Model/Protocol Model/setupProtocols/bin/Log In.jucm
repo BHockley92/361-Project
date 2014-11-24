@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ucm.map="http:///ucm/map.ecore" xmlns:urn="http:///urn.ecore" name="URNspec" author="Nathan" created="November 15, 2014 3:16:26 PM EST" modified="November 22, 2014 9:36:01 PM EST" specVersion="6" urnVersion="1.27" nextGlobalID="171">
+  <ucmspec>
+    <scenarioGroups name="ScenarioGroup5" id="5">
+      <scenarios name="ScenarioDef6" id="6"/>
+    </scenarioGroups>
+  </ucmspec>
+  <grlspec>
+    <groups name="StrategiesGroup3" id="3" strategies="4"/>
+    <strategies name="EvaluationStrategy4" id="4" author="Nathan" group="3"/>
+    <impactModel/>
+    <indicatorGroup name="Time" id="7" isRedesignCategory="true"/>
+    <indicatorGroup name="Cost" id="8" isRedesignCategory="true"/>
+    <indicatorGroup name="Quality" id="9" isRedesignCategory="true"/>
+    <indicatorGroup name="Flexibility" id="10" isRedesignCategory="true"/>
+    <featureModel/>
+  </grlspec>
+  <urndef>
+    <responsibilities name="LogInCredentials «in»" id="24" respRefs="25"/>
+    <responsibilities name="ValidateCredentials «in»" id="30" respRefs="31"/>
+    <responsibilities name="ValidLogin «out»" id="38" respRefs="39"/>
+    <responsibilities name="RequestValidation «out»" id="40" respRefs="41"/>
+    <responsibilities name="InvalidLoginMessage «out»" id="165" respRefs="166"/>
+    <specDiagrams xsi:type="ucm.map:UCMmap" name="UCMmap2" id="2">
+      <nodes xsi:type="ucm.map:StartPoint" name="Start" id="12" x="119" y="184" succ="//@urndef/@specDiagrams.0/@connections.0">
+        <label/>
+        <precondition deltaX="40" deltaY="-17" label="" expression="true"/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EndPoint" name="Success" id="14" x="100" y="251" pred="//@urndef/@specDiagrams.0/@connections.3">
+        <label/>
+        <postcondition deltaX="-40" deltaY="-20" label="" expression="true"/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef25" id="25" x="343" y="152" contRef="17" succ="//@urndef/@specDiagrams.0/@connections.1" pred="//@urndef/@specDiagrams.0/@connections.7" respDef="24">
+        <label deltaX="31" deltaY="10"/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef31" id="31" x="1030" y="183" contRef="19" succ="//@urndef/@specDiagrams.0/@connections.2" pred="//@urndef/@specDiagrams.0/@connections.4" respDef="30">
+        <label deltaX="-10" deltaY="29"/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef39" id="39" x="332" y="279" contRef="17" succ="//@urndef/@specDiagrams.0/@connections.3" pred="//@urndef/@specDiagrams.0/@connections.10" respDef="38">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef41" id="41" x="616" y="134" succ="//@urndef/@specDiagrams.0/@connections.4" pred="//@urndef/@specDiagrams.0/@connections.12" respDef="40">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork50" id="50" x="905" y="257" contRef="19" succ="//@urndef/@specDiagrams.0/@connections.5 //@urndef/@specDiagrams.0/@connections.6" pred="//@urndef/@specDiagrams.0/@connections.8"/>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin156" id="156" x="251" y="181" contRef="17" succ="//@urndef/@specDiagrams.0/@connections.7" pred="//@urndef/@specDiagrams.0/@connections.0 //@urndef/@specDiagrams.0/@connections.11"/>
+      <nodes xsi:type="ucm.map:DirectionArrow" name="DirectionArrow157" id="157" x="1023" y="256" contRef="19" succ="//@urndef/@specDiagrams.0/@connections.8" pred="//@urndef/@specDiagrams.0/@connections.2"/>
+      <nodes xsi:type="ucm.map:DirectionArrow" name="DirectionArrow158" id="158" x="658" y="226" succ="//@urndef/@specDiagrams.0/@connections.9" pred="//@urndef/@specDiagrams.0/@connections.6"/>
+      <nodes xsi:type="ucm.map:DirectionArrow" name="DirectionArrow159" id="159" x="566" y="297" succ="//@urndef/@specDiagrams.0/@connections.10" pred="//@urndef/@specDiagrams.0/@connections.5"/>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef166" id="166" x="455" y="205" contRef="17" succ="//@urndef/@specDiagrams.0/@connections.11" pred="//@urndef/@specDiagrams.0/@connections.9" respDef="165">
+        <label deltaX="36" deltaY="-37"/>
+      </nodes>
+      <nodes xsi:type="ucm.map:DirectionArrow" name="DirectionArrow170" id="170" x="454" y="136" contRef="17" succ="//@urndef/@specDiagrams.0/@connections.12" pred="//@urndef/@specDiagrams.0/@connections.1"/>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef17" id="17" x="196" y="51" width="324" height="285" contDef="16" nodes="25 39 156 166 170">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef19" id="19" x="776" y="46" width="405" height="312" contDef="18" nodes="31 50 157">
+        <label/>
+      </contRefs>
+      <connections xsi:type="ucm.map:NodeConnection" source="12" target="156"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="25" target="170"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="31" target="157"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="39" target="14"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="41" target="31"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="50" target="159">
+        <condition deltaX="117" deltaY="-22" label="credentials valid" expression="true" description=""/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="50" target="158">
+        <condition deltaX="129" deltaY="51" label="credentials not valid" expression="true" description=""/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="156" target="25"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="157" target="50"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="158" target="166"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="159" target="39"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="166" target="156"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="170" target="41"/>
+    </specDiagrams>
+    <components name="User" id="16" contRefs="17" kind="Actor"/>
+    <components name="Matchmaking Server" id="18" contRefs="19" kind="Actor"/>
+  </urndef>
+  <metadata name="_Use0to100EvaluationRange" value="false"/>
+</urn:URNspec>

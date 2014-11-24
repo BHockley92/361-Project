@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;setupProtocols/src/Join Game Lobby.jucm&apos; to &apos;Create Account.jucm&apos;" description="Rename resource &apos;Join Game Lobby.jucm&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Join Game Lobby.jucm" name="Create Account.jucm" stamp="1416087709937" updateReferences="true"/>
+</session>

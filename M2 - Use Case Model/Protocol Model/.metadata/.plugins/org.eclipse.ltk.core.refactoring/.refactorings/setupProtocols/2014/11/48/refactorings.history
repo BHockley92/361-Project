@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;setupProtocols/src/Play Turn v2.jucm&apos; to &apos;Play Turn.jucm&apos;" description="Rename resource &apos;Play Turn v2.jucm&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Play Turn v2.jucm" name="Play Turn.jucm" stamp="1416775982559" updateReferences="true"/>
+</session>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;setupProtocols/src/Summary.jucm&apos; to &apos;Win Game.jucm&apos;" description="Rename resource &apos;Summary.jucm&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Summary.jucm" name="Win Game.jucm" stamp="1416280913334" updateReferences="true"/>
+</session>
