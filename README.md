@@ -6,7 +6,7 @@ Where all of the information for our project will be stored.
 ###Workflow
 The workflow we will be using is described in the image below.
 
-![github workflow](http://nvie.com/img/2009/12/Screen-shot-2009-12-24-at-11.32.03.png)
+![github workflow](http://1.bp.blogspot.com/-ct9MmWf5gJk/U2Pe9V8A5GI/AAAAAAAAAT0/0Y-XvAb9RB8/s1600/gitflow-orig-diagram.png)
 
 To accompany this, we will be using semantic versioning with slight modifications. The outline of semantic versioning can be found [here](http://semver.org/). 
 
