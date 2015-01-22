@@ -41,28 +41,18 @@ public class HostScript : Photon.MonoBehaviour
 		if (Input.GetKey(KeyCode.Space))
 		{
 			photonView.RPC("nextTurn", PhotonTargets.All, PhotonNetwork.player.ID);
+			isMyTurn = false;
 		}
 	}
 
 	[RPC] void nextTurn(int id)
 	{
-		// I pressed the button
-		if (id == PhotonNetwork.player.ID) 
+		isMyTurn = true;
+		Debug.Log("Turn start");
+		if(photonView.isMine)
 		{
-			isMyTurn = false;
-			Debug.Log("Turn Over.");
+			Debug.Log("Still mine.");
 		}
-
-		// Another player called it
-		else
-		{
-			isMyTurn = true;
-			Debug.Log("Turn start");
-			if(photonView.isMine)
-			{
-				Debug.Log("Still mine.");
-			}
-			else{ Debug.Log("not mine");}
-		}
+		else{ Debug.Log("not mine");}
 	}
 }
