@@ -5,19 +5,16 @@ public class HostScript : Photon.MonoBehaviour
 {
 	public float speed = 10f;
 	volatile bool isMyTurn = true;
-	private int x;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		isMyTurn = true;
-		x = 0;
 	}
 	
 	// Update is called once per frame
 	void Update()
 	{
-		Debug.Log (x+": "+"Photon View is Mine: " + photonView.isMine + " Turn: " + isMyTurn);
-		x++;
 		if (photonView.isMine && isMyTurn)
 		{
 			InputMovement();
@@ -42,6 +39,7 @@ public class HostScript : Photon.MonoBehaviour
 		{
 			photonView.RPC("nextTurn", PhotonTargets.All, PhotonNetwork.player.ID);
 			isMyTurn = false;
+			Debug.Log ("Space Pressed: Is it my turn? " + isMyTurn);
 		}
 	}
 
