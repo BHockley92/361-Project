@@ -22,6 +22,7 @@ ExportedObj/
 *.user
 *.unityproj
 *.booproj
+*.dll
 
 # ============ #
 # OS generated #
