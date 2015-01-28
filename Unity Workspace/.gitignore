@@ -1,17 +1,17 @@
 # =============== #
 # Unity generated #
 # =============== #
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Ll]ibrary/
-[Pp]rojectSettings/
+Temp/
+Obj/
+Build/
+Library/
+ProjectSettings/
 sysinfo.txt
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
-[Ee]xported[Oo]bj/
+ExportedObj/
 /*.userprefs
 /*.csproj
 /*.pidb
@@ -30,4 +30,4 @@ sysinfo.txt
 .Trashes
 Icon?
 ehthumbs.db
-[Tt]humbs.db
+Thumbs.db
