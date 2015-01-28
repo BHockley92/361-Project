@@ -3,8 +3,9 @@
 # =============== #
 [Tt]emp/
 [Oo]bj/
-[Bb]uild
+[Bb]uild/
 [Ll]ibrary/
+[Pp]rojectSettings/
 sysinfo.txt
  
 # ===================================== #
