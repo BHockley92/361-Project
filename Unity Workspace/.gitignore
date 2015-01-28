@@ -6,6 +6,7 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
+ProjectSettings
 Assets/AssetStoreTools*
 
 # ===================================== #
