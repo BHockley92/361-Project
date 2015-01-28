@@ -48,6 +48,9 @@
   <ItemGroup>
      <Compile Include="Assets\HostScript.cs" />
      <Compile Include="Assets\NetworkManagerScript.cs" />
+     <Compile Include="Assets\Networking\Host.cs" />
+     <Compile Include="Assets\Networking\Player.cs" />
+     <Compile Include="Assets\Networking\RoomManager.cs" />
      <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\Demo2DJumpAndRun.cs" />
      <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\JumpAndRunMovement.cs" />
      <Compile Include="Assets\Photon Unity Networking\Demos\DemoBoxes\DemoBoxesGui.cs" />
