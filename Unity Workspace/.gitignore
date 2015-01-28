@@ -3,28 +3,29 @@
 # =============== #
 Temp/
 Obj/
-Build/
+UnityGenerated/
 Library/
-ProjectSettings/
-sysinfo.txt
- 
+Assets/AssetStoreTools*
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 ExportedObj/
-/*.userprefs
-/*.csproj
-/*.pidb
-/*.suo
-/*.sln*
-/*.user
-/*.unityproj
-/*.booproj
- 
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
 # ============ #
 # OS generated #
 # ============ #
-.DS_Store*
+.DS_Store
+.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
