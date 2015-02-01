@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_3VCSYIgoEeGxqtZ4yVqVGg" name="Outpath">
+  <structuralView xmi:id="_o7LokIr0EeGP-shl74zfPQ">
+    <classes xsi:type="ram:Class" xmi:id="_rrMSEIr0EeGP-shl74zfPQ" name="ICFNWithOutpaths" partial="true" superTypes="_g5YAEI7rEeGsMYoV23JA9Q">
+      <operations xmi:id="_E9jHIIr1EeGP-shl74zfPQ" name="addNextNode" returnType="_JWFNoIr1EeGP-shl74zfPQ">
+        <parameters xmi:id="_W7NmkIr1EeGP-shl74zfPQ" name="outpathName" type="_K1-TEIr1EeGP-shl74zfPQ"/>
+        <parameters xmi:id="_XawCQIr1EeGP-shl74zfPQ" name="n" type="_hii44I7rEeGsMYoV23JA9Q"/>
+      </operations>
+      <operations xmi:id="_FUH0EIr1EeGP-shl74zfPQ" name="getOutpath" returnType="_r_K-AIr0EeGP-shl74zfPQ">
+        <parameters xmi:id="_gUXHQIr1EeGP-shl74zfPQ" name="outPathname" type="_K1-TEIr1EeGP-shl74zfPQ"/>
+      </operations>
+      <operations xmi:id="_FoBAcIr1EeGP-shl74zfPQ" name="addOutpath" visibility="package" returnType="_JWFNoIr1EeGP-shl74zfPQ">
+        <parameters xmi:id="_lKFgEIr1EeGP-shl74zfPQ" name="pathname" type="_K1-TEIr1EeGP-shl74zfPQ"/>
+        <parameters xmi:id="_llRnQIr1EeGP-shl74zfPQ" name="n" type="_r_K-AIr0EeGP-shl74zfPQ"/>
+      </operations>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_r_K-AIr0EeGP-shl74zfPQ" name="OutpathNode" superTypes="_gSAeEI7rEeGsMYoV23JA9Q">
+      <operations xmi:id="_sWAqYIyZEeGP-shl74zfPQ" name="create" returnType="_r_K-AIr0EeGP-shl74zfPQ" operationType="Constructor">
+        <parameters xmi:id="_zDTBwIyZEeGP-shl74zfPQ" name="outpathName" type="_K1-TEIr1EeGP-shl74zfPQ"/>
+      </operations>
+      <operations xmi:id="_EpxEwPisEeG9pr3sNUE5Qg" name="getName" returnType="_K1-TEIr1EeGP-shl74zfPQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_gSAeEI7rEeGsMYoV23JA9Q" name="SequenceNode"/>
+    <classes xsi:type="ram:Class" xmi:id="_g5YAEI7rEeGsMYoV23JA9Q" name="ControlFlowNode"/>
+    <classes xsi:type="ram:Class" xmi:id="_hii44I7rEeGsMYoV23JA9Q" name="WorkflowNode"/>
+    <types xsi:type="ram:RVoid" xmi:id="_JWFNoIr1EeGP-shl74zfPQ"/>
+    <types xsi:type="ram:RString" xmi:id="_K1-TEIr1EeGP-shl74zfPQ"/>
+    <types xsi:type="ram:RAny" xmi:id="_80mmgZRqEeG9isvLd_SRiA"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_80mmgpRqEeG9isvLd_SRiA"/>
+    <types xsi:type="ram:RInt" xmi:id="_80nNkJRqEeG9isvLd_SRiA"/>
+    <types xsi:type="ram:RChar" xmi:id="_80nNkZRqEeG9isvLd_SRiA"/>
+    <types xsi:type="ram:RDouble" xmi:id="_8n9aMNHjEeKndf5avu7gLg"/>
+    <types xsi:type="ram:RFloat" xmi:id="_9a_ZoNHjEeKndf5avu7gLg"/>
+  </structuralView>
+  <instantiations xmi:id="_uB9ckYyeEeGpeIH37hJjzg" type="Extends">
+    <externalAspect href="Workflow.ram#_stle2XdvEeGm3uH8rYfPgw"/>
+  </instantiations>
+  <instantiations xmi:id="_-RMgUJRqEeG9isvLd_SRiA">
+    <mappings xmi:id="_-RNucJRqEeG9isvLd_SRiA" toElement="_r_K-AIr0EeGP-shl74zfPQ">
+      <operationMappings xmi:id="_yKW_UYenEeKTv80NEhfqQQ" toElement="_EpxEwPisEeG9pr3sNUE5Qg">
+        <fromElement href="../util/Named.ram#_coJYcIybEeGP-shl74zfPQ"/>
+      </operationMappings>
+      <fromElement xsi:type="ram:Class" href="../util/Named.ram#_aKtFoIybEeGP-shl74zfPQ"/>
+    </mappings>
+    <externalAspect href="../util/Named.ram#_SrF5cIybEeGP-shl74zfPQ"/>
+  </instantiations>
+  <layout xmi:id="_oHwnYfisEeGiPPsHO0E-HQ">
+    <containers xmi:id="_oHwnYvisEeGiPPsHO0E-HQ" key="_o7LokIr0EeGP-shl74zfPQ">
+      <value xmi:id="_oHwnY_isEeGiPPsHO0E-HQ" key="_rrMSEIr0EeGP-shl74zfPQ">
+        <value xmi:id="_oHwnZPisEeGiPPsHO0E-HQ" x="108.98886" y="362.4292"/>
+      </value>
+      <value xmi:id="_oHwnZfisEeGiPPsHO0E-HQ" key="_r_K-AIr0EeGP-shl74zfPQ">
+        <value xmi:id="_oHwnZvisEeGiPPsHO0E-HQ" x="778.9893" y="358.49005"/>
+      </value>
+      <value xmi:id="_oHwnZ_isEeGiPPsHO0E-HQ" key="_g5YAEI7rEeGsMYoV23JA9Q">
+        <value xmi:id="_oHwnaPisEeGiPPsHO0E-HQ" x="277.9895" y="210.4892"/>
+      </value>
+      <value xmi:id="_oHwnafisEeGiPPsHO0E-HQ" key="_gSAeEI7rEeGsMYoV23JA9Q">
+        <value xmi:id="_oHwnavisEeGiPPsHO0E-HQ" x="890.9892" y="207.48988"/>
+      </value>
+      <value xmi:id="_oHwna_isEeGiPPsHO0E-HQ" key="_hii44I7rEeGsMYoV23JA9Q">
+        <value xmi:id="_oHwnbPisEeGiPPsHO0E-HQ" x="603.9892" y="210.48933"/>
+      </value>
+    </containers>
+  </layout>
+</ram:Aspect>

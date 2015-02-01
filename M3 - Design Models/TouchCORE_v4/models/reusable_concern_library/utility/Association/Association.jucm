@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ASCII"?>
+<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="http:///fm.ecore" xmlns:grl="http:///grl.ecore" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmlns:urn="http:///urn.ecore" name="URNspec" author="CORE" created="September 24, 2014 2:21:02 PM EDT" modified="September 24, 2014 2:21:02 PM EDT" urnVersion="1.27" nextGlobalID="41">
+  <ucmspec>
+    <scenarioGroups name="ScenarioGroup5" id="5">
+      <scenarios name="ScenarioDef6" id="6"/>
+    </scenarioGroups>
+  </ucmspec>
+  <grlspec>
+    <intElements xsi:type="fm:Feature" name="Association" id="11" linksDest="17 20 35" type="Task" decompositionType="Xor" refs="12">
+      <realizedBy xsi:type="ram:Aspect" href="Association.ram#_mDv4YEQ1EeSSfO86-u_zzA"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="Ordered" id="15" linksDest="23 26" linksSrc="17" type="Task" decompositionType="Xor" refs="16">
+      <realizedBy xsi:type="ram:Aspect" href="Ordered.ram#_tpbwUNxLEeOnIsad9LWapQ"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="Unordered" id="18" linksDest="29 32" linksSrc="20" type="Task" decompositionType="Xor" refs="19">
+      <realizedBy xsi:type="ram:Aspect" href="Unordered.ram#_Z3l1INxZEeOLe_W5cUN4CA"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="ArrayList" id="21" linksSrc="23" type="Task" refs="22">
+      <realizedBy xsi:type="ram:Aspect" href="ArrayList.ram#_zWzAQNrhEeOjbYigm5_oCw"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="LinkedList" id="24" linksSrc="26" type="Task" refs="25">
+      <realizedBy xsi:type="ram:Aspect" href="LinkedList.ram#_oVh0cNxQEeOnIsad9LWapQ"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="HashSet" id="27" linksSrc="29" type="Task" refs="28">
+      <realizedBy xsi:type="ram:Aspect" href="HashSet.ram#_01Jl4NrnEeOwm7v1Cdkh_g"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="TreeSet" id="30" linksSrc="32" type="Task" refs="31">
+      <realizedBy xsi:type="ram:Aspect" href="TreeSet.ram#_QxfNkNrrEeOiKaOAPqVfuA"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="KeyIndexed" id="33" linksDest="38 41" linksSrc="35" type="Task" decompositionType="Xor" refs="34">
+      <realizedBy xsi:type="ram:Aspect" href="KeyIndexed.ram#__rlwYNxaEeOLe_W5cUN4CA"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="TreeMap" id="36" linksSrc="38" type="Task" refs="37">
+      <realizedBy xsi:type="ram:Aspect" href="TreeMap.ram#_MS_cAOBcEeO79rVsrluJOQ"/>
+    </intElements>
+    <intElements xsi:type="fm:Feature" name="HashMap" id="39" linksSrc="41" type="Task" refs="40">
+      <realizedBy xsi:type="ram:Aspect" href="HashMap.ram#_PD6TUNxdEeOWzK3gwh7MSw"/>
+    </intElements>
+    <links xsi:type="grl:Decomposition" name="Decomposition17" id="17" refs="//@urndef/@specDiagrams.0/@connections.0" dest="11" src="15"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition20" id="20" refs="//@urndef/@specDiagrams.0/@connections.1" dest="11" src="18"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition23" id="23" refs="//@urndef/@specDiagrams.0/@connections.2" dest="15" src="21"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition26" id="26" refs="//@urndef/@specDiagrams.0/@connections.3" dest="15" src="24"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition29" id="29" refs="//@urndef/@specDiagrams.0/@connections.4" dest="18" src="27"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition32" id="32" refs="//@urndef/@specDiagrams.0/@connections.5" dest="18" src="30"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition35" id="35" refs="//@urndef/@specDiagrams.0/@connections.6" dest="11" src="33"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition38" id="38" refs="//@urndef/@specDiagrams.0/@connections.7" dest="33" src="36"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition41" id="41" refs="//@urndef/@specDiagrams.0/@connections.8" dest="33" src="39"/>
+    <groups name="StrategiesGroup3" id="3" strategies="4"/>
+    <strategies name="EvaluationStrategy4" id="4" author="CORE" group="3"/>
+    <impactModel/>
+    <indicatorGroup name="Time" id="7" isRedesignCategory="true"/>
+    <indicatorGroup name="Cost" id="8" isRedesignCategory="true"/>
+    <indicatorGroup name="Quality" id="9" isRedesignCategory="true"/>
+    <indicatorGroup name="Flexibility" id="10" isRedesignCategory="true"/>
+    <featureModel/>
+  </grlspec>
+  <urndef>
+    <specDiagrams xsi:type="fm:FeatureDiagram" name="FeatureDiagram2" id="2" concern="13">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef12" id="12" pred="//@urndef/@specDiagrams.0/@connections.0 //@urndef/@specDiagrams.0/@connections.1 //@urndef/@specDiagrams.0/@connections.6" def="11"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef16" id="16" succ="//@urndef/@specDiagrams.0/@connections.0" pred="//@urndef/@specDiagrams.0/@connections.2 //@urndef/@specDiagrams.0/@connections.3" def="15"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef19" id="19" succ="//@urndef/@specDiagrams.0/@connections.1" pred="//@urndef/@specDiagrams.0/@connections.4 //@urndef/@specDiagrams.0/@connections.5" def="18"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef22" id="22" succ="//@urndef/@specDiagrams.0/@connections.2" def="21"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef25" id="25" succ="//@urndef/@specDiagrams.0/@connections.3" def="24"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef28" id="28" succ="//@urndef/@specDiagrams.0/@connections.4" def="27"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef31" id="31" succ="//@urndef/@specDiagrams.0/@connections.5" def="30"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef34" id="34" succ="//@urndef/@specDiagrams.0/@connections.6" pred="//@urndef/@specDiagrams.0/@connections.7 //@urndef/@specDiagrams.0/@connections.8" def="33"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef37" id="37" succ="//@urndef/@specDiagrams.0/@connections.7" def="36"/>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef40" id="40" succ="//@urndef/@specDiagrams.0/@connections.8" def="39"/>
+      <connections xsi:type="grl:LinkRef" source="16" target="12" link="17"/>
+      <connections xsi:type="grl:LinkRef" source="19" target="12" link="20"/>
+      <connections xsi:type="grl:LinkRef" source="22" target="16" link="23"/>
+      <connections xsi:type="grl:LinkRef" source="25" target="16" link="26"/>
+      <connections xsi:type="grl:LinkRef" source="28" target="19" link="29"/>
+      <connections xsi:type="grl:LinkRef" source="31" target="19" link="32"/>
+      <connections xsi:type="grl:LinkRef" source="34" target="12" link="35"/>
+      <connections xsi:type="grl:LinkRef" source="37" target="34" link="38"/>
+      <connections xsi:type="grl:LinkRef" source="40" target="34" link="41"/>
+    </specDiagrams>
+    <specDiagrams xsi:type="grl:GRLGraph" name="GRLGraph14" id="14" concern="13"/>
+    <concerns name="Association" id="13" description="" specDiagrams="2 14">
+      <coreConcern href="Association.core#/"/>
+    </concerns>
+  </urndef>
+  <metadata name="_Use0to100EvaluationRange" value="false"/>
+</urn:URNspec>

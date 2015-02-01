@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_7wZ_ES_FEeO12dEuM623RQ" name="Traceable">
+  <structuralView xmi:id="_7wbNMC_FEeO12dEuM623RQ">
+    <classes xsi:type="ram:Class" xmi:id="_7wbNMS_FEeO12dEuM623RQ" name="Trace">
+      <operations xmi:id="_J3DwsC_GEeO12dEuM623RQ" name="create" returnType="_7wbNMS_FEeO12dEuM623RQ" operationType="Constructor">
+        <parameters xmi:id="_NxdJsC_GEeO12dEuM623RQ" name="invokedMethod" type="_7wb0QS_FEeO12dEuM623RQ"/>
+        <parameters xmi:id="_PWdYoC_GEeO12dEuM623RQ" name="kind" type="_7wb0QC_FEeO12dEuM623RQ"/>
+        <parameters xmi:id="_SFVZsC_GEeO12dEuM623RQ" name="target" type="_7wbNMy_FEeO12dEuM623RQ"/>
+      </operations>
+      <operations xmi:id="_h-GCIC_GEeO12dEuM623RQ" name="getAccessKind" returnType="_7wb0QC_FEeO12dEuM623RQ"/>
+      <operations xmi:id="_YW-98C_GEeO12dEuM623RQ" name="getTarget" returnType="_7wbNMy_FEeO12dEuM623RQ"/>
+      <associationEnds xmi:id="_7wbNMi_FEeO12dEuM623RQ" name="target" lowerBound="1" assoc="_7wb0Qi_FEeO12dEuM623RQ"/>
+      <associationEnds xmi:id="_4Hx2EC_GEeO12dEuM623RQ" name="invokedMethod" lowerBound="1" assoc="_4H6Y8S_GEeO12dEuM623RQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_7wbNMy_FEeO12dEuM623RQ" name="Traceable" partial="true">
+      <operations xmi:id="_susCYDCAEeOCXde4lEaWUA" name="create" visibility="private" returnType="_7wbNMy_FEeO12dEuM623RQ" operationType="Constructor"/>
+      <operations xmi:id="_uo1PYC_GEeO12dEuM623RQ" name="traceableMethod" returnType="_7wb0RC_FEeO12dEuM623RQ"/>
+      <operations xmi:id="_oMOYUC_GEeO12dEuM623RQ" name="createTrace" returnType="_7wbNMS_FEeO12dEuM623RQ">
+        <parameters xmi:id="_oMOYUS_GEeO12dEuM623RQ" name="m" type="_7wb0QS_FEeO12dEuM623RQ"/>
+      </operations>
+      <associationEnds xmi:id="_7wbNNC_FEeO12dEuM623RQ" name="myTrace" lowerBound="1" navigable="false" assoc="_7wb0Qi_FEeO12dEuM623RQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_7wb0QC_FEeO12dEuM623RQ" name="AccessKind"/>
+    <classes xsi:type="ram:Class" xmi:id="_7wb0QS_FEeO12dEuM623RQ" name="Method">
+      <associationEnds xmi:id="_4H6Y8C_GEeO12dEuM623RQ" name="myTrace" lowerBound="1" navigable="false" assoc="_4H6Y8S_GEeO12dEuM623RQ"/>
+    </classes>
+    <associations xmi:id="_7wb0Qi_FEeO12dEuM623RQ" name="Trace_Traceable" ends="_7wbNMi_FEeO12dEuM623RQ _7wbNNC_FEeO12dEuM623RQ"/>
+    <associations xmi:id="_4H6Y8S_GEeO12dEuM623RQ" name="Trace_Method" ends="_4Hx2EC_GEeO12dEuM623RQ _4H6Y8C_GEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RVoid" xmi:id="_7wb0Qy_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RAny" xmi:id="_7wb0RC_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_7wb0RS_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RInt" xmi:id="_7wb0Ri_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RChar" xmi:id="_7wb0Ry_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RString" xmi:id="_7wb0SC_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RDouble" xmi:id="_7wb0SS_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RFloat" xmi:id="_7wb0Si_FEeO12dEuM623RQ"/>
+  </structuralView>
+  <instantiations xmi:id="_Hb7hEDCBEeOCXde4lEaWUA">
+    <mappings xmi:id="_JM6WgDCBEeOCXde4lEaWUA" toElement="_7wbNMy_FEeO12dEuM623RQ">
+      <operationMappings xmi:id="_MKOcMDCBEeOCXde4lEaWUA" toElement="_uo1PYC_GEeO12dEuM623RQ">
+        <fromElement href="AccessClassified.ram#_uo1PYC_GEeO12dEuM623RQ"/>
+      </operationMappings>
+      <fromElement xsi:type="ram:Class" href="AccessClassified.ram#_7wbNMy_FEeO12dEuM623RQ"/>
+    </mappings>
+    <externalAspect href="AccessClassified.ram#_7wZ_ES_FEeO12dEuM623RQ"/>
+  </instantiations>
+  <layout xmi:id="_7wb0Sy_FEeO12dEuM623RQ">
+    <containers xmi:id="_7wb0TC_FEeO12dEuM623RQ" key="_7wbNMC_FEeO12dEuM623RQ">
+      <value xmi:id="_7wb0TS_FEeO12dEuM623RQ" key="_7wbNMS_FEeO12dEuM623RQ">
+        <value xmi:id="_7wb0Ti_FEeO12dEuM623RQ" x="194.00021" y="186.00005"/>
+      </value>
+      <value xmi:id="_7wb0Ty_FEeO12dEuM623RQ" key="_7wbNMy_FEeO12dEuM623RQ">
+        <value xmi:id="_7wb0UC_FEeO12dEuM623RQ" x="534.9998" y="466.00003"/>
+      </value>
+      <value xmi:id="_7wb0US_FEeO12dEuM623RQ" key="_7wb0QC_FEeO12dEuM623RQ">
+        <value xmi:id="_7wb0Ui_FEeO12dEuM623RQ" x="902.9999" y="382.00015"/>
+      </value>
+      <value xmi:id="_7wcbUC_FEeO12dEuM623RQ" key="_7wb0QS_FEeO12dEuM623RQ">
+        <value xmi:id="_7wcbUS_FEeO12dEuM623RQ" x="161.0" y="431.0"/>
+      </value>
+    </containers>
+    <containers xmi:id="_fx40wDCAEeOCXde4lEaWUA" key="_fx1KYTCAEeOCXde4lEaWUA">
+      <value xmi:id="_ljeY4DCAEeOCXde4lEaWUA" key="_ljcjsDCAEeOCXde4lEaWUA">
+        <value xmi:id="_ljeY4TCAEeOCXde4lEaWUA" x="559.9999" y="264.99994"/>
+      </value>
+      <value xmi:id="_mLjFgDCAEeOCXde4lEaWUA" key="_mLiecDCAEeOCXde4lEaWUA">
+        <value xmi:id="_mLjFgTCAEeOCXde4lEaWUA" x="275.9995" y="217.9998"/>
+      </value>
+    </containers>
+    <containers xmi:id="_5sCpoDCAEeOCXde4lEaWUA" key="_5sBbgDCAEeOCXde4lEaWUA">
+      <value xmi:id="_8e5LwDCAEeOCXde4lEaWUA" key="_8e4ksDCAEeOCXde4lEaWUA">
+        <value xmi:id="_8e5LwTCAEeOCXde4lEaWUA" x="692.00024" y="418.99997"/>
+      </value>
+      <value xmi:id="_-n8i8DCAEeOCXde4lEaWUA" key="_-n774DCAEeOCXde4lEaWUA">
+        <value xmi:id="_-n8i8TCAEeOCXde4lEaWUA" x="373.0" y="436.0"/>
+      </value>
+    </containers>
+  </layout>
+  <stateViews xmi:id="_fx1KYTCAEeOCXde4lEaWUA" name="Traceable" specifies="_7wbNMy_FEeO12dEuM623RQ">
+    <stateMachines xmi:id="_lITf0DCAEeOCXde4lEaWUA" start="_ljcjsDCAEeOCXde4lEaWUA">
+      <states xmi:id="_ljcjsDCAEeOCXde4lEaWUA" name="Start" outgoings="_wdpAYDCAEeOCXde4lEaWUA"/>
+      <states xmi:id="_mLiecDCAEeOCXde4lEaWUA" name="Trace" incomings="_wdpAYDCAEeOCXde4lEaWUA _yQ34kDCAEeOCXde4lEaWUA _3A-KgDCAEeOCXde4lEaWUA" outgoings="_yQ34kDCAEeOCXde4lEaWUA _3A-KgDCAEeOCXde4lEaWUA"/>
+      <transitions xmi:id="_wdpAYDCAEeOCXde4lEaWUA" name="create" endState="_mLiecDCAEeOCXde4lEaWUA" startState="_ljcjsDCAEeOCXde4lEaWUA" signature="_susCYDCAEeOCXde4lEaWUA"/>
+      <transitions xmi:id="_yQ34kDCAEeOCXde4lEaWUA" name="createTrace" endState="_mLiecDCAEeOCXde4lEaWUA" startState="_mLiecDCAEeOCXde4lEaWUA" signature="_oMOYUC_GEeO12dEuM623RQ"/>
+      <transitions xmi:id="_3A-KgDCAEeOCXde4lEaWUA" name="traceableMethod" endState="_mLiecDCAEeOCXde4lEaWUA" startState="_mLiecDCAEeOCXde4lEaWUA" signature="_uo1PYC_GEeO12dEuM623RQ"/>
+    </stateMachines>
+  </stateViews>
+  <stateViews xmi:id="_5sBbgDCAEeOCXde4lEaWUA" name="Trace" specifies="_7wbNMS_FEeO12dEuM623RQ">
+    <stateMachines xmi:id="_79AmsDCAEeOCXde4lEaWUA" start="_8e4ksDCAEeOCXde4lEaWUA">
+      <states xmi:id="_8e4ksDCAEeOCXde4lEaWUA" name="Start" outgoings="_CFF_QDCBEeOCXde4lEaWUA"/>
+      <states xmi:id="_-n774DCAEeOCXde4lEaWUA" name="Accessible" incomings="_CFF_QDCBEeOCXde4lEaWUA _DN5aYDCBEeOCXde4lEaWUA _EtWa8DCBEeOCXde4lEaWUA" outgoings="_DN5aYDCBEeOCXde4lEaWUA _EtWa8DCBEeOCXde4lEaWUA"/>
+      <transitions xmi:id="_CFF_QDCBEeOCXde4lEaWUA" name="create" endState="_-n774DCAEeOCXde4lEaWUA" startState="_8e4ksDCAEeOCXde4lEaWUA" signature="_J3DwsC_GEeO12dEuM623RQ"/>
+      <transitions xmi:id="_DN5aYDCBEeOCXde4lEaWUA" name="getAccessKind" endState="_-n774DCAEeOCXde4lEaWUA" startState="_-n774DCAEeOCXde4lEaWUA" signature="_h-GCIC_GEeO12dEuM623RQ"/>
+      <transitions xmi:id="_EtWa8DCBEeOCXde4lEaWUA" name="getTarget" endState="_-n774DCAEeOCXde4lEaWUA" startState="_-n774DCAEeOCXde4lEaWUA" signature="_YW-98C_GEeO12dEuM623RQ"/>
+    </stateMachines>
+  </stateViews>
+</ram:Aspect>

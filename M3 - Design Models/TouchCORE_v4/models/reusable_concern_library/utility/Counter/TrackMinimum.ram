@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="http:///fm.ecore" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_E-pKcEZ_EeSHH7iGSzWjTA" name="TrackMinimum">
+  <realizes xsi:type="fm:Feature" href="Counter.jucm#15"/>
+  <structuralView xmi:id="_E-pKcUZ_EeSHH7iGSzWjTA">
+    <classes xsi:type="ram:Class" xmi:id="_E-pKckZ_EeSHH7iGSzWjTA" name="Counter">
+      <attributes xmi:id="_E-pKc0Z_EeSHH7iGSzWjTA" name="minimum" type="_E-pKd0Z_EeSHH7iGSzWjTA"/>
+    </classes>
+    <types xsi:type="ram:RVoid" xmi:id="_E-pKdEZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RAny" xmi:id="_E-pKdUZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_E-pKdkZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RInt" xmi:id="_E-pKd0Z_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RChar" xmi:id="_E-pKeEZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RString" xmi:id="_E-pKeUZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RDouble" xmi:id="_E-pKekZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RFloat" xmi:id="_E-pKe0Z_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RLong" xmi:id="_E-pKfEZ_EeSHH7iGSzWjTA"/>
+  </structuralView>
+  <instantiations xmi:id="_KetgwEZ_EeSHH7iGSzWjTA" type="Extends">
+    <externalAspect href="Counter.ram#_dUCwsEUOEeSCVrBlhJ8sdw"/>
+  </instantiations>
+  <layout xmi:id="_E-pKfUZ_EeSHH7iGSzWjTA">
+    <containers xmi:id="_E-pKfkZ_EeSHH7iGSzWjTA" key="_E-pKcUZ_EeSHH7iGSzWjTA">
+      <value xmi:id="_E-pKf0Z_EeSHH7iGSzWjTA" key="_E-pKckZ_EeSHH7iGSzWjTA">
+        <value xmi:id="_E-pKgEZ_EeSHH7iGSzWjTA" x="369.0003" y="280.99985"/>
+      </value>
+    </containers>
+  </layout>
+</ram:Aspect>

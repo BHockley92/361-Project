@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_9tGogGRkEeSR9P2HSfiCvA" name="Copyable&lt;Clone>">
+  <structuralView xmi:id="_9tGogWRkEeSR9P2HSfiCvA">
+    <classes xsi:type="ram:ImplementationClass" xmi:id="_9tGogmRkEeSR9P2HSfiCvA" name="Cloneable" comesFrom="_9tGouGRkEeSR9P2HSfiCvA" instanceClassName="java.lang.Cloneable"/>
+    <classes xsi:type="ram:Class" xmi:id="_9tGog2RkEeSR9P2HSfiCvA" name="Copyable" comesFrom="_9tGouGRkEeSR9P2HSfiCvA _9tGouWRkEeSR9P2HSfiCvA" partial="true" superTypes="_9tGogmRkEeSR9P2HSfiCvA">
+      <operations xmi:id="_9tGohGRkEeSR9P2HSfiCvA" name="create" comesFrom="_9tGouGRkEeSR9P2HSfiCvA" visibility="private" returnType="_9tGog2RkEeSR9P2HSfiCvA" partial="true" operationType="Constructor"/>
+      <operations xmi:id="_9tGohWRkEeSR9P2HSfiCvA" name="clone" comesFrom="_9tGouGRkEeSR9P2HSfiCvA" returnType="_9tGog2RkEeSR9P2HSfiCvA"/>
+      <operations xmi:id="_9tGohmRkEeSR9P2HSfiCvA" name="replaceStateWith" comesFrom="_9tGouWRkEeSR9P2HSfiCvA" returnType="_9tGoiGRkEeSR9P2HSfiCvA" partial="true">
+        <parameters xmi:id="_9tGoh2RkEeSR9P2HSfiCvA" name="from" type="_9tGog2RkEeSR9P2HSfiCvA"/>
+      </operations>
+    </classes>
+    <types xsi:type="ram:RVoid" xmi:id="_9tGoiGRkEeSR9P2HSfiCvA"/>
+    <types xsi:type="ram:RAny" xmi:id="_9tGoiWRkEeSR9P2HSfiCvA"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_9tGoimRkEeSR9P2HSfiCvA"/>
+    <types xsi:type="ram:RInt" xmi:id="_9tGoi2RkEeSR9P2HSfiCvA"/>
+    <types xsi:type="ram:RChar" xmi:id="_9tGojGRkEeSR9P2HSfiCvA"/>
+    <types xsi:type="ram:RString" xmi:id="_9tGojWRkEeSR9P2HSfiCvA"/>
+    <types xsi:type="ram:RDouble" xmi:id="_9tGojmRkEeSR9P2HSfiCvA"/>
+    <types xsi:type="ram:RFloat" xmi:id="_9tGoj2RkEeSR9P2HSfiCvA"/>
+    <types xsi:type="ram:RLong" xmi:id="_9tGokGRkEeSR9P2HSfiCvA"/>
+  </structuralView>
+  <messageViews xsi:type="ram:MessageView" xmi:id="_9tGokWRkEeSR9P2HSfiCvA" specifies="_9tGohWRkEeSR9P2HSfiCvA">
+    <specification xmi:id="_9tGokmRkEeSR9P2HSfiCvA">
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_9tGok2RkEeSR9P2HSfiCvA" covered="_9tGomWRkEeSR9P2HSfiCvA" message="_9tGom2RkEeSR9P2HSfiCvA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_9tGolGRkEeSR9P2HSfiCvA" covered="_9tGomWRkEeSR9P2HSfiCvA" message="_9tGon2RkEeSR9P2HSfiCvA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_9tGolWRkEeSR9P2HSfiCvA" covered="_9tGommRkEeSR9P2HSfiCvA" message="_9tGon2RkEeSR9P2HSfiCvA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_9tGolmRkEeSR9P2HSfiCvA" covered="_9tGomWRkEeSR9P2HSfiCvA" message="_9tGooGRkEeSR9P2HSfiCvA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_9tGol2RkEeSR9P2HSfiCvA" covered="_9tGommRkEeSR9P2HSfiCvA" message="_9tGooGRkEeSR9P2HSfiCvA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_9tGomGRkEeSR9P2HSfiCvA" covered="_9tGomWRkEeSR9P2HSfiCvA" message="_9tGonWRkEeSR9P2HSfiCvA"/>
+      <lifelines xmi:id="_9tGomWRkEeSR9P2HSfiCvA" represents="_9tGoo2RkEeSR9P2HSfiCvA" coveredBy="_9tGok2RkEeSR9P2HSfiCvA _9tGomGRkEeSR9P2HSfiCvA _9tGolGRkEeSR9P2HSfiCvA _9tGolmRkEeSR9P2HSfiCvA"/>
+      <lifelines xmi:id="_9tGommRkEeSR9P2HSfiCvA" represents="_9tGonGRkEeSR9P2HSfiCvA" coveredBy="_9tGolWRkEeSR9P2HSfiCvA _9tGol2RkEeSR9P2HSfiCvA"/>
+      <messages xmi:id="_9tGom2RkEeSR9P2HSfiCvA" sendEvent="_9tGopGRkEeSR9P2HSfiCvA" receiveEvent="_9tGok2RkEeSR9P2HSfiCvA" signature="_9tGohWRkEeSR9P2HSfiCvA">
+        <localProperties xsi:type="ram:Reference" xmi:id="_9tGonGRkEeSR9P2HSfiCvA" name="newCopy" lowerBound="1" type="_9tGog2RkEeSR9P2HSfiCvA"/>
+      </messages>
+      <messages xmi:id="_9tGonWRkEeSR9P2HSfiCvA" sendEvent="_9tGomGRkEeSR9P2HSfiCvA" receiveEvent="_9tGopWRkEeSR9P2HSfiCvA" signature="_9tGohWRkEeSR9P2HSfiCvA" messageSort="reply">
+        <returns xsi:type="ram:StructuralFeatureValue" xmi:id="_9tGonmRkEeSR9P2HSfiCvA" value="_9tGonGRkEeSR9P2HSfiCvA"/>
+      </messages>
+      <messages xmi:id="_9tGon2RkEeSR9P2HSfiCvA" sendEvent="_9tGolGRkEeSR9P2HSfiCvA" receiveEvent="_9tGolWRkEeSR9P2HSfiCvA" signature="_9tGohGRkEeSR9P2HSfiCvA" assignTo="_9tGonGRkEeSR9P2HSfiCvA" messageSort="createMessage"/>
+      <messages xmi:id="_9tGooGRkEeSR9P2HSfiCvA" sendEvent="_9tGolmRkEeSR9P2HSfiCvA" receiveEvent="_9tGol2RkEeSR9P2HSfiCvA" signature="_9tGohmRkEeSR9P2HSfiCvA">
+        <arguments xmi:id="_9tGooWRkEeSR9P2HSfiCvA" parameter="_9tGoh2RkEeSR9P2HSfiCvA">
+          <value xsi:type="ram:StructuralFeatureValue" xmi:id="_9tGoomRkEeSR9P2HSfiCvA" value="_9tGoo2RkEeSR9P2HSfiCvA"/>
+        </arguments>
+      </messages>
+      <properties xmi:id="_9tGoo2RkEeSR9P2HSfiCvA" name="target" lowerBound="1" type="_9tGog2RkEeSR9P2HSfiCvA"/>
+      <formalGates xmi:id="_9tGopGRkEeSR9P2HSfiCvA" message="_9tGom2RkEeSR9P2HSfiCvA" name="in_copy"/>
+      <formalGates xmi:id="_9tGopWRkEeSR9P2HSfiCvA" message="_9tGonWRkEeSR9P2HSfiCvA" name="out_copy"/>
+    </specification>
+  </messageViews>
+  <messageViews xsi:type="ram:MessageView" xmi:id="_9tGopmRkEeSR9P2HSfiCvA" specifies="_9tGohmRkEeSR9P2HSfiCvA">
+    <specification xmi:id="_9tGop2RkEeSR9P2HSfiCvA">
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_9tGoqGRkEeSR9P2HSfiCvA" covered="_9tGoqmRkEeSR9P2HSfiCvA" message="_9tGoq2RkEeSR9P2HSfiCvA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_9tGoqWRkEeSR9P2HSfiCvA" covered="_9tGoqmRkEeSR9P2HSfiCvA" message="_9tGorGRkEeSR9P2HSfiCvA"/>
+      <lifelines xmi:id="_9tGoqmRkEeSR9P2HSfiCvA" represents="_9tGorWRkEeSR9P2HSfiCvA" coveredBy="_9tGoqGRkEeSR9P2HSfiCvA _9tGoqWRkEeSR9P2HSfiCvA"/>
+      <messages xmi:id="_9tGoq2RkEeSR9P2HSfiCvA" sendEvent="_9tGormRkEeSR9P2HSfiCvA" receiveEvent="_9tGoqGRkEeSR9P2HSfiCvA" signature="_9tGohmRkEeSR9P2HSfiCvA"/>
+      <messages xmi:id="_9tGorGRkEeSR9P2HSfiCvA" sendEvent="_9tGoqWRkEeSR9P2HSfiCvA" receiveEvent="_9tGor2RkEeSR9P2HSfiCvA" signature="_9tGohmRkEeSR9P2HSfiCvA" messageSort="reply"/>
+      <properties xmi:id="_9tGorWRkEeSR9P2HSfiCvA" name="target" lowerBound="1" type="_9tGog2RkEeSR9P2HSfiCvA"/>
+      <formalGates xmi:id="_9tGormRkEeSR9P2HSfiCvA" message="_9tGoq2RkEeSR9P2HSfiCvA" name="in_replaceStateWith"/>
+      <formalGates xmi:id="_9tGor2RkEeSR9P2HSfiCvA" message="_9tGorGRkEeSR9P2HSfiCvA" name="out_replaceStateWith"/>
+    </specification>
+  </messageViews>
+  <layout xmi:id="_9tGosGRkEeSR9P2HSfiCvA">
+    <containers xmi:id="_9tGosWRkEeSR9P2HSfiCvA" key="_9tGogWRkEeSR9P2HSfiCvA"/>
+  </layout>
+  <stateViews xmi:id="_9tGosmRkEeSR9P2HSfiCvA" name="Copyable">
+    <stateMachines xmi:id="_9tGos2RkEeSR9P2HSfiCvA" start="_9tGotGRkEeSR9P2HSfiCvA">
+      <states xmi:id="_9tGotGRkEeSR9P2HSfiCvA" name="Created" incomings="_9tGotmRkEeSR9P2HSfiCvA _9tGot2RkEeSR9P2HSfiCvA" outgoings="_9tGot2RkEeSR9P2HSfiCvA"/>
+      <states xmi:id="_9tGotWRkEeSR9P2HSfiCvA" name="Uninitialized" outgoings="_9tGotmRkEeSR9P2HSfiCvA"/>
+      <transitions xmi:id="_9tGotmRkEeSR9P2HSfiCvA" name="create" endState="_9tGotGRkEeSR9P2HSfiCvA" startState="_9tGotWRkEeSR9P2HSfiCvA" signature="_9tGohGRkEeSR9P2HSfiCvA"/>
+      <transitions xmi:id="_9tGot2RkEeSR9P2HSfiCvA" name="clone" endState="_9tGotGRkEeSR9P2HSfiCvA" startState="_9tGotGRkEeSR9P2HSfiCvA" signature="_9tGohWRkEeSR9P2HSfiCvA"/>
+    </stateMachines>
+    <specifies xsi:type="ram:Class" href="../../utility/Copyable/Clone.ram#_F6DtkmQ-EeSHMdf5DpN6fg"/>
+  </stateViews>
+  <wovenAspects xmi:id="_9tGouGRkEeSR9P2HSfiCvA" name="Clone">
+    <comesFrom href="../../utility/Copyable/Clone.ram#_F6DtkGQ-EeSHMdf5DpN6fg"/>
+  </wovenAspects>
+  <wovenAspects xmi:id="_9tGouWRkEeSR9P2HSfiCvA" name="ReplaceState">
+    <comesFrom href="../../utility/Copyable/ReplaceState.ram#_-kW-4EQeEeSPKotjlAbjzg"/>
+  </wovenAspects>
+</ram:Aspect>

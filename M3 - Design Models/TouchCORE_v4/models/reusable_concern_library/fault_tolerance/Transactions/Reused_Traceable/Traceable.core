@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<core:COREConcern xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://cs.mcgill.ca/sel/core/1.0" xmlns:fm="http:///fm.ecore" xmlns:grl="http:///grl.ecore" xmi:id="_9FVx4GEXEeSxuurPGOqeHA" name="Traceable">
+  <models xsi:type="fm:FeatureModel" href="Traceable.jucm#//@grlspec/@featureModel"/>
+  <models xsi:type="grl:ImpactModel" href="Traceable.jucm#//@grlspec/@impactModel"/>
+  <interface xmi:id="_9FVx4WEXEeSxuurPGOqeHA"/>
+</core:COREConcern>

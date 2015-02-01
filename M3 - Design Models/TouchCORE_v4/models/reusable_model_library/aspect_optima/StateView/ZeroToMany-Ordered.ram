@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_stleYXdvEeGm3uH8rYfPgw" name="ZeroToMany-Ordered">
+  <structuralView xmi:id="_stleAHdvEeGm3uH8rYfPgw">
+    <classes xsi:type="ram:Class" xmi:id="_stleMHdvEeGm3uH8rYfPgw" name="Data" partial="true">
+      <operations xmi:id="_WjtsoS4dEeOsEpUm1ciJTg" name="create" returnType="_stleMHdvEeGm3uH8rYfPgw" operationType="Constructor"/>
+      <operations xmi:id="_ptdvQS4eEeOsEpUm1ciJTg" name="removeAll" returnType="__pWrUIdfEeG0oPAT5BSQFQ"/>
+      <operations xmi:id="_l14xcIdYEeG0oPAT5BSQFQ" name="add" returnType="__pWrUIdfEeG0oPAT5BSQFQ">
+        <parameters xmi:id="_l14xcYdYEeG0oPAT5BSQFQ" name="a" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_FRO_wIfiEeG0oPAT5BSQFQ" name="getAssociated" returnType="_VobOoIf4EeGZL5DwZ7sEOw"/>
+      <operations xmi:id="_Y_GngNKfEeG5R4pEaTc3Kw" name="remove" returnType="__pWrUIdfEeG0oPAT5BSQFQ">
+        <parameters xmi:id="_Y_GngdKfEeG5R4pEaTc3Kw" name="index" type="_1gRigIdfEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_dfAhUNKfEeG5R4pEaTc3Kw" name="contains" returnType="_fQmL8ZF-EeGl6_HHEAkO0g">
+        <parameters xmi:id="_dfAhUdKfEeG5R4pEaTc3Kw" name="a" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_hZZTQNKfEeG5R4pEaTc3Kw" name="get" returnType="_R4j4oIdeEeG0oPAT5BSQFQ">
+        <parameters xmi:id="_hZZTQdKfEeG5R4pEaTc3Kw" name="index" type="_1gRigIdfEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_tUJOANKfEeG5R4pEaTc3Kw" name="add" returnType="__pWrUIdfEeG0oPAT5BSQFQ">
+        <parameters xmi:id="_tUJOAdKfEeG5R4pEaTc3Kw" name="index" type="_1gRigIdfEeG0oPAT5BSQFQ"/>
+        <parameters xmi:id="_tUJOAtKfEeG5R4pEaTc3Kw" name="a" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+      </operations>
+      <associationEnds xmi:id="_l14KYIdYEeG0oPAT5BSQFQ" name="mySet" lowerBound="1" referenceType="Composition" assoc="__FhcIId4EeG0oPAT5BSQFQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_R4j4oIdeEeG0oPAT5BSQFQ" name="Associated" partial="true">
+      <associationEnds xmi:id="_uh1mcJCDEeG7cMsksRMbkg" name="set" navigable="false" assoc="_AH9wkId5EeG0oPAT5BSQFQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_U-27MIdeEeG0oPAT5BSQFQ" name="Sequence">
+      <operations xmi:id="_se3zcIdfEeG0oPAT5BSQFQ" name="create" visibility="package" returnType="_U-27MIdeEeG0oPAT5BSQFQ" operationType="Constructor"/>
+      <operations xmi:id="_uyNIAIdfEeG0oPAT5BSQFQ" name="add" visibility="package" returnType="__pWrUIdfEeG0oPAT5BSQFQ">
+        <parameters xmi:id="_NS97oIdgEeG0oPAT5BSQFQ" name="a" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_wO7ksIdfEeG0oPAT5BSQFQ" name="remove" visibility="package" returnType="__pWrUIdfEeG0oPAT5BSQFQ">
+        <parameters xmi:id="_P0_zgIdgEeG0oPAT5BSQFQ" name="a" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_xCehgIdfEeG0oPAT5BSQFQ" name="delete" visibility="package" returnType="__pWrUIdfEeG0oPAT5BSQFQ"/>
+      <operations xmi:id="_esxDANKhEeGX8rB_WPxJ8w" name="get" visibility="package" returnType="_R4j4oIdeEeG0oPAT5BSQFQ">
+        <parameters xmi:id="_esxDAdKhEeGX8rB_WPxJ8w" name="i" type="_1gRigIdfEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_hN6xINKhEeGX8rB_WPxJ8w" name="remove" visibility="package" returnType="__pWrUIdfEeG0oPAT5BSQFQ">
+        <parameters xmi:id="_hN6xIdKhEeGX8rB_WPxJ8w" name="i" type="_1gRigIdfEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_l2QOMNKhEeGX8rB_WPxJ8w" name="contains" visibility="package" returnType="_fQmL8ZF-EeGl6_HHEAkO0g">
+        <parameters xmi:id="_l2QOMdKhEeGX8rB_WPxJ8w" name="a" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+      </operations>
+      <associationEnds xmi:id="_ySLsgId4EeG0oPAT5BSQFQ" name="data" upperBound="-1" navigable="false" assoc="__FhcIId4EeG0oPAT5BSQFQ"/>
+      <associationEnds xmi:id="_y4OY0Id4EeG0oPAT5BSQFQ" name="myAssociated" upperBound="-1" referenceType="Aggregation" assoc="_AH9wkId5EeG0oPAT5BSQFQ"/>
+      <attributes xmi:id="_x334cIdfEeG0oPAT5BSQFQ" name="size" type="_1gRigIdfEeG0oPAT5BSQFQ"/>
+    </classes>
+    <associations xmi:id="__FhcIId4EeG0oPAT5BSQFQ" name="DATA_SET_ASSOC" ends="_l14KYIdYEeG0oPAT5BSQFQ _ySLsgId4EeG0oPAT5BSQFQ"/>
+    <associations xmi:id="_AH9wkId5EeG0oPAT5BSQFQ" name="SET_ASSOCIATED_ASSOC" ends="_y4OY0Id4EeG0oPAT5BSQFQ _uh1mcJCDEeG7cMsksRMbkg"/>
+    <types xsi:type="ram:RInt" xmi:id="_1gRigIdfEeG0oPAT5BSQFQ"/>
+    <types xsi:type="ram:RVoid" xmi:id="__pWrUIdfEeG0oPAT5BSQFQ"/>
+    <types xsi:type="ram:RSet" xmi:id="_VobOoIf4EeGZL5DwZ7sEOw" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+    <types xsi:type="ram:RAny" xmi:id="_fQmL8JF-EeGl6_HHEAkO0g"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_fQmL8ZF-EeGl6_HHEAkO0g"/>
+    <types xsi:type="ram:RChar" xmi:id="_fQmL8pF-EeGl6_HHEAkO0g"/>
+    <types xsi:type="ram:RString" xmi:id="_fQmL85F-EeGl6_HHEAkO0g"/>
+    <types xsi:type="ram:RDouble" xmi:id="_8n9aMNHjEeKndf5avu7gLg"/>
+    <types xsi:type="ram:RFloat" xmi:id="_9a_ZoNHjEeKndf5avu7gLg"/>
+    <types xsi:type="ram:RSequence" xmi:id="_ptdvQC4eEeOsEpUm1ciJTg" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+  </structuralView>
+  <layout xmi:id="_2YG28NKhEeGX8rB_WPxJ8w">
+    <containers xmi:id="_2YG28dKhEeGX8rB_WPxJ8w" key="_stleAHdvEeGm3uH8rYfPgw">
+      <value xmi:id="_2YG28tKhEeGX8rB_WPxJ8w" key="_R4j4oIdeEeG0oPAT5BSQFQ">
+        <value xmi:id="_2YG289KhEeGX8rB_WPxJ8w" x="1083.8794" y="335.5028"/>
+      </value>
+      <value xmi:id="_2YG29NKhEeGX8rB_WPxJ8w" key="_stleMHdvEeGm3uH8rYfPgw">
+        <value xmi:id="_2YG29dKhEeGX8rB_WPxJ8w" x="83.878845" y="172.50287"/>
+      </value>
+      <value xmi:id="_2YG29tKhEeGX8rB_WPxJ8w" key="_U-27MIdeEeG0oPAT5BSQFQ">
+        <value xmi:id="_2YG299KhEeGX8rB_WPxJ8w" x="672.67175" y="238.5026"/>
+      </value>
+    </containers>
+    <containers xmi:id="_YA7RgC4dEeOsEpUm1ciJTg" key="_YA4OMC4dEeOsEpUm1ciJTg">
+      <value xmi:id="_ZhLjUC4dEeOsEpUm1ciJTg" key="_ZhJuIC4dEeOsEpUm1ciJTg">
+        <value xmi:id="_ZhLjUS4dEeOsEpUm1ciJTg" x="271.9999" y="163.99988"/>
+      </value>
+      <value xmi:id="_aQxNMC4dEeOsEpUm1ciJTg" key="_aQwmIC4dEeOsEpUm1ciJTg">
+        <value xmi:id="_aQxNMS4dEeOsEpUm1ciJTg" x="480.9314" y="242.79208"/>
+      </value>
+      <value xmi:id="_5bzF0C4dEeOsEpUm1ciJTg" key="_5byewC4dEeOsEpUm1ciJTg">
+        <value xmi:id="_5bzF0S4dEeOsEpUm1ciJTg" x="728.9999" y="163.99995"/>
+      </value>
+    </containers>
+    <containers xmi:id="_IdngMDCEEeOeltXtT7ccRw" key="_IdlrATCEEeOeltXtT7ccRw">
+      <value xmi:id="_KOr1MDCEEeOeltXtT7ccRw" key="_KOrOIDCEEeOeltXtT7ccRw">
+        <value xmi:id="_KOr1MTCEEeOeltXtT7ccRw" x="266.0" y="615.0"/>
+      </value>
+      <value xmi:id="_K7YjIDCEEeOeltXtT7ccRw" key="_K7X8EDCEEeOeltXtT7ccRw">
+        <value xmi:id="_K7YjITCEEeOeltXtT7ccRw" x="465.04578" y="324.13257"/>
+      </value>
+      <value xmi:id="_MjSVEDCEEeOeltXtT7ccRw" key="_MjRuADCEEeOeltXtT7ccRw">
+        <value xmi:id="_MjSVETCEEeOeltXtT7ccRw" x="757.04553" y="324.13257"/>
+      </value>
+    </containers>
+  </layout>
+  <stateViews xmi:id="_YA4OMC4dEeOsEpUm1ciJTg" name="Data" specifies="_stleMHdvEeGm3uH8rYfPgw">
+    <stateMachines xmi:id="_ZSj4gC4dEeOsEpUm1ciJTg" start="_ZhJuIC4dEeOsEpUm1ciJTg">
+      <states xmi:id="_ZhJuIC4dEeOsEpUm1ciJTg" name="Start" outgoings="_c4MicC4dEeOsEpUm1ciJTg"/>
+      <states xmi:id="_aQwmIC4dEeOsEpUm1ciJTg" name="Empty" incomings="_c4MicC4dEeOsEpUm1ciJTg _6XezEC6uEeOU2OXLAlY_Og" outgoings="_9f078C4dEeOsEpUm1ciJTg"/>
+      <states xmi:id="_5byewC4dEeOsEpUm1ciJTg" name="NotEmpty" incomings="_9f078C4dEeOsEpUm1ciJTg _-unqUC4dEeOsEpUm1ciJTg _AL9LAC4eEeOsEpUm1ciJTg" outgoings="_-unqUC4dEeOsEpUm1ciJTg _AL9LAC4eEeOsEpUm1ciJTg _6XezEC6uEeOU2OXLAlY_Og"/>
+      <transitions xmi:id="_c4MicC4dEeOsEpUm1ciJTg" name="create" endState="_aQwmIC4dEeOsEpUm1ciJTg" startState="_ZhJuIC4dEeOsEpUm1ciJTg" signature="_WjtsoS4dEeOsEpUm1ciJTg"/>
+      <transitions xmi:id="_9f078C4dEeOsEpUm1ciJTg" name="add" endState="_5byewC4dEeOsEpUm1ciJTg" startState="_aQwmIC4dEeOsEpUm1ciJTg" signature="_l14xcIdYEeG0oPAT5BSQFQ"/>
+      <transitions xmi:id="_-unqUC4dEeOsEpUm1ciJTg" name="add" endState="_5byewC4dEeOsEpUm1ciJTg" startState="_5byewC4dEeOsEpUm1ciJTg" signature="_l14xcIdYEeG0oPAT5BSQFQ"/>
+      <transitions xmi:id="_AL9LAC4eEeOsEpUm1ciJTg" name="remove" endState="_5byewC4dEeOsEpUm1ciJTg" startState="_5byewC4dEeOsEpUm1ciJTg" signature="_Y_GngNKfEeG5R4pEaTc3Kw"/>
+      <transitions xmi:id="_6XezEC6uEeOU2OXLAlY_Og" name="[size==0]" endState="_aQwmIC4dEeOsEpUm1ciJTg" startState="_5byewC4dEeOsEpUm1ciJTg">
+        <guard xmi:id="_IgwG8C7HEeOJR-Mzr9ZABg">
+          <Specification xsi:type="ram:LiteralString" xmi:id="_IgwG8S7HEeOJR-Mzr9ZABg" value="size==0"/>
+        </guard>
+      </transitions>
+    </stateMachines>
+  </stateViews>
+  <stateViews xmi:id="_IdlrATCEEeOeltXtT7ccRw" name="Sequence" specifies="_U-27MIdeEeG0oPAT5BSQFQ">
+    <stateMachines xmi:id="_JyN7oDCEEeOeltXtT7ccRw" start="_KOrOIDCEEeOeltXtT7ccRw">
+      <states xmi:id="_KOrOIDCEEeOeltXtT7ccRw" name="Start" outgoings="_N-QeQDCEEeOeltXtT7ccRw"/>
+      <states xmi:id="_K7X8EDCEEeOeltXtT7ccRw" name="Empty" incomings="_N-QeQDCEEeOeltXtT7ccRw _SJlPMDCEEeOeltXtT7ccRw" outgoings="_QpG68DCEEeOeltXtT7ccRw"/>
+      <states xmi:id="_MjRuADCEEeOeltXtT7ccRw" name="NotEmpty" incomings="_QpG68DCEEeOeltXtT7ccRw _WiZpkDCEEeOeltXtT7ccRw _XKIX8DCEEeOeltXtT7ccRw" outgoings="_SJlPMDCEEeOeltXtT7ccRw _WiZpkDCEEeOeltXtT7ccRw _XKIX8DCEEeOeltXtT7ccRw"/>
+      <transitions xmi:id="_N-QeQDCEEeOeltXtT7ccRw" name="create" endState="_K7X8EDCEEeOeltXtT7ccRw" startState="_KOrOIDCEEeOeltXtT7ccRw" signature="_se3zcIdfEeG0oPAT5BSQFQ"/>
+      <transitions xmi:id="_QpG68DCEEeOeltXtT7ccRw" name="add" endState="_MjRuADCEEeOeltXtT7ccRw" startState="_K7X8EDCEEeOeltXtT7ccRw" signature="_uyNIAIdfEeG0oPAT5BSQFQ"/>
+      <transitions xmi:id="_SJlPMDCEEeOeltXtT7ccRw" name="[size==0]" endState="_K7X8EDCEEeOeltXtT7ccRw" startState="_MjRuADCEEeOeltXtT7ccRw">
+        <guard xmi:id="_V-pcQDCEEeOeltXtT7ccRw">
+          <Specification xsi:type="ram:LiteralString" xmi:id="_V-pcQTCEEeOeltXtT7ccRw" value="size==0"/>
+        </guard>
+      </transitions>
+      <transitions xmi:id="_WiZpkDCEEeOeltXtT7ccRw" name="add" endState="_MjRuADCEEeOeltXtT7ccRw" startState="_MjRuADCEEeOeltXtT7ccRw" signature="_uyNIAIdfEeG0oPAT5BSQFQ"/>
+      <transitions xmi:id="_XKIX8DCEEeOeltXtT7ccRw" name="remove" endState="_MjRuADCEEeOeltXtT7ccRw" startState="_MjRuADCEEeOeltXtT7ccRw" signature="_wO7ksIdfEeG0oPAT5BSQFQ"/>
+    </stateMachines>
+  </stateViews>
+</ram:Aspect>
