@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="http:///fm.ecore" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_mDv4YEQ1EeSSfO86-u_zzA" name="Association">
+  <realizes xsi:type="fm:Feature" href="Association.jucm#11"/>
+  <structuralView xmi:id="_stleAHdvEeGm3uH8rYfPgw">
+    <classes xsi:type="ram:Class" xmi:id="_stleMHdvEeGm3uH8rYfPgw" name="Data">
+      <operations xmi:id="_pkWIQLSfEeGKTZf7hOJPNg" name="contains" returnType="_fQmL8ZF-EeGl6_HHEAkO0g" partial="true">
+        <parameters xmi:id="_7j8A0NrhEeOjbYigm5_oCw" name="a" type="_R4j4oIdeEeG0oPAT5BSQFQ"/>
+      </operations>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_R4j4oIdeEeG0oPAT5BSQFQ" name="Associated" partial="true"/>
+    <types xsi:type="ram:RInt" xmi:id="_1gRigIdfEeG0oPAT5BSQFQ"/>
+    <types xsi:type="ram:RVoid" xmi:id="__pWrUIdfEeG0oPAT5BSQFQ"/>
+    <types xsi:type="ram:RAny" xmi:id="_fQmL8JF-EeGl6_HHEAkO0g"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_fQmL8ZF-EeGl6_HHEAkO0g"/>
+    <types xsi:type="ram:RChar" xmi:id="_fQmL8pF-EeGl6_HHEAkO0g"/>
+    <types xsi:type="ram:RString" xmi:id="_fQmL85F-EeGl6_HHEAkO0g"/>
+    <types xsi:type="ram:RDouble" xmi:id="_8n9aMNHjEeKndf5avu7gLg"/>
+    <types xsi:type="ram:RFloat" xmi:id="_9a_ZoNHjEeKndf5avu7gLg"/>
+  </structuralView>
+  <layout xmi:id="_g6zTgQZ4EeKZrL1xbgDvbw">
+    <containers xmi:id="_g6zTggZ4EeKZrL1xbgDvbw" key="_stleAHdvEeGm3uH8rYfPgw">
+      <value xmi:id="_g6zTgwZ4EeKZrL1xbgDvbw" key="_R4j4oIdeEeG0oPAT5BSQFQ">
+        <value xmi:id="_g6zThAZ4EeKZrL1xbgDvbw" x="811.0315" y="133.24619"/>
+      </value>
+      <value xmi:id="_g6zThQZ4EeKZrL1xbgDvbw">
+        <value xmi:id="_g6zThgZ4EeKZrL1xbgDvbw" x="661.99963" y="107.99991"/>
+      </value>
+      <value xmi:id="_g6zThwZ4EeKZrL1xbgDvbw" key="_stleMHdvEeGm3uH8rYfPgw">
+        <value xmi:id="_g6zTiAZ4EeKZrL1xbgDvbw" x="230.99979" y="108.00015"/>
+      </value>
+    </containers>
+  </layout>
+</ram:Aspect>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_7wZ_ES_FEeO12dEuM623RQ" name="AccessClassified">
+  <structuralView xmi:id="_7wbNMC_FEeO12dEuM623RQ">
+    <classes xsi:type="ram:Class" xmi:id="_7wbNMy_FEeO12dEuM623RQ" name="AccessClassified" partial="true">
+      <operations xmi:id="_xVfXAC_TEeON3cxHSuRK9A" name="create" visibility="private" returnType="_7wbNMy_FEeO12dEuM623RQ" operationType="Constructor"/>
+      <operations xmi:id="_uo1PYC_GEeO12dEuM623RQ" name="classifiedMethod" returnType="_7wb0RC_FEeO12dEuM623RQ"/>
+      <operations xmi:id="_oMOYUC_GEeO12dEuM623RQ" name="getAccessKind" returnType="_7wb0QC_FEeO12dEuM623RQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_7wb0QC_FEeO12dEuM623RQ" name="AccessKind"/>
+    <types xsi:type="ram:RVoid" xmi:id="_7wb0Qy_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RAny" xmi:id="_7wb0RC_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_7wb0RS_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RInt" xmi:id="_7wb0Ri_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RChar" xmi:id="_7wb0Ry_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RString" xmi:id="_7wb0SC_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RDouble" xmi:id="_7wb0SS_FEeO12dEuM623RQ"/>
+    <types xsi:type="ram:RFloat" xmi:id="_7wb0Si_FEeO12dEuM623RQ"/>
+  </structuralView>
+  <layout xmi:id="_7wb0Sy_FEeO12dEuM623RQ">
+    <containers xmi:id="_7wb0TC_FEeO12dEuM623RQ" key="_7wbNMC_FEeO12dEuM623RQ">
+      <value xmi:id="_7wb0Ty_FEeO12dEuM623RQ" key="_7wbNMy_FEeO12dEuM623RQ">
+        <value xmi:id="_7wb0UC_FEeO12dEuM623RQ" x="393.99985" y="292.0"/>
+      </value>
+      <value xmi:id="_7wb0US_FEeO12dEuM623RQ" key="_7wb0QC_FEeO12dEuM623RQ">
+        <value xmi:id="_7wb0Ui_FEeO12dEuM623RQ" x="829.00006" y="288.0"/>
+      </value>
+    </containers>
+    <containers xmi:id="_cdl7EC_TEeON3cxHSuRK9A" key="_cdks8S_TEeON3cxHSuRK9A">
+      <value xmi:id="_jNRfIS_TEeON3cxHSuRK9A" key="_jNRfIC_TEeON3cxHSuRK9A">
+        <value xmi:id="_jNSGMC_TEeON3cxHSuRK9A" x="271.00006" y="205.00003"/>
+      </value>
+      <value xmi:id="_kBtz0C_TEeON3cxHSuRK9A" key="_kBtMwC_TEeON3cxHSuRK9A">
+        <value xmi:id="_kBtz0S_TEeON3cxHSuRK9A" x="499.00043" y="205.9998"/>
+      </value>
+    </containers>
+  </layout>
+  <stateViews xmi:id="_cdks8S_TEeON3cxHSuRK9A" name="AccessClassified" specifies="_7wbNMy_FEeO12dEuM623RQ">
+    <stateMachines xmi:id="_iffMEC_TEeON3cxHSuRK9A" start="_jNRfIC_TEeON3cxHSuRK9A">
+      <states xmi:id="_jNRfIC_TEeON3cxHSuRK9A" name="Start" outgoings="_odGaAC_TEeON3cxHSuRK9A"/>
+      <states xmi:id="_kBtMwC_TEeON3cxHSuRK9A" name="Ready" incomings="_odGaAC_TEeON3cxHSuRK9A _0x_6IC_TEeON3cxHSuRK9A _sl-3gDBuEeOufuMEfGc99w" outgoings="_0x_6IC_TEeON3cxHSuRK9A _sl-3gDBuEeOufuMEfGc99w"/>
+      <transitions xmi:id="_odGaAC_TEeON3cxHSuRK9A" name="create" endState="_kBtMwC_TEeON3cxHSuRK9A" startState="_jNRfIC_TEeON3cxHSuRK9A" signature="_xVfXAC_TEeON3cxHSuRK9A"/>
+      <transitions xmi:id="_0x_6IC_TEeON3cxHSuRK9A" name="classifiedMethod" endState="_kBtMwC_TEeON3cxHSuRK9A" startState="_kBtMwC_TEeON3cxHSuRK9A" signature="_uo1PYC_GEeO12dEuM623RQ"/>
+      <transitions xmi:id="_sl-3gDBuEeOufuMEfGc99w" name="getAccessKind" endState="_kBtMwC_TEeON3cxHSuRK9A" startState="_kBtMwC_TEeON3cxHSuRK9A" signature="_oMOYUC_GEeO12dEuM623RQ"/>
+    </stateMachines>
+  </stateViews>
+</ram:Aspect>

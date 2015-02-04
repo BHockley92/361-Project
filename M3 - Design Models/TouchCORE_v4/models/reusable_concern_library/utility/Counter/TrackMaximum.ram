@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="http:///fm.ecore" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_Jeey0EZ_EeSHH7iGSzWjTA" name="TrackMaximum">
+  <realizes xsi:type="fm:Feature" href="Counter.jucm#18"/>
+  <structuralView xmi:id="_Jeey0UZ_EeSHH7iGSzWjTA">
+    <classes xsi:type="ram:Class" xmi:id="_Jeey0kZ_EeSHH7iGSzWjTA" name="Counter">
+      <attributes xmi:id="_Jeey00Z_EeSHH7iGSzWjTA" name="maximum" type="_Jeey10Z_EeSHH7iGSzWjTA"/>
+    </classes>
+    <types xsi:type="ram:RVoid" xmi:id="_Jeey1EZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RAny" xmi:id="_Jeey1UZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_Jeey1kZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RInt" xmi:id="_Jeey10Z_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RChar" xmi:id="_Jeey2EZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RString" xmi:id="_Jeey2UZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RDouble" xmi:id="_Jeey2kZ_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RFloat" xmi:id="_Jeey20Z_EeSHH7iGSzWjTA"/>
+    <types xsi:type="ram:RLong" xmi:id="_Jeey3EZ_EeSHH7iGSzWjTA"/>
+  </structuralView>
+  <instantiations xmi:id="_Jeey3UZ_EeSHH7iGSzWjTA" type="Extends">
+    <externalAspect href="Counter.ram#_dUCwsEUOEeSCVrBlhJ8sdw"/>
+  </instantiations>
+  <layout xmi:id="_Jeey3kZ_EeSHH7iGSzWjTA">
+    <containers xmi:id="_Jeey30Z_EeSHH7iGSzWjTA" key="_Jeey0UZ_EeSHH7iGSzWjTA">
+      <value xmi:id="_Jeey4EZ_EeSHH7iGSzWjTA" key="_Jeey0kZ_EeSHH7iGSzWjTA">
+        <value xmi:id="_Jeey4UZ_EeSHH7iGSzWjTA" x="373.00003" y="281.00012"/>
+      </value>
+    </containers>
+  </layout>
+</ram:Aspect>

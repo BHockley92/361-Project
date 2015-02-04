@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fakeaourn="http://fakeaourn/1.0" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_Bh_pMJEsEeOmp78xr2dZwA" name="PassiveMVC_PullObserver">
+  <realizes xsi:type="fakeaourn:Feature" href="Observer.fakeaourn#_WBqOcKMLEeOXN99rMUlGxw"/>
+  <structuralView xmi:id="_Bh_pMZEsEeOmp78xr2dZwA">
+    <classes xsi:type="ram:Class" xmi:id="_Bh_pMpEsEeOmp78xr2dZwA" name="Model" partial="true">
+      <operations xmi:id="_Bh_pM5EsEeOmp78xr2dZwA" name="service" returnType="_Bh_pO5EsEeOmp78xr2dZwA" partial="true"/>
+      <operations xmi:id="_Bh_pNJEsEeOmp78xr2dZwA" name="getChanges" visibility="package" returnType="_Bh_pO5EsEeOmp78xr2dZwA" partial="true"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Bh_pNZEsEeOmp78xr2dZwA" name="Controller" partial="true">
+      <operations xmi:id="_Bh_pNpEsEeOmp78xr2dZwA" name="handleEvent" returnType="_Bh_pO5EsEeOmp78xr2dZwA" partial="true"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Bh_pN5EsEeOmp78xr2dZwA" name="View" partial="true">
+      <operations xmi:id="_Bh_pOJEsEeOmp78xr2dZwA" name="updateView" visibility="package" returnType="_Bh_pOpEsEeOmp78xr2dZwA" partial="true">
+        <parameters xmi:id="_Bh_pOZEsEeOmp78xr2dZwA" name="m" type="_Bh_pMpEsEeOmp78xr2dZwA"/>
+      </operations>
+    </classes>
+    <types xsi:type="ram:RVoid" xmi:id="_Bh_pOpEsEeOmp78xr2dZwA"/>
+    <types xsi:type="ram:RAny" xmi:id="_Bh_pO5EsEeOmp78xr2dZwA"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_Bh_pPJEsEeOmp78xr2dZwA"/>
+    <types xsi:type="ram:RInt" xmi:id="_Bh_pPZEsEeOmp78xr2dZwA"/>
+    <types xsi:type="ram:RChar" xmi:id="_Bh_pPpEsEeOmp78xr2dZwA"/>
+    <types xsi:type="ram:RString" xmi:id="_Bh_pP5EsEeOmp78xr2dZwA"/>
+    <types xsi:type="ram:RDouble" xmi:id="_Bh_pQJEsEeOmp78xr2dZwA"/>
+    <types xsi:type="ram:RFloat" xmi:id="_Bh_pQZEsEeOmp78xr2dZwA"/>
+  </structuralView>
+  <instantiations xmi:id="_Bh_pQpEsEeOmp78xr2dZwA" type="Extends">
+    <mappings xmi:id="_Bh_pQ5EsEeOmp78xr2dZwA" toElement="_Bh_pMpEsEeOmp78xr2dZwA">
+      <operationMappings xmi:id="_Bh_pRJEsEeOmp78xr2dZwA" toElement="_Bh_pM5EsEeOmp78xr2dZwA">
+        <fromElement href="PullObserver.ram#_z83iMJEpEeOmp78xr2dZwA"/>
+      </operationMappings>
+      <operationMappings xmi:id="_Bh_pRZEsEeOmp78xr2dZwA" toElement="_Bh_pNJEsEeOmp78xr2dZwA">
+        <fromElement href="PullObserver.ram#_CQHy85EKEeOd9eLwdOkbxQ"/>
+      </operationMappings>
+      <fromElement xsi:type="ram:Class" href="PullObserver.ram#_CQHy8pEKEeOd9eLwdOkbxQ"/>
+    </mappings>
+    <mappings xmi:id="_Bh_pRpEsEeOmp78xr2dZwA" toElement="_Bh_pN5EsEeOmp78xr2dZwA">
+      <operationMappings xmi:id="_Bh_pR5EsEeOmp78xr2dZwA" toElement="_Bh_pOJEsEeOmp78xr2dZwA">
+        <fromElement href="PullObserver.ram#_6TOnUJEpEeOmp78xr2dZwA"/>
+      </operationMappings>
+      <fromElement xsi:type="ram:Class" href="PullObserver.ram#_2OlGIJEpEeOmp78xr2dZwA"/>
+    </mappings>
+    <externalAspect href="PullObserver.ram#_CQHy8JEKEeOd9eLwdOkbxQ"/>
+  </instantiations>
+  <layout xmi:id="_Bh_pSJEsEeOmp78xr2dZwA">
+    <containers xmi:id="_Bh_pSZEsEeOmp78xr2dZwA" key="_Bh_pMZEsEeOmp78xr2dZwA">
+      <value xmi:id="_Bh_pSpEsEeOmp78xr2dZwA" key="_Bh_pMpEsEeOmp78xr2dZwA">
+        <value xmi:id="_Bh_pS5EsEeOmp78xr2dZwA" x="268.9999" y="288.0003"/>
+      </value>
+      <value xmi:id="_Bh_pTJEsEeOmp78xr2dZwA" key="_Bh_pNZEsEeOmp78xr2dZwA">
+        <value xmi:id="_Bh_pTZEsEeOmp78xr2dZwA" x="636.0" y="349.0"/>
+      </value>
+      <value xmi:id="_Bh_pTpEsEeOmp78xr2dZwA" key="_Bh_pN5EsEeOmp78xr2dZwA">
+        <value xmi:id="_Bh_pT5EsEeOmp78xr2dZwA" x="449.9997" y="140.99995"/>
+      </value>
+    </containers>
+  </layout>
+</ram:Aspect>

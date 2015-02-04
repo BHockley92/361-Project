@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fakeaourn:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fakeaourn="http://fakeaourn/1.0" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_S4cnsMffEeOwiZ9N8scdTQ">
+  <features xmi:id="_3RAfsMfgEeOwiZ9N8scdTQ" name="Workflow">
+    <realizedBy xsi:type="ram:Aspect" href="Workflow.ram#_stle2XdvEeGm3uH8rYfPgw"/>
+  </features>
+  <features xmi:id="_gHzysMfkEeOwiZ9N8scdTQ" name="Input">
+    <realizedBy xsi:type="ram:Aspect" href="Input.ram#_stleYXdvEeGm3uH8rYfPgw"/>
+  </features>
+  <features xmi:id="_65klAMfkEeOwiZ9N8scdTQ" name="Output">
+    <realizedBy xsi:type="ram:Aspect" href="Output.ram#_stleYXdvEeGm3uH8rYfPgw"/>
+  </features>
+  <features xmi:id="_9lpJsMfkEeOwiZ9N8scdTQ" name="ParallelExecution">
+    <realizedBy xsi:type="ram:Aspect" href="ParallelExecution.ram#_1VuvsIyfEeGpeIH37hJjzg"/>
+  </features>
+  <features xmi:id="_BKABQMflEeOwiZ9N8scdTQ" name="Synchronization">
+    <realizedBy xsi:type="ram:Aspect" href="Synchronization.ram#_3WKkMNKtEeGrg5mJXcTORw"/>
+  </features>
+  <features xmi:id="_GQmusMflEeOwiZ9N8scdTQ" name="ConditionalExecution">
+    <realizedBy xsi:type="ram:Aspect" href="ConditionalExecution.ram#_V8m1AarNEeGxNpEWSISFVQ"/>
+  </features>
+</fakeaourn:FeatureModel>

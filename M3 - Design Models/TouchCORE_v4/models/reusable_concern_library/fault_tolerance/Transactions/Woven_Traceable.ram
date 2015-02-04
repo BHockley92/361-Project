@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.1" xmi:id="_2eDlEIbYEeSqH6kHtRRWUA" name="Traceable&lt;Traceable>">
+  <structuralView xmi:id="_2eDlEYbYEeSqH6kHtRRWUA">
+    <classes xsi:type="ram:Class" xmi:id="_2eDlEobYEeSqH6kHtRRWUA" name="Trace" comesFrom="_2eEMVobYEeSqH6kHtRRWUA">
+      <operations xmi:id="_2eDlE4bYEeSqH6kHtRRWUA" name="create" comesFrom="_2eEMVobYEeSqH6kHtRRWUA" visibility="package" returnType="_2eDlEobYEeSqH6kHtRRWUA" operationType="Constructor">
+        <parameters xmi:id="_2eDlFIbYEeSqH6kHtRRWUA" name="target" type="_2eDlHIbYEeSqH6kHtRRWUA"/>
+        <parameters xmi:id="_2eDlFYbYEeSqH6kHtRRWUA" name="kind" type="_2eEMIobYEeSqH6kHtRRWUA"/>
+        <parameters xmi:id="_2eDlFobYEeSqH6kHtRRWUA" name="invokedMethod" type="_2eDlJYbYEeSqH6kHtRRWUA"/>
+      </operations>
+      <operations xmi:id="_2eDlF4bYEeSqH6kHtRRWUA" name="getTarget" comesFrom="_2eEMVobYEeSqH6kHtRRWUA" returnType="_2eDlHIbYEeSqH6kHtRRWUA"/>
+      <operations xmi:id="_2eDlGIbYEeSqH6kHtRRWUA" name="getAccessKind" comesFrom="_2eEMVobYEeSqH6kHtRRWUA" returnType="_2eEMIobYEeSqH6kHtRRWUA"/>
+      <associationEnds xmi:id="_2eDlGYbYEeSqH6kHtRRWUA" name="target" lowerBound="1" assoc="_2eDlKIbYEeSqH6kHtRRWUA"/>
+      <associationEnds xmi:id="_2eDlGobYEeSqH6kHtRRWUA" name="invokedMethod" lowerBound="1" assoc="_2eDlKYbYEeSqH6kHtRRWUA"/>
+      <attributes xmi:id="_2eDlG4bYEeSqH6kHtRRWUA" name="kind" comesFrom="_2eEMVobYEeSqH6kHtRRWUA" type="_2eEMIobYEeSqH6kHtRRWUA"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_2eDlHIbYEeSqH6kHtRRWUA" name="Traceable" comesFrom="_2eEMVobYEeSqH6kHtRRWUA _2eEMV4bYEeSqH6kHtRRWUA" partial="true">
+      <operations xmi:id="_2eDlHYbYEeSqH6kHtRRWUA" name="traceableMethod" comesFrom="_2eEMVobYEeSqH6kHtRRWUA _2eEMV4bYEeSqH6kHtRRWUA" returnType="_2eDlK4bYEeSqH6kHtRRWUA" partial="true"/>
+      <operations xmi:id="_2eDlHobYEeSqH6kHtRRWUA" name="createTrace" comesFrom="_2eEMVobYEeSqH6kHtRRWUA" returnType="_2eDlEobYEeSqH6kHtRRWUA">
+        <parameters xmi:id="_2eDlH4bYEeSqH6kHtRRWUA" name="m" type="_2eDlJYbYEeSqH6kHtRRWUA"/>
+      </operations>
+      <operations xmi:id="_2eDlIIbYEeSqH6kHtRRWUA" name="temp" comesFrom="_2eEMVobYEeSqH6kHtRRWUA" returnType="_2eDlKobYEeSqH6kHtRRWUA"/>
+      <operations xmi:id="_2eDlIYbYEeSqH6kHtRRWUA" name="create" comesFrom="_2eEMV4bYEeSqH6kHtRRWUA" visibility="package" returnType="_2eDlHIbYEeSqH6kHtRRWUA" operationType="Constructor"/>
+      <operations xmi:id="_2eDlIobYEeSqH6kHtRRWUA" name="getAccessKind" comesFrom="_2eEMV4bYEeSqH6kHtRRWUA" visibility="package" returnType="_2eEMIobYEeSqH6kHtRRWUA">
+        <parameters xmi:id="_2eDlI4bYEeSqH6kHtRRWUA" name="m" type="_2eDlJ4bYEeSqH6kHtRRWUA"/>
+      </operations>
+      <associationEnds xmi:id="_2eDlJIbYEeSqH6kHtRRWUA" name="myTrace" lowerBound="1" navigable="false" assoc="_2eDlKIbYEeSqH6kHtRRWUA"/>
+    </classes>
+    <classes xsi:type="ram:ImplementationClass" xmi:id="_2eDlJYbYEeSqH6kHtRRWUA" name="Method" comesFrom="_2eEMVobYEeSqH6kHtRRWUA" instanceClassName="java.lang.reflect.Method">
+      <associationEnds xmi:id="_2eDlJobYEeSqH6kHtRRWUA" name="myTrace" lowerBound="1" navigable="false" assoc="_2eDlKYbYEeSqH6kHtRRWUA"/>
+    </classes>
+    <classes xsi:type="ram:ImplementationClass" xmi:id="_2eDlJ4bYEeSqH6kHtRRWUA" name="Method" comesFrom="_2eEMV4bYEeSqH6kHtRRWUA" instanceClassName="java.lang.reflect.Method"/>
+    <associations xmi:id="_2eDlKIbYEeSqH6kHtRRWUA" name="Trace_Traceable" ends="_2eDlGYbYEeSqH6kHtRRWUA _2eDlJIbYEeSqH6kHtRRWUA"/>
+    <associations xmi:id="_2eDlKYbYEeSqH6kHtRRWUA" name="Trace_Method" ends="_2eDlJobYEeSqH6kHtRRWUA _2eDlGobYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RVoid" xmi:id="_2eDlKobYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RAny" xmi:id="_2eDlK4bYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_2eDlLIbYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RInt" xmi:id="_2eDlLYbYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RChar" xmi:id="_2eDlLobYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RString" xmi:id="_2eDlL4bYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RDouble" xmi:id="_2eDlMIbYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RFloat" xmi:id="_2eEMIIbYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:RLong" xmi:id="_2eEMIYbYEeSqH6kHtRRWUA"/>
+    <types xsi:type="ram:REnum" xmi:id="_2eEMIobYEeSqH6kHtRRWUA" name="AccessKind">
+      <literals xmi:id="_2eEMI4bYEeSqH6kHtRRWUA" name="READ"/>
+      <literals xmi:id="_2eEMJIbYEeSqH6kHtRRWUA" name="WRITE"/>
+      <literals xmi:id="_2eEMJYbYEeSqH6kHtRRWUA" name="UPDATE"/>
+    </types>
+    <types xsi:type="ram:REnum" xmi:id="_2eEMJobYEeSqH6kHtRRWUA" name="AccessKind">
+      <literals xmi:id="_2eEMJ4bYEeSqH6kHtRRWUA" name="READ"/>
+      <literals xmi:id="_2eEMKIbYEeSqH6kHtRRWUA" name="WRITE"/>
+      <literals xmi:id="_2eEMKYbYEeSqH6kHtRRWUA" name="UPDATE"/>
+    </types>
+  </structuralView>
+  <messageViews xsi:type="ram:MessageView" xmi:id="_2eEMKobYEeSqH6kHtRRWUA" specifies="_2eDlHobYEeSqH6kHtRRWUA">
+    <specification xmi:id="_2eEMK4bYEeSqH6kHtRRWUA">
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_2eEMLIbYEeSqH6kHtRRWUA" covered="_2eEMMobYEeSqH6kHtRRWUA" message="_2eEMNIbYEeSqH6kHtRRWUA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_2eEMLYbYEeSqH6kHtRRWUA" covered="_2eEMMobYEeSqH6kHtRRWUA" message="_2eEMQIbYEeSqH6kHtRRWUA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_2eEMLobYEeSqH6kHtRRWUA" covered="_2eEMMobYEeSqH6kHtRRWUA" message="_2eEMQIbYEeSqH6kHtRRWUA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_2eEML4bYEeSqH6kHtRRWUA" covered="_2eEMMobYEeSqH6kHtRRWUA" message="_2eEMOYbYEeSqH6kHtRRWUA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_2eEMMIbYEeSqH6kHtRRWUA" covered="_2eEMM4bYEeSqH6kHtRRWUA" message="_2eEMOYbYEeSqH6kHtRRWUA"/>
+      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_2eEMMYbYEeSqH6kHtRRWUA" covered="_2eEMMobYEeSqH6kHtRRWUA" message="_2eEMN4bYEeSqH6kHtRRWUA"/>
+      <lifelines xmi:id="_2eEMMobYEeSqH6kHtRRWUA" represents="_2eEMQ4bYEeSqH6kHtRRWUA" coveredBy="_2eEMLIbYEeSqH6kHtRRWUA _2eEMMYbYEeSqH6kHtRRWUA _2eEML4bYEeSqH6kHtRRWUA _2eEMLYbYEeSqH6kHtRRWUA _2eEMLobYEeSqH6kHtRRWUA"/>
+      <lifelines xmi:id="_2eEMM4bYEeSqH6kHtRRWUA" represents="_2eEMNYbYEeSqH6kHtRRWUA" coveredBy="_2eEMMIbYEeSqH6kHtRRWUA"/>
+      <messages xmi:id="_2eEMNIbYEeSqH6kHtRRWUA" sendEvent="_2eEMRIbYEeSqH6kHtRRWUA" receiveEvent="_2eEMLIbYEeSqH6kHtRRWUA" signature="_2eDlHobYEeSqH6kHtRRWUA">
+        <localProperties xsi:type="ram:Reference" xmi:id="_2eEMNYbYEeSqH6kHtRRWUA" name="trace" lowerBound="1" type="_2eDlEobYEeSqH6kHtRRWUA"/>
+        <localProperties xsi:type="ram:Attribute" xmi:id="_2eEMNobYEeSqH6kHtRRWUA" name="accessKind">
+          <type xsi:type="ram:REnum" href="../Traceable/Woven_AccessClassification.ram#_LkQdE2EZEeSxuurPGOqeHA"/>
+        </localProperties>
+      </messages>
+      <messages xmi:id="_2eEMN4bYEeSqH6kHtRRWUA" sendEvent="_2eEMMYbYEeSqH6kHtRRWUA" receiveEvent="_2eEMRYbYEeSqH6kHtRRWUA" signature="_2eDlHobYEeSqH6kHtRRWUA" messageSort="reply">
+        <returns xsi:type="ram:StructuralFeatureValue" xmi:id="_2eEMOIbYEeSqH6kHtRRWUA" value="_2eEMNYbYEeSqH6kHtRRWUA"/>
+      </messages>
+      <messages xmi:id="_2eEMOYbYEeSqH6kHtRRWUA" sendEvent="_2eEML4bYEeSqH6kHtRRWUA" receiveEvent="_2eEMMIbYEeSqH6kHtRRWUA" signature="_2eDlE4bYEeSqH6kHtRRWUA" assignTo="_2eEMNYbYEeSqH6kHtRRWUA" messageSort="createMessage">
+        <arguments xmi:id="_2eEMOobYEeSqH6kHtRRWUA" parameter="_2eDlFIbYEeSqH6kHtRRWUA">
+          <value xsi:type="ram:ParameterValue" xmi:id="_2eEMO4bYEeSqH6kHtRRWUA" parameter="_2eDlH4bYEeSqH6kHtRRWUA"/>
+        </arguments>
+        <arguments xmi:id="_2eEMPIbYEeSqH6kHtRRWUA" parameter="_2eDlFYbYEeSqH6kHtRRWUA">
+          <value xsi:type="ram:StructuralFeatureValue" xmi:id="_2eEMPYbYEeSqH6kHtRRWUA" value="_2eEMNobYEeSqH6kHtRRWUA"/>
+        </arguments>
+        <arguments xmi:id="_2eEMPobYEeSqH6kHtRRWUA" parameter="_2eDlFobYEeSqH6kHtRRWUA">
+          <value xsi:type="ram:StructuralFeatureValue" xmi:id="_2eEMP4bYEeSqH6kHtRRWUA" value="_2eEMQ4bYEeSqH6kHtRRWUA"/>
+        </arguments>
+      </messages>
+      <messages xmi:id="_2eEMQIbYEeSqH6kHtRRWUA" sendEvent="_2eEMLYbYEeSqH6kHtRRWUA" receiveEvent="_2eEMLobYEeSqH6kHtRRWUA" assignTo="_2eEMNobYEeSqH6kHtRRWUA">
+        <signature href="../Traceable/Woven_AccessClassification.ram#_LkP2BGEZEeSxuurPGOqeHA"/>
+        <arguments xmi:id="_2eEMQYbYEeSqH6kHtRRWUA">
+          <parameter href="../Traceable/Woven_AccessClassification.ram#_LkP2BWEZEeSxuurPGOqeHA"/>
+          <value xsi:type="ram:ParameterValue" xmi:id="_2eEMQobYEeSqH6kHtRRWUA" parameter="_2eDlH4bYEeSqH6kHtRRWUA"/>
+        </arguments>
+      </messages>
+      <properties xmi:id="_2eEMQ4bYEeSqH6kHtRRWUA" name="target" lowerBound="1" type="_2eDlHIbYEeSqH6kHtRRWUA"/>
+      <formalGates xmi:id="_2eEMRIbYEeSqH6kHtRRWUA" message="_2eEMNIbYEeSqH6kHtRRWUA" name="in_createTrace"/>
+      <formalGates xmi:id="_2eEMRYbYEeSqH6kHtRRWUA" message="_2eEMN4bYEeSqH6kHtRRWUA" name="out_createTrace"/>
+    </specification>
+  </messageViews>
+  <layout xmi:id="_2eEMRobYEeSqH6kHtRRWUA">
+    <containers xmi:id="_2eEMR4bYEeSqH6kHtRRWUA" key="_2eDlEYbYEeSqH6kHtRRWUA"/>
+  </layout>
+  <stateViews xmi:id="_2eEMSIbYEeSqH6kHtRRWUA" name="Traceable">
+    <stateMachines xmi:id="_2eEMSYbYEeSqH6kHtRRWUA" start="_2eEMSobYEeSqH6kHtRRWUA">
+      <states xmi:id="_2eEMSobYEeSqH6kHtRRWUA" name="Start" outgoings="_2eEMTIbYEeSqH6kHtRRWUA"/>
+      <states xmi:id="_2eEMS4bYEeSqH6kHtRRWUA" name="Trace" incomings="_2eEMTIbYEeSqH6kHtRRWUA _2eEMTYbYEeSqH6kHtRRWUA _2eEMTobYEeSqH6kHtRRWUA" outgoings="_2eEMTYbYEeSqH6kHtRRWUA _2eEMTobYEeSqH6kHtRRWUA"/>
+      <transitions xmi:id="_2eEMTIbYEeSqH6kHtRRWUA" name="temp" endState="_2eEMS4bYEeSqH6kHtRRWUA" startState="_2eEMSobYEeSqH6kHtRRWUA" signature="_2eDlIIbYEeSqH6kHtRRWUA"/>
+      <transitions xmi:id="_2eEMTYbYEeSqH6kHtRRWUA" name="createTrace" endState="_2eEMS4bYEeSqH6kHtRRWUA" startState="_2eEMS4bYEeSqH6kHtRRWUA" signature="_2eDlHobYEeSqH6kHtRRWUA"/>
+      <transitions xmi:id="_2eEMTobYEeSqH6kHtRRWUA" name="traceableMethod" endState="_2eEMS4bYEeSqH6kHtRRWUA" startState="_2eEMS4bYEeSqH6kHtRRWUA" signature="_2eDlHYbYEeSqH6kHtRRWUA"/>
+    </stateMachines>
+    <specifies xsi:type="ram:Class" href="../Traceable/Traceable.ram#_Fn4asmEYEeSxuurPGOqeHA"/>
+  </stateViews>
+  <stateViews xmi:id="_2eEMT4bYEeSqH6kHtRRWUA" name="Trace">
+    <stateMachines xmi:id="_2eEMUIbYEeSqH6kHtRRWUA" start="_2eEMUYbYEeSqH6kHtRRWUA">
+      <states xmi:id="_2eEMUYbYEeSqH6kHtRRWUA" name="Start" outgoings="_2eEMU4bYEeSqH6kHtRRWUA"/>
+      <states xmi:id="_2eEMUobYEeSqH6kHtRRWUA" name="Accessible" incomings="_2eEMU4bYEeSqH6kHtRRWUA _2eEMVIbYEeSqH6kHtRRWUA _2eEMVYbYEeSqH6kHtRRWUA" outgoings="_2eEMVIbYEeSqH6kHtRRWUA _2eEMVYbYEeSqH6kHtRRWUA"/>
+      <transitions xmi:id="_2eEMU4bYEeSqH6kHtRRWUA" name="create" endState="_2eEMUobYEeSqH6kHtRRWUA" startState="_2eEMUYbYEeSqH6kHtRRWUA" signature="_2eDlE4bYEeSqH6kHtRRWUA"/>
+      <transitions xmi:id="_2eEMVIbYEeSqH6kHtRRWUA" name="getTarget" endState="_2eEMUobYEeSqH6kHtRRWUA" startState="_2eEMUobYEeSqH6kHtRRWUA" signature="_2eDlF4bYEeSqH6kHtRRWUA"/>
+      <transitions xmi:id="_2eEMVYbYEeSqH6kHtRRWUA" name="getAccessKind" endState="_2eEMUobYEeSqH6kHtRRWUA" startState="_2eEMUobYEeSqH6kHtRRWUA" signature="_2eDlGIbYEeSqH6kHtRRWUA"/>
+    </stateMachines>
+    <specifies xsi:type="ram:Class" href="../Traceable/Traceable.ram#_N2PjQGEYEeSxuurPGOqeHA"/>
+  </stateViews>
+  <wovenAspects xmi:id="_2eEMVobYEeSqH6kHtRRWUA" name="Traceable">
+    <comesFrom href="../Traceable/Traceable.ram#_Fn4asGEYEeSxuurPGOqeHA"/>
+  </wovenAspects>
+  <wovenAspects xmi:id="_2eEMV4bYEeSqH6kHtRRWUA" name="AccessClassification&lt;AccessClassified>">
+    <comesFrom href="../Traceable/Woven_AccessClassification.ram#_25vQ8IbXEeSygKfjHrPxSQ"/>
+  </wovenAspects>
+</ram:Aspect>
