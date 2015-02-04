@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<core:COREConcern xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://cs.mcgill.ca/sel/core/1.0" xmlns:fm="http:///fm.ecore" xmlns:grl="http:///grl.ecore" xmi:id="_bYGfgGRqEeSE1_ednp-yFA" name="Command">
-  <models xsi:type="fm:FeatureModel" href="Command.jucm#//@grlspec/@featureModel"/>
-  <models xsi:type="grl:ImpactModel" href="Command.jucm#//@grlspec/@impactModel"/>
-  <interface xmi:id="_bYGfgWRqEeSE1_ednp-yFA"/>
-</core:COREConcern>
