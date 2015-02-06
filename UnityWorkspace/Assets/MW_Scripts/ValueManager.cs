@@ -9,9 +9,15 @@ public class ValueManager
 	Dictionary <LandType, int>		landValues;
 
 	private string filePath { get; set; }
-	private int value;
+	private int value; // TODO: remove?
 
-	public ValueManager();
+	public ValueManager()
+	{
+		unitValues = new Dictionary<UnitType, int>();
+		villageValues = new Dictionary<VillageType, int>();
+		landValues = new Dictionary<LandType, int>();
+
+	}
 
 	public int getUnitValue(UnitType ut) { return unitValues [ut]; }
 	public int getLandValue(LandType lt) { return landValues [lt]; }
