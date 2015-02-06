@@ -4,7 +4,7 @@ using GameEnums;
 
 public class Structure 
 {
-	private StructureType myType;
+	private StructureType myType { get; }
 
 	public Structure (Tile loc);
 	public Tile getMyLocation();
