@@ -108,7 +108,9 @@
       <attributes xmi:id="_DzXfC6rHEeSk4uFYjIt4dg" name="wood" type="_DzXfU6rHEeSk4uFYjIt4dg"/>
     </classes>
     <classes xsi:type="ram:Class" xmi:id="_DzXfDKrHEeSk4uFYjIt4dg" name="ValueManager">
-      <operations xmi:id="_DzXfDarHEeSk4uFYjIt4dg" name="create" returnType="_DzXfDKrHEeSk4uFYjIt4dg" operationType="Constructor"/>
+      <operations xmi:id="_DzXfDarHEeSk4uFYjIt4dg" name="create" returnType="_DzXfDKrHEeSk4uFYjIt4dg" operationType="Constructor">
+        <parameters xmi:id="_pioyYK-nEeSmsvCafssw2g" name="path" type="_DzXfVarHEeSk4uFYjIt4dg"/>
+      </operations>
       <operations xmi:id="_DzXfDqrHEeSk4uFYjIt4dg" name="getUnitValue" returnType="_DzXfU6rHEeSk4uFYjIt4dg">
         <parameters xmi:id="_DzXfD6rHEeSk4uFYjIt4dg" name="ut" type="_DzXfZarHEeSk4uFYjIt4dg"/>
       </operations>
