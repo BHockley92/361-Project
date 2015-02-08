@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class NetworkPlayer : Photon.MonoBehaviour
+public class Player : Photon.MonoBehaviour
 {
 	private float speed = 10f;
 	private Hashtable properties = new Hashtable();
