@@ -147,7 +147,9 @@
       <attributes xmi:id="_vgr84rB5EeS377mAxHBI7g" name="needToPay" type="_vgskArB5EeS377mAxHBI7g"/>
     </classes>
     <classes xsi:type="ram:Class" xmi:id="_vgr847B5EeS377mAxHBI7g" name="ValueManager">
-      <operations xmi:id="_vgr85LB5EeS377mAxHBI7g" name="create" returnType="_vgr847B5EeS377mAxHBI7g" operationType="Constructor"/>
+      <operations xmi:id="_vgr85LB5EeS377mAxHBI7g" name="create" returnType="_vgr847B5EeS377mAxHBI7g" operationType="Constructor">
+        <parameters xmi:id="_tY6qELCcEeSVJNGbaimMCw" name="path" type="_vgskBLB5EeS377mAxHBI7g"/>
+      </operations>
       <operations xmi:id="_vgr85bB5EeS377mAxHBI7g" name="getUnitValue" returnType="_vgskArB5EeS377mAxHBI7g">
         <parameters xmi:id="_vgr85rB5EeS377mAxHBI7g" name="ut" type="_vgskFLB5EeS377mAxHBI7g"/>
       </operations>
