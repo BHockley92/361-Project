@@ -10,6 +10,7 @@ public class MW_Game
 	public AbstractGameLogic myGameLogic { get; private set; }
 
 	// TODO: board representation -- use this: http://www.redblobgames.com/grids/hexagons/#map-storage
+	// Axial coordinate system will be used
 	public AbstractTile[,] board { get; private set; }
 	
 	// Global stats tracked, not for each player

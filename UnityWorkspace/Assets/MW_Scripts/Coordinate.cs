@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 // Helper class to be used to pass x and y coordinates
-public class Coordinate : IEqualityComparer<GridPoint>
+public class Coordinate : IEqualityComparer<Coordinate>
 {
 	public int x { get; set; }
 	public int y { get; set; }
