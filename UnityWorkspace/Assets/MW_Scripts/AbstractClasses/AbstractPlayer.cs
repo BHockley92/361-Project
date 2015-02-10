@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using GameEnums;
 
-public class Player
+public abstract class AbstractPlayer
 {
 	private string username;
 	private string password;
 	private PlayerStatus status;
 	private int wins;
 	private int losses;
+	private IList<AbstractVillage> myVillages { get; }
 }
