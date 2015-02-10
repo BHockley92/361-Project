@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AbstractGame
+public abstract class AbstractGame
 {
 	private List<Player> participants;
-	private AbstractPlayer turnOf { get; }
+	private AbstractPlayer turnOf { get; set; }
 
-	private AbstractGameLogic myGameLogic { get; }
-	private Tile[,] board { get; }
+	private AbstractGameLogic myGameLogic { get; set; }
+	private AbstractTile[,] board { get; set; }
 	// TODO: board representation -- use this: http://www.redblobgames.com/grids/hexagons/#map-storage
 
 	// Global stats tracked, not for each player

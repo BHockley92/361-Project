@@ -18,10 +18,10 @@ public abstract class ValueManager
 		landValues = new Dictionary<LandType, int>();
 	}
 
-	public abstract int getUnitValue(UnitType ut) { return unitValues [ut]; }
-	public abstract int getLandValue(LandType lt) { return landValues [lt]; }
-	public abstract int getVillageValue(VillageType vt) { return villageValues [vt]; }
+	public int getUnitValue(UnitType ut) { return unitValues [ut]; }
+	public int getLandValue(LandType lt) { return landValues [lt]; }
+	public int getVillageValue(VillageType vt) { return villageValues [vt]; }
 
-	private abstract void loadValuesFromFile(); // Maybe have a generic serializer?
+	public abstract void loadValuesFromFile(); // Maybe have a generic serializer?
 
 }

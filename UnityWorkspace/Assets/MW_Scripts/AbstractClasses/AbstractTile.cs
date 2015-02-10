@@ -8,7 +8,4 @@ public abstract class AbstractTile
 	private AbstractStructure occupyingStructure { get; set; }
 	private AbstractVillage myVillage{ get; set; }
 	private AbstractUnit occupyingUnit { get; set; }
-
-	public AbstractTile( LandType lt);
-
 }

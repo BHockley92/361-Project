@@ -7,12 +7,12 @@ public abstract class AbstractVillage
 	private VillageType myType { get; set; }
 	private int gold { get; set; }
 	private int wood { get; set; }
-	private IList<Tile> controlledRegion { get; }
-	private IList<Unit> supportedUnits { get; }
-	private AbstractTile location { get; }
-	private AbstractPlayer myPlayer { get; }
+	private IList<AbstractTile> controlledRegion { get; set; }
+	private IList<AbstractUnit> supportedUnits { get; set; }
+	private AbstractTile location { get; set; }
+	private AbstractPlayer myPlayer { get; set; }
 	
-	public AbstractVillage(IList<Tile> region, AbstractPlayer player)
+	public AbstractVillage(IList<AbstractTile> region, AbstractPlayer player)
 	{
 		myType = VillageType.Hovel;
 		gold = 0;
