@@ -34,7 +34,9 @@
       <attributes xmi:id="_vgrVt7B5EeS377mAxHBI7g" name="roundsPlayed" type="_vgskArB5EeS377mAxHBI7g"/>
     </classes>
     <classes xsi:type="ram:Class" xmi:id="_vgrVuLB5EeS377mAxHBI7g" name="Unit">
-      <operations xmi:id="_vgrVubB5EeS377mAxHBI7g" name="create" returnType="_vgrVuLB5EeS377mAxHBI7g" operationType="Constructor"/>
+      <operations xmi:id="_vgrVubB5EeS377mAxHBI7g" name="create" returnType="_vgrVuLB5EeS377mAxHBI7g" operationType="Constructor">
+        <parameters xmi:id="_8QVRALDuEeSuG5HJrV58Kg" name="vOwner" type="_vgr8wLB5EeS377mAxHBI7g"/>
+      </operations>
       <operations xmi:id="_tNfKELCEEeS15rESknNEMA" name="destroy" returnType="_vgsj_7B5EeS377mAxHBI7g" operationType="Destructor"/>
       <operations xmi:id="_vgrVurB5EeS377mAxHBI7g" name="getMyLocation" returnType="_vgrV1LB5EeS377mAxHBI7g"/>
       <operations xmi:id="_vgrVu7B5EeS377mAxHBI7g" name="getMyVillage" returnType="_vgr8wLB5EeS377mAxHBI7g"/>
@@ -1367,7 +1369,7 @@
         <value xmi:id="_vgvAULB5EeS377mAxHBI7g" x="1187.3848" y="239.0692"/>
       </value>
       <value xmi:id="_vgvAUbB5EeS377mAxHBI7g" key="_vgrVuLB5EeS377mAxHBI7g">
-        <value xmi:id="_vgvAUrB5EeS377mAxHBI7g" x="1210.9089" y="1212.9575"/>
+        <value xmi:id="_vgvAUrB5EeS377mAxHBI7g" x="1210.9087" y="1212.9573"/>
       </value>
       <value xmi:id="_vgvAU7B5EeS377mAxHBI7g" key="_vgrVx7B5EeS377mAxHBI7g">
         <value xmi:id="_vgvAVLB5EeS377mAxHBI7g" x="1829.4714" y="638.1125"/>
@@ -1376,7 +1378,7 @@
         <value xmi:id="_vgvAVrB5EeS377mAxHBI7g" x="1608.9552" y="285.59286"/>
       </value>
       <value xmi:id="_vgvAV7B5EeS377mAxHBI7g" key="_vgrV1LB5EeS377mAxHBI7g">
-        <value xmi:id="_vgvAWLB5EeS377mAxHBI7g" x="1161.3175" y="569.9547"/>
+        <value xmi:id="_vgvAWLB5EeS377mAxHBI7g" x="1161.3167" y="569.9542"/>
       </value>
       <value xmi:id="_vgvAWbB5EeS377mAxHBI7g" key="_vgskCLB5EeS377mAxHBI7g">
         <value xmi:id="_vgvAWrB5EeS377mAxHBI7g" x="2062.508" y="-1012.33765"/>
