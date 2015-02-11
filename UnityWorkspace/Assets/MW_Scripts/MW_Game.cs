@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using GameEnums;
 
-public class MW_Game 
+public class MW_Game : AbstractGame
 {
 	private IList<AbstractPlayer> participants;
 	public AbstractPlayer turnOf { get; private set; }
