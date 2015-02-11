@@ -4,6 +4,6 @@ using GameEnums;
 
 public class AbstractStructure 
 {
-	private StructureType myType { get; set; }
-	private AbstractTile myLocation { get; set; }
+	public StructureType myType { get; private set; }
+	public AbstractTile myLocation { get; set; }
 }

@@ -4,9 +4,9 @@ using GameEnums;
 
 public abstract class ValueManager
 {
-	Dictionary <UnitType, int> 		unitValues;
-	Dictionary <VillageType, int> 	villageValues;
-	Dictionary <LandType, int>		landValues;
+	private Dictionary <UnitType, int> 		unitValues;
+	private Dictionary <VillageType, int> 	villageValues;
+	private Dictionary <LandType, int>		landValues;
 
 	private string filePath { get; set; }
 	private int value; // TODO: remove?

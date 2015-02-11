@@ -4,9 +4,9 @@ using GameEnums;
 
 public abstract class AbstractPlayer
 {
-	private string username;
+	public string username { get; private set; }
 	private string password;
-	private PlayerStatus status;
+	private PlayerStatus status { get; set; }
 	private int wins;
 	private int losses;
 	private IList<AbstractVillage> myVillages { get; set; }

@@ -4,9 +4,9 @@ using GameEnums;
 
 public abstract class AbstractUnit 
 {
-	private UnitType myType { get; set; }
-	private ActionType currentAction { get; set; }
+	public UnitType myType { get; private set; }
+	public ActionType currentAction { get; private set; }
 	
-	private IList<AbstractVillage> myVillage { get; set; }
-	private AbstractTile myLocation { get; set; }
+	public IList<AbstractVillage> myVillage { get; private set; }
+	public AbstractTile myLocation { get; private set; }
 }

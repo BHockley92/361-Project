@@ -4,13 +4,13 @@ using GameEnums;
 
 public abstract class AbstractVillage 
 {
-	private VillageType myType { get; set; }
-	private int gold { get; set; }
-	private int wood { get; set; }
-	private IList<AbstractTile> controlledRegion { get; set; }
-	private IList<AbstractUnit> supportedUnits { get; set; }
-	private AbstractTile location { get; set; }
-	private AbstractPlayer myPlayer { get; set; }
+	public VillageType myType { get; private set; }
+	public int gold { get; private set; }
+	public int wood { get; private set; }
+	public IList<AbstractTile> controlledRegion { get; private set; }
+	public IList<AbstractUnit> supportedUnits { get; private set; }
+	public AbstractTile location { get; private set; }
+	public AbstractPlayer myPlayer { get; private set; }
 	
 	public AbstractVillage(IList<AbstractTile> region, AbstractPlayer player)
 	{

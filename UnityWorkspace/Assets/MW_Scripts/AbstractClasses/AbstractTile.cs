@@ -4,8 +4,8 @@ using GameEnums;
 
 public abstract class AbstractTile 
 {
-	private LandType myType { get; set; }
-	private AbstractStructure occupyingStructure { get; set; }
-	private AbstractVillage myVillage{ get; set; }
-	private AbstractUnit occupyingUnit { get; set; }
+	public LandType myType { get; private set; }
+	public AbstractStructure occupyingStructure { get; private set; }
+	public AbstractVillage myVillage{ get; private set; }
+	public AbstractUnit occupyingUnit { get; private set; }
 }
