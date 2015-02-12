@@ -9,7 +9,7 @@ public class MW_Game : AbstractGame
 	
 	public AbstractGameLogic myGameLogic { get; private set; }
 
-	// TODO: board representation -- use this: http://www.redblobgames.com/grids/hexagons/#map-storage
+	// TODO: board representation -- use this: http://www.redblobgames.com/grids/hexagons/#map-storage with solution 3 (slide to the left)
 	// Axial coordinate system will be used
 	public AbstractTile[,] board { get; private set; }
 	
@@ -19,10 +19,10 @@ public class MW_Game : AbstractGame
 	private int unitsDiedFromPoverty = 0;
 
 	// for a randomly generated board, assumes length and width are > 0
-	public MW_Game(IList<AbstractPlayer> players, int boardLength, int boardWidth)
+	public MW_Game(IList<AbstractPlayer> players, int qboardLength, int rboardWidth)
 	{
 		participants = players;
-		board = generateRandomBoard (boardLength, boardWidth);
+		board = generateRandomBoard (qboardLength, rboardWidth);
 	}
 
 	// Constructor for when a board is loaded
@@ -34,9 +34,10 @@ public class MW_Game : AbstractGame
 	}
 
 	// Generates a random island that conforms to specs (300 land tiles that aren't water, one big land mass)
-	private AbstractTile[,] generateRandomBoard(int boardLength, int boardWidth)
+	private AbstractTile[,] generateRandomBoard(int qboardLength, int rboardWidth)
 	{
 		// TODO
+		board = new AbstractTile[ rboardWidth, qboardLength + rboardWidth/2 ];
 		return null;
 	}
 
