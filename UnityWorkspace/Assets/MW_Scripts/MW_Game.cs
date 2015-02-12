@@ -17,17 +17,22 @@ public class MW_Game : AbstractGame
 	private int unitsDiedFromPoverty = 0;
 
 	// for a randomly generated board, assumes length and width are > 0
-	public MW_Game(IList<AbstractPlayer> players, int qboardLength, int rboardWidth)
+	public MW_Game(IList<AbstractPlayer> players, int qboardLength, int rboardWidth, AbstractGameLogic gl)
 	{
 		participants = players;
-		board.generateRandomBoard (qboardLength, rboardWidth);
+		turnOf = participants [0];
+
+		gameBoard = new Board (qboardLength, rboardWidth);
+		myGameLogic = gl;
 	}
 
 	// Constructor for when a board is loaded
-	public MW_Game(IList<AbstractPlayer> players, Board b)
+	public MW_Game(IList<AbstractPlayer> players,  Tile[,] b, AbstractGameLogic gl)
 	{
 		participants = players;
 		turnOf = players [0];
-		board = b;
+
+		gameBoard = new Board(b);
+		myGameLogic = gl;
 	}
 }
