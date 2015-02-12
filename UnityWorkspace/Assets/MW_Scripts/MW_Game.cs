@@ -39,4 +39,18 @@ public class MW_Game : AbstractGame
 		// TODO
 		return null;
 	}
+
+	// get the neighbours of a hex tile
+	// list is ordered from the upper left neighbor and moving clockwise
+	public List<Tile> getNeighbors(Coordinate c)
+	{
+		// TODO: check that indices are valid -- don't forget that not all indices in the array are used!
+		List<Tile> ret = new List<Tile> ();
+		ret.Add (board [c.q, c.r - 1]);
+		ret.Add (board [c.q + 1, c.r - 1 ]);
+		ret.Add (board [c.q + 1, c.r ]);
+		ret.Add (board [c.q, c.r + 1]);
+		ret.Add (board [c.q - 1, c.r + 1 ]);
+		ret.Add (board [c.q - 1, c.r]);
+	}
 }
