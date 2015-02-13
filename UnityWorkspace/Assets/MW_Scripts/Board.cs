@@ -8,39 +8,76 @@ public class Board
 	// Axial coordinate system will be used with a rhombus shaped board
 		// q = x coordinate
 		// r = z coordinate
-	public Tile[,] board;
+	public AbstractTile[,] board;
 
 	// Constructor for when a random board is generated
-	public Board(int qlength, int rwidth)
+	public Board(int length, int width)
 	{
-		board = generateRandomBoard (qlength, rwidth);
+		board = generateRandomBoard (length, width);
 	}
 
 	// Constructor for when a board is provided
-	public Board(AbstractTile[,] b)
+	public Board( Tile[,] b )
 	{
 		board = b;
 	}
 	
 	// Generates a random island that conforms to specs (300 land tiles that aren't water, one big land mass)
-	private void generateRandomBoard(int qboardLength, int rboardWidth)
+	private Tile[,] generateRandomBoard(int boardLength, int boardWidth)
 	{
 		// TODO
-		board = new AbstractTile[ rboardWidth, qboardLength ];
+		board = new Tile[ boardLength, boardWidth ];
+		return null;
 	}
 	
 	// get the neighbours of a hex tile
-	// list is ordered from the upper left neighbor and moving clockwise
-	public List<Tile> getNeighbors(Coordinate c)
+	public List<AbstractTile> getNeighbors(Coordinate c)
 	{
-		// TODO: check that indices are valid -- don't forget that not all indices in the array are used!
-		List<Tile> ret = new List<Tile> ();
-		ret.Add (board [c.q, c.r - 1]);
-		ret.Add (board [c.q + 1, c.r - 1 ]);
-		ret.Add (board [c.q + 1, c.r ]);
-		ret.Add (board [c.q, c.r + 1]);
-		ret.Add (board [c.q - 1, c.r + 1 ]);
-		ret.Add (board [c.q - 1, c.r]);
+		List<AbstractTile> ret = new List<AbstractTile> ();
+
+		// Check that the coordinate is within bounds
+		if(c.x >= 0 && c.z >= 0)
+		{
+			if( c.x < board.GetLength(0) && c.z < board.GetLength(1)) // TODO: test that the right dimensions are verified x-> 0 and z -> 1
+			{
+				// Now we know the coordinate is valid
+
+				// Check that left adjacent spaces are valid
+				if( c.x - 1 >= 0 )
+				{
+					ret.Add(board[c.x - 1, c.z]);
+
+					// Check for the above and below
+					if( c.z - 1 >= 0 )
+					{
+						ret.Add(board[c.x - 1, c.z - 1]);
+					}
+
+					if( c.z + 1 < board.GetLength(1)) // TODO is this the correct dimension?
+					{
+						ret.Add(board[ c.x - 1, c.z + 1 ]);
+					}
+				}
+
+				// Now check the right adjacent spaces
+				if( c.x + 1 < board.GetLength(0)) // TODO: is this the correct dimension?
+				{
+					ret.Add ( board[ c.x + 1, c.z ] );
+
+					// Check for the above and below
+					// Check for the above and below
+					if( c.z - 1 >= 0 )
+					{
+						ret.Add(board[c.x + 1, c.z - 1]);
+					}
+					
+					if( c.z + 1 < board.GetLength(1)) // TODO is this the correct dimension?
+					{
+						ret.Add(board[ c.x + 1, c.z + 1 ]);
+					}
+				}
+			}
+		}
 
 		return ret;
 	}
