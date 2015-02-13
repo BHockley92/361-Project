@@ -17,12 +17,12 @@ public class MW_Game : AbstractGame
 	private int unitsDiedFromPoverty = 0;
 
 	// for a randomly generated board, assumes length and width are > 0
-	public MW_Game(IList<AbstractPlayer> players, int qboardLength, int rboardWidth, AbstractGameLogic gl)
+	public MW_Game(IList<AbstractPlayer> players, int boardLength, int boardWidth, AbstractGameLogic gl)
 	{
 		participants = players;
 		turnOf = participants [0];
 
-		gameBoard = new Board (qboardLength, rboardWidth);
+		gameBoard = new Board (boardLength, boardWidth);
 		myGameLogic = gl;
 	}
 
