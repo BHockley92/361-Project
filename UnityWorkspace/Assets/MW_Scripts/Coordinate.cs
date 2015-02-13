@@ -7,13 +7,13 @@ using System.Collections.Generic;
 	// x = q, z = r
 public class Coordinate : IEqualityComparer<Coordinate>
 {
-	public int q { get; set; }
-	public int r { get; set; }
+	public int x { get; set; }
+	public int z { get; set; }
 
 	public Coordinate( int pX, int pZ)
 	{
-		q = pX;
-		r = pZ;
+		x = pX;
+		z = pZ;
 	}
 
 	// All interface implementations for IEqualityComparer below
@@ -22,22 +22,22 @@ public class Coordinate : IEqualityComparer<Coordinate>
 		if (obj == null) return false;
 		Coordinate objAsGP = obj as Coordinate;
 		if (objAsGP == null) return false;
-		return (this.q == objAsGP.q && this.r == objAsGP.r);
+		return (this.x == objAsGP.x && this.z == objAsGP.z);
 	}
 	
 	public bool equals(Coordinate p)
 	{
-		return (this.q == p.q && this.r == p.r);
+		return (this.x == p.x && this.z == p.z);
 	}
 	
 	public override int GetHashCode()
 	{
-		return this.r * 100 + this.r;
+		return this.x * 100 + this.z;
 	}
 	
 	public override string ToString ()
 	{
-		return "(" + q + ", " + r + ")";
+		return "(" + x + ", " + z + ")";
 	}
 	
 	public bool Equals(Coordinate p1, Coordinate p2)
