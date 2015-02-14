@@ -4,13 +4,6 @@ using GameEnums;
 
 public class MW_Game : AbstractGame
 {
-	private IList<AbstractPlayer> participants;
-	public AbstractPlayer turnOf { get; private set; }
-	
-	public AbstractGameLogic myGameLogic { get; private set; }
-
-	public Board gameBoard { get; private set; }
-	
 	// Global stats tracked, not for each player
 	private int roundsPlayed = 0;
 	private int unitsDiedFromCombat = 0;
