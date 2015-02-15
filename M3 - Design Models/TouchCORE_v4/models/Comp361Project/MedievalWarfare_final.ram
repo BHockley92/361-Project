@@ -494,7 +494,7 @@
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_diOhMbVdEeSK4cr3aapYig" covered="_PaUHO7R7EeSDMqjGxVLAzw" message="_diOhMrVdEeSK4cr3aapYig"/>
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_qz-rILVdEeSK4cr3aapYig" covered="_PaUHOrR7EeSDMqjGxVLAzw" message="_qz-rIrVdEeSK4cr3aapYig"/>
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_qz-rIbVdEeSK4cr3aapYig" covered="_PaUHO7R7EeSDMqjGxVLAzw" message="_qz-rIrVdEeSK4cr3aapYig"/>
-          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_PaUHOLR7EeSDMqjGxVLAzw" body="upgradeValue &lt;= gold" language="java"/>
+          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_PaUHOLR7EeSDMqjGxVLAzw" body="upgradeValue &lt;= gold &amp;&amp; upgradeValue >= 0" language="java"/>
         </operands>
       </fragments>
       <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_PaUHObR7EeSDMqjGxVLAzw" covered="_PaUHOrR7EeSDMqjGxVLAzw" message="_PaUHQrR7EeSDMqjGxVLAzw"/>
