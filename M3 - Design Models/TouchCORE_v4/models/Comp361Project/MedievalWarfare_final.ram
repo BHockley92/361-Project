@@ -395,17 +395,22 @@
       <fragments xsi:type="ram:ExecutionStatement" xmi:id="_PaTgTLR7EeSDMqjGxVLAzw" covered="_PaTgVLR7EeSDMqjGxVLAzw">
         <specification xsi:type="ram:OpaqueExpression" xmi:id="_PaTgTbR7EeSDMqjGxVLAzw" body="int upgradeValue = newValue - oldValue" language="java"/>
       </fragments>
-      <fragments xsi:type="ram:CombinedFragment" xmi:id="_PaTgTrR7EeSDMqjGxVLAzw" covered="_PaTgVLR7EeSDMqjGxVLAzw _PaTgVbR7EeSDMqjGxVLAzw" interactionOperator="opt">
+      <fragments xsi:type="ram:CombinedFragment" xmi:id="_PaTgTrR7EeSDMqjGxVLAzw" covered="_PaTgVLR7EeSDMqjGxVLAzw _PaTgVbR7EeSDMqjGxVLAzw _PaTgVrR7EeSDMqjGxVLAzw" interactionOperator="opt">
         <operands xmi:id="_PaTgT7R7EeSDMqjGxVLAzw">
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_PaTgULR7EeSDMqjGxVLAzw" covered="_PaTgVLR7EeSDMqjGxVLAzw" message="_PaUHGbR7EeSDMqjGxVLAzw"/>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_PaTgUbR7EeSDMqjGxVLAzw" covered="_PaTgVbR7EeSDMqjGxVLAzw" message="_PaUHGbR7EeSDMqjGxVLAzw"/>
-          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_PaTgUrR7EeSDMqjGxVLAzw" body="upgradeValue &lt;= villageGold" language="java"/>
+          <fragments xsi:type="ram:ExecutionStatement" xmi:id="_k4UTELVfEeSK4cr3aapYig" covered="_PaTgVLR7EeSDMqjGxVLAzw">
+            <specification xsi:type="ram:OpaqueExpression" xmi:id="_k4UTEbVfEeSK4cr3aapYig" body="villageGold = villageGold - upgradeValue;" language="java"/>
+          </fragments>
+          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_pFHqsLVfEeSK4cr3aapYig" covered="_PaTgVLR7EeSDMqjGxVLAzw" message="_pFHqsrVfEeSK4cr3aapYig"/>
+          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_pFHqsbVfEeSK4cr3aapYig" covered="_PaTgVrR7EeSDMqjGxVLAzw" message="_pFHqsrVfEeSK4cr3aapYig"/>
+          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_1NubQLVfEeSK4cr3aapYig" covered="_PaTgVLR7EeSDMqjGxVLAzw" message="_1NubQrVfEeSK4cr3aapYig"/>
+          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_1NubQbVfEeSK4cr3aapYig" covered="_PaTgVbR7EeSDMqjGxVLAzw" message="_1NubQrVfEeSK4cr3aapYig"/>
+          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_PaTgUrR7EeSDMqjGxVLAzw" body="upgradeValue &lt;= villageGold &amp;&amp; upgradeValue >= 0" language="java"/>
         </operands>
       </fragments>
       <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_PaTgU7R7EeSDMqjGxVLAzw" covered="_PaTgVLR7EeSDMqjGxVLAzw" message="_PaUHBbR7EeSDMqjGxVLAzw"/>
-      <lifelines xmi:id="_PaTgVLR7EeSDMqjGxVLAzw" represents="_PaUHHLR7EeSDMqjGxVLAzw" coveredBy="_PaTgN7R7EeSDMqjGxVLAzw _PaTgU7R7EeSDMqjGxVLAzw _PaTgOLR7EeSDMqjGxVLAzw _PaTgO7R7EeSDMqjGxVLAzw _PaTgPLR7EeSDMqjGxVLAzw _PaTgP7R7EeSDMqjGxVLAzw _PaTgQLR7EeSDMqjGxVLAzw _PaTgQ7R7EeSDMqjGxVLAzw _PaTgRLR7EeSDMqjGxVLAzw _PaTgR7R7EeSDMqjGxVLAzw _PaTgSLR7EeSDMqjGxVLAzw _PaTgS7R7EeSDMqjGxVLAzw _PaTgTrR7EeSDMqjGxVLAzw _PaTgTLR7EeSDMqjGxVLAzw _PaTgULR7EeSDMqjGxVLAzw"/>
-      <lifelines xmi:id="_PaTgVbR7EeSDMqjGxVLAzw" represents="_PaS5FLR7EeSDMqjGxVLAzw" coveredBy="_PaTgObR7EeSDMqjGxVLAzw _PaTgOrR7EeSDMqjGxVLAzw _PaTgPbR7EeSDMqjGxVLAzw _PaTgPrR7EeSDMqjGxVLAzw _PaTgTrR7EeSDMqjGxVLAzw _PaTgUbR7EeSDMqjGxVLAzw"/>
-      <lifelines xmi:id="_PaTgVrR7EeSDMqjGxVLAzw" represents="_PaUHALR7EeSDMqjGxVLAzw" coveredBy="_PaTgQbR7EeSDMqjGxVLAzw _PaTgQrR7EeSDMqjGxVLAzw"/>
+      <lifelines xmi:id="_PaTgVLR7EeSDMqjGxVLAzw" represents="_PaUHHLR7EeSDMqjGxVLAzw" coveredBy="_PaTgN7R7EeSDMqjGxVLAzw _PaTgU7R7EeSDMqjGxVLAzw _PaTgOLR7EeSDMqjGxVLAzw _PaTgO7R7EeSDMqjGxVLAzw _PaTgPLR7EeSDMqjGxVLAzw _PaTgP7R7EeSDMqjGxVLAzw _PaTgQLR7EeSDMqjGxVLAzw _PaTgQ7R7EeSDMqjGxVLAzw _PaTgRLR7EeSDMqjGxVLAzw _PaTgR7R7EeSDMqjGxVLAzw _PaTgSLR7EeSDMqjGxVLAzw _PaTgS7R7EeSDMqjGxVLAzw _PaTgTrR7EeSDMqjGxVLAzw _PaTgTLR7EeSDMqjGxVLAzw _k4UTELVfEeSK4cr3aapYig _pFHqsLVfEeSK4cr3aapYig _1NubQLVfEeSK4cr3aapYig"/>
+      <lifelines xmi:id="_PaTgVbR7EeSDMqjGxVLAzw" represents="_PaS5FLR7EeSDMqjGxVLAzw" coveredBy="_PaTgObR7EeSDMqjGxVLAzw _PaTgOrR7EeSDMqjGxVLAzw _PaTgPbR7EeSDMqjGxVLAzw _PaTgPrR7EeSDMqjGxVLAzw _PaTgTrR7EeSDMqjGxVLAzw _1NubQbVfEeSK4cr3aapYig"/>
+      <lifelines xmi:id="_PaTgVrR7EeSDMqjGxVLAzw" represents="_PaUHALR7EeSDMqjGxVLAzw" coveredBy="_PaTgQbR7EeSDMqjGxVLAzw _PaTgQrR7EeSDMqjGxVLAzw _PaTgTrR7EeSDMqjGxVLAzw _pFHqsbVfEeSK4cr3aapYig"/>
       <lifelines xmi:id="_PaTgV7R7EeSDMqjGxVLAzw" represents="_PaS5MrR7EeSDMqjGxVLAzw" coveredBy="_PaTgRbR7EeSDMqjGxVLAzw _PaTgRrR7EeSDMqjGxVLAzw _PaTgSbR7EeSDMqjGxVLAzw _PaTgSrR7EeSDMqjGxVLAzw"/>
       <messages xmi:id="_PaTgWLR7EeSDMqjGxVLAzw" sendEvent="_PaUHHbR7EeSDMqjGxVLAzw" receiveEvent="_PaTgN7R7EeSDMqjGxVLAzw" signature="_PaS5E7R7EeSDMqjGxVLAzw">
         <localProperties xsi:type="ram:Reference" xmi:id="_PaUHALR7EeSDMqjGxVLAzw" name="unitVillage" lowerBound="1" type="_PaSSELR7EeSDMqjGxVLAzw"/>
@@ -443,9 +448,14 @@
       <messages xmi:id="_PaUHF7R7EeSDMqjGxVLAzw" sendEvent="_PaTgSrR7EeSDMqjGxVLAzw" receiveEvent="_PaTgS7R7EeSDMqjGxVLAzw" signature="_PaS48bR7EeSDMqjGxVLAzw" messageSort="reply">
         <returns xsi:type="ram:StructuralFeatureValue" xmi:id="_PaUHGLR7EeSDMqjGxVLAzw" value="_PaS4_bR7EeSDMqjGxVLAzw"/>
       </messages>
-      <messages xmi:id="_PaUHGbR7EeSDMqjGxVLAzw" sendEvent="_PaTgULR7EeSDMqjGxVLAzw" receiveEvent="_PaTgUbR7EeSDMqjGxVLAzw" signature="_PaSR3LR7EeSDMqjGxVLAzw">
-        <arguments xmi:id="_PaUHGrR7EeSDMqjGxVLAzw" parameter="_PaSR3bR7EeSDMqjGxVLAzw">
-          <value xsi:type="ram:ParameterValue" xmi:id="_PaUHG7R7EeSDMqjGxVLAzw" parameter="_PaS5FbR7EeSDMqjGxVLAzw"/>
+      <messages xmi:id="_pFHqsrVfEeSK4cr3aapYig" sendEvent="_pFHqsLVfEeSK4cr3aapYig" receiveEvent="_pFHqsbVfEeSK4cr3aapYig" signature="_PaSSGLR7EeSDMqjGxVLAzw">
+        <arguments xmi:id="_pFHqs7VfEeSK4cr3aapYig" parameter="_PaSSGbR7EeSDMqjGxVLAzw">
+          <value xsi:type="ram:StructuralFeatureValue" xmi:id="_r5DK4LVfEeSK4cr3aapYig" value="_PaUHArR7EeSDMqjGxVLAzw"/>
+        </arguments>
+      </messages>
+      <messages xmi:id="_1NubQrVfEeSK4cr3aapYig" sendEvent="_1NubQLVfEeSK4cr3aapYig" receiveEvent="_1NubQbVfEeSK4cr3aapYig" signature="_PaSR3LR7EeSDMqjGxVLAzw">
+        <arguments xmi:id="_1NubQ7VfEeSK4cr3aapYig" parameter="_PaSR3bR7EeSDMqjGxVLAzw">
+          <value xsi:type="ram:ParameterValue" xmi:id="_7YEdoLVfEeSK4cr3aapYig" parameter="_PaS5FbR7EeSDMqjGxVLAzw"/>
         </arguments>
       </messages>
       <properties xmi:id="_PaUHHLR7EeSDMqjGxVLAzw" name="target" lowerBound="1" type="_PaS5DLR7EeSDMqjGxVLAzw"/>
@@ -1857,7 +1867,7 @@
         <value xmi:id="_PaYYuLR7EeSDMqjGxVLAzw" x="1902.1135" y="289.69186"/>
       </value>
       <value xmi:id="_PaYYubR7EeSDMqjGxVLAzw" key="_PaSSELR7EeSDMqjGxVLAzw">
-        <value xmi:id="_PaYYurR7EeSDMqjGxVLAzw" x="344.78226" y="572.7322"/>
+        <value xmi:id="_PaYYurR7EeSDMqjGxVLAzw" x="344.78278" y="572.73285"/>
       </value>
       <value xmi:id="_PaYYu7R7EeSDMqjGxVLAzw" key="_PaS47rR7EeSDMqjGxVLAzw">
         <value xmi:id="_PaYYvLR7EeSDMqjGxVLAzw" x="1969.9418" y="-38.705994"/>
@@ -1878,7 +1888,7 @@
         <value xmi:id="_PaYYxrR7EeSDMqjGxVLAzw" x="2527.2373" y="-636.49286"/>
       </value>
       <value xmi:id="_PaYYx7R7EeSDMqjGxVLAzw" key="_PaS5DLR7EeSDMqjGxVLAzw">
-        <value xmi:id="_PaYYyLR7EeSDMqjGxVLAzw" x="1910.7507" y="-678.1063"/>
+        <value xmi:id="_PaYYyLR7EeSDMqjGxVLAzw" x="1910.7513" y="-678.1048"/>
       </value>
       <value xmi:id="_PaYYybR7EeSDMqjGxVLAzw" key="_PaS5M7R7EeSDMqjGxVLAzw">
         <value xmi:id="_PaYYyrR7EeSDMqjGxVLAzw" x="-123.84406" y="721.0509"/>
