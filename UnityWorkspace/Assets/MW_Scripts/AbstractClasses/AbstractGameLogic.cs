@@ -4,6 +4,8 @@ using GameEnums;
 
 public abstract class AbstractGameLogic 
 {
+	public ValueManager myValueManager { get; protected set; }
+
 	public void buildRoad(AbstractUnit u)
 	{
 		UnitType mytype = u.myType;
@@ -13,7 +15,20 @@ public abstract class AbstractGameLogic
 		}
 	}
 
-	public abstract void upgradeVillage(AbstractVillage v, VillageType newType);
+	public void upgradeVillage(AbstractVillage v, VillageType newType)
+	{
+		int gold = v.gold;
+		int newValue = myValueManager.getVillageValue (newType);
+		int oldValue = myValueManager.getVillageValue (v.myType);
+		int upgradeValue = newValue - oldValue;
+
+		if (upgradeValue <= gold )
+		{
+			v.gold = gold - upgradeValue;
+			v.myType = newType;
+		}
+	}
+
 	public abstract void upgradeUnit(AbstractUnit u, UnitType newType);
 	public abstract void moveUnit(AbstractUnit u, AbstractTile dest);
 	public abstract void destroyVillage(AbstractVillage v, AbstractUnit invader);
