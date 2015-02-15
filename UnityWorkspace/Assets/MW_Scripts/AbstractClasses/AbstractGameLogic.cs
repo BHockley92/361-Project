@@ -22,6 +22,8 @@ public abstract class AbstractGameLogic
 		int oldValue = myValueManager.getVillageValue (v.myType);
 		int upgradeValue = newValue - oldValue;
 
+		// >= 0 because presumably higher levels cost more, so you don't want
+		// to downgrade a unit
 		if (upgradeValue <= gold && upgradeValue >= 0)
 		{
 			v.gold = gold - upgradeValue;
@@ -38,6 +40,8 @@ public abstract class AbstractGameLogic
 		int upgradeValue = myValueManager.getUnitValue (newType);
 		upgradeValue -= myValueManager.getUnitValue (u.myType);
 
+		// >= 0 because presumably higher levels cost more, so you don't want
+		// to downgrade a unit
 		if(upgradeValue <= vGold && upgradeValue >= 0)
 		{
 			unitVillage.gold = vGold - upgradeValue;
