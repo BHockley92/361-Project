@@ -4,13 +4,13 @@ using GameEnums;
 
 public abstract class AbstractUnit 
 {
-	public UnitType myType { get; private set; }
-	public ActionType currentAction { get; private set; }
+	public UnitType myType { get; protected set; }
+	public ActionType currentAction { get; protected set; }
 	
-	public AbstractVillage myVillage { get; private set; }
-	public AbstractTile myLocation { get; private set; }
+	public AbstractVillage myVillage { get; protected set; }
+	public AbstractTile myLocation { get; protected set; }
 
-	public PlayerPrefs getPlayer()
+	public AbstractPlayer getPlayer()
 	{
 		return myVillage.myPlayer;
 	}
