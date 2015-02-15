@@ -5,7 +5,7 @@ using GameEnums;
 public abstract class AbstractUnit 
 {
 	public UnitType myType { get; protected set; }
-	public ActionType currentAction { get; protected set; }
+	public ActionType currentAction { get; set; }
 	
 	public AbstractVillage myVillage { get; protected set; }
 	public AbstractTile myLocation { get; protected set; }

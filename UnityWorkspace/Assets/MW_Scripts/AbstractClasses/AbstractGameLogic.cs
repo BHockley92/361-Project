@@ -4,7 +4,15 @@ using GameEnums;
 
 public abstract class AbstractGameLogic 
 {
-	public abstract void buildRoad(AbstractUnit u);
+	public void buildRoad(AbstractUnit u)
+	{
+		UnitType mytype = u.myType;
+		if(mytype == UnitType.Peasant)
+		{
+			u.currentAction = ActionType.BuildingRoad;
+		}
+	}
+
 	public abstract void upgradeVillage(AbstractVillage v, VillageType newType);
 	public abstract void upgradeUnit(AbstractUnit u, UnitType newType);
 	public abstract void moveUnit(AbstractUnit u, AbstractTile dest);
