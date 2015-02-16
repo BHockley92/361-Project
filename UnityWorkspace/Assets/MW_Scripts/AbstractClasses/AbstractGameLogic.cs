@@ -56,7 +56,7 @@ public abstract class AbstractGameLogic
 
 	public void beginTurn( AbstractPlayer p, AbstractGame g)
 	{
-		List<AbstractPlayer> myVillages = p.myVillages;
+		List<AbstractVillage> myVillages = p.myVillages;
 
 		foreach(AbstractVillage v in myVillages)
 		{
@@ -67,11 +67,25 @@ public abstract class AbstractGameLogic
 		}
 	}
 
-	public abstract void tombStonePhase( VillageType myVillage );
+	public void tombStonePhase( AbstractVillage myVillage )
+	{
+		List<AbstractTile> controlledRegion = myVillage.controlledRegion;
+
+		foreach(AbstractTile t in controlledRegion)
+		{
+			StructureType occupyingStructure = t.occupyingStructure.myType;
+
+			if(occupyingStructure == StructureType.Tombstone)
+			{
+				t.occupyingStructure.myType = StructureType.NONE;
+				t.myType = LandType.Tree;
+			}
+		}
+	}
 	public abstract void buildPhase( AbstractVillage myVillage);
-	public abstract void incomePhase( VillageType myVillage );
-	public abstract void paymentPhase( VillageType myVillage );
-	public abstract void payVillagers( VillageType myVillage );
+	public abstract void incomePhase( AbstractVillage myVillage );
+	public abstract void paymentPhase( AbstractVillage myVillage );
+	public abstract void payVillagers( AbstractVillage myVillage );
 	public abstract void peasantBuild( AbstractTile myTile );
 	public abstract void perishVillagers (VillageType myVillage );
 	// TODO: the two private methods
