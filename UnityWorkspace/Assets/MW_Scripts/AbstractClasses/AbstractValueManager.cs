@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using GameEnums;
 
 public abstract class ValueManager
 {
-	private Dictionary <UnitType, int> 		unitValues;
+	private Dictionary <UnitType, int> 		unitValues; // cost to buy a unit
+	private Dictionary <UnitType, int>		unitMaintenance; // cost every turn to maintain the unit
 	private Dictionary <VillageType, int> 	villageValues;
 	private Dictionary <LandType, int>		landValues;
 
@@ -14,11 +15,13 @@ public abstract class ValueManager
 	public ValueManager()
 	{
 		unitValues = new Dictionary<UnitType, int>();
+		unitMaintenance = new Dictionary<UnitType, int>();
 		villageValues = new Dictionary<VillageType, int>();
 		landValues = new Dictionary<LandType, int>();
 	}
 
 	public int getUnitValue(UnitType ut) { return unitValues [ut]; }
+	public int getMaintenanceCost(UnitType ut) {return unitMaintenance [ut]; }
 	public int getLandValue(LandType lt) { return landValues [lt]; }
 	public int getVillageValue(VillageType vt) { return villageValues [vt]; }
 

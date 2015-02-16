@@ -34,7 +34,6 @@ public abstract class AbstractGameLogic
 	public void upgradeUnit(AbstractUnit u, UnitType newType)
 	{
 		AbstractVillage unitVillage = u.myVillage;
-		UnitType uType = u.myType;
 
 		int vGold = unitVillage.gold;
 		int upgradeValue = myValueManager.getUnitValue (newType);
@@ -49,7 +48,9 @@ public abstract class AbstractGameLogic
 		}
 	}
 
-	public abstract void moveUnit(AbstractUnit u, AbstractTile dest); // TODO
+
+	// TODO: implement these -- divide region and takeover I don't think are needed for the demo
+	public abstract void moveUnit(AbstractUnit u, AbstractTile dest);
 	public abstract void destroyVillage(AbstractVillage v, AbstractUnit invader);
 	public abstract void divideRegion(IList<AbstractTile> region);
 	public abstract void takeoverTile(AbstractTile dest);
@@ -67,7 +68,7 @@ public abstract class AbstractGameLogic
 		}
 	}
 
-	public void tombStonePhase( AbstractVillage myVillage )
+	private void tombStonePhase( AbstractVillage myVillage )
 	{
 		List<AbstractTile> controlledRegion = myVillage.controlledRegion;
 
@@ -83,31 +84,34 @@ public abstract class AbstractGameLogic
 		}
 	}
 
-	public abstract void peasantBuild( AbstractTile myTile )
+	private void peasantBuild( AbstractTile myTile )
 	{
 		AbstractUnit occupyingUnit = myTile.occupyingUnit;
 		UnitType myType = occupyingUnit.myType;
 		ActionType currentAction = occupyingUnit.currentAction;
 
-		if(myType == UnitType.Peasant && currentAction == ActionType.BuildingRoad)
+		if(myType == UnitType.Peasant)
 		{
-			myTile.occupyingStructure.myType = StructureType.Road;
-			occupyingUnit.currentAction = ActionType.ReadyForOrders;
-		}
+			if(currentAction == ActionType.BuildingRoad)
+			{
+				myTile.occupyingStructure.myType = StructureType.Road;
+				occupyingUnit.currentAction = ActionType.ReadyForOrders;
+			}
 
-		else if(myType == UnitType.Peasant && currentAction == ActionType.FinishCultivating)
-		{
-			myTile.myType = LandType.Meadow;
-			occupyingUnit.currentAction = ActionType.ReadyForOrders;
-		}
+			else if(currentAction == ActionType.FinishCultivating)
+			{
+				myTile.myType = LandType.Meadow;
+				occupyingUnit.currentAction = ActionType.ReadyForOrders;
+			}
 
-		else if(myType == UnitType.Peasant && currentAction == ActionType.StartCultivating)
-		{
-			occupyingUnit.currentAction = ActionType.FinishCultivating;
+			else if(currentAction == ActionType.StartCultivating)
+			{
+				occupyingUnit.currentAction = ActionType.FinishCultivating;
+			}
 		}
 	}
 
-	public void buildPhase( AbstractVillage myVillage)
+	private void buildPhase( AbstractVillage myVillage)
 	{
 		List<AbstractTile> controlledRegion = myVillage.controlledRegion;
 
@@ -116,9 +120,56 @@ public abstract class AbstractGameLogic
 			peasantBuild(t);
 		}
 	}
-	public abstract void incomePhase( AbstractVillage myVillage );
-	public abstract void paymentPhase( AbstractVillage myVillage );
-	public abstract void payVillagers( AbstractVillage myVillage );
-	public abstract void perishVillagers (VillageType myVillage );
+
+	private void incomePhase( AbstractVillage myVillage )
+	{
+		List<AbstractTile> controlledRegion = myVillage.controlledRegion;
+
+		foreach(AbstractTile t in controlledRegion)
+		{
+			myVillage.gold += myValueManager.getLandValue(t.myType);
+		}
+	}
+
+	private void paymentPhase( AbstractVillage myVillage )
+	{
+		List<AbstractUnit> supportedUnits = myVillage.supportedUnits;
+
+		int totalCost = 0;
+
+		foreach(AbstractUnit u in supportedUnits)
+		{
+			totalCost += myValueManager.getMaintenanceCost(u.myType);
+		}
+
+		if( myVillage.gold >= totalCost )
+		{
+			myVillage.gold -= totalCost;
+		}
+
+		// not enough money, EVERYONE DIES (that's associated to the village)
+		else
+		{
+			myVillage.gold = 0;
+			perishVillagers(myVillage);
+		}
+	}
+
+	private void perishVillagers (AbstractVillage myVillage )
+	{
+		List<AbstractUnit> supportedUnits = myVillage.supportedUnits;
+
+		foreach(AbstractUnit u in supportedUnits)
+		{
+			AbstractTile myLocation = u.myLocation;
+			myLocation.occupyingStructure.myType = StructureType.Tombstone;
+
+			// Remove the unit
+			myLocation.occupyingUnit = null;
+			myLocation = null;
+
+		}
+	}
+
 	// TODO: the two private methods
 }
