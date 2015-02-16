@@ -13,7 +13,7 @@ DisplayHeight=1000
 #Which display to use for fullscreen
 Display=1
 #Framerate maximum
-MaximumFrameRate=60
+MaximumFrameRate=15
 #Vertical_sync:'true' or 'false'
 Vertical_sync=false
 #Enables multiple mice use (windows, some linux)
