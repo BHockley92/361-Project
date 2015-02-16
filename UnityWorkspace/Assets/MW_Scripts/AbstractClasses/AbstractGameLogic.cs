@@ -82,11 +82,43 @@ public abstract class AbstractGameLogic
 			}
 		}
 	}
-	public abstract void buildPhase( AbstractVillage myVillage);
+
+	public abstract void peasantBuild( AbstractTile myTile )
+	{
+		AbstractUnit occupyingUnit = myTile.occupyingUnit;
+		UnitType myType = occupyingUnit.myType;
+		ActionType currentAction = occupyingUnit.currentAction;
+
+		if(myType == UnitType.Peasant && currentAction == ActionType.BuildingRoad)
+		{
+			myTile.occupyingStructure.myType = StructureType.Road;
+			occupyingUnit.currentAction = ActionType.ReadyForOrders;
+		}
+
+		else if(myType == UnitType.Peasant && currentAction == ActionType.FinishCultivating)
+		{
+			myTile.myType = LandType.Meadow;
+			occupyingUnit.currentAction = ActionType.ReadyForOrders;
+		}
+
+		else if(myType == UnitType.Peasant && currentAction == ActionType.StartCultivating)
+		{
+			occupyingUnit.currentAction = ActionType.FinishCultivating;
+		}
+	}
+
+	public void buildPhase( AbstractVillage myVillage)
+	{
+		List<AbstractTile> controlledRegion = myVillage.controlledRegion;
+
+		foreach(AbstractTile t in controlledRegion)
+		{
+			peasantBuild(t);
+		}
+	}
 	public abstract void incomePhase( AbstractVillage myVillage );
 	public abstract void paymentPhase( AbstractVillage myVillage );
 	public abstract void payVillagers( AbstractVillage myVillage );
-	public abstract void peasantBuild( AbstractTile myTile );
 	public abstract void perishVillagers (VillageType myVillage );
 	// TODO: the two private methods
 }
