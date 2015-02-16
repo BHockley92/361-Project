@@ -22,14 +22,33 @@ public abstract class AbstractGameLogic
 		int oldValue = myValueManager.getVillageValue (v.myType);
 		int upgradeValue = newValue - oldValue;
 
-		if (upgradeValue <= gold )
+		// >= 0 because presumably higher levels cost more, so you don't want
+		// to downgrade a unit
+		if (upgradeValue <= gold && upgradeValue >= 0)
 		{
 			v.gold = gold - upgradeValue;
 			v.myType = newType;
 		}
 	}
 
-	public abstract void upgradeUnit(AbstractUnit u, UnitType newType);
+	public void upgradeUnit(AbstractUnit u, UnitType newType)
+	{
+		AbstractVillage unitVillage = u.myVillage;
+		UnitType uType = u.myType;
+
+		int vGold = unitVillage.gold;
+		int upgradeValue = myValueManager.getUnitValue (newType);
+		upgradeValue -= myValueManager.getUnitValue (u.myType);
+
+		// >= 0 because presumably higher levels cost more, so you don't want
+		// to downgrade a unit
+		if(upgradeValue <= vGold && upgradeValue >= 0)
+		{
+			unitVillage.gold = vGold - upgradeValue;
+			u.myType = newType;
+		}
+	}
+
 	public abstract void moveUnit(AbstractUnit u, AbstractTile dest);
 	public abstract void destroyVillage(AbstractVillage v, AbstractUnit invader);
 	public abstract void divideRegion(IList<AbstractTile> region);

@@ -4,9 +4,9 @@ using GameEnums;
 
 public abstract class AbstractVillage 
 {
-	public VillageType myType { get; protected set; }
-	public int gold { get; protected set; }
-	public int wood { get; protected set; }
+	public VillageType myType { get; set; }
+	public int gold { get; set; }
+	public int wood { get; set; }
 	public IList<AbstractTile> controlledRegion { get; protected set; }
 	public IList<AbstractUnit> supportedUnits { get; protected set; }
 	public AbstractTile location { get; protected set; }
