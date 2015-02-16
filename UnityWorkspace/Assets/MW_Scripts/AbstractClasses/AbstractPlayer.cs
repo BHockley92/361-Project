@@ -9,5 +9,5 @@ public abstract class AbstractPlayer
 	private PlayerStatus status { get; set; }
 	private int wins;
 	private int losses;
-	private IList<AbstractVillage> myVillages { get; set; }
+	public List<AbstractVillage> myVillages { get; set; }
 }

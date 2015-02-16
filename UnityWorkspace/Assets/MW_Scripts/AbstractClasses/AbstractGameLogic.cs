@@ -49,16 +49,30 @@ public abstract class AbstractGameLogic
 		}
 	}
 
-	public abstract void moveUnit(AbstractUnit u, AbstractTile dest);
+	public abstract void moveUnit(AbstractUnit u, AbstractTile dest); // TODO
 	public abstract void destroyVillage(AbstractVillage v, AbstractUnit invader);
 	public abstract void divideRegion(IList<AbstractTile> region);
 	public abstract void takeoverTile(AbstractTile dest);
-	public abstract void beginTurn( AbstractPlayer p, AbstractGame g);
+
+	public void beginTurn( AbstractPlayer p, AbstractGame g)
+	{
+		List<AbstractPlayer> myVillages = p.myVillages;
+
+		foreach(AbstractVillage v in myVillages)
+		{
+			tombStonePhase(v);
+			buildPhase(v);
+			incomePhase(v);
+			paymentPhase(v);
+		}
+	}
+
 	public abstract void tombStonePhase( VillageType myVillage );
-	public abstract void peasantBuild( Tile myTile );
+	public abstract void buildPhase( AbstractVillage myVillage);
 	public abstract void incomePhase( VillageType myVillage );
 	public abstract void paymentPhase( VillageType myVillage );
 	public abstract void payVillagers( VillageType myVillage );
+	public abstract void peasantBuild( AbstractTile myTile );
 	public abstract void perishVillagers (VillageType myVillage );
 	// TODO: the two private methods
 }
