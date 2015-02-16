@@ -209,6 +209,7 @@
       <associationEnds xmi:id="_nVKtFbWAEeSUIKtin5peYQ" name="villageValues" lowerBound="1" assoc="_nVL7J7WAEeSUIKtin5peYQ"/>
       <associationEnds xmi:id="_nVKtFrWAEeSUIKtin5peYQ" name="landValues" lowerBound="1" assoc="_nVL7KLWAEeSUIKtin5peYQ"/>
       <associationEnds xmi:id="_nVKtF7WAEeSUIKtin5peYQ" name="myGameLogic" lowerBound="1" navigable="false" assoc="_nVL7LLWAEeSUIKtin5peYQ"/>
+      <associationEnds xmi:id="_S2_L0LY0EeS676RIA1X22A" name="unitMaintenanceCost" lowerBound="1" assoc="_S3DdQLY0EeS676RIA1X22A"/>
       <attributes xmi:id="_nVKtGLWAEeSUIKtin5peYQ" name="filepath" static="true" type="_nVL7ObWAEeSUIKtin5peYQ"/>
       <attributes xmi:id="_nVKtGbWAEeSUIKtin5peYQ" name="value" type="_nVL7N7WAEeSUIKtin5peYQ"/>
     </classes>
@@ -224,6 +225,7 @@
     </classes>
     <classes xsi:type="ram:ImplementationClass" xmi:id="_nVKtIrWAEeSUIKtin5peYQ" name="HashMap" instanceClassName="java.util.HashMap">
       <associationEnds xmi:id="_nVKtI7WAEeSUIKtin5peYQ" name="myValueManager" lowerBound="1" navigable="false" assoc="_nVL7JrWAEeSUIKtin5peYQ"/>
+      <associationEnds xmi:id="_S3BoELY0EeS676RIA1X22A" name="myValueManager1" lowerBound="1" navigable="false" assoc="_S3DdQLY0EeS676RIA1X22A"/>
       <typeParameters xmi:id="_nVKtJLWAEeSUIKtin5peYQ" name="K" genericType="_nVL7SrWAEeSUIKtin5peYQ"/>
       <typeParameters xmi:id="_nVKtJbWAEeSUIKtin5peYQ" name="V" genericType="_nVL7N7WAEeSUIKtin5peYQ"/>
     </classes>
@@ -372,6 +374,7 @@
     <associations xmi:id="_nVL7MbWAEeSUIKtin5peYQ" name="MedievalWarfare_Random" ends="_nVJe4LWAEeSUIKtin5peYQ _nVLUP7WAEeSUIKtin5peYQ"/>
     <associations xmi:id="_nVL7MrWAEeSUIKtin5peYQ" name="Stack_MedievalWarfare" ends="_nVLURLWAEeSUIKtin5peYQ _nVJe4bWAEeSUIKtin5peYQ"/>
     <associations xmi:id="_nVL7M7WAEeSUIKtin5peYQ" name="ArrayList_MedievalWarfare" ends="_nVLUTLWAEeSUIKtin5peYQ _nVJe4rWAEeSUIKtin5peYQ"/>
+    <associations xmi:id="_S3DdQLY0EeS676RIA1X22A" name="ValueManager_HashMap" ends="_S2_L0LY0EeS676RIA1X22A _S3BoELY0EeS676RIA1X22A"/>
     <types xsi:type="ram:RVoid" xmi:id="_nVL7NLWAEeSUIKtin5peYQ"/>
     <types xsi:type="ram:RAny" xmi:id="_nVL7NbWAEeSUIKtin5peYQ"/>
     <types xsi:type="ram:RBoolean" xmi:id="_nVL7NrWAEeSUIKtin5peYQ"/>
