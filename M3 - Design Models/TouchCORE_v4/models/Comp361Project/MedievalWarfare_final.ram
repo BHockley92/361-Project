@@ -451,7 +451,6 @@
       <fragments xsi:type="ram:ExecutionStatement" xmi:id="_nVMiSbWAEeSUIKtin5peYQ" covered="_nVMiUbWAEeSUIKtin5peYQ">
         <specification xsi:type="ram:OpaqueExpression" xmi:id="_nVMiSrWAEeSUIKtin5peYQ" body="int upgradeValue = newValue - oldValue" language="java"/>
       </fragments>
-<<<<<<< HEAD
       <fragments xsi:type="ram:CombinedFragment" xmi:id="_nVMiS7WAEeSUIKtin5peYQ" covered="_nVMiUbWAEeSUIKtin5peYQ _nVMiUrWAEeSUIKtin5peYQ" interactionOperator="opt">
         <operands xmi:id="_nVMiTLWAEeSUIKtin5peYQ">
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVMiTbWAEeSUIKtin5peYQ" covered="_nVMiUbWAEeSUIKtin5peYQ" message="_nVMib7WAEeSUIKtin5peYQ"/>
@@ -487,48 +486,6 @@
       <messages xmi:id="_nVMiZbWAEeSUIKtin5peYQ" sendEvent="_nVMiQbWAEeSUIKtin5peYQ" receiveEvent="_nVMiQrWAEeSUIKtin5peYQ" signature="_nVKtDbWAEeSUIKtin5peYQ" assignTo="_nVMiWbWAEeSUIKtin5peYQ">
         <arguments xmi:id="_nVMiZrWAEeSUIKtin5peYQ" parameter="_nVKtDrWAEeSUIKtin5peYQ">
           <value xsi:type="ram:ParameterValue" xmi:id="_nVMiZ7WAEeSUIKtin5peYQ" parameter="_nVKtMbWAEeSUIKtin5peYQ"/>
-=======
-      <fragments xsi:type="ram:CombinedFragment" xmi:id="_PaTgTrR7EeSDMqjGxVLAzw" covered="_PaTgVLR7EeSDMqjGxVLAzw _PaTgVbR7EeSDMqjGxVLAzw _PaTgVrR7EeSDMqjGxVLAzw" interactionOperator="opt">
-        <operands xmi:id="_PaTgT7R7EeSDMqjGxVLAzw">
-          <fragments xsi:type="ram:ExecutionStatement" xmi:id="_k4UTELVfEeSK4cr3aapYig" covered="_PaTgVLR7EeSDMqjGxVLAzw">
-            <specification xsi:type="ram:OpaqueExpression" xmi:id="_k4UTEbVfEeSK4cr3aapYig" body="villageGold = villageGold - upgradeValue;" language="java"/>
-          </fragments>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_pFHqsLVfEeSK4cr3aapYig" covered="_PaTgVLR7EeSDMqjGxVLAzw" message="_pFHqsrVfEeSK4cr3aapYig"/>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_pFHqsbVfEeSK4cr3aapYig" covered="_PaTgVrR7EeSDMqjGxVLAzw" message="_pFHqsrVfEeSK4cr3aapYig"/>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_1NubQLVfEeSK4cr3aapYig" covered="_PaTgVLR7EeSDMqjGxVLAzw" message="_1NubQrVfEeSK4cr3aapYig"/>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_1NubQbVfEeSK4cr3aapYig" covered="_PaTgVbR7EeSDMqjGxVLAzw" message="_1NubQrVfEeSK4cr3aapYig"/>
-          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_PaTgUrR7EeSDMqjGxVLAzw" body="upgradeValue &lt;= villageGold &amp;&amp; upgradeValue >= 0" language="java"/>
-        </operands>
-      </fragments>
-      <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_PaTgU7R7EeSDMqjGxVLAzw" covered="_PaTgVLR7EeSDMqjGxVLAzw" message="_PaUHBbR7EeSDMqjGxVLAzw"/>
-      <lifelines xmi:id="_PaTgVLR7EeSDMqjGxVLAzw" represents="_PaUHHLR7EeSDMqjGxVLAzw" coveredBy="_PaTgN7R7EeSDMqjGxVLAzw _PaTgU7R7EeSDMqjGxVLAzw _PaTgOLR7EeSDMqjGxVLAzw _PaTgO7R7EeSDMqjGxVLAzw _PaTgPLR7EeSDMqjGxVLAzw _PaTgP7R7EeSDMqjGxVLAzw _PaTgQLR7EeSDMqjGxVLAzw _PaTgQ7R7EeSDMqjGxVLAzw _PaTgRLR7EeSDMqjGxVLAzw _PaTgR7R7EeSDMqjGxVLAzw _PaTgSLR7EeSDMqjGxVLAzw _PaTgS7R7EeSDMqjGxVLAzw _PaTgTrR7EeSDMqjGxVLAzw _PaTgTLR7EeSDMqjGxVLAzw _k4UTELVfEeSK4cr3aapYig _pFHqsLVfEeSK4cr3aapYig _1NubQLVfEeSK4cr3aapYig"/>
-      <lifelines xmi:id="_PaTgVbR7EeSDMqjGxVLAzw" represents="_PaS5FLR7EeSDMqjGxVLAzw" coveredBy="_PaTgObR7EeSDMqjGxVLAzw _PaTgOrR7EeSDMqjGxVLAzw _PaTgPbR7EeSDMqjGxVLAzw _PaTgPrR7EeSDMqjGxVLAzw _PaTgTrR7EeSDMqjGxVLAzw _1NubQbVfEeSK4cr3aapYig"/>
-      <lifelines xmi:id="_PaTgVrR7EeSDMqjGxVLAzw" represents="_PaUHALR7EeSDMqjGxVLAzw" coveredBy="_PaTgQbR7EeSDMqjGxVLAzw _PaTgQrR7EeSDMqjGxVLAzw _PaTgTrR7EeSDMqjGxVLAzw _pFHqsbVfEeSK4cr3aapYig"/>
-      <lifelines xmi:id="_PaTgV7R7EeSDMqjGxVLAzw" represents="_PaS5MrR7EeSDMqjGxVLAzw" coveredBy="_PaTgRbR7EeSDMqjGxVLAzw _PaTgRrR7EeSDMqjGxVLAzw _PaTgSbR7EeSDMqjGxVLAzw _PaTgSrR7EeSDMqjGxVLAzw"/>
-      <messages xmi:id="_PaTgWLR7EeSDMqjGxVLAzw" sendEvent="_PaUHHbR7EeSDMqjGxVLAzw" receiveEvent="_PaTgN7R7EeSDMqjGxVLAzw" signature="_PaS5E7R7EeSDMqjGxVLAzw">
-        <localProperties xsi:type="ram:Reference" xmi:id="_PaUHALR7EeSDMqjGxVLAzw" name="unitVillage" lowerBound="1" type="_PaSSELR7EeSDMqjGxVLAzw"/>
-        <localProperties xsi:type="ram:Attribute" xmi:id="_PaUHAbR7EeSDMqjGxVLAzw" name="unitType" type="_PaTgHrR7EeSDMqjGxVLAzw"/>
-        <localProperties xsi:type="ram:Attribute" xmi:id="_PaUHArR7EeSDMqjGxVLAzw" name="villageGold" type="_PaTgDLR7EeSDMqjGxVLAzw"/>
-        <localProperties xsi:type="ram:Attribute" xmi:id="_PaUHA7R7EeSDMqjGxVLAzw" name="newValue" type="_PaTgDLR7EeSDMqjGxVLAzw"/>
-        <localProperties xsi:type="ram:Attribute" xmi:id="_PaUHBLR7EeSDMqjGxVLAzw" name="oldValue" type="_PaTgDLR7EeSDMqjGxVLAzw"/>
-      </messages>
-      <messages xmi:id="_PaUHBbR7EeSDMqjGxVLAzw" sendEvent="_PaTgU7R7EeSDMqjGxVLAzw" receiveEvent="_PaUHHrR7EeSDMqjGxVLAzw" signature="_PaS5E7R7EeSDMqjGxVLAzw" messageSort="reply"/>
-      <messages xmi:id="_PaUHBrR7EeSDMqjGxVLAzw" sendEvent="_PaTgOLR7EeSDMqjGxVLAzw" receiveEvent="_PaTgObR7EeSDMqjGxVLAzw" signature="_PaSR2rR7EeSDMqjGxVLAzw" assignTo="_PaUHALR7EeSDMqjGxVLAzw"/>
-      <messages xmi:id="_PaUHB7R7EeSDMqjGxVLAzw" sendEvent="_PaTgOrR7EeSDMqjGxVLAzw" receiveEvent="_PaTgO7R7EeSDMqjGxVLAzw" signature="_PaSR2rR7EeSDMqjGxVLAzw" messageSort="reply">
-        <returns xsi:type="ram:StructuralFeatureValue" xmi:id="_PaUHCLR7EeSDMqjGxVLAzw" value="_PaSR47R7EeSDMqjGxVLAzw"/>
-      </messages>
-      <messages xmi:id="_PaUHCbR7EeSDMqjGxVLAzw" sendEvent="_PaTgPLR7EeSDMqjGxVLAzw" receiveEvent="_PaTgPbR7EeSDMqjGxVLAzw" signature="_PaSR27R7EeSDMqjGxVLAzw" assignTo="_PaUHAbR7EeSDMqjGxVLAzw"/>
-      <messages xmi:id="_PaUHCrR7EeSDMqjGxVLAzw" sendEvent="_PaTgPrR7EeSDMqjGxVLAzw" receiveEvent="_PaTgP7R7EeSDMqjGxVLAzw" signature="_PaSR27R7EeSDMqjGxVLAzw" messageSort="reply">
-        <returns xsi:type="ram:StructuralFeatureValue" xmi:id="_PaUHC7R7EeSDMqjGxVLAzw" value="_PaSR5bR7EeSDMqjGxVLAzw"/>
-      </messages>
-      <messages xmi:id="_PaUHDLR7EeSDMqjGxVLAzw" sendEvent="_PaTgQLR7EeSDMqjGxVLAzw" receiveEvent="_PaTgQbR7EeSDMqjGxVLAzw" signature="_PaSSF7R7EeSDMqjGxVLAzw" assignTo="_PaUHArR7EeSDMqjGxVLAzw"/>
-      <messages xmi:id="_PaUHDbR7EeSDMqjGxVLAzw" sendEvent="_PaTgQrR7EeSDMqjGxVLAzw" receiveEvent="_PaTgQ7R7EeSDMqjGxVLAzw" signature="_PaSSF7R7EeSDMqjGxVLAzw" messageSort="reply">
-        <returns xsi:type="ram:StructuralFeatureValue" xmi:id="_PaUHDrR7EeSDMqjGxVLAzw" value="_PaS467R7EeSDMqjGxVLAzw"/>
-      </messages>
-      <messages xmi:id="_PaUHD7R7EeSDMqjGxVLAzw" sendEvent="_PaTgRLR7EeSDMqjGxVLAzw" receiveEvent="_PaTgRbR7EeSDMqjGxVLAzw" signature="_PaS48bR7EeSDMqjGxVLAzw" assignTo="_PaUHA7R7EeSDMqjGxVLAzw">
-        <arguments xmi:id="_PaUHELR7EeSDMqjGxVLAzw" parameter="_PaS48rR7EeSDMqjGxVLAzw">
-          <value xsi:type="ram:ParameterValue" xmi:id="_PaUHEbR7EeSDMqjGxVLAzw" parameter="_PaS5FbR7EeSDMqjGxVLAzw"/>
->>>>>>> FETCH_HEAD
         </arguments>
       </messages>
       <messages xmi:id="_nVMiaLWAEeSUIKtin5peYQ" sendEvent="_nVMiQ7WAEeSUIKtin5peYQ" receiveEvent="_nVMiRLWAEeSUIKtin5peYQ" signature="_nVKtDbWAEeSUIKtin5peYQ" messageSort="reply">
@@ -542,20 +499,9 @@
       <messages xmi:id="_nVMibbWAEeSUIKtin5peYQ" sendEvent="_nVMiR7WAEeSUIKtin5peYQ" receiveEvent="_nVMiSLWAEeSUIKtin5peYQ" signature="_nVKtDbWAEeSUIKtin5peYQ" messageSort="reply">
         <returns xsi:type="ram:StructuralFeatureValue" xmi:id="_nVMibrWAEeSUIKtin5peYQ" value="_nVKtGbWAEeSUIKtin5peYQ"/>
       </messages>
-<<<<<<< HEAD
       <messages xmi:id="_nVMib7WAEeSUIKtin5peYQ" sendEvent="_nVMiTbWAEeSUIKtin5peYQ" receiveEvent="_nVMiTrWAEeSUIKtin5peYQ" signature="_nVJfALWAEeSUIKtin5peYQ">
         <arguments xmi:id="_nVMicLWAEeSUIKtin5peYQ" parameter="_nVJfAbWAEeSUIKtin5peYQ">
           <value xsi:type="ram:ParameterValue" xmi:id="_nVMicbWAEeSUIKtin5peYQ" parameter="_nVKtMbWAEeSUIKtin5peYQ"/>
-=======
-      <messages xmi:id="_pFHqsrVfEeSK4cr3aapYig" sendEvent="_pFHqsLVfEeSK4cr3aapYig" receiveEvent="_pFHqsbVfEeSK4cr3aapYig" signature="_PaSSGLR7EeSDMqjGxVLAzw">
-        <arguments xmi:id="_pFHqs7VfEeSK4cr3aapYig" parameter="_PaSSGbR7EeSDMqjGxVLAzw">
-          <value xsi:type="ram:StructuralFeatureValue" xmi:id="_r5DK4LVfEeSK4cr3aapYig" value="_PaUHArR7EeSDMqjGxVLAzw"/>
-        </arguments>
-      </messages>
-      <messages xmi:id="_1NubQrVfEeSK4cr3aapYig" sendEvent="_1NubQLVfEeSK4cr3aapYig" receiveEvent="_1NubQbVfEeSK4cr3aapYig" signature="_PaSR3LR7EeSDMqjGxVLAzw">
-        <arguments xmi:id="_1NubQ7VfEeSK4cr3aapYig" parameter="_PaSR3bR7EeSDMqjGxVLAzw">
-          <value xsi:type="ram:ParameterValue" xmi:id="_7YEdoLVfEeSK4cr3aapYig" parameter="_PaS5FbR7EeSDMqjGxVLAzw"/>
->>>>>>> FETCH_HEAD
         </arguments>
       </messages>
       <properties xmi:id="_nVMicrWAEeSUIKtin5peYQ" name="target" lowerBound="1" type="_nVKtKLWAEeSUIKtin5peYQ"/>
@@ -590,19 +536,11 @@
           <fragments xsi:type="ram:ExecutionStatement" xmi:id="_nVNJV7WAEeSUIKtin5peYQ" covered="_nVNJX7WAEeSUIKtin5peYQ">
             <specification xsi:type="ram:OpaqueExpression" xmi:id="_nVNJWLWAEeSUIKtin5peYQ" body="gold = gold - upgradeValue;" language="java"/>
           </fragments>
-<<<<<<< HEAD
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJWbWAEeSUIKtin5peYQ" covered="_nVNJX7WAEeSUIKtin5peYQ" message="_nVNJeLWAEeSUIKtin5peYQ"/>
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJWrWAEeSUIKtin5peYQ" covered="_nVNJYLWAEeSUIKtin5peYQ" message="_nVNJeLWAEeSUIKtin5peYQ"/>
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJW7WAEeSUIKtin5peYQ" covered="_nVNJX7WAEeSUIKtin5peYQ" message="_nVNJe7WAEeSUIKtin5peYQ"/>
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJXLWAEeSUIKtin5peYQ" covered="_nVNJYLWAEeSUIKtin5peYQ" message="_nVNJe7WAEeSUIKtin5peYQ"/>
           <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_nVNJXbWAEeSUIKtin5peYQ" body="upgradeValue &lt;= gold" language="java"/>
-=======
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_diOhMLVdEeSK4cr3aapYig" covered="_PaUHOrR7EeSDMqjGxVLAzw" message="_diOhMrVdEeSK4cr3aapYig"/>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_diOhMbVdEeSK4cr3aapYig" covered="_PaUHO7R7EeSDMqjGxVLAzw" message="_diOhMrVdEeSK4cr3aapYig"/>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_qz-rILVdEeSK4cr3aapYig" covered="_PaUHOrR7EeSDMqjGxVLAzw" message="_qz-rIrVdEeSK4cr3aapYig"/>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_qz-rIbVdEeSK4cr3aapYig" covered="_PaUHO7R7EeSDMqjGxVLAzw" message="_qz-rIrVdEeSK4cr3aapYig"/>
-          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_PaUHOLR7EeSDMqjGxVLAzw" body="upgradeValue &lt;= gold &amp;&amp; upgradeValue >= 0" language="java"/>
->>>>>>> FETCH_HEAD
         </operands>
       </fragments>
       <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJXrWAEeSUIKtin5peYQ" covered="_nVNJX7WAEeSUIKtin5peYQ" message="_nVNJZ7WAEeSUIKtin5peYQ"/>
@@ -2288,13 +2226,8 @@
       <value xmi:id="_nVsRi7WAEeSUIKtin5peYQ" key="_nVKtCrWAEeSUIKtin5peYQ">
         <value xmi:id="_nVsRjLWAEeSUIKtin5peYQ" x="1969.9418" y="-38.705994"/>
       </value>
-<<<<<<< HEAD
       <value xmi:id="_nVsRjbWAEeSUIKtin5peYQ" key="_nVKtGrWAEeSUIKtin5peYQ">
         <value xmi:id="_nVsRjrWAEeSUIKtin5peYQ" x="2739.6362" y="-15.273856"/>
-=======
-      <value xmi:id="_PaYYubR7EeSDMqjGxVLAzw" key="_PaSSELR7EeSDMqjGxVLAzw">
-        <value xmi:id="_PaYYurR7EeSDMqjGxVLAzw" x="344.78278" y="572.73285"/>
->>>>>>> FETCH_HEAD
       </value>
       <value xmi:id="_nVsRj7WAEeSUIKtin5peYQ" key="_nVKtHrWAEeSUIKtin5peYQ">
         <value xmi:id="_nVsRkLWAEeSUIKtin5peYQ" x="2652.3157" y="132.34285"/>
@@ -2314,13 +2247,8 @@
       <value xmi:id="_nVsRmbWAEeSUIKtin5peYQ" key="_nVLUJLWAEeSUIKtin5peYQ">
         <value xmi:id="_nVsRmrWAEeSUIKtin5peYQ" x="-123.84406" y="721.0509"/>
       </value>
-<<<<<<< HEAD
       <value xmi:id="_nVsRm7WAEeSUIKtin5peYQ" key="_nVLUKrWAEeSUIKtin5peYQ">
         <value xmi:id="_nVsRnLWAEeSUIKtin5peYQ" x="1835.7816" y="877.6333"/>
-=======
-      <value xmi:id="_PaYYx7R7EeSDMqjGxVLAzw" key="_PaS5DLR7EeSDMqjGxVLAzw">
-        <value xmi:id="_PaYYyLR7EeSDMqjGxVLAzw" x="1910.7513" y="-678.1048"/>
->>>>>>> FETCH_HEAD
       </value>
       <value xmi:id="_nVsRnbWAEeSUIKtin5peYQ" key="_nVLUMLWAEeSUIKtin5peYQ">
         <value xmi:id="_nVsRnrWAEeSUIKtin5peYQ" x="1909.75" y="1169.7572"/>
