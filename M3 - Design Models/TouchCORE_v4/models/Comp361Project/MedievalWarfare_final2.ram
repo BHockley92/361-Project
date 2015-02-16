@@ -451,17 +451,22 @@
       <fragments xsi:type="ram:ExecutionStatement" xmi:id="_nVMiSbWAEeSUIKtin5peYQ" covered="_nVMiUbWAEeSUIKtin5peYQ">
         <specification xsi:type="ram:OpaqueExpression" xmi:id="_nVMiSrWAEeSUIKtin5peYQ" body="int upgradeValue = newValue - oldValue" language="java"/>
       </fragments>
-      <fragments xsi:type="ram:CombinedFragment" xmi:id="_nVMiS7WAEeSUIKtin5peYQ" covered="_nVMiUbWAEeSUIKtin5peYQ _nVMiUrWAEeSUIKtin5peYQ" interactionOperator="opt">
+      <fragments xsi:type="ram:CombinedFragment" xmi:id="_nVMiS7WAEeSUIKtin5peYQ" covered="_nVMiUbWAEeSUIKtin5peYQ _nVMiUrWAEeSUIKtin5peYQ _nVMiU7WAEeSUIKtin5peYQ" interactionOperator="opt">
         <operands xmi:id="_nVMiTLWAEeSUIKtin5peYQ">
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVMiTbWAEeSUIKtin5peYQ" covered="_nVMiUbWAEeSUIKtin5peYQ" message="_nVMib7WAEeSUIKtin5peYQ"/>
-          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVMiTrWAEeSUIKtin5peYQ" covered="_nVMiUrWAEeSUIKtin5peYQ" message="_nVMib7WAEeSUIKtin5peYQ"/>
-          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_nVMiT7WAEeSUIKtin5peYQ" body="upgradeValue &lt;= villageGold" language="java"/>
+          <fragments xsi:type="ram:ExecutionStatement" xmi:id="_8_WggLWLEeS2Db6tNEcJ-w" covered="_nVMiUbWAEeSUIKtin5peYQ">
+            <specification xsi:type="ram:OpaqueExpression" xmi:id="_8_WggbWLEeS2Db6tNEcJ-w" body="villageGold = villageGold - upgradeValue;" language="java"/>
+          </fragments>
+          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_B-y2ALWMEeS2Db6tNEcJ-w" covered="_nVMiUbWAEeSUIKtin5peYQ" message="_B-y2ArWMEeS2Db6tNEcJ-w"/>
+          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_B-y2AbWMEeS2Db6tNEcJ-w" covered="_nVMiU7WAEeSUIKtin5peYQ" message="_B-y2ArWMEeS2Db6tNEcJ-w"/>
+          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_GODEsLWMEeS2Db6tNEcJ-w" covered="_nVMiUbWAEeSUIKtin5peYQ" message="_GODrwLWMEeS2Db6tNEcJ-w"/>
+          <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_GODEsbWMEeS2Db6tNEcJ-w" covered="_nVMiUrWAEeSUIKtin5peYQ" message="_GODrwLWMEeS2Db6tNEcJ-w"/>
+          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_nVMiT7WAEeSUIKtin5peYQ" body="upgradeValue &lt;= villageGold &amp;&amp; upgradeValue >= 0" language="java"/>
         </operands>
       </fragments>
       <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVMiULWAEeSUIKtin5peYQ" covered="_nVMiUbWAEeSUIKtin5peYQ" message="_nVMiW7WAEeSUIKtin5peYQ"/>
-      <lifelines xmi:id="_nVMiUbWAEeSUIKtin5peYQ" represents="_nVMicrWAEeSUIKtin5peYQ" coveredBy="_nVMiNLWAEeSUIKtin5peYQ _nVMiULWAEeSUIKtin5peYQ _nVMiNbWAEeSUIKtin5peYQ _nVMiOLWAEeSUIKtin5peYQ _nVMiObWAEeSUIKtin5peYQ _nVMiPLWAEeSUIKtin5peYQ _nVMiPbWAEeSUIKtin5peYQ _nVMiQLWAEeSUIKtin5peYQ _nVMiQbWAEeSUIKtin5peYQ _nVMiRLWAEeSUIKtin5peYQ _nVMiRbWAEeSUIKtin5peYQ _nVMiSLWAEeSUIKtin5peYQ _nVMiS7WAEeSUIKtin5peYQ _nVMiSbWAEeSUIKtin5peYQ _nVMiTbWAEeSUIKtin5peYQ"/>
-      <lifelines xmi:id="_nVMiUrWAEeSUIKtin5peYQ" represents="_nVKtMLWAEeSUIKtin5peYQ" coveredBy="_nVMiNrWAEeSUIKtin5peYQ _nVMiN7WAEeSUIKtin5peYQ _nVMiOrWAEeSUIKtin5peYQ _nVMiO7WAEeSUIKtin5peYQ _nVMiS7WAEeSUIKtin5peYQ _nVMiTrWAEeSUIKtin5peYQ"/>
-      <lifelines xmi:id="_nVMiU7WAEeSUIKtin5peYQ" represents="_nVMiVrWAEeSUIKtin5peYQ" coveredBy="_nVMiPrWAEeSUIKtin5peYQ _nVMiP7WAEeSUIKtin5peYQ"/>
+      <lifelines xmi:id="_nVMiUbWAEeSUIKtin5peYQ" represents="_nVMicrWAEeSUIKtin5peYQ" coveredBy="_nVMiNLWAEeSUIKtin5peYQ _nVMiULWAEeSUIKtin5peYQ _nVMiNbWAEeSUIKtin5peYQ _nVMiOLWAEeSUIKtin5peYQ _nVMiObWAEeSUIKtin5peYQ _nVMiPLWAEeSUIKtin5peYQ _nVMiPbWAEeSUIKtin5peYQ _nVMiQLWAEeSUIKtin5peYQ _nVMiQbWAEeSUIKtin5peYQ _nVMiRLWAEeSUIKtin5peYQ _nVMiRbWAEeSUIKtin5peYQ _nVMiSLWAEeSUIKtin5peYQ _nVMiS7WAEeSUIKtin5peYQ _nVMiSbWAEeSUIKtin5peYQ _8_WggLWLEeS2Db6tNEcJ-w _B-y2ALWMEeS2Db6tNEcJ-w _GODEsLWMEeS2Db6tNEcJ-w"/>
+      <lifelines xmi:id="_nVMiUrWAEeSUIKtin5peYQ" represents="_nVKtMLWAEeSUIKtin5peYQ" coveredBy="_nVMiNrWAEeSUIKtin5peYQ _nVMiN7WAEeSUIKtin5peYQ _nVMiOrWAEeSUIKtin5peYQ _nVMiO7WAEeSUIKtin5peYQ _nVMiS7WAEeSUIKtin5peYQ _GODEsbWMEeS2Db6tNEcJ-w"/>
+      <lifelines xmi:id="_nVMiU7WAEeSUIKtin5peYQ" represents="_nVMiVrWAEeSUIKtin5peYQ" coveredBy="_nVMiPrWAEeSUIKtin5peYQ _nVMiP7WAEeSUIKtin5peYQ _nVMiS7WAEeSUIKtin5peYQ _B-y2AbWMEeS2Db6tNEcJ-w"/>
       <lifelines xmi:id="_nVMiVLWAEeSUIKtin5peYQ" represents="_nVLUI7WAEeSUIKtin5peYQ" coveredBy="_nVMiQrWAEeSUIKtin5peYQ _nVMiQ7WAEeSUIKtin5peYQ _nVMiRrWAEeSUIKtin5peYQ _nVMiR7WAEeSUIKtin5peYQ"/>
       <messages xmi:id="_nVMiVbWAEeSUIKtin5peYQ" sendEvent="_nVMic7WAEeSUIKtin5peYQ" receiveEvent="_nVMiNLWAEeSUIKtin5peYQ" signature="_nVKtL7WAEeSUIKtin5peYQ">
         <localProperties xsi:type="ram:Reference" xmi:id="_nVMiVrWAEeSUIKtin5peYQ" name="unitVillage" lowerBound="1" type="_nVKGErWAEeSUIKtin5peYQ"/>
@@ -499,9 +504,14 @@
       <messages xmi:id="_nVMibbWAEeSUIKtin5peYQ" sendEvent="_nVMiR7WAEeSUIKtin5peYQ" receiveEvent="_nVMiSLWAEeSUIKtin5peYQ" signature="_nVKtDbWAEeSUIKtin5peYQ" messageSort="reply">
         <returns xsi:type="ram:StructuralFeatureValue" xmi:id="_nVMibrWAEeSUIKtin5peYQ" value="_nVKtGbWAEeSUIKtin5peYQ"/>
       </messages>
-      <messages xmi:id="_nVMib7WAEeSUIKtin5peYQ" sendEvent="_nVMiTbWAEeSUIKtin5peYQ" receiveEvent="_nVMiTrWAEeSUIKtin5peYQ" signature="_nVJfALWAEeSUIKtin5peYQ">
-        <arguments xmi:id="_nVMicLWAEeSUIKtin5peYQ" parameter="_nVJfAbWAEeSUIKtin5peYQ">
-          <value xsi:type="ram:ParameterValue" xmi:id="_nVMicbWAEeSUIKtin5peYQ" parameter="_nVKtMbWAEeSUIKtin5peYQ"/>
+      <messages xmi:id="_B-y2ArWMEeS2Db6tNEcJ-w" sendEvent="_B-y2ALWMEeS2Db6tNEcJ-w" receiveEvent="_B-y2AbWMEeS2Db6tNEcJ-w" signature="_nVKGGrWAEeSUIKtin5peYQ">
+        <arguments xmi:id="_B-y2A7WMEeS2Db6tNEcJ-w" parameter="_nVKGG7WAEeSUIKtin5peYQ">
+          <value xsi:type="ram:StructuralFeatureValue" xmi:id="_EKaZALWMEeS2Db6tNEcJ-w" value="_nVMiWLWAEeSUIKtin5peYQ"/>
+        </arguments>
+      </messages>
+      <messages xmi:id="_GODrwLWMEeS2Db6tNEcJ-w" sendEvent="_GODEsLWMEeS2Db6tNEcJ-w" receiveEvent="_GODEsbWMEeS2Db6tNEcJ-w" signature="_nVJfALWAEeSUIKtin5peYQ">
+        <arguments xmi:id="_GODrwbWMEeS2Db6tNEcJ-w" parameter="_nVJfAbWAEeSUIKtin5peYQ">
+          <value xsi:type="ram:ParameterValue" xmi:id="_HkCnQLWMEeS2Db6tNEcJ-w" parameter="_nVKtMbWAEeSUIKtin5peYQ"/>
         </arguments>
       </messages>
       <properties xmi:id="_nVMicrWAEeSUIKtin5peYQ" name="target" lowerBound="1" type="_nVKtKLWAEeSUIKtin5peYQ"/>
@@ -540,7 +550,7 @@
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJWrWAEeSUIKtin5peYQ" covered="_nVNJYLWAEeSUIKtin5peYQ" message="_nVNJeLWAEeSUIKtin5peYQ"/>
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJW7WAEeSUIKtin5peYQ" covered="_nVNJX7WAEeSUIKtin5peYQ" message="_nVNJe7WAEeSUIKtin5peYQ"/>
           <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJXLWAEeSUIKtin5peYQ" covered="_nVNJYLWAEeSUIKtin5peYQ" message="_nVNJe7WAEeSUIKtin5peYQ"/>
-          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_nVNJXbWAEeSUIKtin5peYQ" body="upgradeValue &lt;= gold" language="java"/>
+          <interactionConstraint xsi:type="ram:OpaqueExpression" xmi:id="_nVNJXbWAEeSUIKtin5peYQ" body="upgradeValue &lt;= gold &amp;&amp; upgradeValue >= 0" language="java"/>
         </operands>
       </fragments>
       <fragments xsi:type="ram:MessageOccurrenceSpecification" xmi:id="_nVNJXrWAEeSUIKtin5peYQ" covered="_nVNJX7WAEeSUIKtin5peYQ" message="_nVNJZ7WAEeSUIKtin5peYQ"/>
