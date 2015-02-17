@@ -8,4 +8,5 @@ public abstract class AbstractTile
 	public AbstractStructure occupyingStructure { get; set; }
 	public AbstractVillage myVillage{ get; set; }
 	public AbstractUnit occupyingUnit { get; set; }
+	public abstract List<AbstractTile> getNeighbours();
 }

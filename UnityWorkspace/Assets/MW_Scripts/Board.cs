@@ -97,7 +97,6 @@ public class Board
 				}
 			}
 		}
-
 		return ret;
 	}
 }

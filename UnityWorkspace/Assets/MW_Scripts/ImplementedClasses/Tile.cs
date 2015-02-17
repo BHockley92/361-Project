@@ -11,7 +11,7 @@ public class Tile : AbstractTile
 	public bool visited { get; set; } // for BFS algorithm
 	public Board myBoard { get; private set; }
 
-	public Tile( LandType type)
+	public Tile( LandType type, Board b)
 	{
 		myType = type;
 		myVillage = null;
@@ -19,5 +19,19 @@ public class Tile : AbstractTile
 		occupyingUnit = null;
 
 		visited = false;
+
+		if (b == null) throw new System.ArgumentException ("Board passed to tile is null");
+
+		myBoard = b;
+	}
+
+	public override List<AbstractTile> getNeighbours()
+	{
+		List<AbstractTile> ret = new List<AbstractTile>();
+		foreach(Tile t in myBoard.getNeighbours(this))
+		{
+			ret.Add(t);
+		}
+		return ret;
 	}
 }
