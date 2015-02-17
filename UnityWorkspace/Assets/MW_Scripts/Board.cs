@@ -8,7 +8,7 @@ public class Board
 	// Axial coordinate system will be used with a rhombus shaped board
 		// q = x coordinate
 		// r = z coordinate
-	public AbstractTile[,] board;
+	public Tile[,] board;
 
 	// Constructor for when a random board is generated
 	public Board(int length, int width)
@@ -29,11 +29,30 @@ public class Board
 		board = new Tile[ boardLength, boardWidth ];
 		return null;
 	}
+
+	// returns neighbours of a given tile
+	// returns null if the tile is not found
+	public List<Tile> getNeighbours(AbstractTile t)
+	{
+		for(int i = 0; i < board.GetLength(0); i++ )// TODO: is this the right input for the method?
+		{
+			for( int j = 0; j < board.GetLength(1); j++ ) // TODO: same as above
+			{
+				if( board[i, j] == t)
+				{
+					return getNeighbours(new Coordinate(i, j));
+				}
+			}
+		}
+
+		// tile wasnt' found
+		return null;
+	}
 	
 	// get the neighbours of a hex tile
-	public List<AbstractTile> getNeighbors(Coordinate c)
+	public List<Tile> getNeighbours(Coordinate c)
 	{
-		List<AbstractTile> ret = new List<AbstractTile> ();
+		List<Tile> ret = new List<Tile> ();
 
 		// Check that the coordinate is within bounds
 		if(c.x >= 0 && c.z >= 0)
