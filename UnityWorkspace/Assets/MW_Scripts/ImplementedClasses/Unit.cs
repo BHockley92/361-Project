@@ -5,8 +5,12 @@ public class Unit : AbstractUnit
 {
 	public Unit(AbstractVillage vOwner, AbstractTile startLocation)
 	{
-		// TODO: throw exception is try to make a unit?
 		myVillage = vOwner;
 		myLocation = startLocation;
+
+		if(startLocation.occupyingUnit == null)
+		{
+			startLocation.occupyingUnit = this;
+		}
 	}
 }
