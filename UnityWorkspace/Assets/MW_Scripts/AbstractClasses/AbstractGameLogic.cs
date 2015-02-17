@@ -49,11 +49,18 @@ public abstract class AbstractGameLogic
 	}
 
 
-	// TODO: implement these -- divide region and takeover I don't think are needed for the demo
+	// TODO: for the demo
 	public abstract void moveUnit(AbstractUnit u, AbstractTile dest);
+
+	// TODO: unimplemented methods below, but not for the demo
 	public abstract void destroyVillage(AbstractVillage v, AbstractUnit invader);
 	public abstract void divideRegion(IList<AbstractTile> region);
 	public abstract void takeoverTile(AbstractTile dest);
+
+	private void connectRegions(List<AbstractVillage> v)
+	{
+		// TODO, but not for the first demo
+	}
 
 	public void beginTurn( AbstractPlayer p, AbstractGame g)
 	{
@@ -170,6 +177,4 @@ public abstract class AbstractGameLogic
 
 		}
 	}
-
-	// TODO: the two private methods
 }
