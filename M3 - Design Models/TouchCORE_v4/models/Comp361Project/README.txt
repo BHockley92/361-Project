@@ -1,0 +1,1 @@
+These diagrams were made using the TouchCore 4.1 which is the version before the one with scrolling was released. It does not work on TouchCore 4.2.

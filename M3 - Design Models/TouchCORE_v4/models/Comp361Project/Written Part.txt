@@ -1,0 +1,8 @@
+All game move operations are controlled by the GameLogic class. 
+We've chosen this class to be the controller because it aggregates the game state manipulation logic.
+
+beginTurn is controlled by the GameLogic class. We've chosen the GameLogic class because it controls the 
+state of a game instance and beginTurn is an abstraction of a rule of the game. 
+
+newGame is controlled by the MedievalWarfare class. We've chosen this class because we may have 
+multiple games running and so we need a class that overlooks game to keep track of multiple game instances.
