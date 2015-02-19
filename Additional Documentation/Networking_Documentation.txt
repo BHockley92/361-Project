@@ -1,8 +1,8 @@
 MWNetwork:
 
 1.	Regarding turns:
-	1.1	Tells you whether it is your turn.  UI should be designed in such a way as to disable certain options when it is not your turn.
-	1.2	Provides a function for ending your turn, which notifies the next player that it is his turn.
+	1.1	Tells you whether it is your turn.  GUI should be designed in such a way as to disable certain options when it is not your turn.
+	1.2	Provides a function for ending your turn, which also notifies the next player that it is his turn.
 	
 2.	Regarding rooms:
 	2.1	Provides a list of available rooms.
@@ -10,19 +10,23 @@ MWNetwork:
 	2.3	Notifies other players when a player left the room.  Provides an appropriate error code (from an enum).
 
 3.	Regarding game state:
-	3.1	Provides a function for updating other players' game state.  In this model, a player will not see another player's movement until it is "committed"
+	3.1	Provides a function for updating other players' game state.  In this model, a player will not see another player's movement until it is "serviced"
 		(at each call by this API's user).
 
 4.	Regarding credentials:
 	4.1	Verifies the provided user name and password credentials, returning an appropriate message.
-	4.2	Adds users to the matchmaker's database using the provided credentials.
+	4.2	Adds users to a database using the provided credentials. (no removing necessary at this point)
 	
 5.	Regarding statistics:
 	5.1	Provides a/many function(s) for updating a player's statistics.
+	5.2	Could potentially be done automatically... TBD.
 		
 6.	Regarding the network's status:
-	6.1	User implements an interface (MWNetworkHandler?) which has functions which are called on certain network events.
-		Object is then passed to MWNetwork for handling exceptional network events.
+	6.1	Implements all necessary callbacks given various connectivity issues with the network and other players.
+
+7.	Regarding the game's state:
+	7.1	Saves a room's game state if all players are disconnected.
+		This means there is no need to save the game explicitly. Ever. (TBC)
 		
 7.	COMMENTS:
 	- 
