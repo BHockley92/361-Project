@@ -6,7 +6,7 @@ public class GameLogic : AbstractGameLogic
 {
 	public override void buildRoad(AbstractUnit u)
 	{
-		UnitType mytype = u.unitType;
+		UnitType mytype = u.myType;
 		if(mytype == UnitType.Peasant)
 		{
 			u.currentAction = ActionType.BuildingRoad;
@@ -31,18 +31,18 @@ public class GameLogic : AbstractGameLogic
 	
 	public override void upgradeUnit(AbstractUnit u, UnitType newType)
 	{
-		AbstractVillage unitVillage = u.belongsToVillage;
+		AbstractVillage unitVillage = u.myVillage;
 		
 		int vGold = unitVillage.gold;
 		int upgradeValue = myValueManager.getUnitValue (newType);
-		upgradeValue -= myValueManager.getUnitValue (u.unitType);
+		upgradeValue -= myValueManager.getUnitValue (u.myType);
 		
 		// >= 0 because presumably higher levels cost more, so you don't want
 		// to downgrade a unit
 		if(upgradeValue <= vGold && upgradeValue >= 0)
 		{
 			unitVillage.gold = vGold - upgradeValue;
-			u.unitType = newType;
+			u.myType = newType;
 		}
 	}
 	
@@ -50,8 +50,8 @@ public class GameLogic : AbstractGameLogic
 	// TODO: for the demo
 	public override void moveUnit(AbstractUnit u, AbstractTile dest) 
 	{
-		AbstractTile unitLocation = u.location;
-		UnitType unitType = u.unitType;
+		AbstractTile unitLocation = u.myLocation;
+		UnitType unitType = u.myType;
 		AbstractPlayer player = u.getPlayer ();
 
 		// TODO: Finish.
@@ -65,7 +65,7 @@ public class GameLogic : AbstractGameLogic
 	
 	public override void beginTurn( AbstractPlayer p, AbstractGame g)
 	{
-		List<AbstractVillage> myVillages = p.villages;
+		List<AbstractVillage> myVillages = p.myVillages;
 		
 		foreach(AbstractVillage v in myVillages)
 		{
@@ -87,7 +87,7 @@ public class GameLogic : AbstractGameLogic
 			if(occupyingStructure == StructureType.Tombstone)
 			{
 				t.occupyingStructure.myType = StructureType.NONE;
-				t.landType = LandType.Tree;
+				t.myType = LandType.Tree;
 			}
 		}
 	}
@@ -95,7 +95,7 @@ public class GameLogic : AbstractGameLogic
 	protected override void peasantBuild( AbstractTile myTile )
 	{
 		AbstractUnit occupyingUnit = myTile.occupyingUnit;
-		UnitType myType = occupyingUnit.unitType;
+		UnitType myType = occupyingUnit.myType;
 		ActionType currentAction = occupyingUnit.currentAction;
 		
 		if(myType == UnitType.Peasant)
@@ -108,7 +108,7 @@ public class GameLogic : AbstractGameLogic
 			
 			else if(currentAction == ActionType.FinishCultivating)
 			{
-				myTile.landType = LandType.Meadow;
+				myTile.myType = LandType.Meadow;
 				occupyingUnit.currentAction = ActionType.ReadyForOrders;
 			}
 			
@@ -135,7 +135,7 @@ public class GameLogic : AbstractGameLogic
 		
 		foreach(AbstractTile t in controlledRegion)
 		{
-			myVillage.gold += myValueManager.getLandValue(t.landType);
+			myVillage.gold += myValueManager.getLandValue(t.myType);
 		}
 	}
 	
@@ -147,7 +147,7 @@ public class GameLogic : AbstractGameLogic
 		
 		foreach(AbstractUnit u in supportedUnits)
 		{
-			totalCost += myValueManager.getMaintenanceCost(u.unitType);
+			totalCost += myValueManager.getMaintenanceCost(u.myType);
 		}
 		
 		if( myVillage.gold >= totalCost )
@@ -169,7 +169,7 @@ public class GameLogic : AbstractGameLogic
 		
 		foreach(AbstractUnit u in supportedUnits)
 		{
-			AbstractTile myLocation = u.location;
+			AbstractTile myLocation = u.myLocation;
 			myLocation.occupyingStructure.myType = StructureType.Tombstone;
 			
 			// Remove the unit
