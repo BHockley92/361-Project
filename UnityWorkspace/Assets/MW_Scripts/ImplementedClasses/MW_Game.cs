@@ -10,14 +10,14 @@ public class MW_Game : AbstractGame
 	// for a randomly generated board, assumes length and width are > 0
 	public MW_Game(List<AbstractPlayer> players, int boardLength, int boardWidth, AbstractGameLogic gl)
 	{
-		initialize (players, new Board (boardLength, boardWidth), gl);
+		//initialize (players, new Board (boardLength, boardWidth), gl);
 		roundsPlayed = 0;
 	}
 
 	// Constructor for when a board is loaded
 	public MW_Game(List<AbstractPlayer> players,  Tile[,] b, AbstractGameLogic gl)
 	{
-		initialize (players, new Board (b), gl);
+		//initialize (players, new Board (b), gl);
 		roundsPlayed = 0;
 	}
 }

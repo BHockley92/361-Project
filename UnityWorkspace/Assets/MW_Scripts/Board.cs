@@ -4,15 +4,22 @@ using GameEnums;
 
 public class Board 
 {
-	// TODO: board representation -- use this: http://www.redblobgames.com/grids/hexagons/#map-storage with solution 3 (slide to the left)
-	// Axial coordinate system will be used with a rhombus shaped board
-		// q = x coordinate
-		// r = z coordinate
-	public Tile[,] board;
+	// board representation -- use this: http://www.redblobgames.com/grids/hexagons/#map-storage
+		// Rhombus is being used as the shape of the board.
 
-	// Constructor for when a random board is generated
-	public Board(int length, int width)
+	public Tile[,] board { get; private set; }
+	public int border { get; private set; }
+
+	/**
+	 * Constructs a board randomly.
+	 * 
+	 * Length and width are length and width of te board.
+	 * Waterboarder is how many tiles of water should surround the island.
+	 * Assumes valid inputs.
+	 */
+	public Board(int length, int width, int waterBorder)
 	{
+		border = waterBorder;
 		generateRandomBoard (length, width);
 	}
 
@@ -23,11 +30,40 @@ public class Board
 	}
 	
 	// Generates a random island that conforms to specs (300 land tiles that aren't water, one big land mass)
-	private Tile[,] generateRandomBoard(int boardLength, int boardWidth)
+	// TODO: debug
+	private void generateRandomBoard(int boardLength, int boardWidth)
 	{
-		// TODO
 		board = new Tile[ boardLength, boardWidth ];
-		return board;
+		fillBoardWithWater ();
+
+		// Now make the island while taking into account for the border (don't put land there)
+		for(int i = 0 + border; i < board.GetLength(0) - border; i++)
+		{
+			for(int j = 0 + border; j < board.GetLength(1) - border; j++)
+			{
+				// Generate a random land type
+				LandType lt;
+				int randInt = Random.Range(0, 3);
+				if( randInt == 0 ) lt = LandType.Meadow;
+				else if( randInt == 1 ) lt = LandType.Grass;
+				else lt = LandType.Tree;
+
+				// Now make and place the tile
+				board[ i , j ] = new Tile( lt, this );
+			}
+		}
+	}
+
+	// Fills the board with water tiles
+	private void fillBoardWithWater()
+	{
+		for(int i = 0; i < board.GetLength(0); i++)
+		{
+			for(int j = 0; j < board.GetLength(1); j++)
+			{
+				board[i, j] = new Tile(LandType.Sea, this);
+			}
+		}
 	}
 
 	// returns neighbours of a given tile
@@ -45,7 +81,7 @@ public class Board
 			}
 		}
 
-		// tile wasnt' found
+		// tile wasn't found
 		return null;
 	}
 	
