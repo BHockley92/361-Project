@@ -13,7 +13,7 @@ public class Board
 	// Constructor for when a random board is generated
 	public Board(int length, int width)
 	{
-		board = generateRandomBoard (length, width);
+		generateRandomBoard (length, width);
 	}
 
 	// Constructor for when a board is provided
@@ -27,16 +27,16 @@ public class Board
 	{
 		// TODO
 		board = new Tile[ boardLength, boardWidth ];
-		return null;
+		return board;
 	}
 
 	// returns neighbours of a given tile
 	// returns null if the tile is not found
 	public List<Tile> getNeighbours(AbstractTile t)
 	{
-		for(int i = 0; i < board.GetLength(0); i++ )// TODO: is this the right input for the method?
+		for(int i = 0; i < board.GetLength(0); i++ )
 		{
-			for( int j = 0; j < board.GetLength(1); j++ ) // TODO: same as above
+			for( int j = 0; j < board.GetLength(1); j++ )
 			{
 				if( board[i, j] == t)
 				{
@@ -57,7 +57,7 @@ public class Board
 		// Check that the coordinate is within bounds
 		if(c.x >= 0 && c.z >= 0)
 		{
-			if( c.x < board.GetLength(0) && c.z < board.GetLength(1)) // TODO: test that the right dimensions are verified x-> 0 and z -> 1
+			if( c.x < board.GetLength(0) && c.z < board.GetLength(0))
 			{
 				// Now we know the coordinate is valid
 
@@ -72,14 +72,14 @@ public class Board
 						ret.Add(board[c.x - 1, c.z - 1]);
 					}
 
-					if( c.z + 1 < board.GetLength(1)) // TODO is this the correct dimension?
+					if( c.z + 1 < board.GetLength(1))
 					{
 						ret.Add(board[ c.x - 1, c.z + 1 ]);
 					}
 				}
 
 				// Now check the right adjacent spaces
-				if( c.x + 1 < board.GetLength(0)) // TODO: is this the correct dimension?
+				if( c.x + 1 < board.GetLength(0))
 				{
 					ret.Add ( board[ c.x + 1, c.z ] );
 
@@ -90,7 +90,7 @@ public class Board
 						ret.Add(board[c.x + 1, c.z - 1]);
 					}
 					
-					if( c.z + 1 < board.GetLength(1)) // TODO is this the correct dimension?
+					if( c.z + 1 < board.GetLength(1))
 					{
 						ret.Add(board[ c.x + 1, c.z + 1 ]);
 					}
