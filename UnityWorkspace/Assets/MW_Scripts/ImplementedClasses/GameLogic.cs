@@ -47,55 +47,79 @@ public class GameLogic : AbstractGameLogic
 	}
 
 	// TODO: this may be wrong. I followed the diagram as best as I could
+	// Only the first nested if statement is relevant to the demo
 	public override void moveUnit(AbstractUnit u, AbstractTile dest) 
 	{
-		AbstractTile unitLocation = u.myLocation;
-		UnitType unitType = u.myType;
-		AbstractPlayer player = u.getPlayer ();
+		// Only look at adjacent tiles. No multitile movement here
 
-		List<AbstractTile> unitTileNeighbours = unitLocation.getNeighbours ();
-		List<AbstractTile> destTileNeighbours;
+		// Moving into a neutral tile ends movement
+		// If a villager walks over a tombstone that isn't a knight, it is cleared and the unit can no longer move
+		// If a non-knight unit moves on a tree square it is vacated and one wood is added to the stokpile
+		// Villagers should be able to cultivate meadows AFTER moving, same goes for building a road
+		// Knights cannot move through forests
 
-		LandType landtype = dest.myType;
+		// Need to take into account: expanding territory joins villages
+		// Only infantry rank and higher can move into enemy territory
+		// watchtower == infantry level
 
+		List<AbstractTile> adjacentTiles = u.myLocation.getNeighbours ();
+		ActionType unitAction = u.currentAction;
 
-		if(unitTileNeighbours.Contains(dest))
+		int uValue = myValueManager.getUnitValue(u.myType);
+		int soldierValue = myValueManager.getUnitValue(UnitType.Soldier);
+		int knightValue = myValueManager.getUnitValue (UnitType.Knight);
+		
+		// move can only happen if the destination is in the adjacent squares and isn't sea
+		// also: The unit cannot move if they've already moved
+		if( adjacentTiles.Contains(dest) && dest.myType != LandType.Sea 
+		   && unitAction == ActionType.ReadyForOrders)
 		{
-			if( unitType != UnitType.Knight && landtype != LandType.Tree )
+			AbstractVillage destVillage = dest.myVillage;
+
+			// the destination neutral territory, therefore there is no unit on it
+			if(destVillage == null)
 			{
-				destTileNeighbours = dest.getNeighbours();
+				// TODO check knight v forest, look for tombstone, etc -- should probably be its own method
+					// THIS IS THE ONLY PART RELEVANT TO THE DEMO
+				// Don't forget about merging territory if that's relevant (not for the demo)
 			}
-			
-			foreach( AbstractTile t in destTileNeighbours)
+
+			// The tile belongs to someone and might have a unit on it
+			else
 			{
-				// TODO: things can throw null pointer exceptions here -- fix
-				AbstractUnit neighbourUnit = t.occupyingUnit;
-				AbstractVillage neighbourVillage = t.myVillage;
-				VillageType neighbourVillageType = neighbourVillage.myType;
-				AbstractPlayer neighbourPlayer = neighbourVillage.myPlayer;
+				// Get a bunch of values which will be used
+				AbstractUnit destUnit = dest.occupyingUnit;
+				AbstractPlayer destPlayer = destVillage.myPlayer;
+				AbstractPlayer player = u.getPlayer();
 
-				Structure neighbourStructure = t.occupyingStructure;
-				UnitType neighbourUnitType = neighbourUnit.myType;
+				int destUnitValue = -1;
 
-				int neighbourUnitValue = myValueManager.getUnitValue(neighbourUnitType);
-				int unitValue = myValueManager.getUnitValue(unitType);
+				if(destUnit != null)
+				{
+					destUnit = myValueManager.getUnitValue(destUnit.myType);
+				}
 
-				// Fuck this check and everything about it
-				if(neighbourPlayer != player &&
-				   ( neighbourUnitValue > unitValue || unitValue < myValueManager.getUnitValue(UnitType.Soldier)
-				 		&& (neighbourVillage != null || neighbourStructure == StructureType.Tower)
-				   ) 
-				   || 
-				   (
-						unitValue < myValueManager.getUnitValue(UnitType.Knight) 
-						&& neighbourVillageType == VillageType.Fort
-					)
-				   ){ return; }
-				// end crazy check
+				// Now who does the territory belong to?
+
+				// Destination is within your own territory
+				if(player == destPlayer)
+				{
+					// You can't invade your own units, do nothing
+					if( destUnitValue >= 0) return;
+
+					// There is no unit in the destination tile
+					else
+					{
+						// TODO check knight v forest, look for tombstone, etc -- should probably be its own method
+					}
+				}
+
+				// It's enemy territory
+				else
+				{
+					// TODO: not relevant for the demo
+				}
 			}
-			// TODO: i have no idea what's nested and what isn't. everything is interpreted
-			// into code up until the last opt inclusively
-			// gg.
 		}
 	}
 	
