@@ -31,7 +31,5 @@ public abstract class AbstractGame
 		}
 
 		turnOf = participants [turnIndex];
-
 	}
-	// TODO: board representation -- use this: http://www.redblobgames.com/grids/hexagons/#map-storage
 }

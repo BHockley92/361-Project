@@ -23,12 +23,6 @@ public class Board
 		generateRandomBoard (length, width);
 	}
 
-	// Constructor for when a board is provided
-	public Board( Tile[,] b )
-	{
-		board = b;
-	}
-	
 	// Generates a random island that conforms to specs (300 land tiles that aren't water, one big land mass)
 	private void generateRandomBoard(int boardLength, int boardWidth)
 	{
