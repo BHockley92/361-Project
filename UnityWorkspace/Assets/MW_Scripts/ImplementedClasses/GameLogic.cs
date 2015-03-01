@@ -45,16 +45,58 @@ public class GameLogic : AbstractGameLogic
 			u.myType = newType;
 		}
 	}
-	
-	
-	// TODO: for the demo
+
+	// TODO: this may be wrong. I followed the diagram as best as I could
 	public override void moveUnit(AbstractUnit u, AbstractTile dest) 
 	{
 		AbstractTile unitLocation = u.myLocation;
 		UnitType unitType = u.myType;
 		AbstractPlayer player = u.getPlayer ();
 
-		// TODO: Finish.
+		List<AbstractTile> unitTileNeighbours = unitLocation.getNeighbours ();
+		List<AbstractTile> destTileNeighbours;
+
+		LandType landtype = dest.myType;
+
+
+		if(unitTileNeighbours.Contains(dest))
+		{
+			if( unitType != UnitType.Knight && landtype != LandType.Tree )
+			{
+				destTileNeighbours = dest.getNeighbours();
+			}
+			
+			foreach( AbstractTile t in destTileNeighbours)
+			{
+				// TODO: things can throw null pointer exceptions here -- fix
+				AbstractUnit neighbourUnit = t.occupyingUnit;
+				AbstractVillage neighbourVillage = t.myVillage;
+				VillageType neighbourVillageType = neighbourVillage.myType;
+				AbstractPlayer neighbourPlayer = neighbourVillage.myPlayer;
+
+				Structure neighbourStructure = t.occupyingStructure;
+				UnitType neighbourUnitType = neighbourUnit.myType;
+
+				int neighbourUnitValue = myValueManager.getUnitValue(neighbourUnitType);
+				int unitValue = myValueManager.getUnitValue(unitType);
+
+				// Fuck this check and everything about it
+				if(neighbourPlayer != player &&
+				   ( neighbourUnitValue > unitValue || unitValue < myValueManager.getUnitValue(UnitType.Soldier)
+				 		&& (neighbourVillage != null || neighbourStructure == StructureType.Tower)
+				   ) 
+				   || 
+				   (
+						unitValue < myValueManager.getUnitValue(UnitType.Knight) 
+						&& neighbourVillageType == VillageType.Fort
+					)
+				   ){ return; }
+				// end crazy check
+			}
+			// TODO: i have no idea what's nested and what isn't. everything is interpreted
+			// into code up until the last opt inclusively
+			// gg.
+		}
 	}
 	
 	// TODO: unimplemented methods below, but not for the demo
