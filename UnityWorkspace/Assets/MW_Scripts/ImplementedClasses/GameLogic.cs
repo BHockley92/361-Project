@@ -196,6 +196,7 @@ public class GameLogic : AbstractGameLogic
 					// Check if domination links two villages
 					// Check if adjacent units/watchtowers die of space invasion
 					// Make sure action type is set correctly ( tombstone + invade? forest + invade with soldier? )
+					// Make sure that watchtowers and units cut off from their home villages die or get reassigned
 				}
 			}
 		}
