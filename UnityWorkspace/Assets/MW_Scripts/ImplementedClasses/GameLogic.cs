@@ -95,8 +95,6 @@ public class GameLogic : AbstractGameLogic
 		}
 	}
 
-	// TODO: this may be wrong. I followed the diagram as best as I could
-	// Only the first nested if statement is relevant to the demo ( if destVillage == null )
 	public override void moveUnit(AbstractUnit u, AbstractTile dest) 
 	{
 		// Only look at adjacent tiles. No multitile movement here
@@ -116,91 +114,124 @@ public class GameLogic : AbstractGameLogic
 
 		int uValue = myValueManager.getUnitValue(u.myType);
 		int soldierValue = myValueManager.getUnitValue(UnitType.Soldier);
-		int knightValue = myValueManager.getUnitValue (UnitType.Knight);
-		
+
 		// move can only happen if the destination is in the adjacent squares and isn't sea
 		// also: The unit cannot move if they've already moved
 		if( adjacentTiles.Contains(dest) && dest.myType != LandType.Sea 
 		   && unitAction == ActionType.ReadyForOrders)
 		{
-			AbstractVillage destVillage = dest.myVillage;
-
-			// the destination neutral territory, therefore there is no unit on it
-			// THIS IS THE ONLY DEMO RELEVANT PART
-			if(destVillage == null)
+			// Now check to make sure the tile isn't occupied.
+			// Since units block all adjacent squares and die
+			// when an enemy unit enters their guarded squares,
+			// it should be impossible to move onto a tile with an enemy unit
+			if(dest.occupyingUnit == null)
 			{
-				// TODO: refactor this part into its own method
+				// Now check to see if adjacent enemy units/structures are blocking it
+				List<AbstractTile>  destNeighbours = dest.getNeighbours();
 
-				// knights can't go into forests
-				if( dest.myType == LandType.Tree && u.myType == UnitType.Knight ) return;
-
-				// move the unit
-				u.myLocation.occupyingUnit = null;
-				u.myLocation = dest;
-
-				// Take over the territory
-				dest.myVillage = u.myVillage;
-				u.myVillage.controlledRegion.Add(dest);
-
-				// Neutral territory entered: the unit can no longer receive orders
-				u.currentAction = ActionType.Moved;
-
-				// If infantry or knight, trample the meadow
-				if(u.myType == UnitType.Soldier || u.myType == UnitType.Knight && dest.myType == LandType.Meadow)
+				foreach(AbstractTile t in destNeighbours)
 				{
-					dest.myType = LandType.Grass;
-				}
-
-				// If there's a tombstone or forest on the tile, clear it
-				// < knightvalue because the knights do not care about clearing tombstones
-				if(uValue < knightValue && dest.occupyingStructure.myType == StructureType.Tombstone)
-				{
-					u.currentAction = ActionType.ClearingTombStone;
-				}
-
-
-				else if( dest.myType == LandType.Tree )
-				{
-					u.currentAction = ActionType.ChoppingTree;
-				}
-			}
-
-			// The tile belongs to someone and might have a unit on it
-			else
-			{
-				// Get a bunch of values which will be used
-				AbstractUnit destUnit = dest.occupyingUnit;
-				AbstractPlayer destPlayer = destVillage.myPlayer;
-				AbstractPlayer player = u.getPlayer();
-
-				int destUnitValue = -1;
-
-				if(destUnit != null)
-				{
-					destUnitValue = myValueManager.getUnitValue(destUnit.myType);
-				}
-
-				// Now who does the territory belong to?
-
-				// Destination is within your own territory
-				if(player == destPlayer)
-				{
-					// You can't invade your own units, do nothing
-					if( destUnitValue >= 0) return;
-
-					// There is no unit in the destination tile
-					else
+					// an enemy unit on a tile has to belong
+					// to an enemy
+					if( t.myVillage != null )
 					{
-						// TODO check knight v forest, look for tombstone, etc -- should probably be its own method
+						// The tile belongs to an enemy
+						if( t.myVillage.myPlayer != u.getPlayer() )
+						{
+							// Can't move it if there is a unit
+							// of equal or better rank blocking us
+							if( t.occupyingUnit != null)
+							{
+								if(uValue <= myValueManager.getUnitValue(t.occupyingUnit.myType))
+									return;
+							}
+
+							// Can't invade tower controlled area without a better
+							// unit than a knight
+							if( t.occupyingStructure != null)
+							{
+								if( uValue <= soldierValue 
+								   && t.occupyingStructure.myType == StructureType.Tower)
+									return;
+							}
+						}
 					}
 				}
 
-				// It's enemy territory
-				else
+				// Ok, so now we know that the destination is not being
+				// blocked by enemies and is adjacent to the unit's location
+
+				// knights can't walk through forests
+				if( dest.myType == LandType.Tree && u.myType == UnitType.Knight) return;
+
+				// If it's within the moving unit's territory or neutral territory
+				// we can move
+				if( dest.myVillage == u.myVillage || dest.myVillage == null)
 				{
-					// TODO: not relevant for the demo
+					actuallyMoveTheUnit( u, dest );
+
+					// if it's neutral territory, take it
+					if( dest.myVillage == null )
+					{
+						dest.myVillage = u.myVillage;
+						u.myVillage.controlledRegion.Add(dest);
+
+						// assuming the method call didn't make it cultivate a meadow or something,
+						// consider the unit moved
+						if( u.currentAction == ActionType.ReadyForOrders)
+							u.currentAction = ActionType.Moved;
+					}
+
+					// TODO: check if there are any adjacent units that die from space invasion
+						// DONT CARE FOR DEMO LOLOL
+				}
+
+				// Otherwise we're invading enemy territory
+				// Only soldiers and better can invade
+				else if ( uValue >= soldierValue );
+				{
+					// TODO: this is not for the demo. So ... LOLOL DONT CARE
+					// actuallyMoveTheUnit(u, dest);
+					// Do the invasion stuff
+					// Check if domination links two villages
+					// Check if adjacent units/watchtowers die of space invasion
+					// Make sure action type is set correctly ( tombstone + invade? forest + invade with soldier? )
 				}
 			}
+		}
+	}
+
+	// Assumes all checks have been done and we can actually move the unit
+	// Does not manage any territories
+	// Only takes care of movement, trampling fields, orders and tombstones
+	// Should be done BEFORE territories are manages or order management WON'T WORK
+	private void actuallyMoveTheUnit( AbstractUnit u, AbstractTile dest)
+	{
+		// move the unit onto the destination
+		u.myLocation.occupyingUnit = null;
+		u.myLocation = dest;
+		dest.occupyingUnit = u;
+
+		// Trample the meadow if soldier or knight
+		if( dest.myType == LandType.Meadow &&
+		   ( u.myType == UnitType.Soldier || u.myType == UnitType.Knight))
+		{
+			dest.myType = LandType.Grass;
+		}
+
+		// Only knights won't clear tombstones, so if there is one
+			// and the unit isn't a knight, clear it.
+		if( dest.occupyingStructure.myType == StructureType.Tombstone
+		   && u.myType != UnitType.Knight)
+		{
+			u.currentAction = ActionType.ClearingTombStone;
+		}
+
+		// Only knights won't chop wood, so if there's a forest,
+			// clear it if the unit isn't a knight
+		if( dest.myType == LandType.Tree && u.myType != UnitType.Knight)
+		{
+			u.currentAction = ActionType.ChoppingTree;
 		}
 	}
 	
