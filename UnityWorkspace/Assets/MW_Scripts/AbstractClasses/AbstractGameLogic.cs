@@ -6,6 +6,7 @@ public abstract class AbstractGameLogic
 {
 	public ValueManager myValueManager { get; protected set; }
 
+	public abstract void hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile);
 	public abstract void buildRoad (AbstractUnit u);
 	public abstract void upgradeVillage (AbstractVillage v, VillageType newType);
 	public abstract void upgradeUnit (AbstractUnit u, UnitType newType);
