@@ -47,7 +47,7 @@ public class GameLogic : AbstractGameLogic
 	}
 
 	// TODO: this may be wrong. I followed the diagram as best as I could
-	// Only the first nested if statement is relevant to the demo
+	// Only the first nested if statement is relevant to the demo ( if destVillage == null )
 	public override void moveUnit(AbstractUnit u, AbstractTile dest) 
 	{
 		// Only look at adjacent tiles. No multitile movement here
@@ -77,11 +77,43 @@ public class GameLogic : AbstractGameLogic
 			AbstractVillage destVillage = dest.myVillage;
 
 			// the destination neutral territory, therefore there is no unit on it
+			// THIS IS THE ONLY DEMO RELEVANT PART
 			if(destVillage == null)
 			{
-				// TODO check knight v forest, look for tombstone, etc -- should probably be its own method
-					// THIS IS THE ONLY PART RELEVANT TO THE DEMO
-				// Don't forget about merging territory if that's relevant (not for the demo)
+				// TODO: refactor this part into its own method
+
+				// knights can't go into forests
+				if( dest.myType == LandType.Tree && u.myType == UnitType.Knight ) return;
+
+				// move the unit
+				u.myLocation.occupyingUnit = null;
+				u.myLocation = dest;
+
+				// Take over the territory
+				dest.myVillage = u.myVillage;
+				u.myVillage.controlledRegion.Add(dest);
+
+				// Neutral territory entered: the unit can no longer receive orders
+				u.currentAction = ActionType.Moved;
+
+				// If infantry or knight, trample the meadow
+				if(u.myType == UnitType.Soldier || u.myType == UnitType.Knight && dest.myType == LandType.Meadow)
+				{
+					dest.myType = LandType.Grass;
+				}
+
+				// If there's a tombstone or forest on the tile, clear it
+				// < knightvalue because the knights do not care about clearing tombstones
+				if(uValue < knightValue && dest.occupyingStructure == StructureType.Tombstone)
+				{
+					u.currentAction = ActionType.ClearingTombStone;
+				}
+
+
+				else if( dest.myType == LandType.Tree )
+				{
+					u.currentAction = ActionType.ChoppingTree;
+				}
 			}
 
 			// The tile belongs to someone and might have a unit on it
