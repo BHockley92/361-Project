@@ -18,9 +18,9 @@ public class MWNetwork
 	private MWNetwork() 
 	{
 		version 		= "1.0";	// TODO verify if valid version number
-		players			= new ArrayList;
+		players			= new ArrayList();
 		gameStarted 	= false;
-	};
+	}
 	
 	/* 
 	 * Connects to Photon's master server using current version number.
@@ -96,7 +96,7 @@ public class MWNetwork
 		
 		// Set player turns
 		Hashtable isMyTurn = new Hashtable();
-		for (PhotonPlayer player in PhotonNetwork.playerList)
+		foreach (PhotonPlayer player in PhotonNetwork.playerList)
 		{
 			if (player.isMasterClient)
 			{
