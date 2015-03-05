@@ -5,7 +5,6 @@ public abstract class AbstractMedievalWarfare
 {
 	public AbstractGame currentGame { get; set; }
 	public abstract void newGame( List<AbstractPlayer> participants);
-	public abstract List<Tile> loadMaps(string myMapFile);
-	public abstract void assignVillages(List<Tile> myGameTiles);
-	public abstract void makeVillage(List<Tile> visitedTiles, Tile myTile, List<AbstractPlayer> participants);
+	//public abstract List<Tile> loadMaps(string myMapFile);
+	public abstract void assignRegions(Board gameBoard);
 }

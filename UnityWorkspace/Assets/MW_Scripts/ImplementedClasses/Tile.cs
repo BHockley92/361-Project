@@ -9,6 +9,8 @@ public class Tile : AbstractTile
 	// can avoid duplicating state here.
 
 	public bool visited { get; set; } // for BFS algorithm
+	public bool isVisited{ get; set; } //for assignRegions BFS algorithm
+	public bool hasVillage{ get; set; } //for assignRegions BFS algorithm
 	public Board myBoard { get; private set; }
 
 	public Tile( LandType type, Board b)
