@@ -138,8 +138,8 @@ public class MWNetwork
 		// Start next player's turn.
 		// TODO make sure there are no race conditions for property.
 		// TODO check if game over before setting beginning of turn?
-		property["isMyTurn"] = true;	
-		GetNextFor(PhotonNetwork.player).SetCustomProperties(property);
+		property["isMyTurn"] = true;
+		GetNextFor(PhotonNetwork.player).SetCustomProperties(property);     // TODO check if GetNextFor function works
 	}
 	
 	/*
@@ -160,31 +160,10 @@ public class MWNetwork
 	}
 	
 	/*
-	 * 
+	 * This function updates the game state on the other players' machines.
 	 */
-	void OnPhotonPlayerPropertiesChanged(object[] playerAndUpdatedProps)
-	{
-		// Retrieve player and properties from the passed parameter
-		PhotonPlayer 	player 	= playerAndUpdatedProps[0] as PhotonPlayer;
-		Hashtable 		props 	= playerAndUpdatedProps[1] as Hashtable;
-		
-		// 
-	}
-	
-	/*
-	 * This function announces to other players that your game state has changed.
-	 */
-	public void gameStateChanged()
-	{
-		photonView.RPC("updateGameState", PhotonTargets.Others, gameState);
-	}
-	
-	/*
-	 * Updates the state of the game with the one provided.
-	 */
-	[RPC]
-	private void updateGameState(GameState gameState)
-	{
-		
-	}
+    public void gameStateUpdated()
+    {
+
+    }
 }
