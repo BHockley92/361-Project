@@ -12,7 +12,7 @@ public class InGameMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyUp (KeyCode.Escape)) {
+		if(Input.GetKeyDown (KeyCode.Escape)) {
 			menu.alpha = 1;
 			menu.blocksRaycasts = true;
 			menu.interactable = true;
