@@ -17,5 +17,6 @@ public class InGameMenu : MonoBehaviour {
 			menu.blocksRaycasts = true;
 			menu.interactable = true;
 		}
+		
 	}
 }

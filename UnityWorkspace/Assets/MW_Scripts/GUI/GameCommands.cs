@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GameCommands : MonoBehaviour {
 
+	public Matchmaking mm;
+
 	//Exit to desktop/quit button
 	public void ExitApp() {
 		#if UNITY_EDITOR
@@ -14,7 +16,9 @@ public class GameCommands : MonoBehaviour {
 
 	//Loads lobby info of selected game
 	public void JoinGame() {
-
+		mm.JoinGame();
+		if (mm.error);
+		//TODO: some kind of error reaction
 	}
 
 	//Populate popup with available maps
@@ -29,7 +33,7 @@ public class GameCommands : MonoBehaviour {
 
 	//Create a lobby and populate with information
 	public void HostGame() {
-
+		mm.HostGame();
 	}
 
 	//Sends message in input to all players
@@ -59,6 +63,6 @@ public class GameCommands : MonoBehaviour {
 
 	//The leave or disband button depending on host or player
 	public void Leave_Disband() {
-
+		mm.LeaveRoom();
 	}
 }

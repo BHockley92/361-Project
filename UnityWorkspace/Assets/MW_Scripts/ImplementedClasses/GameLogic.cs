@@ -188,7 +188,7 @@ public class GameLogic : AbstractGameLogic
 
 				// Otherwise we're invading enemy territory
 				// Only soldiers and better can invade
-				else if ( uValue >= soldierValue );
+				else if ( uValue >= soldierValue )
 				{
 					// TODO: this is not for the demo. So ... LOLOL DONT CARE
 					// actuallyMoveTheUnit(u, dest);
