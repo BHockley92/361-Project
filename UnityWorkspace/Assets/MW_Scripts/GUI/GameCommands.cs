@@ -46,7 +46,7 @@ public class GameCommands : MonoBehaviour {
 
 	}
 
-	//Saves the current state of the game in XML format and informs all players
+	//Saves the current state of the game and informs all players
 	public void SaveGame() {
 
 	}
