@@ -11,14 +11,12 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class MWNetwork
 {
 	private static string 	version;
-	private ArrayList		players;
 	private bool 			gameStarted;
 
 	// The constructor is private, as this is a utility class.
 	private MWNetwork() 
 	{
 		version 		= "1.0";	// TODO verify if valid version number
-		players			= new ArrayList();
 		gameStarted 	= false;
 	}
 	
@@ -52,7 +50,7 @@ public class MWNetwork
 	 */
 	public static void createRoom(string roomName)
 	{
-		PhotonNetwork.CreateRoom(roomName, new RoomOptions() {maxPlayers = 4}, null);
+		PhotonNetwork.CreateRoom(roomName, new RoomOptions() {maxPlayers = 2}, null);
 		
 		Hashtable roomProps = new Hashtable();
 		roomProps.Add("gameStarted", false);
@@ -86,7 +84,7 @@ public class MWNetwork
 		if (PhotonNetwork.playerList.Length < 2 
 			|| PhotonNetwork.playerList.Length > PhotonNetwork.room.maxPlayers)
 		{
-            Debug.Log("Cannot start game: must be between 2 and " + PhotonNetwork.room.maxPlayers + " players.");
+            Debug.Log("Cannot start game: must be between 2 and " + PhotonNetwork.room.maxPlayers + " players.");		// TODO remove if photon checks this already
 			return;
 		}
 		
@@ -94,7 +92,7 @@ public class MWNetwork
 		PhotonNetwork.room.visible = false;
 		PhotonNetwork.room.open = false;
 		
-		// Set player turns
+		// Set player turns (the host is currently automatically player 1)
 		Hashtable isMyTurn = new Hashtable();
 		foreach (PhotonPlayer player in PhotonNetwork.playerList)
 		{
@@ -111,20 +109,10 @@ public class MWNetwork
 		
 		// Mark the game as having started
 		Hashtable roomProps = new Hashtable();
-		roomProps.Add("gameStarted", false);
+		roomProps.Add("gameStarted", true);
 		PhotonNetwork.room.SetCustomProperties(roomProps);
 	}
 	
-	/*
-	 * Marks you as having started your turn.
-	 */
-	public static void beginTurn()
-	{
-		Hashtable property = new Hashtable();
-		property.Add("isMyTurn", true);
-		PhotonNetwork.player.SetCustomProperties(property);
-	}
-
 	/*
 	 * Ends your turn, starting the next player's turn.
 	 */
@@ -137,18 +125,44 @@ public class MWNetwork
 		
 		// Start next player's turn.
 		// TODO make sure there are no race conditions for property.
-		// TODO check if game over before setting beginning of turn?
 		property["isMyTurn"] = true;
-        //PhotonNetwork.player.GetNextFor().SetCustomProperties(property);     // TODO fix this shit
+		PhotonPlayer[] players = PhotonNetwork.playerList;
+		PhotonPlayer nextPlayer = players[(players.IndexOf(player) + 1) % players.Length];
+        nextPlayer.SetCustomProperties(property);
 	}
 	
 	/*
-	 * Displays the room list for a lobby at the given position (x,y).
-     * TODO Return a more intuitive type?
+	 * Returns an array of room names.
 	 */
-	public static RoomInfo[] getRoomList()
+	public static string[] getRoomList()
 	{
-		return PhotonNetwork.GetRoomList();
+		RoomInfo[] rooms = PhotonNetwork.GetRoomList();
+		
+		string[] roomNames = new string[rooms.Length];
+		
+		for (int i = 0; i < rooms.Length; i++)
+		{
+			roomNames[i] = rooms[i].name;
+		}
+		
+		return roomNames;
+	}
+	
+	/*
+	 * Returns an array of player names.
+	 */
+	public static string[] getPlayerList()
+	{
+		PhotonPlayer[] players = PhotonNetwork.playerList;
+		
+		string[] playerNames = new string[players.Length];
+		
+		for (int i = 0; i < players.Length; i++)
+		{
+			playerNames[i] = players[i].name;
+		}
+		
+		return playerNames;
 	}
 	
 	/*
@@ -156,6 +170,6 @@ public class MWNetwork
 	 */
     public void gameStateUpdated()
     {
-
+		LoadBalancingClient.Service();
     }
 }
