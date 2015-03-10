@@ -52,7 +52,7 @@ public class MWNetwork
 	 */
 	public static void createRoom(string roomName)
 	{
-		PhotonNetwork.CreateRoom(roomName, new RoomOptions() {maxPlayers = 2}, null);
+		PhotonNetwork.CreateRoom(roomName, new RoomOptions() {maxPlayers = 4}, null);
 		
 		Hashtable roomProps = new Hashtable();
 		roomProps.Add("gameStarted", false);
