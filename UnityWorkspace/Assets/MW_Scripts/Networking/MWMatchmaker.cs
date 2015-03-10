@@ -7,7 +7,7 @@
 	 * Logs a user into the Matchmaker.  
 	 * Returns success or failure for logging in.
 	 */
-	public static bool login(String username, String password)
+	public static bool login(string username, string password)
 	{
 		return false;
 	}
