@@ -11,13 +11,11 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class MWNetwork
 {
 	private static string 	version;
-	private bool 			gameStarted;
 
 	// The constructor is private, as this is a utility class.
 	private MWNetwork() 
 	{
 		version 		= "1.0";	// TODO verify if valid version number
-		gameStarted 	= false;
 	}
 	
 	/* 
@@ -127,7 +125,7 @@ public class MWNetwork
 		// TODO make sure there are no race conditions for property.
 		property["isMyTurn"] = true;
 		PhotonPlayer[] players = PhotonNetwork.playerList;
-		PhotonPlayer nextPlayer = players[(players.IndexOf(player) + 1) % players.Length];
+        PhotonPlayer nextPlayer = players[(System.Array.IndexOf(players, PhotonNetwork.player) + 1) % players.Length];
         nextPlayer.SetCustomProperties(property);
 	}
 	
@@ -166,10 +164,14 @@ public class MWNetwork
 	}
 	
 	/*
-	 * This function updates the game state on the other players' machines.
+	 * This function updates the game state on the other players' machines
 	 */
     public void gameStateUpdated()
     {
-		LoadBalancingClient.Service();
+        //LoadBalancingClient.Service();
+
+        /*
+         * As it is for the demo, the game state should update automatically.
+         */ 
     }
 }
