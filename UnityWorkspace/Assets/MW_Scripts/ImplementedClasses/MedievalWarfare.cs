@@ -6,7 +6,7 @@ using GameEnums;
 
 public class MedievalWarfare : AbstractMedievalWarfare
 {
-	public override void newGame(List<AbstractPlayer> participants)
+	public override MW_Game newGame(List<AbstractPlayer> participants)
 	{
 		// initalize game for randomly generated board, --ask Nick what water border should be
 		GameLogic gl = new GameLogic (); 
@@ -30,6 +30,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 
 		assignRegions (myBoard);
 
+		return myGame;
 	}//end newGame
 
 	public override void assignRegions(Board gameBoard)
