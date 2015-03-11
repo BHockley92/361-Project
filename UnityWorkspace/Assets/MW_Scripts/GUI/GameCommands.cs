@@ -17,7 +17,7 @@ public class GameCommands : MonoBehaviour {
 	//Loads lobby info of selected game
 	public void JoinGame() {
 		mm.JoinGame();
-		if (mm.error);
+		if (mm.error){};
 		//TODO: some kind of error reaction
 	}
 
