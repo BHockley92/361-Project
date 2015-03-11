@@ -63,8 +63,8 @@ public class GameCommands : MonoBehaviour {
 
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
-		MedievalWarfare mw = new MedievalWarfare ();
-		MW_Game currentGame = mw.newGame ();
+		//MedievalWarfare mw = new MedievalWarfare ();
+		//MW_Game currentGame = mw.newGame ();
 
 	}
 
