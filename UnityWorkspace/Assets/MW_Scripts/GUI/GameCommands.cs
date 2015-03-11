@@ -14,6 +14,11 @@ public class GameCommands : MonoBehaviour {
 		#endif
 	}
 
+	//Authenticates the user to view stats
+	public void Authenticate() {
+
+	}
+
 	//Loads lobby info of selected game
 	public void JoinGame() {
 		mm.JoinGame();
