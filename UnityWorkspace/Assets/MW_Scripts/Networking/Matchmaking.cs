@@ -26,6 +26,7 @@ public class Matchmaking : Photon.MonoBehaviour
 		//TODO: set the player name from login credentials
 		PhotonNetwork.playerName = "Alex";
 		PhotonNetwork.ConnectUsingSettings(""+version);
+		Debug.Log ("Connected.");
 	}
 	
 	public void JoinGame () {
