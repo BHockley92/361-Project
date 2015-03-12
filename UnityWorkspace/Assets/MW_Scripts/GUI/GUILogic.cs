@@ -96,7 +96,7 @@ public class GUILogic : MonoBehaviour {
 		float minDistance = Mathf.Infinity;
 		foreach(GameObject current in GameObject.FindObjectsOfType<GameObject>()) {
 			if(current.name.Contains("tile") && Mathf.Abs(Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude) < minDistance) {
-				minDistance = Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude;
+				minDistance = Mathf.Abs(Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude);
 				closestTile = current;
 			}
 		}
@@ -115,16 +115,16 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void UpgradeUnit() {
-		GameObject closestUnit = null;
+		GameObject closestTile = null;
 		float minDistance = Mathf.Infinity;
 		foreach(GameObject current in GameObject.FindObjectsOfType<GameObject>()) {
 			if(current.name.Contains("tile") && Mathf.Abs(Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude) < minDistance) {
-				minDistance = Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude;
-				closestUnit = current;
+				minDistance = Mathf.Abs(Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude);
+				closestTile = current;
 			}
 		}
 		foreach (Tile current in GAME.gameBoard.board) {
-			if(current.boardPosition == new Vector2(closestUnit.transform.position.x, closestUnit.transform.position.z)) {
+			if(current.boardPosition == new Vector2(closestTile.transform.position.x, closestTile.transform.position.z)) {
 				int unit_type = (int)current.occupyingUnit.myType;
 				UnitType newType = 0;
 				switch(unit_type) {
@@ -134,6 +134,24 @@ public class GUILogic : MonoBehaviour {
 					case 3: newType = UnitType.Knight;break;
 				}
 				GAME.myGameLogic.upgradeUnit (current.occupyingUnit,newType);
+			}
+		}
+	}
+
+	public void HireVillager() {
+		GameObject closestTile = null;
+		float minDistance = Mathf.Infinity;
+		foreach(GameObject current in GameObject.FindObjectsOfType<GameObject>()) {
+			if(current.name.Contains("tile") && Mathf.Abs(Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude) < minDistance) {
+				minDistance = Mathf.Abs(Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude);
+				closestTile = current;
+			}
+		}
+		foreach (Tile current in GAME.gameBoard.board) {
+			if (current.boardPosition == new Vector2 (closestTile.transform.position.x, closestTile.transform.position.z)) {
+				Unit newUnit = new Unit(current.myVillage, current);
+				newUnit.myType = UnitType.Peasant;
+				GAME.myGameLogic.hireVillager(newUnit,current.myVillage,current);
 			}
 		}
 	}
