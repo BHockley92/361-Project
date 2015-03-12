@@ -22,16 +22,15 @@ public class MedievalWarfare : AbstractMedievalWarfare
 		foreach (Tile t in myBoard.board) {
 
 			if(t.myType == LandType.Sea){
-				break; //we don't put a village on the water
+				continue; //we don't put a village on the water
 			}
 
-			else{
 			int randomPlayer = Random.Range (0, participants.Count - 1);
 			List<AbstractTile> myTile = new List<AbstractTile>();
 			myTile.Add(t);
 			//region consists of the single tile it occupies
 			t.myVillage = new Village (myTile, participants [randomPlayer]);
-			}
+
 
 		}
 
@@ -44,6 +43,11 @@ public class MedievalWarfare : AbstractMedievalWarfare
 	{
 		//BFS algorithm
 		foreach (Tile t in gameBoard.board) {
+			//don't iterate over water tiles
+			if(t.myType == LandType.Sea){
+				continue;
+			}
+
 				Stack<Tile> myStack = new Stack<Tile> ();
 				List<AbstractTile> visitedTiles = new List<AbstractTile> ();
 				AbstractPlayer belongsTo = t.myVillage.myPlayer; //current owner of tile t
