@@ -21,11 +21,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 		//during BFS remove all except 1 for the villages that have more than 3 tiles
 		foreach (Tile t in myBoard.board) {
 
-			if(t.myType == LandType.Sea){
-				continue; //we don't put a village on the water
-			}
-
-			int randomPlayer = Random.Range (0, participants.Count - 1);
+			int randomPlayer = Random.Range (0, participants.Count);
 			List<AbstractTile> myTile = new List<AbstractTile>();
 			myTile.Add(t);
 			//region consists of the single tile it occupies
@@ -43,10 +39,6 @@ public class MedievalWarfare : AbstractMedievalWarfare
 	{
 		//BFS algorithm
 		foreach (Tile t in gameBoard.board) {
-			//don't iterate over water tiles
-			if(t.myType == LandType.Sea){
-				continue;
-			}
 
 				Stack<Tile> myStack = new Stack<Tile> ();
 				List<AbstractTile> visitedTiles = new List<AbstractTile> ();

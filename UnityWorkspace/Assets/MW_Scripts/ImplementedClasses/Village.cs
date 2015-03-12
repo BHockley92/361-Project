@@ -7,7 +7,7 @@ public class Village : AbstractVillage
 	public Village(List<AbstractTile> region, AbstractPlayer player)
 	{
 		myType = VillageType.Hovel;
-		gold = 0;
+		gold = 7;
 		wood = 0;
 		
 		controlledRegion = region;
