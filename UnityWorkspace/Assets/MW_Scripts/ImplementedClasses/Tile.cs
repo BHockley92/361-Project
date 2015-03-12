@@ -13,13 +13,13 @@ public class Tile : AbstractTile
 	public bool hasVillage{ get; set; } //for assignRegions BFS algorithm
 	public Board myBoard { get; private set; }
 
-	public Tile( LandType type, Board b)
+	public Tile( LandType type, Board b, float i, float j)
 	{
 		myType = type;
 		myVillage = null;
 		occupyingStructure = new Structure(this, StructureType.NONE);
 		occupyingUnit = null;
-
+		boardPosition = new Vector2 (i, j);
 		visited = false;
 
 		if (b == null) throw new System.ArgumentException ("Board passed to tile is null");

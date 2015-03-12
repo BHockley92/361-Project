@@ -70,15 +70,16 @@ public class MedievalWarfare : AbstractMedievalWarfare
 				int randInt = Random.Range(0, visitedTiles.Count -1);
 				AbstractTile villageTile = visitedTiles[randInt];
 
+				//Create the village
+				GameObject village = (GameObject)Object.Instantiate(Resources.Load("hovel"));
+				village.transform.position = new Vector3(villageTile.boardPosition.x,0.7f,villageTile.boardPosition.y-0.5f);
+
 				Village myNewVillage = new Village (visitedTiles, belongsTo);
 				myNewVillage.location = villageTile;
 				foreach (Tile w in visitedTiles){
 					w.hasVillage = true;
 					w.myVillage = myNewVillage;
 				}
-				//TODO
-				//Place village on proper tile
-				GameObject village = (GameObject)Object.Instantiate(Resources.Load("hovel"));
 			}
 			else if( visitedTiles.Count <3){
 				//set land to neutral

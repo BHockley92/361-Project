@@ -40,22 +40,27 @@ public class Board {
 				else if( randInt == 1 ) lt = LandType.Grass;
 				else lt = LandType.Tree;
 
-				// Now make and place the tile
-				board[ i , j ] = new Tile( lt, this );
-
 				//Make the tile
 				GameObject tile = null;
 				switch(randInt){
 					case 0: tile = (GameObject)Resources.Load("TileMeadow"); break;
 					case 1: tile = (GameObject)Resources.Load("TileGrass"); break;
 					case 2: tile = (GameObject)Resources.Load("TileForest"); break;
-				}	
+				}
+				float x = 0;
+				float y = 0;
 				if(j%2==0) {
-					Object.Instantiate(tile, new Vector3(2*i, 0.1f, (2*j)-(j/2)), new Quaternion(0,0,0,0));
+					x = 2*i;
+					y = (2*j)-(j/2);
 				}
 				else {
-					Object.Instantiate(tile, new Vector3(2*i+1, 0.1f, j + j/2.0f), new Quaternion(0,0,0,0));
+					x = 2*i+1;
+					y = j + j/2.0f;
 				}
+				Object.Instantiate(tile, new Vector3(x, 0.1f, y), new Quaternion(0,0,0,0));
+
+				// Now make and place the tile
+				board[ i , j ] = new Tile( lt, this, x, y);
 			}
 		}
 	}
@@ -67,13 +72,19 @@ public class Board {
 		{
 			for(int j = 0; j < board.GetLength(1); j++)
 			{
-				board[i, j] = new Tile(LandType.Sea, this);
+				float x = 0;
+				float y = 0;
 				if(j%2==0) {
-					Object.Instantiate((GameObject)Resources.Load ("TileWater"), new Vector3(2*i, 0, (2*j)-(j/2)), new Quaternion(0,0,0,0));
+					x = 2*i;
+					y = (2*j)-(j/2);
 				}
 				else {
-					Object.Instantiate((GameObject)Resources.Load ("TileWater"), new Vector3(2*i+1, 0, j + j/2.0f), new Quaternion(0,0,0,0));
+					x = 2*i+1;
+					y = j + j/2.0f;
 				}
+				Object.Instantiate((GameObject)Resources.Load("TileWater"), new Vector3(x, 0, y), new Quaternion(0,0,0,0));
+
+				board[i, j] = new Tile(LandType.Sea, this, x, y);
 			}
 		}
 	}

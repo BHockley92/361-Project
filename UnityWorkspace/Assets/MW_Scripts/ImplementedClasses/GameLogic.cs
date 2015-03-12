@@ -82,7 +82,7 @@ public class GameLogic : AbstractGameLogic
 			//Update the gold menu
 			v.myType = newType;
 			//TODO
-			//Swap current village with new village
+			//Swap village
 		}
 	}
 	
@@ -100,6 +100,8 @@ public class GameLogic : AbstractGameLogic
 		{
 			unitVillage.gold = vGold - upgradeValue;
 			u.myType = newType;
+			//TODO
+			//Swap unit
 		}
 	}
 
@@ -226,8 +228,13 @@ public class GameLogic : AbstractGameLogic
 		   ( u.myType == UnitType.Soldier || u.myType == UnitType.Knight))
 		{
 			dest.myType = LandType.Grass;
-			//TODO
-			//Switch meadow to grass
+			//Swaps out the tile
+			foreach(GameObject t in GameObject.FindObjectsOfType<Tile>()) {
+				if(t.transform.position == new Vector3(dest.boardPosition.x, 0.1f, dest.boardPosition.y)) {
+					Object.Destroy(t);
+					Object.Instantiate((GameObject)Resources.Load("TileGrass"),new Vector3(dest.boardPosition.x, 0.1f, dest.boardPosition.y), new Quaternion(0,0,0,0));
+				}
+			};
 		}
 
 		// Only knights won't clear tombstones, so if there is one
@@ -243,8 +250,6 @@ public class GameLogic : AbstractGameLogic
 		if( dest.myType == LandType.Tree && u.myType != UnitType.Knight)
 		{
 			u.currentAction = ActionType.ChoppingTree;
-			//TODO
-			//Switch forest to grass tile
 		}
 	}
 	
@@ -279,8 +284,14 @@ public class GameLogic : AbstractGameLogic
 			{
 				t.occupyingStructure.myType = StructureType.NONE;
 				t.myType = LandType.Tree;
-				//TODO
-				//Switch tombstone tile to forest tile
+
+				//Swaps out the tile
+				foreach(GameObject tile in GameObject.FindObjectsOfType<Tile>()) {
+					if(tile.transform.position == new Vector3(t.boardPosition.x, 0.1f, t.boardPosition.y)) {
+						Object.Destroy(tile);
+						Object.Instantiate((GameObject)Resources.Load("TileGrass"),new Vector3(t.boardPosition.x, 0.1f, t.boardPosition.y), new Quaternion(0,0,0,0));
+					}
+				};
 			}
 		}
 	}
@@ -370,12 +381,23 @@ public class GameLogic : AbstractGameLogic
 		{
 			AbstractTile myLocation = u.myLocation;
 			myLocation.occupyingStructure.myType = StructureType.Tombstone;
-			//TODO
-			//Switch grass...? to tombstone
+
+			//TODO:
+			//May need to destroy the tile after we remove all the things on it
+
+			//Swaps out the tile
+			foreach(GameObject tile in GameObject.FindObjectsOfType<Tile>()) {
+				if(tile.transform.position == new Vector3(myLocation.boardPosition.x, 0.1f, myLocation.boardPosition.y)) {
+					Object.Destroy(tile);
+					Object.Instantiate((GameObject)Resources.Load("TileGrave"),new Vector3(myLocation.boardPosition.x, 0.1f, myLocation.boardPosition.y), new Quaternion(0,0,0,0));
+				}
+			};
 			
 			// Remove the unit
 			myLocation.occupyingUnit = null;
 			myLocation = null;
+
+			//TODO:
 			//Destroy unit at location
 			
 		}

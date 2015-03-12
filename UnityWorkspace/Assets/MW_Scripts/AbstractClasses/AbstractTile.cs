@@ -4,6 +4,7 @@ using GameEnums;
 
 public abstract class AbstractTile 
 {
+	public Vector2 boardPosition { get; set; }
 	public LandType myType { get; set; }
 	public AbstractStructure occupyingStructure { get; set; }
 	public AbstractVillage myVillage{ get; set; }

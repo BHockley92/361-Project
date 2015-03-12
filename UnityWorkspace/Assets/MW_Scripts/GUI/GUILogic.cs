@@ -10,6 +10,7 @@ public class GUILogic : MonoBehaviour {
 	public InputField USERNAME;
 	public InputField PASSWORD;
 	public MW_Player PLAYER;
+	public Button ENDTURN;
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -70,14 +71,14 @@ public class GUILogic : MonoBehaviour {
 
 	//When it becomes current players turn, enable the endturn button
 	public void BeginTurn() {
-		//TODO
-		//Enable the end turn button
+		if (NETWORK.isMyTurn ()) {
+			ENDTURN.enabled = true;
+		}
 	}
 
 	//Ends current turn and goes to next player
 	public void EndTurn() {
-		//TODO
-		//Disable end turn button
+		ENDTURN.enabled = false;
 		GAME.EndTurn ();
 		NETWORK.endTurn ();
 	}
