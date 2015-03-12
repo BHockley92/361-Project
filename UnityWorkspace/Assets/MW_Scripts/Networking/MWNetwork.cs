@@ -7,6 +7,18 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 // TODO Matchmaker
 
 /*
+ * An enum for MWNetwork responses.
+ */ 
+public enum MWNetworkResponse
+{
+    GAME_START_SUCCESS,
+    GAME_ALREADY_STARTED,
+    NOT_HOST,
+    ROOM_NOT_CREATED,
+    BAD_PLAYER_COUNT
+}
+
+/*
  * This is a utility class for networking within the Medieval Warfare game.
  */
 public class MWNetwork : Photon.MonoBehaviour
@@ -15,6 +27,7 @@ public class MWNetwork : Photon.MonoBehaviour
     private static string version = "1.0";
 
     public GUILogic GUIplayer;
+    public GameObject playerListText;
 
     /* 
      * Returns the MWNetwork component upon which you can call all functions below.
@@ -69,32 +82,35 @@ public class MWNetwork : Photon.MonoBehaviour
 	 * Initializes all player properties for the beginning of a game.
 	 * Currently, master client is automatically player 1 and other players turns
 	 * are ordered according to when they joined.
+     * Returns a response indicating whether the game was started succesfully or not.
 	 */
-	public void startGame()
+    public MWNetworkResponse startGame()
 	{
 		// Make sure starting conditions are satisfied:
         // 1.   A room has been joined
         if (PhotonNetwork.room == null)
         {
             Debug.Log("Cannot start game: a room has not yet been created");
+            return MWNetworkReponse.ROOM_NOT_CREATED;
         }
         // 2.   You are the host
         if (!PhotonNetwork.isMasterClient)
         {
             Debug.Log("Cannot start game: you are not the host.");
+            return MWNetworkReponse.NOT_HOST;
         }
-		// 2. 	Game is not already in play.
+		// 3. 	Game is not already in play.
 		if ((bool) PhotonNetwork.room.customProperties["gameStarted"])
 		{
 			Debug.Log("Cannot start game: it has already started.");
-			return;
+            return MWNetworkReponse.GAME_ALREADY_STARTED;
 		}
-		// 3.	2 <= number of players <= maximum players
+		// 4.	2 <= number of players <= maximum players
 		if (PhotonNetwork.playerList.Length < 2 
 			|| PhotonNetwork.playerList.Length > PhotonNetwork.room.maxPlayers)
 		{
-            Debug.Log("Cannot start game: must be between 2 and " + PhotonNetwork.room.maxPlayers + " players.");		// TODO remove if photon checks this already
-			return;
+            Debug.Log("Cannot start game: must be between 2 and " + PhotonNetwork.room.maxPlayers + " players.");
+            return MWNetworkReponse.BAD_PLAYER_COUNT;
 		}
 		
 		// Make the room impossible to see or join
@@ -120,6 +136,8 @@ public class MWNetwork : Photon.MonoBehaviour
 		Hashtable roomProps = new Hashtable();
 		roomProps.Add("gameStarted", true);
 		PhotonNetwork.room.SetCustomProperties(roomProps);
+
+        return MWNetworkResponse.GAME_START_SUCCESS;
 	}
 
     /*
@@ -191,7 +209,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	}
 	
 	/*
-	 * Returns an array of player names.
+	 * Returns a list of AbstractPlayers in the room.
 	 */
 	public List<AbstractPlayer> getPlayers()
 	{
@@ -207,18 +225,6 @@ public class MWNetwork : Photon.MonoBehaviour
 		
 		return mw_players;
 	}
-	
-	/*
-	 * This function updates the game state on the other players' machines
-	 */
-    public void gameStateUpdated()
-    {
-        //LoadBalancingClient.Service();
-
-        /*
-         * As it is for the demo, the game state should update automatically.
-         */ 
-    }
 
     /*****************************************************************************************************
      * The following functions implement pertinent Photon callbacks to react to certain networking events.
@@ -239,7 +245,9 @@ public class MWNetwork : Photon.MonoBehaviour
             PhotonNetwork.room.SetCustomProperties(newPlayerMap);
         }
         else {
-            Debug.Log("Joined room before MW_Player was instantiated in GUILogic.  Player was therefore not added to the room properties.");
+            Debug.Log("Joined room before MW_Player was instantiated in GUILogic.\n"
+                      + "Player was therefore not added to the room properties.\n"
+                      + "Probable cause: MW_Player not instantiated.");
         }
     }
 
