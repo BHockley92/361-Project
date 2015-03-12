@@ -13,4 +13,8 @@ public class MW_Game : AbstractGame
 		initialize (players, new Board (boardLength, boardWidth, waterborder), gl);
 		roundsPlayed = 0;
 	}
+
+	public void EndTurn() {
+		nextTurn ();
+	}
 }

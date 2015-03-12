@@ -75,9 +75,10 @@ public class MedievalWarfare : AbstractMedievalWarfare
 				foreach (Tile w in visitedTiles){
 					w.hasVillage = true;
 					w.myVillage = myNewVillage;
-
 				}
-
+				//TODO
+				//Place village on proper tile
+				GameObject village = (GameObject)Object.Instantiate(Resources.Load("hovel"));
 			}
 			else if( visitedTiles.Count <3){
 				//set land to neutral

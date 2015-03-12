@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using GameEnums;
 
-public class Board 
+public class Board : MonoBehaviour 
 {
 	// board representation -- use this: http://www.redblobgames.com/grids/hexagons/#map-storage
 		// Rhombus is being used as the shape of the board.
-
+	public GameObject MEADOW_TILE;
+	public GameObject GRASS_TILE;
+	public GameObject FOREST_TILE;
 	public Tile[,] board { get; private set; }
 	public int border { get; private set; }
 
@@ -42,6 +44,15 @@ public class Board
 
 				// Now make and place the tile
 				board[ i , j ] = new Tile( lt, this );
+
+				//Make the tile
+				GameObject tile = null;
+				switch(randInt){
+					case 0: tile = MEADOW_TILE; break;
+					case 1: tile = GRASS_TILE; break;
+					case 2: tile = FOREST_TILE; break;
+				}	
+				Object.Instantiate(tile, new Vector3(i, 0, j), new Quaternion(0,0,0,0));
 			}
 		}
 	}

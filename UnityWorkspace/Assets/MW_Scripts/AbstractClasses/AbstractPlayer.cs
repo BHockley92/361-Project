@@ -4,8 +4,7 @@ using GameEnums;
 
 public abstract class AbstractPlayer
 {
-	public string username { get; private set; }
-	private string password;
+	public string username { get; protected set; }
 	private PlayerStatus status { get; set; }
 	private int wins;
 	private int losses;

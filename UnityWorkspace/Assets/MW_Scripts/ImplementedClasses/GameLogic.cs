@@ -41,12 +41,16 @@ public class GameLogic : AbstractGameLogic
 
 					// first charge the village for it
 					commandingVillage.gold -= unitcost;
+					//TODO
+					//Update gold display
 
 					// now add it to supported units and spawn it
 					commandingVillage.supportedUnits.Add(u);
 					u.myVillage = commandingVillage;
 					u.myLocation = spawnedTile;
 					spawnedTile.occupyingUnit = u;
+					//TODO
+					//Spawn a villager
 				}
 			}
 		}
@@ -74,7 +78,11 @@ public class GameLogic : AbstractGameLogic
 		if (upgradeValue <= gold && upgradeValue >= 0)
 		{
 			v.gold = gold - upgradeValue;
+			//TODO
+			//Update the gold menu
 			v.myType = newType;
+			//TODO
+			//Swap current village with new village
 		}
 	}
 	
@@ -218,6 +226,8 @@ public class GameLogic : AbstractGameLogic
 		   ( u.myType == UnitType.Soldier || u.myType == UnitType.Knight))
 		{
 			dest.myType = LandType.Grass;
+			//TODO
+			//Switch meadow to grass
 		}
 
 		// Only knights won't clear tombstones, so if there is one
@@ -233,6 +243,8 @@ public class GameLogic : AbstractGameLogic
 		if( dest.myType == LandType.Tree && u.myType != UnitType.Knight)
 		{
 			u.currentAction = ActionType.ChoppingTree;
+			//TODO
+			//Switch forest to grass tile
 		}
 	}
 	
@@ -267,6 +279,8 @@ public class GameLogic : AbstractGameLogic
 			{
 				t.occupyingStructure.myType = StructureType.NONE;
 				t.myType = LandType.Tree;
+				//TODO
+				//Switch tombstone tile to forest tile
 			}
 		}
 	}
@@ -315,6 +329,8 @@ public class GameLogic : AbstractGameLogic
 		foreach(AbstractTile t in controlledRegion)
 		{
 			myVillage.gold += myValueManager.getLandValue(t.myType);
+			//TODO
+			//Update gold menu
 		}
 	}
 	
@@ -332,12 +348,16 @@ public class GameLogic : AbstractGameLogic
 		if( myVillage.gold >= totalCost )
 		{
 			myVillage.gold -= totalCost;
+			//TODO
+			//Update gold menu
 		}
 		
 		// not enough money, EVERYONE DIES (that's associated to the village)
 		else
 		{
 			myVillage.gold = 0;
+			//TODO
+			//Update gold menu
 			perishVillagers(myVillage);
 		}
 	}
@@ -350,10 +370,13 @@ public class GameLogic : AbstractGameLogic
 		{
 			AbstractTile myLocation = u.myLocation;
 			myLocation.occupyingStructure.myType = StructureType.Tombstone;
+			//TODO
+			//Switch grass...? to tombstone
 			
 			// Remove the unit
 			myLocation.occupyingUnit = null;
 			myLocation = null;
+			//Destroy unit at location
 			
 		}
 	}	

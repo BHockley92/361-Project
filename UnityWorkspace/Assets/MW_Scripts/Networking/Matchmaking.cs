@@ -13,6 +13,7 @@ public class Matchmaking : Photon.MonoBehaviour
 	//public CanvasGroup menu;
 	
 	public GameObject lobbyPlayersTextGO;
+	public GUILogic GUILogic;
 	
 	private byte version = 1;
 	
@@ -24,7 +25,7 @@ public class Matchmaking : Photon.MonoBehaviour
 	
 	public void Connect() {
 		//TODO: set the player name from login credentials
-		PhotonNetwork.playerName = "Alex";
+		PhotonNetwork.playerName = GUILogic.PLAYER.username;
 		PhotonNetwork.ConnectUsingSettings(""+version);
 		Debug.Log ("Connected.");
 	}
@@ -94,7 +95,7 @@ public class Matchmaking : Photon.MonoBehaviour
 	
 	public void OnPhotonPlayerConnected(PhotonPlayer newPlayer) {
 		Debug.Log ("Player amount in room changed.");
-		UnityEngine.UI.Text text = lobbyPlayersTextGO.GetComponent<UnityEngine.UI.Text>();
+		UnityEngine.UI.Text text = lobbyPlayersTextGO.GetComponentInChildren<UnityEngine.UI.Text>();
 		string players = "";
 		foreach(string s in ListPlayers())
 			players += s + "\n";
