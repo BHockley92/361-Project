@@ -88,6 +88,7 @@ public class GUILogic : MonoBehaviour {
 	public void Ready_Start() {
 		MedievalWarfare mw = new MedievalWarfare ();
 		GAME = mw.newGame (NETWORK.getPlayers());
+		Camera.main.GetComponent<CameraControl> ().GAME = GAME;
 		NETWORK.startGame ();
 	}
 
