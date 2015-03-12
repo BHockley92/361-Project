@@ -17,16 +17,24 @@ public class CameraControl : MonoBehaviour {
 	public float ROT_SPEED = 10;
 	
 	private Vector3 INIT_POS;
-	private Vector3 INIT_ROT;
-	
-	
+
+	private GameObject TARGET;
+
 	void Start () {
 		INIT_POS = transform.position;      
-		INIT_ROT = transform.eulerAngles;
 	}
 	
 	
 	void Update () {
+
+		//Updates TARGET to whatever the user clicked on
+		if (Input.GetMouseButtonDown (0)) {
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if(Physics.Raycast(ray,out hit,100)) {
+				TARGET = hit.transform.gameObject;
+			}
+		}
 		// panning     
 		if ( Input.GetMouseButton( 0 ) ) {
 			transform.Translate(Vector3.right * Time.deltaTime * PAN_SPEED * (Input.mousePosition.x - Screen.width * 0.5f) / (Screen.width * 0.5f), Space.World);
@@ -47,13 +55,6 @@ public class CameraControl : MonoBehaviour {
 			else if ( Input.GetKey("s") || Input.mousePosition.y <= Screen.height * SCROLL_EDGE ) {         
 				transform.Translate(Vector3.forward * Time.deltaTime * -PAN_SPEED, Space.Self );            
 			}  
-			
-			if ( Input.GetKey("q") || Input.mousePosition.x <= Screen.width * SCROLL_EDGE ) {
-				transform.Rotate(Vector3.up * Time.deltaTime * -ROT_SPEED, Space.World);
-			}
-			else if ( Input.GetKey("e") || Input.mousePosition.x >= Screen.width * (1 - SCROLL_EDGE) ) {
-				transform.Rotate(Vector3.up * Time.deltaTime * ROT_SPEED, Space.World);
-			}
 		}
 		
 		// zoom in/out
@@ -62,10 +63,5 @@ public class CameraControl : MonoBehaviour {
 		CUR_ZOOM = Mathf.Clamp( CUR_ZOOM, ZOOM_RANGE.x, ZOOM_RANGE.y );
 		
 		transform.position = new Vector3( transform.position.x, transform.position.y - (transform.position.y - (INIT_POS.y + CUR_ZOOM)) * 0.1f, transform.position.z );
-		
-		float x = transform.eulerAngles.x - (transform.eulerAngles.x - (INIT_ROT.x + CUR_ZOOM * ZOOM_ROT)) * 0.1f;
-		x = Mathf.Clamp( x, ZOOM_ANGLE_RANGE.x, ZOOM_ANGLE_RANGE.y );
-		
-		transform.eulerAngles = new Vector3( x, transform.eulerAngles.y, transform.eulerAngles.z );
 	}
 }

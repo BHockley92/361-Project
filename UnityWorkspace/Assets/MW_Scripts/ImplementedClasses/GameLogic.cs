@@ -41,8 +41,12 @@ public class GameLogic : AbstractGameLogic
 
 					// first charge the village for it
 					commandingVillage.gold -= unitcost;
-					//TODO
-					//Update gold display
+					//Update the GUI
+					foreach(GUIText current in GameObject.FindObjectsOfType<GUIText>()) {
+						if(current.name == "Gold") {
+							current.text = "Gold: " + commandingVillage.gold;
+						}
+					}
 
 					// now add it to supported units and spawn it
 					commandingVillage.supportedUnits.Add(u);
@@ -78,11 +82,13 @@ public class GameLogic : AbstractGameLogic
 		if (upgradeValue <= gold && upgradeValue >= 0)
 		{
 			v.gold = gold - upgradeValue;
-			//TODO
-			//Update the gold menu
+			//Update the GUI
+			foreach(GUIText current in GameObject.FindObjectsOfType<GUIText>()) {
+				if(current.name == "Gold") {
+					current.text = "Gold: " + v.gold;
+				}
+			}
 			v.myType = newType;
-			//TODO
-			//Swap village
 		}
 	}
 	
@@ -229,7 +235,7 @@ public class GameLogic : AbstractGameLogic
 		{
 			dest.myType = LandType.Grass;
 			//Swaps out the tile
-			foreach(GameObject t in GameObject.FindObjectsOfType<Tile>()) {
+			foreach(GameObject t in GameObject.FindObjectsOfType<GameObject>()) {
 				if(t.transform.position == new Vector3(dest.boardPosition.x, 0.1f, dest.boardPosition.y)) {
 					Object.Destroy(t);
 					Object.Instantiate((GameObject)Resources.Load("TileGrass"),new Vector3(dest.boardPosition.x, 0.1f, dest.boardPosition.y), new Quaternion(0,0,0,0));
@@ -286,7 +292,7 @@ public class GameLogic : AbstractGameLogic
 				t.myType = LandType.Tree;
 
 				//Swaps out the tile
-				foreach(GameObject tile in GameObject.FindObjectsOfType<Tile>()) {
+				foreach(GameObject tile in GameObject.FindObjectsOfType<GameObject>()) {
 					if(tile.transform.position == new Vector3(t.boardPosition.x, 0.1f, t.boardPosition.y)) {
 						Object.Destroy(tile);
 						Object.Instantiate((GameObject)Resources.Load("TileGrass"),new Vector3(t.boardPosition.x, 0.1f, t.boardPosition.y), new Quaternion(0,0,0,0));
@@ -340,8 +346,12 @@ public class GameLogic : AbstractGameLogic
 		foreach(AbstractTile t in controlledRegion)
 		{
 			myVillage.gold += myValueManager.getLandValue(t.myType);
-			//TODO
-			//Update gold menu
+			//Update the GUI
+			foreach(GUIText current in GameObject.FindObjectsOfType<GUIText>()) {
+				if(current.name == "Gold") {
+					current.text = "Gold: " + myVillage.gold;
+				}
+			}
 		}
 	}
 	
@@ -359,16 +369,25 @@ public class GameLogic : AbstractGameLogic
 		if( myVillage.gold >= totalCost )
 		{
 			myVillage.gold -= totalCost;
-			//TODO
-			//Update gold menu
+			//Update the GUI
+			foreach(GUIText current in GameObject.FindObjectsOfType<GUIText>()) {
+				if(current.name == "Gold") {
+					current.text = "Gold: " + myVillage.gold;
+				}
+			}
 		}
 		
 		// not enough money, EVERYONE DIES (that's associated to the village)
 		else
 		{
 			myVillage.gold = 0;
-			//TODO
-			//Update gold menu
+			//Update the GUI
+			foreach(GUIText current in GameObject.FindObjectsOfType<GUIText>()) {
+				if(current.name == "Gold") {
+					current.text = "Gold: " + myVillage.gold;
+				}
+			}
+
 			perishVillagers(myVillage);
 		}
 	}
@@ -386,7 +405,7 @@ public class GameLogic : AbstractGameLogic
 			//May need to destroy the tile after we remove all the things on it
 
 			//Swaps out the tile
-			foreach(GameObject tile in GameObject.FindObjectsOfType<Tile>()) {
+			foreach(GameObject tile in GameObject.FindObjectsOfType<GameObject>()) {
 				if(tile.transform.position == new Vector3(myLocation.boardPosition.x, 0.1f, myLocation.boardPosition.y)) {
 					Object.Destroy(tile);
 					Object.Instantiate((GameObject)Resources.Load("TileGrave"),new Vector3(myLocation.boardPosition.x, 0.1f, myLocation.boardPosition.y), new Quaternion(0,0,0,0));
@@ -396,7 +415,6 @@ public class GameLogic : AbstractGameLogic
 			// Remove the unit
 			myLocation.occupyingUnit = null;
 			myLocation = null;
-
 			//TODO:
 			//Destroy unit at location
 			
