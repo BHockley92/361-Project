@@ -10,7 +10,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 	{
 		// initalize game for randomly generated board, --ask Nick what water border should be
 		GameLogic gl = new GameLogic (); 
-		MW_Game myGame = new MW_Game (participants, 300, 300, 5, gl);
+		MW_Game myGame = new MW_Game (participants, 20, 20, 2, gl);
 		
 		//get tiles that make up board 
 		Board myBoard = myGame.gameBoard;

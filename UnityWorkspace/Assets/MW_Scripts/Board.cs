@@ -20,6 +20,7 @@ public class Board {
 	{
 		border = waterBorder;
 		generateRandomBoard (length, width);
+		fillBoardWithWater ();
 	}
 
 	// Generates a random island that conforms to specs (300 land tiles that aren't water, one big land mass)
@@ -49,7 +50,12 @@ public class Board {
 					case 1: tile = (GameObject)Resources.Load("TileGrass"); break;
 					case 2: tile = (GameObject)Resources.Load("TileForest"); break;
 				}	
-				Object.Instantiate(tile, new Vector3(i, 0, j), new Quaternion(0,0,0,0));
+				if(j%2==0) {
+					Object.Instantiate(tile, new Vector3(2*i, 0.1f, (2*j)-(j/2)), new Quaternion(0,0,0,0));
+				}
+				else {
+					Object.Instantiate(tile, new Vector3(2*i+1, 0.1f, j + j/2.0f), new Quaternion(0,0,0,0));
+				}
 			}
 		}
 	}
@@ -62,6 +68,12 @@ public class Board {
 			for(int j = 0; j < board.GetLength(1); j++)
 			{
 				board[i, j] = new Tile(LandType.Sea, this);
+				if(j%2==0) {
+					Object.Instantiate((GameObject)Resources.Load ("TileWater"), new Vector3(2*i, 0, (2*j)-(j/2)), new Quaternion(0,0,0,0));
+				}
+				else {
+					Object.Instantiate((GameObject)Resources.Load ("TileWater"), new Vector3(2*i+1, 0, j + j/2.0f), new Quaternion(0,0,0,0));
+				}
 			}
 		}
 	}
