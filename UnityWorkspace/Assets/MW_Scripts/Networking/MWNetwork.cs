@@ -6,9 +6,13 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 // TODO Chat?
 // TODO Matchmaker
 
+// TODO Call Authenticate upon login.
+// TODO Set player turns. How? Should MW_Player implement the Equals() method?
+// TODO Make sure ONLY host spawns map via the instantiate method below
+
 /*
  * An enum for MWNetwork responses.
- */ 
+ */
 public enum MWNetworkResponse
 {
     GAME_START_SUCCESS,
@@ -20,6 +24,7 @@ public enum MWNetworkResponse
 
 /*
  * This is a utility class for networking within the Medieval Warfare game.
+ * This is mostly an enhanced wrapper for Photon's built-in functions to hide the API details from the group.
  */
 public class MWNetwork : Photon.MonoBehaviour
 {
@@ -29,6 +34,15 @@ public class MWNetwork : Photon.MonoBehaviour
     public GUILogic GUIplayer;
     public GameObject playerListText;
 
+	/* 
+	 * Connects to Photon's master server using current version number.
+	 */
+    void Start()
+    {
+        PhotonNetwork.ConnectUsingSettings(version);
+        Debug.Log("Connected to master server!");
+    }
+
     /* 
      * Returns the MWNetwork component upon which you can call all functions below.
      */
@@ -37,13 +51,14 @@ public class MWNetwork : Photon.MonoBehaviour
         return GameObject.Find("MWNetwork").GetComponent<MWNetwork>();
     }
 
-	/* 
-	 * Connects to Photon's master server using current version number.
-	 */
-    void Start()
+    /*
+     * USE THIS GOD DAMN FUNCTION TO INSTANTIATE ALL OBJECTS THAT NEED TO BE SERIALIZED OVER THE NETWORK.
+     * Otherwise they will NOT appear on other players' machine.
+     * Make sure a fucking PhotonView component is attached to the prefabs as well.
+     */
+    public GameObject instantiate(GameObject obj, Vector3 pos, Quaternion rot)
     {
-        PhotonNetwork.ConnectUsingSettings(version);
-        Debug.Log("Connected to master server!");
+        return (GameObject) PhotonNetwork.Instantiate(obj.name, pos, rot, 0); // TODO make sure last argument is fitting.
     }
 	
 	/*
@@ -91,26 +106,26 @@ public class MWNetwork : Photon.MonoBehaviour
         if (PhotonNetwork.room == null)
         {
             Debug.Log("Cannot start game: a room has not yet been created");
-            return MWNetworkReponse.ROOM_NOT_CREATED;
+            return MWNetworkResponse.ROOM_NOT_CREATED;
         }
         // 2.   You are the host
         if (!PhotonNetwork.isMasterClient)
         {
             Debug.Log("Cannot start game: you are not the host.");
-            return MWNetworkReponse.NOT_HOST;
+            return MWNetworkResponse.NOT_HOST;
         }
 		// 3. 	Game is not already in play.
 		if ((bool) PhotonNetwork.room.customProperties["gameStarted"])
 		{
 			Debug.Log("Cannot start game: it has already started.");
-            return MWNetworkReponse.GAME_ALREADY_STARTED;
+            return MWNetworkResponse.GAME_ALREADY_STARTED;
 		}
 		// 4.	2 <= number of players <= maximum players
 		if (PhotonNetwork.playerList.Length < 2 
 			|| PhotonNetwork.playerList.Length > PhotonNetwork.room.maxPlayers)
 		{
             Debug.Log("Cannot start game: must be between 2 and " + PhotonNetwork.room.maxPlayers + " players.");
-            return MWNetworkReponse.BAD_PLAYER_COUNT;
+            return MWNetworkResponse.BAD_PLAYER_COUNT;
 		}
 		
 		// Make the room impossible to see or join
