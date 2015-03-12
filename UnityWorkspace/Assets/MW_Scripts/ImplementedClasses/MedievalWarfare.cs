@@ -17,14 +17,21 @@ public class MedievalWarfare : AbstractMedievalWarfare
 
 
 
-		//each tile gets a village owned by a random player ie: set up tileOwner
+		//each tile that's not water gets a village owned by a random player ie: set up tileOwner
 		//during BFS remove all except 1 for the villages that have more than 3 tiles
 		foreach (Tile t in myBoard.board) {
+
+			if(t.myType == LandType.Sea){
+				break; //we don't put a village on the water
+			}
+
+			else{
 			int randomPlayer = Random.Range (0, participants.Count - 1);
 			List<AbstractTile> myTile = new List<AbstractTile>();
 			myTile.Add(t);
 			//region consists of the single tile it occupies
 			t.myVillage = new Village (myTile, participants [randomPlayer]);
+			}
 
 		}
 
