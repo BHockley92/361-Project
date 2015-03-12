@@ -238,6 +238,10 @@ public class MWNetwork : Photon.MonoBehaviour
             newPlayerMap.Add(PhotonNetwork.player, newPlayer);
             PhotonNetwork.room.SetCustomProperties(newPlayerMap);
         }
+        else
+        {
+            Debug.Log("Joined room before MW_Player was instantiated in GUILogic.  Player was therefore not added to the room properties.");
+        }
     }
 
     void OnCreatedRoom()
