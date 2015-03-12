@@ -85,9 +85,8 @@ public class GUILogic : MonoBehaviour {
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
 		MedievalWarfare mw = new MedievalWarfare ();
-		//TODO
-		//Need to get a list of players objects, not just strings
-		//GAME = mw.newGame (300, 300, 10, new GameLogic());
+		MWNetwork instance = MWNetwork.getInstance ();
+		GAME = mw.newGame (instance.getPlayers());
 	}
 
 	//The leave or disband button depending on host or player

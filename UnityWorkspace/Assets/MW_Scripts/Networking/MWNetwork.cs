@@ -14,7 +14,7 @@ public class MWNetwork : Photon.MonoBehaviour
     private static string version = "1.0";
 
     // The GameObject associated to a player in MW.  It will only be instantiated if not null.
-    public GameObject player;
+    public GUILogic player;
 
     /* 
      * Returns the MWNetwork component upon which you can call all functions below.
@@ -227,8 +227,8 @@ public class MWNetwork : Photon.MonoBehaviour
     {
         Debug.Log("Connected to Room.");
 
-        if (player != null)
-            PhotonNetwork.Instantiate(player.name, new Vector3(-2 + PhotonNetwork.playerList.Length, 3, 0), Quaternion.identity, 0, null);
+        if (player.PLAYER != null)
+            PhotonNetwork.Instantiate(player.PLAYER.username, new Vector3(-2 + PhotonNetwork.playerList.Length, 3, 0), Quaternion.identity, 0, null);
     }
 
     void OnCreatedRoom()
