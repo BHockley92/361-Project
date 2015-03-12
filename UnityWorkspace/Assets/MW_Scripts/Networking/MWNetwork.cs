@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 // TODO Chat?
@@ -13,8 +14,7 @@ public class MWNetwork : Photon.MonoBehaviour
     // The game version.  Will probably never change this.
     private static string version = "1.0";
 
-    // The GameObject associated to a player in MW.  It will only be instantiated if not null.
-    public GUILogic player;
+    public GUILogic GUIplayer;
 
     /* 
      * Returns the MWNetwork component upon which you can call all functions below.
@@ -193,18 +193,19 @@ public class MWNetwork : Photon.MonoBehaviour
 	/*
 	 * Returns an array of player names.
 	 */
-	public string[] getPlayers()
+	public List<AbstractPlayer> getPlayers()
 	{
 		PhotonPlayer[] players = PhotonNetwork.playerList;
+        Hashtable roomProps = PhotonNetwork.room.customProperties;
+
+        List<AbstractPlayer> mw_players = new List<AbstractPlayer>();
+
+		foreach (PhotonPlayer player in players)
+        {
+            mw_players.Add( (AbstractPlayer)roomProps[player] );
+        }
 		
-		string[] playerNames = new string[players.Length];
-		
-		for (int i = 0; i < players.Length; i++)
-		{
-			playerNames[i] = players[i].name;
-		}
-		
-		return playerNames;
+		return mw_players;
 	}
 	
 	/*
@@ -227,8 +228,16 @@ public class MWNetwork : Photon.MonoBehaviour
     {
         Debug.Log("Connected to Room.");
 
-        if (player.PLAYER != null)
-            PhotonNetwork.Instantiate(player.PLAYER.username, new Vector3(-2 + PhotonNetwork.playerList.Length, 3, 0), Quaternion.identity, 0, null);
+        // Instantiate a MW_Player game object
+        if (GUIplayer.PLAYER != null)
+        {
+            MW_Player newPlayer = GUIplayer.PLAYER;
+
+            // Map network player to respective MW_Player and add to room properties
+            Hashtable newPlayerMap = new Hashtable();
+            newPlayerMap.Add(PhotonNetwork.player, newPlayer);
+            PhotonNetwork.room.SetCustomProperties(newPlayerMap);
+        }
     }
 
     void OnCreatedRoom()
