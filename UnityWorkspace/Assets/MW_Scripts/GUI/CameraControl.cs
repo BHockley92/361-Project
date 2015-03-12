@@ -18,6 +18,7 @@ public class CameraControl : MonoBehaviour {
 	
 	private Vector3 INIT_POS;
 
+	public MW_Game GAME;
 	public GameObject TARGET;
 
 	void Start () {
@@ -32,9 +33,48 @@ public class CameraControl : MonoBehaviour {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(ray,out hit,100)) {
-				//Only update to useful things
+				//Update target if we hit a unit or building
 				if(hit.transform.gameObject.name.Contains("unit") || hit.transform.gameObject.name.Contains("building")) {
 					TARGET = hit.transform.gameObject;
+				}
+				else {
+					//Find the tile the unit's on
+					GameObject closestTile = null;
+					float minDistance = Mathf.Infinity;
+					foreach(GameObject current in GameObject.FindObjectsOfType<GameObject>()) {
+						if(current.name.Contains("tile") && Mathf.Abs(TARGET.transform.position.magnitude - current.transform.position.magnitude) < minDistance) {
+							minDistance = Mathf.Abs(TARGET.transform.position.magnitude - current.transform.position.magnitude);
+							closestTile = current;
+						}
+					}
+					Tile unitTile = null;
+					foreach (Tile current in GAME.gameBoard.board) {
+						if(current.boardPosition == new Vector2(closestTile.transform.position.x, closestTile.transform.position.z)) {
+							unitTile = current;
+						}
+					}
+
+					//Find the tile I clicked on
+					GameObject targetTile = null;
+					minDistance = Mathf.Infinity;
+					foreach(GameObject current in GameObject.FindObjectsOfType<GameObject>()) {
+						if(current.name.Contains("tile") && Mathf.Abs(hit.transform.position.magnitude - current.transform.position.magnitude) < minDistance) {
+							minDistance = Mathf.Abs(hit.transform.position.magnitude - current.transform.position.magnitude);
+							targetTile = current;
+						}
+					}
+					Tile destTile = null;
+					foreach (Tile current in GAME.gameBoard.board) {
+						if(current.boardPosition == new Vector2(closestTile.transform.position.x, closestTile.transform.position.z)) {
+							destTile = current;
+						}
+					}
+
+					//Call move unit
+					GAME.myGameLogic.moveUnit(unitTile.occupyingUnit, destTile);
+
+					//Move the model
+					hit.transform.position = targetTile.transform.position + new Vector3(0,0,0);
 				}
 			}
 		}
