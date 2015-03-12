@@ -18,7 +18,7 @@ public class CameraControl : MonoBehaviour {
 	
 	private Vector3 INIT_POS;
 
-	private GameObject TARGET;
+	public GameObject TARGET;
 
 	void Start () {
 		INIT_POS = transform.position;      
@@ -32,7 +32,10 @@ public class CameraControl : MonoBehaviour {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(ray,out hit,100)) {
-				TARGET = hit.transform.gameObject;
+				//Only update to useful things
+				if(hit.transform.gameObject.name.Contains("unit") || hit.transform.gameObject.name.Contains("building")) {
+					TARGET = hit.transform.gameObject;
+				}
 			}
 		}
 		// panning     

@@ -53,8 +53,8 @@ public class GameLogic : AbstractGameLogic
 					u.myVillage = commandingVillage;
 					u.myLocation = spawnedTile;
 					spawnedTile.occupyingUnit = u;
-					//TODO
-					//Spawn a villager
+					Object.Instantiate(Resources.Load("unitpeasant"),Camera.main.GetComponent<CameraControl>().TARGET.transform.position + new Vector3(0,0,0), new Quaternion(0,0,0,0));
+					Object.Destroy(Camera.main.GetComponent<CameraControl>().TARGET.transform);
 				}
 			}
 		}
@@ -89,6 +89,19 @@ public class GameLogic : AbstractGameLogic
 				}
 			}
 			v.myType = newType;
+
+			string village = null;
+			if (v.myType == VillageType.Hovel) {
+				village = "buildinghovel";
+			}
+			else if (v.myType == VillageType.Town) {
+				village = "buildingvillage";
+			}
+			else {
+				village = "buildingcastle";
+			}
+			Object.Instantiate(Resources.Load(village),Camera.main.GetComponent<CameraControl>().TARGET.transform.position, new Quaternion(0,0,0,0));
+			Object.Destroy(Camera.main.GetComponent<CameraControl>().TARGET.transform);
 		}
 	}
 	
@@ -106,8 +119,21 @@ public class GameLogic : AbstractGameLogic
 		{
 			unitVillage.gold = vGold - upgradeValue;
 			u.myType = newType;
-			//TODO
-			//Swap unit
+			string unit = null;
+			if (u.myType == UnitType.Peasant) {
+				unit = "unitpeasant";
+			}
+			else if (u.myType == UnitType.Infantry) {
+				unit = "unitinfantry";
+			}
+			else if (u.myType == UnitType.Soldier) {
+				unit = "unitsoldier";
+			}
+			else {
+				unit = "unitknight";
+			}
+			Object.Instantiate(Resources.Load(unit),Camera.main.GetComponent<CameraControl>().TARGET.transform.position, new Quaternion(0,0,0,0));
+			Object.Destroy(Camera.main.GetComponent<CameraControl>().TARGET.transform);
 		}
 	}
 
@@ -401,13 +427,11 @@ public class GameLogic : AbstractGameLogic
 			AbstractTile myLocation = u.myLocation;
 			myLocation.occupyingStructure.myType = StructureType.Tombstone;
 
-			//TODO:
-			//May need to destroy the tile after we remove all the things on it
-
 			//Swaps out the tile
+			GameObject actualTile = null;
 			foreach(GameObject tile in GameObject.FindObjectsOfType<GameObject>()) {
 				if(tile.transform.position == new Vector3(myLocation.boardPosition.x, 0.1f, myLocation.boardPosition.y)) {
-					Object.Destroy(tile);
+					actualTile = tile;
 					Object.Instantiate((GameObject)Resources.Load("TileGrave"),new Vector3(myLocation.boardPosition.x, 0.1f, myLocation.boardPosition.y), new Quaternion(0,0,0,0));
 				}
 			};
@@ -415,8 +439,21 @@ public class GameLogic : AbstractGameLogic
 			// Remove the unit
 			myLocation.occupyingUnit = null;
 			myLocation = null;
-			//TODO:
-			//Destroy unit at location
+
+			//Minimum distance between
+			float minDistance = Mathf.Infinity;
+			GameObject unitOnTile = null;
+			foreach(GameObject current in GameObject.FindObjectsOfType<GameObject>()) {
+				if(current.name.Contains("unit") && Mathf.Abs(actualTile.transform.position.magnitude - current.transform.position.magnitude) < minDistance) {
+					minDistance = actualTile.transform.position.magnitude - current.transform.position.magnitude;
+					unitOnTile = current;
+				}
+			}
+			//Destroy the unit on that tile
+			Object.Destroy(unitOnTile);
+
+			//Delete the old tile
+			Object.Destroy(actualTile);
 			
 		}
 	}	

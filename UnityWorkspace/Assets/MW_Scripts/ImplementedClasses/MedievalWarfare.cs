@@ -71,7 +71,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 				AbstractTile villageTile = visitedTiles[randInt];
 
 				//Create the village
-				GameObject village = (GameObject)Object.Instantiate(Resources.Load("hovel"));
+				GameObject village = (GameObject)Object.Instantiate(Resources.Load("buildinghovel"));
 				village.transform.position = new Vector3(villageTile.boardPosition.x,0.7f,villageTile.boardPosition.y-0.5f);
 
 				Village myNewVillage = new Village (visitedTiles, belongsTo);

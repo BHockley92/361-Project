@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Xml.Linq;
 using UnityEngine.UI;
+using GameEnums;
 
 public class GUILogic : MonoBehaviour {
 
@@ -88,6 +89,53 @@ public class GUILogic : MonoBehaviour {
 		MedievalWarfare mw = new MedievalWarfare ();
 		GAME = mw.newGame (NETWORK.getPlayers());
 		NETWORK.startGame ();
+	}
+
+	public void UpgradeBuilding() {
+		GameObject closestTile = null;
+		float minDistance = Mathf.Infinity;
+		foreach(GameObject current in GameObject.FindObjectsOfType<GameObject>()) {
+			if(current.name.Contains("tile") && Mathf.Abs(Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude) < minDistance) {
+				minDistance = Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude;
+				closestTile = current;
+			}
+		}
+		foreach (Tile current in GAME.gameBoard.board) {
+			if(current.boardPosition == new Vector2(closestTile.transform.position.x, closestTile.transform.position.z)) {
+				int village_type = (int)current.occupyingStructure.myType;
+				VillageType newType = 0;
+				switch(village_type) {
+					case 0: newType = VillageType.Town;break;
+					case 1: newType = VillageType.Fort;break;
+					case 2: newType = VillageType.Fort;break;
+				}
+				GAME.myGameLogic.upgradeVillage (current.myVillage,newType);
+			}
+		}
+	}
+
+	public void UpgradeUnit() {
+		GameObject closestUnit = null;
+		float minDistance = Mathf.Infinity;
+		foreach(GameObject current in GameObject.FindObjectsOfType<GameObject>()) {
+			if(current.name.Contains("tile") && Mathf.Abs(Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude) < minDistance) {
+				minDistance = Camera.main.GetComponent<CameraControl>().TARGET.transform.position.magnitude - current.transform.position.magnitude;
+				closestUnit = current;
+			}
+		}
+		foreach (Tile current in GAME.gameBoard.board) {
+			if(current.boardPosition == new Vector2(closestUnit.transform.position.x, closestUnit.transform.position.z)) {
+				int unit_type = (int)current.occupyingUnit.myType;
+				UnitType newType = 0;
+				switch(unit_type) {
+					case 0: newType = UnitType.Infantry;break;
+					case 1: newType = UnitType.Soldier;break;
+					case 2: newType = UnitType.Knight;break;
+					case 3: newType = UnitType.Knight;break;
+				}
+				GAME.myGameLogic.upgradeUnit (current.occupyingUnit,newType);
+			}
+		}
 	}
 
 	//The leave or disband button depending on host or player
