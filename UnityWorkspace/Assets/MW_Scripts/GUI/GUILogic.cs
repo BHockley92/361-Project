@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GUILogic : MonoBehaviour {
 
-	public Matchmaking mm;
+	public MWNetwork NETWORK;
 	public MW_Game GAME;
 	public InputField USERNAME;
 	public InputField PASSWORD;
@@ -28,15 +28,14 @@ public class GUILogic : MonoBehaviour {
 			if (player.Attribute ("name").Value == USERNAME.text && player.Attribute ("password").Value == PASSWORD.text) {
 				PLAYER = new MW_Player();
 				PLAYER.setAttribute(player.Attribute ("name").Value);
+				Debug.Log (PLAYER.username);
 			}
 		}
 	}
 
 	//Loads lobby info of selected game
 	public void JoinGame() {
-		mm.JoinGame();
-		if (mm.error){};
-		//TODO: some kind of error reaction
+		NETWORK.joinRoom("demo");
 	}
 
 	//Populate popup with available maps
@@ -51,7 +50,7 @@ public class GUILogic : MonoBehaviour {
 
 	//Create a lobby and populate with information
 	public void HostGame() {
-		mm.HostGame();
+		NETWORK.hostRoom("demo");
 	}
 
 	//Sends message in input to all players
@@ -77,20 +76,20 @@ public class GUILogic : MonoBehaviour {
 
 	//Ends current turn and goes to next player
 	public void EndTurn() {
-		GAME.EndTurn ();
 		//TODO
 		//Disable end turn button
+		GAME.EndTurn ();
+		NETWORK.endTurn ();
 	}
 
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
 		MedievalWarfare mw = new MedievalWarfare ();
-		MWNetwork instance = MWNetwork.getInstance ();
-		GAME = mw.newGame (instance.getPlayers());
+		GAME = mw.newGame (NETWORK.getPlayers());
+		NETWORK.startGame ();
 	}
 
 	//The leave or disband button depending on host or player
 	public void Leave_Disband() {
-		mm.LeaveRoom();
 	}
 }
