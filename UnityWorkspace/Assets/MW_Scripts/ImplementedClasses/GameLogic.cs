@@ -215,7 +215,7 @@ public class GameLogic : AbstractGameLogic
 	// Assumes all checks have been done and we can actually move the unit
 	// Does not manage any territories
 	// Only takes care of movement, trampling fields, orders and tombstones
-	// Should be done BEFORE territories are manages or order management WON'T WORK
+	// Should be done BEFORE territories are managed or order management WON'T WORK
 	private void actuallyMoveTheUnit( AbstractUnit u, AbstractTile dest)
 	{
 		// move the unit onto the destination
