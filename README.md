@@ -20,12 +20,12 @@ First it should be noted: EVERYONE FIX YOUR BROKEN CODE. Report bugs as you find
 **Nicholas :**
 - Finish MoveUnit
 - TakeOverTile
-- ~~Tree Growth Phase~~
-- MergeRegions
+- Tree Growth Phase
+- ~~MergeRegions~~
 
 **Emily :**
 - Destroy Village
-- ConnectRegions
+- DivideRegions
 - Serialization
 
 **Alex :**
