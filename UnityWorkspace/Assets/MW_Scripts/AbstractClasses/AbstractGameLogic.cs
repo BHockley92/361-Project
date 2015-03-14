@@ -17,6 +17,7 @@ public abstract class AbstractGameLogic
 
 	protected abstract void connectRegions (List<AbstractVillage> v);
 	public abstract void beginTurn (AbstractPlayer p, AbstractGame g);
+	protected abstract void treeGrowthPhase( Board b );
 	protected abstract void tombStonePhase (AbstractVillage myVillage);
 	protected abstract void peasantBuild (AbstractTile myTile);
 	protected abstract void buildPhase (AbstractVillage myVillage);

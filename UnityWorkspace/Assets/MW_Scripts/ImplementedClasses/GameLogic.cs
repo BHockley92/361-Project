@@ -324,6 +324,9 @@ public class GameLogic : AbstractGameLogic
 	
 	public override void beginTurn( AbstractPlayer p, AbstractGame g)
 	{
+		// If it's a new round, tree growth
+		if( g.turnIndex == 0 ) treeGrowthPhase( g.gameBoard );
+
 		List<AbstractVillage> myVillages = p.myVillages;
 		
 		foreach(AbstractVillage v in myVillages)
@@ -332,6 +335,47 @@ public class GameLogic : AbstractGameLogic
 			buildPhase(v);
 			incomePhase(v);
 			paymentPhase(v);
+		}
+	}
+
+	protected override void treeGrowthPhase( Board b )
+	{
+		// iterate over each tile in the board
+		for(int i = 0; i < b.board.GetLength(0); i++)
+		{
+			for(int j = 0; j < b.board.GetLength(1); j++)
+			{
+				// check if the tile is a tree
+				AbstractTile t = b.board[i, j];
+				if( t.myType == LandType.Tree )
+				{
+					spawnTreesInNeighbours( t );
+				}
+			}
+		}
+	}
+
+	// Goes through each neighbour of the tile and if they are eligible 
+	// for tree growth, a dice is rolled to determine if it actually happens
+	private void spawnTreesInNeighbours( AbstractTile t)
+	{
+		List<AbstractTile> neighbours = t.getNeighbours();
+		
+		// If the tile neighbour is elegible for tree growth, roll
+		foreach( AbstractTile neighbour in neighbours )
+		{
+			if( neighbour.occupyingUnit == null 
+			   && neighbour.occupyingStructure.myType == StructureType.NONE
+			   && neighbour.myVillage.location != neighbour 
+			   && neighbour.myType != LandType.Sea )
+			{
+				int diceRoll = Random.Range(0, 2);
+				
+				if( diceRoll == 1 )
+				{
+					neighbour.myType = LandType.Tree;
+				}
+			}
 		}
 	}
 	
