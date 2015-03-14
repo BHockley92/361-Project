@@ -25,7 +25,7 @@ First it should be noted: EVERYONE FIX YOUR BROKEN CODE. Report bugs as you find
 
 **Emily :**
 - Destroy Village
-- ConnectRegions
+- DivideRegions
 - Serialization
 
 **Alex :**
