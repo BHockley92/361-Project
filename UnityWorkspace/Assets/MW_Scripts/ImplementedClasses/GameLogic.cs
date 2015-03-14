@@ -287,9 +287,41 @@ public class GameLogic : AbstractGameLogic
 	
 	// TODO: unimplemented methods below, but not for the demo
 	public override void destroyVillage(AbstractVillage v, AbstractUnit invader) {}
-	public override void divideRegion(IList<AbstractTile> region) {}
+	public override void divideRegion(List<AbstractTile> region) {} // How do we know how to divide them with only a list?
 	public override void takeoverTile(AbstractTile dest) {}
-	protected override void connectRegions(List<AbstractVillage> v) {}
+
+	protected override void connectRegions(List<AbstractVillage> villages) 
+	{
+		// randomly choose a village to keep
+		AbstractVillage chosenVillage = villages [Random.Range (villages.Count + 1)];
+
+		foreach( AbstractVillage v in villages )
+		{
+			if( v == chosenVillage ) continue;
+
+			// Transfer gold, wood, units, tiles to remaining village
+			chosenVillage.gold += v.gold;
+			v.gold = 0;
+
+			chosenVillage.wood += v.wood;
+			v.wood = 0;
+
+			foreach( AbstractUnit u in v.supportedUnits)
+			{
+				chosenVillage.supportedUnits.Add(u);
+			}
+			v.supportedUnits.RemoveAll();
+
+			v.location = null;
+
+			foreach( AbstractTile t in v.controlledRegion)
+			{
+				chosenVillage.controlledRegion.Add(t);
+				t.myVillage = chosenVillage;
+			}
+			v.controlledRegion.RemoveAll();
+		}
+	}
 	
 	public override void beginTurn( AbstractPlayer p, AbstractGame g)
 	{
