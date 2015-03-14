@@ -21,7 +21,7 @@ First it should be noted: EVERYONE FIX YOUR BROKEN CODE. Report bugs as you find
 - Finish MoveUnit
 - TakeOverTile
 - Tree Growth Phase
-- MergeRegions
+- ~~MergeRegions~~
 
 **Emily :**
 - Destroy Village
