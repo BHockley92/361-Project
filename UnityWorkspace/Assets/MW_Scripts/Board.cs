@@ -19,8 +19,8 @@ public class Board {
 	public Board(int length, int width, int waterBorder)
 	{
 		border = waterBorder;
-		generateRandomBoard (length, width);
 		fillBoardWithWater ();
+		generateRandomBoard (length, width);
 	}
 
 	// Generates a random island that conforms to specs (300 land tiles that aren't water, one big land mass)

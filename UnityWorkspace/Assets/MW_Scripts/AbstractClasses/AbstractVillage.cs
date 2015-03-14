@@ -9,7 +9,7 @@ public abstract class AbstractVillage
 	public int wood { get; set; }
 	public List<AbstractTile> controlledRegion { get; protected set; }
 	public List<AbstractUnit> supportedUnits { get; protected set; }
-	public AbstractTile location { get; set; } //changed from protected set because I need to set location of village in newGame
+	public AbstractTile location { get; set; }
 	public AbstractPlayer myPlayer { get; protected set; }
 
 	public abstract void swapControl(AbstractTile myTile, AbstractVillage other);

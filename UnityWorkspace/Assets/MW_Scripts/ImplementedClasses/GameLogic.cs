@@ -139,7 +139,7 @@ public class GameLogic : AbstractGameLogic
 
 	public override void moveUnit(AbstractUnit u, AbstractTile dest) 
 	{
-		// Only look at adjacent tiles. No multitile movement here
+		// Only look at adjacent tiles. No multiple movement here
 
 		// Moving into a neutral tile ends movement
 		// If a villager walks over a tombstone that isn't a knight, it is cleared and the unit can no longer move
@@ -225,14 +225,13 @@ public class GameLogic : AbstractGameLogic
 					}
 
 					// TODO: check if there are any adjacent units that die from space invasion
-						// DONT CARE FOR DEMO LOLOL
 				}
 
 				// Otherwise we're invading enemy territory
 				// Only soldiers and better can invade
 				else if ( uValue >= soldierValue )
 				{
-					// TODO: this is not for the demo. So ... LOLOL DONT CARE
+					// TODO: this is not for the demo
 					// actuallyMoveTheUnit(u, dest);
 					// Do the invasion stuff
 					// Check if domination links two villages
