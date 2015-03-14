@@ -293,7 +293,7 @@ public class GameLogic : AbstractGameLogic
 	protected override void connectRegions(List<AbstractVillage> villages) 
 	{
 		// randomly choose a village to keep
-		AbstractVillage chosenVillage = villages [Random.Range (villages.Count + 1)];
+		AbstractVillage chosenVillage = villages [Random.Range (0, villages.Count + 1)];
 
 		foreach( AbstractVillage v in villages )
 		{
@@ -310,7 +310,7 @@ public class GameLogic : AbstractGameLogic
 			{
 				chosenVillage.supportedUnits.Add(u);
 			}
-			v.supportedUnits.RemoveAll();
+			v.supportedUnits.Clear();
 
 			v.location = null;
 
@@ -319,7 +319,7 @@ public class GameLogic : AbstractGameLogic
 				chosenVillage.controlledRegion.Add(t);
 				t.myVillage = chosenVillage;
 			}
-			v.controlledRegion.RemoveAll();
+			v.controlledRegion.Clear();
 		}
 	}
 	

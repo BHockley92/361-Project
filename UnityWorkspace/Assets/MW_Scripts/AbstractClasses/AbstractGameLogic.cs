@@ -12,7 +12,7 @@ public abstract class AbstractGameLogic
 	public abstract void upgradeUnit (AbstractUnit u, UnitType newType);
 	public abstract void moveUnit(AbstractUnit u, AbstractTile dest);
 	public abstract void destroyVillage(AbstractVillage v, AbstractUnit invader);
-	public abstract void divideRegion(IList<AbstractTile> region);
+	public abstract void divideRegion(List<AbstractTile> region);
 	public abstract void takeoverTile(AbstractTile dest);
 
 	protected abstract void connectRegions (List<AbstractVillage> v);
