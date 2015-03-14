@@ -9,26 +9,26 @@ The acceptance test is MONDAY April 6. We need to get ourselves in gear. We have
 
 First it should be noted: EVERYONE FIX YOUR BROKEN CODE. Report bugs as you find them so those in charge can fix them. If you spot a bug while reading code, be kind and either point it out specifically where the bug is or fix it.
 
-Benjamin :
+**Benjamin :**
 - Make the entire user interface **WORK**
 - ALL game actions should be **WORKING** by the end of next weekend (**Sunday March 22**). In other words: **backend testing is fully possible**.
 
-Kevin :
+**Kevin :**
 - Finish the networking, lobbies and stats.
 - A single game with 2 people (accounts/logins don't matter) should be completely playable over a network by the end of next weekend (**Sunday March 22**). This does not include stat tracking.
 
-Nicholas :
+**Nicholas :**
 - Finish MoveUnit
 - TakeOverTile
 - Tree Growth Phase
 - MergeRegions
 
-Emily :
+**Emily :**
 - Destroy Village
 - ConnectRegions
 - Serialization
 
-Alex :
+**Alex :**
 - Implement changes (cannons, castles, HP on villages from cannon attack, cannon movement rules)
 
 
