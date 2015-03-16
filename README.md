@@ -19,7 +19,7 @@ First it should be noted: EVERYONE FIX YOUR BROKEN CODE. Report bugs as you find
 
 **Nicholas :**
 - Finish MoveUnit
-- TakeOverTile
+- ~~TakeOverTile~~
 - ~~Tree Growth Phase~~
 - ~~MergeRegions~~
 

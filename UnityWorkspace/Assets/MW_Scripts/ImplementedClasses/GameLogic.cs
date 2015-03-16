@@ -223,7 +223,7 @@ public class GameLogic : AbstractGameLogic
 						if( u.currentAction == ActionType.ReadyForOrders)
 							u.currentAction = ActionType.Moved;
 
-						// Now that the move is successful, kill all adjacent enemy units
+						// Now that the move is successful, kill all adjacent enemy units and structures
 						foreach( AbstractTile neighbour in destNeighbours )
 						{
 							if( neighbour.myVillage.myPlayer != u.getPlayer() )
@@ -315,7 +315,22 @@ public class GameLogic : AbstractGameLogic
 	// TODO: unimplemented methods below, but not for the demo
 	public override void destroyVillage(AbstractVillage v, AbstractUnit invader) {}
 	public override void divideRegion(List<AbstractTile> region) {} // How do we know how to divide them with only a list?
-	public override void takeoverTile(AbstractTile dest) {}
+
+	public override void takeoverTile(AbstractTile dest) 
+	{
+		AbstractUnit attackingUnit = dest.occupyingUnit;
+		AbstractVillage attackingVillage = attackingUnit.myVillage;
+		AbstractVillage occupyingVillage = dest.myVillage;
+
+		if (occupyingVillage != null)
+			destroyVillage (occupyingVillage, attackingUnit);
+
+		AbstractVillage myVillage = dest.myVillage;
+
+		myVillage.swapControl (dest, attackingVillage);
+		List<AbstractTile> controlledRegion = myVillage.controlledRegion;
+		divideRegion (controlledRegion);
+	}
 
 	protected override void connectRegions(List<AbstractVillage> villages) 
 	{
