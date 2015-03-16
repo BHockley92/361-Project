@@ -157,7 +157,7 @@ public class GameLogic : AbstractGameLogic
 		int uValue = myValueManager.getUnitValue(u.myType);
 		int soldierValue = myValueManager.getUnitValue(UnitType.Soldier);
 
-		// move can only happen if the destination is in the adjacent squares and isn't sea
+		// move can only happen if the destination is in the adjacent tiles and isn't sea
 		// also: The unit cannot move if they've already moved
 		if( adjacentTiles.Contains(dest) && dest.myType != LandType.Sea 
 		   && unitAction == ActionType.ReadyForOrders)
@@ -222,9 +222,37 @@ public class GameLogic : AbstractGameLogic
 						// consider the unit moved
 						if( u.currentAction == ActionType.ReadyForOrders)
 							u.currentAction = ActionType.Moved;
-					}
 
-					// TODO: check if there are any adjacent units that die from space invasion
+						// Now that the move is successful, kill all adjacent enemy units
+						foreach( AbstractTile neighbour in destNeighbours )
+						{
+							if( neighbour.myVillage.myPlayer != u.getPlayer() )
+							{
+								AbstractUnit enemyUnit = neighbour.occupyingUnit;
+								AbstractStructure enemyStructure = neighbour.occupyingStructure;
+								if( enemyUnit != null )
+								{
+									enemyUnit.myLocation.occupyingUnit = null;
+									enemyUnit.myLocation = null;
+									enemyUnit.myVillage.supportedUnits.Remove(enemyUnit);
+
+									if( enemyStructure == null )
+									{
+										neighbour.occupyingStructure = new Structure( neighbour, StructureType.Tombstone );
+									}
+									else enemyStructure.myType = StructureType.Tombstone;
+								}
+
+								if( enemyStructure != null )
+								{
+									if( enemyStructure.myType == StructureType.Tower )
+									{
+										enemyStructure.myType = StructureType.NONE;
+									}
+								}
+							}
+						}
+					}
 				}
 
 				// Otherwise we're invading enemy territory
