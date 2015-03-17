@@ -18,7 +18,7 @@ First it should be noted: EVERYONE FIX YOUR BROKEN CODE. Report bugs as you find
 - A single game with 2 people (accounts/logins don't matter) should be completely playable over a network by the end of next weekend (**Sunday March 22**). This does not include stat tracking.
 
 **Nicholas :**
-- Finish MoveUnit
+- ~~Finish MoveUnit~~
 - ~~TakeOverTile~~
 - ~~Tree Growth Phase~~
 - ~~MergeRegions~~
