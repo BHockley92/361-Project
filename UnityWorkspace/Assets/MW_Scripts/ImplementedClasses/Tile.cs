@@ -19,8 +19,8 @@ public class Tile : AbstractTile
 		myVillage = null;
 		occupyingStructure = new Structure(this, StructureType.NONE);
 		occupyingUnit = null;
-		boardPosition = new Vector2 (i, j);
 		visited = false;
+		boardPosition = new Vector2(i,j);
 
 		if (b == null) throw new System.ArgumentException ("Board passed to tile is null");
 
