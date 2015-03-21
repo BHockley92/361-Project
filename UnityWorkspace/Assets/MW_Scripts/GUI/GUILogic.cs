@@ -27,14 +27,11 @@ public class GUILogic : MonoBehaviour {
 
 	//Authenticates the user to view stats
 	public void Authenticate() {
-		//Some bs for now to just make players a thing
-		XDocument file = XDocument.Load ("player_list.xml");
-		foreach (XElement player in file.Root.Elements ("player")) {
-			if (player.Attribute ("name").Value == USERNAME.text && player.Attribute ("password").Value == PASSWORD.text) {
-				PLAYER = new MW_Player();
-				PLAYER.setAttribute(player.Attribute ("name").Value);
-			}
-		}
+		
+		PLAYER = new MW_Player();
+		PLAYER.setAttribute(USERNAME.text);
+		
+		NETWORK.Authenticate(USERNAME.text, PASSWORD.text);
 	}
 
 	//Loads lobby info of selected game

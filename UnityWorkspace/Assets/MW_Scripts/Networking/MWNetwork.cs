@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -31,8 +32,9 @@ public class MWNetwork : Photon.MonoBehaviour
     // The game version.  Will probably never change this.
     private static string version = "1.0";
 
-    public GUILogic GUIplayer;
-    public GameObject playerListText;
+	// Useful references to GUI elements
+    public GUILogic gui;
+    public Text GUIplayerList;
 
 	/* 
 	 * Connects to Photon's master server using current version number.
@@ -60,6 +62,19 @@ public class MWNetwork : Photon.MonoBehaviour
     {
         return (GameObject) PhotonNetwork.Instantiate(obj.name, pos, rot, 0); // TODO make sure last argument is fitting.
     }
+	
+	/*
+	 * Attempts to authenticate the player.
+	 * Returns whether or not the player autheticated successfully
+	 * TODO return an error code?
+	 */
+	public bool Authenticate(string username, string password)
+	{
+		// TODO Check username/password in database
+		PhotonNetwork.playerName = gui.PLAYER.username;
+		
+		return true;
+	}
 	
 	/*
 	 * Sets a maximum number of players that can join a room/game.
@@ -122,7 +137,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		}
 		// 4.	2 <= number of players <= maximum players
 		if (PhotonNetwork.playerList.Length < 2 
-			|| PhotonNetwork.playerList.Length > PhotonNetwork.room.maxPlayers)
+			|| PhotonNetwork.room.playerCount > PhotonNetwork.room.maxPlayers)
 		{
             Debug.Log("Cannot start game: must be between 2 and " + PhotonNetwork.room.maxPlayers + " players.");
             return MWNetworkResponse.BAD_PLAYER_COUNT;
@@ -224,21 +239,22 @@ public class MWNetwork : Photon.MonoBehaviour
 	}
 	
 	/*
-	 * Returns a list of AbstractPlayers in the room.
+	 * Returns a list of AbstractPlayers in the room. FIXME
 	 */
 	public List<AbstractPlayer> getPlayers()
 	{
 		PhotonPlayer[] players = PhotonNetwork.playerList;
         Hashtable roomProps = PhotonNetwork.room.customProperties;
 
-        List<AbstractPlayer> mw_players = new List<AbstractPlayer>();
+        List<AbstractPlayer> mwPlayers = new List<AbstractPlayer>();
 
 		foreach (PhotonPlayer player in players)
         {
-            mw_players.Add( (AbstractPlayer)roomProps[player] );
+			mwPlayers.Add((AbstractPlayer)roomProps[player]);
+			Debug.Log((AbstractPlayer)roomProps[player]);
         }
 		
-		return mw_players;
+		return mwPlayers;
 	}
 
     /*****************************************************************************************************
@@ -247,19 +263,20 @@ public class MWNetwork : Photon.MonoBehaviour
 
     void OnJoinedRoom()
     {
-        Debug.Log("Connected to Room.");
+        Debug.Log(gui.USERNAME + " connected to Room.");
 
-        // Instantiate a MW_Player game object
-        if (GUIplayer.PLAYER != null)
-        {
-            MW_Player newPlayer = GUIplayer.PLAYER;
-
-            // Map network player to respective MW_Player and add to room properties
-            Hashtable newPlayerMap = new Hashtable();
-            newPlayerMap.Add(PhotonNetwork.player, newPlayer);
-            PhotonNetwork.room.SetCustomProperties(newPlayerMap);
+        // TODO Find a way to get MW_Player synced over network.
+        if (gui.PLAYER != null)
+        {            
+			// Update player list on GUI
+			string playerNames = "";
+			foreach (PhotonPlayer player in PhotonNetwork.playerList)
+			{
+				playerNames += player.name + '\n';
+			}
+			GUIplayerList.text = playerNames;
         }
-        else {
+        else { // FIXME this should probably be an exception but will probably remove it eventually anyways...
             Debug.Log("Joined room before MW_Player was instantiated in GUILogic.\n"
                       + "Player was therefore not added to the room properties.\n"
                       + "Probable cause: MW_Player not instantiated.");
