@@ -90,20 +90,26 @@ public class GameLogic : AbstractGameLogic
 	// returns true upon successful upgrade
 	public override bool upgradeUnit(AbstractUnit u, UnitType newType)
 	{
-		// TODO: check if village can support the upgraded version of the unit
 		AbstractVillage unitVillage = u.myVillage;
-		
-		int vGold = unitVillage.gold;
-		int upgradeValue = myValueManager.getUnitValue (newType);
-		upgradeValue -= myValueManager.getUnitValue (u.myType);
-		
-		// >= 0 because presumably higher levels cost more, so you don't want
-		// to downgrade a unit
-		if(upgradeValue <= vGold && upgradeValue >= 0)
+		VillageType UVType = unitVillage.myType;
+
+		// make sure the village can support the upgrade
+		if( (int) newType < (int) UnitType.Soldier
+		   || (int) UVType >= (int) VillageType.Fort
+		   || (UVType == VillageType.Town && newType == UnitType.Soldier))
 		{
-			unitVillage.gold = vGold - upgradeValue;
-			u.myType = newType;
-			return true;
+			int vGold = unitVillage.gold;
+			int upgradeValue = myValueManager.getUnitValue (newType);
+			upgradeValue -= myValueManager.getUnitValue (u.myType);
+			
+			// >= 0 because presumably higher levels cost more, so you don't want
+			// to downgrade a unit
+			if(upgradeValue <= vGold && upgradeValue >= 0)
+			{
+				unitVillage.gold = vGold - upgradeValue;
+				u.myType = newType;
+				return true;
+			}
 		}
 		return false;
 	}
@@ -111,16 +117,26 @@ public class GameLogic : AbstractGameLogic
 	// returns true upon success
 	public override bool combineUnits (AbstractUnit upgrader, AbstractUnit sacrificed)
 	{
-		// TODO: check if the village of the upgrader can support the upgraded version of the unit
-
-		// check that the two units are adjacent
-		if( upgrader.myLocation.getNeighbours().Contains( sacrificed.myLocation ))
+		if( upgrader.myType != UnitType.Knight && upgrader.myType == sacrificed.myType)
 		{
-			sacrificed.myVillage.supportedUnits.Remove( sacrificed );
-			sacrificed.myLocation.occupyingUnit = null;
-			sacrificed.myLocation = null;
+			VillageType vType = upgrader.myVillage.myType;
+			int nextRank = (int)upgrader.myType + 1;
 
-			upgrader.currentAction = ActionType.UpgradingCombining;
+			// make sure the village can support the upgrade
+			if( nextRank < (int) UnitType.Soldier
+			   || (int) vType >= (int) VillageType.Fort
+			   || (vType == VillageType.Town && (UnitType) nextRank == UnitType.Soldier))
+			{
+				// check that the two units are adjacent
+				if( upgrader.myLocation.getNeighbours().Contains( sacrificed.myLocation ))
+				{
+					sacrificed.myVillage.supportedUnits.Remove( sacrificed );
+					sacrificed.myLocation.occupyingUnit = null;
+					sacrificed.myLocation = null;
+
+					upgrader.currentAction = ActionType.UpgradingCombining;
+				}
+			}
 		}
 		return false;
 	}
