@@ -61,8 +61,9 @@ public class GameLogic : AbstractGameLogic
 			u.currentAction = ActionType.BuildingRoad;
 		}
 	}
-	
-	public override void upgradeVillage(AbstractVillage v, VillageType newType)
+
+	// returns true upon successful upgrade
+	public override bool upgradeVillage(AbstractVillage v, VillageType newType)
 	{
 		int gold = v.gold;
 		int newValue = myValueManager.getVillageValue (newType);
@@ -81,10 +82,13 @@ public class GameLogic : AbstractGameLogic
 				}
 			}
 			v.myType = newType;
+			return true;
 		}
+		return false;
 	}
-	
-	public override void upgradeUnit(AbstractUnit u, UnitType newType)
+
+	// returns true upon successful upgrade
+	public override bool upgradeUnit(AbstractUnit u, UnitType newType)
 	{
 		AbstractVillage unitVillage = u.myVillage;
 		
@@ -98,10 +102,13 @@ public class GameLogic : AbstractGameLogic
 		{
 			unitVillage.gold = vGold - upgradeValue;
 			u.myType = newType;
+			return true;
 		}
+		return false;
 	}
 
-	public override void moveUnit(AbstractUnit u, AbstractTile dest) 
+	// returns true upon successful movement of unit
+	public override bool moveUnit(AbstractUnit u, AbstractTile dest) 
 	{
 		AbstractTile unitLocation = u.myLocation;
 
@@ -139,7 +146,7 @@ public class GameLogic : AbstractGameLogic
 					 	)
 					  )
 					{
-						return;
+						return false;
 					}
 				}
 
@@ -210,8 +217,11 @@ public class GameLogic : AbstractGameLogic
 
 				if( dest.myType == LandType.Meadow && (int) u.myType >= (int) UnitType.Soldier )
 					dest.myType = LandType.Grass;
+
+				return true;
 			}
 		}
+		return false;
 	}
 
 

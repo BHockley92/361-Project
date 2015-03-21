@@ -8,9 +8,9 @@ public abstract class AbstractGameLogic
 
 	public abstract void hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile);
 	public abstract void buildRoad (AbstractUnit u);
-	public abstract void upgradeVillage (AbstractVillage v, VillageType newType);
-	public abstract void upgradeUnit (AbstractUnit u, UnitType newType);
-	public abstract void moveUnit(AbstractUnit u, AbstractTile dest);
+	public abstract bool upgradeVillage (AbstractVillage v, VillageType newType);
+	public abstract bool upgradeUnit (AbstractUnit u, UnitType newType);
+	public abstract bool moveUnit(AbstractUnit u, AbstractTile dest);
 	public abstract void destroyVillage(AbstractVillage v, AbstractUnit invader);
 	public abstract void divideRegion(List<AbstractTile> region);
 	public abstract void takeoverTile(AbstractTile dest);
