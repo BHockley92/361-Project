@@ -90,6 +90,7 @@ public class GameLogic : AbstractGameLogic
 	// returns true upon successful upgrade
 	public override bool upgradeUnit(AbstractUnit u, UnitType newType)
 	{
+		// TODO: check if village can support the upgraded version of the unit
 		AbstractVillage unitVillage = u.myVillage;
 		
 		int vGold = unitVillage.gold;
@@ -103,6 +104,23 @@ public class GameLogic : AbstractGameLogic
 			unitVillage.gold = vGold - upgradeValue;
 			u.myType = newType;
 			return true;
+		}
+		return false;
+	}
+
+	// returns true upon success
+	public override bool combineUnits (AbstractUnit upgrader, AbstractUnit sacrificed)
+	{
+		// TODO: check if the village of the upgrader can support the upgraded version of the unit
+
+		// check that the two units are adjacent
+		if( upgrader.myLocation.getNeighbours().Contains( sacrificed.myLocation ))
+		{
+			sacrificed.myVillage.supportedUnits.Remove( sacrificed );
+			sacrificed.myLocation.occupyingUnit = null;
+			sacrificed.myLocation = null;
+
+			upgrader.currentAction = ActionType.UpgradingCombining;
 		}
 		return false;
 	}
@@ -306,7 +324,9 @@ public class GameLogic : AbstractGameLogic
 			}
 			else if( u.currentAction == ActionType.UpgradingCombining )
 			{
-				// TODO figure out how to do combining
+				u.currentAction = ActionType.ReadyForOrders;
+				if( u.myType != UnitType.Knight )
+					u.myType = (UnitType)( (int) u.myType + 1);
 			}
 		}
 	}
