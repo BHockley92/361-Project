@@ -291,7 +291,7 @@ public class GameLogic : AbstractGameLogic
 			buildPhase(v);
 			incomePhase(v);
 			paymentPhase(v);
-			readyForOrders(v)
+			readyForOrders(v);
 		}
 	}
 
