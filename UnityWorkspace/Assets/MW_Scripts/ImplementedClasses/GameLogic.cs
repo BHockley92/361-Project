@@ -291,6 +291,23 @@ public class GameLogic : AbstractGameLogic
 			buildPhase(v);
 			incomePhase(v);
 			paymentPhase(v);
+			readyForOrders(v)
+		}
+	}
+
+	// Finishes combining units
+	private void readyForOrders(AbstractVillage v)
+	{
+		foreach(AbstractUnit u in v.supportedUnits)
+		{
+			if( u.currentAction == ActionType.Moved)
+			{
+				u.currentAction = ActionType.ReadyForOrders;
+			}
+			else if( u.currentAction == ActionType.UpgradingCombining )
+			{
+				// TODO figure out how to do combining
+			}
 		}
 	}
 
@@ -370,7 +387,7 @@ public class GameLogic : AbstractGameLogic
 				myTile.myType = LandType.Meadow;
 				occupyingUnit.currentAction = ActionType.ReadyForOrders;
 			}
-			
+
 			else if(currentAction == ActionType.StartCultivating)
 			{
 				occupyingUnit.currentAction = ActionType.FinishCultivating;
