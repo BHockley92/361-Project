@@ -118,7 +118,7 @@ public class GUILogic : MonoBehaviour {
 			//Store it for easier lookup
 			BOARD_TILES.Add(current.gamePosition,current);
 			//Create the game representation of the tile
-			Object.Instantiate(tile, new Vector3(x, 0.1f, y), new Quaternion(0,0,0,0));
+			NETWORK.instantiate(tile, new Vector3(x, 0.1f, y), Quaternion.identity);
 		}
 	}
 
