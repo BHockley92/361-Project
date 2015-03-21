@@ -38,7 +38,7 @@ public class MWNetwork_UnitTest : Photon.MonoBehaviour
                 }
             }
             // This start game button is available to whoever is hosting the game
-            else if (network.joinedRoom() && network.isHost() && !network.gameStarted())
+            else if (network.joinedRoom() && network.amHost() && !network.gameStarted())
             {
                 if (GUI.Button(new Rect(100, 100, 250, 100), "Start Game"))
                 {

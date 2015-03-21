@@ -189,7 +189,7 @@ public class MWNetwork : Photon.MonoBehaviour
     /*
      * Returns whether or not you are the host
      */
-    public bool isHost()
+    public bool amHost()
     {
         return PhotonNetwork.isMasterClient;
     }
@@ -263,8 +263,6 @@ public class MWNetwork : Photon.MonoBehaviour
 
     void OnJoinedRoom()
     {
-        Debug.Log(gui.USERNAME + " connected to Room.");
-
         // TODO Find a way to get MW_Player synced over network.
         if (gui.PLAYER != null)
         {            

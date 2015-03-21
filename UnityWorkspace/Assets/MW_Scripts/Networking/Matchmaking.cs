@@ -83,7 +83,7 @@ public class Matchmaking : Photon.MonoBehaviour
 			PhotonNetwork.CreateRoom("DemoRoom", new RoomOptions() { maxPlayers = 4 }, null);
 		}
 		else {
-			RoomInfo[] rooms = PhotonNetwork.GetRoomList();
+//			RoomInfo[] rooms = PhotonNetwork.GetRoomList();
 			//TODO: get room info and display it in gui
 			
 			//TODO: this is a temp thing for the demo: join any room

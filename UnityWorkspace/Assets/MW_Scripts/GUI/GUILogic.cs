@@ -36,7 +36,7 @@ public class GUILogic : MonoBehaviour {
 
 	//Loads lobby info of selected game
 	public void JoinGame() {
-		//NETWORK.joinRoom();
+		NETWORK.joinRoom("demo");
 	}
 
 	//Populate popup with available maps
