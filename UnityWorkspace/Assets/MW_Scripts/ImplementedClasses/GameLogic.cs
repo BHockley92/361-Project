@@ -62,6 +62,26 @@ public class GameLogic : AbstractGameLogic
 		}
 	}
 
+	// returns true upon successful build
+	public override bool buildTower(AbstractTile t)
+	{
+		if( t.myVillage != null)
+		{
+			if( t.myVillage.wood >= 5 && (int) t.myVillage.myType >= (int) VillageType.Town)
+			{
+				t.myVillage.wood -= 5;
+
+				if( t.occupyingStructure == null )
+					t.occupyingStructure = new Structure( t, StructureType.Tower );
+				else
+					t.occupyingStructure.myType = StructureType.Tower;
+
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// returns true upon successful upgrade
 	public override bool upgradeVillage(AbstractVillage v, VillageType newType)
 	{

@@ -8,6 +8,7 @@ public abstract class AbstractGameLogic
 
 	public abstract void hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile);
 	public abstract void buildRoad (AbstractUnit u);
+	public abstract bool buildTower(Tile t);
 
 	public abstract bool upgradeVillage (AbstractVillage v, VillageType newType);
 	public abstract bool upgradeUnit (AbstractUnit u, UnitType newType);
