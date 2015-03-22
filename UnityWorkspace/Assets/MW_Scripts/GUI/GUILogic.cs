@@ -163,7 +163,7 @@ public class GUILogic : MonoBehaviour {
 		
 		//Load new unit
 		GameObject new_unit = (GameObject)Resources.Load("peasent");
-		Object.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
+		NETWORK.instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
 		//Destroy current unit
 		Object.Destroy(LAST_CLICKED_ON);
 		//Set new last clicked on
