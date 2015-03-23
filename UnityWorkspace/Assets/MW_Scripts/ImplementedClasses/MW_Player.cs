@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MW_Player : AbstractPlayer 
 {
+
 	public void setAttribute(string u) {
 		username = u;
 	}
