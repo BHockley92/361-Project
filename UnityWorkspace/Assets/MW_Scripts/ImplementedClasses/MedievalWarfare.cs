@@ -8,7 +8,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 {
 	public override MW_Game newGame(List<AbstractPlayer> participants)
 	{
-		// initalize game for randomly generated board, --ask Nick what water border should be
+		// initalize game for randomly generated board
 		GameLogic gl = new GameLogic (); 
 		MW_Game myGame = new MW_Game (participants, 20, 20, 2, gl);
 		
@@ -18,10 +18,10 @@ public class MedievalWarfare : AbstractMedievalWarfare
 
 
 		//each tile that's not water gets a village owned by a random player ie: set up tileOwner
-		//during BFS remove all except 1 for the villages that have more than 3 tiles
+		//during BFS remove all except 1 of the villages that have more than 3 tiles
 		foreach (Tile t in myBoard.board) {
 
-			int randomPlayer = Random.Range (0, participants.Count);
+			int randomPlayer = Random.Range (0, participants.Count); //i still think it's -1 need to check
 			List<AbstractTile> myTile = new List<AbstractTile>();
 			myTile.Add(t);
 			//region consists of the single tile it occupies
@@ -46,7 +46,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 
 				myStack.Push (t);
 
-				//make list of tiles belonging to belongsTo
+				//make list of tiles belonging to belongsTo player
 				while (myStack.Count != 0) {
 					Tile v = myStack.Pop ();
 					visitedTiles.Add (v);

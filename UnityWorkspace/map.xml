@@ -1,0 +1,9 @@
+<map>
+    <tile landtype = "" boardPosition = "" gamePosition = "">
+        <village playerName= "" gold= "" wood="" villageType="" locationOfTile=""/>
+       
+        <structure structureType = ""/>
+    
+        <unit unitType="" unitAction=""/>    
+    </tile>
+</map>
