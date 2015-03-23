@@ -29,6 +29,8 @@ public enum MWNetworkResponse
  */
 public class MWNetwork : Photon.MonoBehaviour
 {
+	private static MWNetwork instance;
+
 	private static string version = "1.0";    // The game version.  Will probably never change this.
 	private MedievalWarfare game;
 
@@ -41,6 +43,8 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
     void Start()
     {
+    	instance = this;
+    
         PhotonNetwork.ConnectUsingSettings(version);
         Debug.Log("Connected to master server!");
     }
@@ -50,10 +54,10 @@ public class MWNetwork : Photon.MonoBehaviour
      */
     public static MWNetwork getInstance()
     {
-        return GameObject.Find("MWNetwork").GetComponent<MWNetwork>();
-    }
-
-    /*
+		return instance;
+	}
+	
+	/*
      * USE THIS GOD DAMN FUNCTION TO INSTANTIATE ALL OBJECTS THAT NEED TO BE SERIALIZED OVER THE NETWORK.
      * Otherwise they will NOT appear on other players' machine.
      * Make sure a fucking PhotonView component is attached to the prefabs as well.
