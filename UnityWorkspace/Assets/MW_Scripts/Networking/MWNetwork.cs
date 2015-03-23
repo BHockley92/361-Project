@@ -29,8 +29,8 @@ public enum MWNetworkResponse
  */
 public class MWNetwork : Photon.MonoBehaviour
 {
-    // The game version.  Will probably never change this.
-    private static string version = "1.0";
+	private static string version = "1.0";    // The game version.  Will probably never change this.
+	private MedievalWarfare game;
 
 	// Useful references to GUI elements
     public GUILogic gui;
@@ -60,7 +60,7 @@ public class MWNetwork : Photon.MonoBehaviour
      */
     public GameObject instantiate(GameObject obj, Vector3 pos, Quaternion rot)
     {
-        return (GameObject) PhotonNetwork.Instantiate(obj.name, pos, rot, 0); // TODO make sure last argument is fitting.
+        return (GameObject) PhotonNetwork.Instantiate(obj.name, pos, rot, 0);
     }
 	
 	/*
@@ -70,7 +70,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
 	public bool Authenticate(string username, string password)
 	{
-		// TODO Check username/password in database
+		// TODO Check username/password in database (playfab?)
 		PhotonNetwork.playerName = gui.PLAYER.username;
 		
 		return true;
@@ -82,14 +82,6 @@ public class MWNetwork : Photon.MonoBehaviour
     public void setMaxPlayers(int max)
 	{
 		PhotonNetwork.room.maxPlayers = max;
-	}
-	
-	/*
-	 * Returns whether it is this player's turn or not.
-	 */
-	public bool isMyTurn()
-	{
-		return (bool) PhotonNetwork.player.customProperties["isMyTurn"];
 	}
 	
 	/*
@@ -114,7 +106,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	 * are ordered according to when they joined.
      * Returns a response indicating whether the game was started succesfully or not.
 	 */
-    public MWNetworkResponse startGame()
+    public MWNetworkResponse startGame(MedievalWarfare game)
 	{
 		// Make sure starting conditions are satisfied:
         // 1.   A room has been joined
@@ -143,24 +135,12 @@ public class MWNetwork : Photon.MonoBehaviour
             return MWNetworkResponse.BAD_PLAYER_COUNT;
 		}
 		
+		// Keep reference to game
+		this.game = game;
+		
 		// Make the room impossible to see or join
 		PhotonNetwork.room.visible = false;
 		PhotonNetwork.room.open = false;
-		
-		// Set player turns (the host is currently automatically player 1)
-		Hashtable isMyTurn = new Hashtable();
-		foreach (PhotonPlayer player in PhotonNetwork.playerList)
-		{
-			if (player.isMasterClient)
-			{
-				isMyTurn["isMyTurn"] = true;
-			}
-			else {
-				isMyTurn["isMyTurn"] = false;
-			}
-			
-			player.SetCustomProperties(isMyTurn);
-		}
 		
 		// Mark the game as having started
 		Hashtable roomProps = new Hashtable();
@@ -203,25 +183,6 @@ public class MWNetwork : Photon.MonoBehaviour
     }
 	
 	/*
-	 * Ends your turn, starting the next player's turn.
-     * TODO change order in which players play?
-	 */
-	public void endTurn()
-	{
-		// End your turn
-		Hashtable property = new Hashtable();
-		property.Add("isMyTurn", false);
-		PhotonNetwork.player.SetCustomProperties(property);
-		
-		// Start next player's turn.
-		// TODO make sure there are no race conditions for property.
-		property["isMyTurn"] = true;
-		PhotonPlayer[] players = PhotonNetwork.playerList;
-        PhotonPlayer nextPlayer = players[(System.Array.IndexOf(players, PhotonNetwork.player) + 1) % players.Length];
-        nextPlayer.SetCustomProperties(property);
-	}
-	
-	/*
 	 * Returns an array of room names.
 	 */
 	public string[] getRooms()
@@ -239,7 +200,8 @@ public class MWNetwork : Photon.MonoBehaviour
 	}
 	
 	/*
-	 * Returns a list of AbstractPlayers in the room. FIXME
+	 * Returns a list of AbstractPlayers in the room. 
+	 * FIXME Associate MW_Player to a network player.
 	 */
 	public List<AbstractPlayer> getPlayers()
 	{
@@ -251,7 +213,6 @@ public class MWNetwork : Photon.MonoBehaviour
 		foreach (PhotonPlayer player in players)
         {
 			mwPlayers.Add((AbstractPlayer)roomProps[player]);
-			Debug.Log((AbstractPlayer)roomProps[player]);
         }
 		
 		return mwPlayers;

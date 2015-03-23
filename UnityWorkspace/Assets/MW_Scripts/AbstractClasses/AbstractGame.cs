@@ -25,12 +25,6 @@ public abstract class AbstractGame
 	 */
 	protected void nextTurn()
 	{
-		turnIndex++;
-		if(turnIndex >= participants.Count)
-		{
-			turnIndex = 0;
-		}
-
-		turnOf = participants [turnIndex];
+		turnOf = participants [++turnIndex % participants.Count];
 	}
 }

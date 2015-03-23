@@ -81,7 +81,6 @@ public class GUILogic : MonoBehaviour {
 	public void EndTurn() {
 		ENDTURN.enabled = false;
 		GAME.EndTurn ();
-		NETWORK.endTurn ();
 	}
 
 	//The ready or start button depending on host or player
@@ -89,7 +88,7 @@ public class GUILogic : MonoBehaviour {
 		MedievalWarfare mw = new MedievalWarfare ();
 		GAME = mw.newGame (NETWORK.getPlayers());
 		visualizeMap();
-		NETWORK.startGame ();
+		NETWORK.startGame(mw);	// TODO React to network's response.
 	}
 
 	private void visualizeMap() {
