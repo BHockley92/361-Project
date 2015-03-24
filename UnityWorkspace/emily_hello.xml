@@ -1,0 +1,48 @@
+<map>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="1" wood="7" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="2" wood="8" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="3" wood="9" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="4" wood="10" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector" />
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="6" wood="12" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="7" wood="13" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="8" wood="14" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="9" wood="15" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+  <tile landType="Sea" boardPosition="Vector" gamePosition="Vector">
+    <village playerName="Ben" gold="10" wood="16" villageType="Hovel" locationOfTiles="Vector" />
+    <structure structureType="Tower" />
+    <unit unitType="Knight" unitAction="Fighting" />
+  </tile>
+</map>

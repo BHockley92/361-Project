@@ -19,92 +19,174 @@ using System;
  */
 
 
-public class SerializeGame 
+public class SerializeGame //: MonoBehaviour //uncomment when testing
 {
-	public void saveGameState(MW_Game myGame) {
-				//XmlDocument doc = new XmlDocument ();
+	public void saveGameState(MW_Game myGame, MW_Player myPlayer) { //game state of myPlayer who ended turn will be saved
 
-				Board myBoard = myGame.gameBoard;
+		XmlDocument doc = new XmlDocument ();
+		XmlNode rootNode = doc.CreateElement ("map");
+		doc.AppendChild (rootNode);
+
+		Board myBoard = myGame.gameBoard;
 		
-				foreach (Tile t in myBoard.board) {
-						string landType = t.myType.ToString ();
-						string boardPosition = t.boardPosition.ToString ();
-						string gamePosition = t.gamePosition.ToString ();
+		foreach (Tile t in myBoard.board) {
 
-						string playerName = t.myVillage.myPlayer.username;
-						string gold = t.myVillage.gold.ToString ();
-						string wood = t.myVillage.wood.ToString ();
-						string villageType = t.myVillage.myType.ToString ();
-						string locationOfTile = t.myVillage.location.boardPosition.ToString (); //not sure if that is the location Ben wants
+			if(t.myType == LandType.Sea){  //  when type is sea, we only serialize tile info
+					
+				XmlNode tileNode = doc.CreateElement ("tile");
+				XmlAttribute landTypeAtt = doc.CreateAttribute ("landType");
+				landTypeAtt.Value = "Sea";
+				XmlAttribute boardPositionAtt = doc.CreateAttribute ("boardPosition");
+				boardPositionAtt.Value = "Vector";
+				XmlAttribute gamePositionAtt = doc.CreateAttribute ("gamePosition");
+				gamePositionAtt.Value = "Vector";
+					
+				tileNode.Attributes.Append (landTypeAtt);
+				tileNode.Attributes.Append (boardPositionAtt);
+				tileNode.Attributes.Append (gamePositionAtt);
+				rootNode.AppendChild (tileNode);
+					
+			}
 
-						string unitType = t.occupyingUnit.myType.ToString ();
-						string unitAction = t.occupyingUnit.currentAction.ToString ();
+			else{
+				XmlNode tileNode = doc.CreateElement ("tile");
+				XmlAttribute landTypeAtt = doc.CreateAttribute ("landType");
+				landTypeAtt.Value = t.myType.ToString ();
+				XmlAttribute boardPositionAtt = doc.CreateAttribute ("boardPosition");
+				boardPositionAtt.Value = t.boardPosition.ToString ();
+				XmlAttribute gamePositionAtt = doc.CreateAttribute ("gamePosition");
+				gamePositionAtt.Value = t.gamePosition.ToString ();
+			
+				tileNode.Attributes.Append (landTypeAtt);
+				tileNode.Attributes.Append (boardPositionAtt);
+				tileNode.Attributes.Append (gamePositionAtt);
+				rootNode.AppendChild (tileNode);
+			
+				XmlNode villageNode = doc.CreateElement ("village");
+				XmlAttribute pName = doc.CreateAttribute ("playerName");
+				pName.Value = t.myVillage.myPlayer.username;
+				XmlAttribute goldAtt = doc.CreateAttribute ("gold");
+				goldAtt.Value = t.myVillage.gold.ToString ();
+				XmlAttribute woodAtt = doc.CreateAttribute ("wood");
+				woodAtt.Value = t.myVillage.wood.ToString ();
+				XmlAttribute vAtt = doc.CreateAttribute ("villageType");
+				vAtt.Value = t.myVillage.myType.ToString ();
+				XmlAttribute locAtt = doc.CreateAttribute ("locationOfTiles");
+				locAtt.Value =t.myVillage.location.boardPosition.ToString ();
+			
+				villageNode.Attributes.Append (pName);
+				villageNode.Attributes.Append (goldAtt);
+				villageNode.Attributes.Append (woodAtt);
+				villageNode.Attributes.Append (vAtt);
+				villageNode.Attributes.Append (locAtt);
+				tileNode.AppendChild (villageNode);
+			
+				XmlNode structureNode = doc.CreateElement ("structure");
+				XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
+				sTypeAtt.Value = t.occupyingStructure.myType.ToString ();
+				structureNode.Attributes.Append (sTypeAtt);
+				tileNode.AppendChild (structureNode);
+			
+				XmlNode unitNode = doc.CreateElement ("unit");
+				XmlAttribute uTypeAtt = doc.CreateAttribute ("unitType");
+				uTypeAtt.Value = t.occupyingUnit.myType.ToString ();
+				XmlAttribute uAction = doc.CreateAttribute ("unitAction");
+				uAction.Value = t.occupyingUnit.currentAction.ToString ();
+			
+				unitNode.Attributes.Append (uTypeAtt);
+				unitNode.Attributes.Append (uAction);
+			
+				tileNode.AppendChild (unitNode);
+			}
+		} //end iterating over each tile
 
-						string structureType = t.occupyingStructure.myType.ToString ();
+		//save xml file state_username.xml
+		string pname = myPlayer.username.ToString ();
+		doc.Save ("state_"+pname+".xml");
+	}
 
 
-
-				}
-		}
-
-	static void Main( string[ ] args ) {
+//FOR TESTING PURPOSES
+	void Start(){
 		XmlDocument doc = new XmlDocument ();
 		XmlNode rootNode = doc.CreateElement ("map");
 		doc.AppendChild (rootNode);
 			
-		XmlNode tileNode = doc.CreateElement ("tile");
-		XmlAttribute landTypeAtt = doc.CreateAttribute ("landType");
-		landTypeAtt.Value = "Sea";
-		XmlAttribute boardPositionAtt = doc.CreateAttribute ("boardPosition");
-		boardPositionAtt.Value = "Vector1";
-		XmlAttribute gamePositionAtt = doc.CreateAttribute ("gamePosition");
-		gamePositionAtt.Value = "Vector1";
+		for (int i = 1; i <= 10; i++) {
 
-		tileNode.Attributes.Append (landTypeAtt);
-		tileNode.Attributes.Append (boardPositionAtt);
-		tileNode.Attributes.Append (gamePositionAtt);
-		rootNode.AppendChild (tileNode);
+						if (i == 5){ // test for when type is sea, so we only serialize tile info
+					
+				XmlNode tileNode = doc.CreateElement ("tile");
+				XmlAttribute landTypeAtt = doc.CreateAttribute ("landType");
+				landTypeAtt.Value = "Sea";
+				XmlAttribute boardPositionAtt = doc.CreateAttribute ("boardPosition");
+				boardPositionAtt.Value = "Vector";
+				XmlAttribute gamePositionAtt = doc.CreateAttribute ("gamePosition");
+				gamePositionAtt.Value = "Vector";
+				
+				tileNode.Attributes.Append (landTypeAtt);
+				tileNode.Attributes.Append (boardPositionAtt);
+				tileNode.Attributes.Append (gamePositionAtt);
+				rootNode.AppendChild (tileNode);
 
-		XmlNode villageNode = doc.CreateElement ("village");
-		XmlAttribute pName = doc.CreateAttribute ("playerName");
-		pName.Value = "Ben";
-		XmlAttribute goldAtt = doc.CreateAttribute ("gold");
-		goldAtt.Value = "78";
-		XmlAttribute woodAtt = doc.CreateAttribute ("wood");
-		woodAtt.Value = "56";
-		XmlAttribute vAtt = doc.CreateAttribute ("villageType");
-		vAtt.Value = "Hovel";
-		XmlAttribute locAtt = doc.CreateAttribute ("locationOfTiles");
-		locAtt.Value = "Vector";
 
-		villageNode.Attributes.Append (pName);
-		villageNode.Attributes.Append (goldAtt);
-		villageNode.Attributes.Append (woodAtt);
-		villageNode.Attributes.Append (vAtt);
-		villageNode.Attributes.Append (locAtt);
-		tileNode.AppendChild (villageNode);
+						}
+			else{
+						XmlNode tileNode = doc.CreateElement ("tile");
+						XmlAttribute landTypeAtt = doc.CreateAttribute ("landType");
+						landTypeAtt.Value = "Sea";
+						XmlAttribute boardPositionAtt = doc.CreateAttribute ("boardPosition");
+						boardPositionAtt.Value = "Vector";
+						XmlAttribute gamePositionAtt = doc.CreateAttribute ("gamePosition");
+						gamePositionAtt.Value = "Vector";
 
-		XmlNode structureNode = doc.CreateElement ("structure");
-		XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
-		sTypeAtt.Value = "Tower";
-		structureNode.Attributes.Append (sTypeAtt);
-		tileNode.AppendChild (structureNode);
+						tileNode.Attributes.Append (landTypeAtt);
+						tileNode.Attributes.Append (boardPositionAtt);
+						tileNode.Attributes.Append (gamePositionAtt);
+						rootNode.AppendChild (tileNode);
 
-		XmlNode unitNode = doc.CreateElement ("unit");
-		XmlAttribute uTypeAtt = doc.CreateAttribute ("unitType");
-		uTypeAtt.Value = "Knight";
-		XmlAttribute uAction = doc.CreateAttribute ("unitAction");
-		uAction.Value = "Fighting";
+						XmlNode villageNode = doc.CreateElement ("village");
+						XmlAttribute pName = doc.CreateAttribute ("playerName");
+						pName.Value = "Ben";
+						XmlAttribute goldAtt = doc.CreateAttribute ("gold");
+						goldAtt.Value = i.ToString ();
+						XmlAttribute woodAtt = doc.CreateAttribute ("wood");
+						woodAtt.Value = (i + 6).ToString ();
+						XmlAttribute vAtt = doc.CreateAttribute ("villageType");
+						vAtt.Value = "Hovel";
+						XmlAttribute locAtt = doc.CreateAttribute ("locationOfTiles");
+						locAtt.Value = "Vector";
 
-		unitNode.Attributes.Append (uTypeAtt);
-		unitNode.Attributes.Append (uAction);
+						villageNode.Attributes.Append (pName);
+						villageNode.Attributes.Append (goldAtt);
+						villageNode.Attributes.Append (woodAtt);
+						villageNode.Attributes.Append (vAtt);
+						villageNode.Attributes.Append (locAtt);
+						tileNode.AppendChild (villageNode);
 
-		tileNode.AppendChild (unitNode);
+						XmlNode structureNode = doc.CreateElement ("structure");
+						XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
+						sTypeAtt.Value = "Tower";
+						structureNode.Attributes.Append (sTypeAtt);
+						tileNode.AppendChild (structureNode);
 
-		doc.Save ("test.xml");
+						XmlNode unitNode = doc.CreateElement ("unit");
+						XmlAttribute uTypeAtt = doc.CreateAttribute ("unitType");
+						uTypeAtt.Value = "Knight";
+						XmlAttribute uAction = doc.CreateAttribute ("unitAction");
+						uAction.Value = "Fighting";
+
+						unitNode.Attributes.Append (uTypeAtt);
+						unitNode.Attributes.Append (uAction);
+
+						tileNode.AppendChild (unitNode);
+			}
+			Debug.Log (i.ToString());
+			
+				}
+		string test = "hello";
+		doc.Save ("emily_"+test+".xml");
 		}
-
-
 
 } //end class
 
