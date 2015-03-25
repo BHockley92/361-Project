@@ -29,14 +29,15 @@ public enum MWNetworkResponse
  */
 public class MWNetwork : Photon.MonoBehaviour
 {
-	private static MWNetwork instance;
-
-	private static string version = "1.0";    // The game version.  Will probably never change this.
-	private MedievalWarfare game;
+	// Event codes
+	private const byte UPDATED_GAME_STATE = 1;
 
 	// Useful references to GUI elements
-    public GUILogic gui;
-    public Text GUIplayerList;
+	public GUILogic gui;
+	public Text GUIplayerList;
+    
+	private static MWNetwork instance;
+	private static string version = "1.0";    // The game version.  Will probably never change this.
 
 	/* 
 	 * Connects to Photon's master server using current version number.
@@ -47,6 +48,8 @@ public class MWNetwork : Photon.MonoBehaviour
     
         PhotonNetwork.ConnectUsingSettings(version);
         Debug.Log("Connected to master server!");
+        
+        PhotonNetwork.OnEventCall += this.OnGameStateReceived;
     }
 
     /* 
@@ -110,7 +113,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	 * are ordered according to when they joined.
      * Returns a response indicating whether the game was started succesfully or not.
 	 */
-    public MWNetworkResponse startGame(MedievalWarfare game)
+    public MWNetworkResponse startGame()
 	{
 		// Make sure starting conditions are satisfied:
         // 1.   A room has been joined
@@ -138,9 +141,6 @@ public class MWNetwork : Photon.MonoBehaviour
             Debug.Log("Cannot start game: must be between 2 and " + PhotonNetwork.room.maxPlayers + " players.");
             return MWNetworkResponse.BAD_PLAYER_COUNT;
 		}
-		
-		// Keep reference to game
-		this.game = game;
 		
 		// Make the room impossible to see or join
 		PhotonNetwork.room.visible = false;
@@ -220,6 +220,33 @@ public class MWNetwork : Photon.MonoBehaviour
         }
 		
 		return mwPlayers;
+	}
+	
+	/*
+	 * Call the function at the end of your turn.
+	 * Lets other players know your turn has ended by updating their game state.
+	 */
+	public void turnEnded(string gameState)
+	{
+		if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
+								      gameState,
+								      true,
+								      new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others }))
+		{
+			Debug.Log("Error sending game state over network.");
+		}
+	}
+	
+	/*
+	 * Called when "turnEnded" is called on another player.
+	 * Delegates the deserialization task.
+	 */
+	public void OnGameStateReceived(byte eventCode, object content, int senderId)
+	{
+		if (eventCode == UPDATED_GAME_STATE)
+		{
+			gui.UpdateGameState((string)content);
+		}
 	}
 
     /*****************************************************************************************************
