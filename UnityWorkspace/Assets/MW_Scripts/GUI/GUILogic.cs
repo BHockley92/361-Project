@@ -15,6 +15,7 @@ public class GUILogic : MonoBehaviour {
 	public Button ENDTURN;
 	public Transform LAST_CLICKED_ON { get; set;}
 	private Dictionary<Vector2,AbstractTile> BOARD_TILES = new Dictionary<Vector2,AbstractTile>();
+	private SerializeGame SERIALIZER = new SerializeGame();
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -27,10 +28,8 @@ public class GUILogic : MonoBehaviour {
 
 	//Authenticates the user to view stats
 	public void Authenticate() {
-		
 		PLAYER = new MW_Player();
 		PLAYER.setAttribute(USERNAME.text);
-		
 		NETWORK.Authenticate(USERNAME.text, PASSWORD.text);
 	}
 
@@ -41,12 +40,12 @@ public class GUILogic : MonoBehaviour {
 
 	//Populate popup with available maps
 	public void NewGame() {
-		//Discuss with kevin
+		//
 	}
 
 	//Populate popup with saved maps
 	public void LoadGame() {
-		//discuss with alex
+		//
 	}
 
 	//Create a lobby and populate with information
@@ -56,39 +55,47 @@ public class GUILogic : MonoBehaviour {
 
 	//Sends message in input to all players
 	public void SendMessage() {
-		//Discuss with kevin
+		//Chat api
 	}
 
 	//Terminates the current game and sends to main menu
 	public void EndGame() {
-		//Discuss with Kevin
+		//How do we want to handle when a player ends the game?
 	}
 
 	//Saves the current state of the game and informs all players
 	public void SaveGame() {
-		//Discuss with Alex?
+		SERIALIZER.saveGameState(GAME,PLAYER);
 	}
 
 	//When it becomes current players turn, enable the endturn button
 	public void BeginTurn() {
-		//Need a call back or some sort of notication. Busy waiting doesn't work
-		//Callback should include the game state so I can pass it in
-		//GAME.myGameLogic.beginTurn(,PLAYER);
-		//Update GUI
+		GAME.myGameLogic.beginTurn(PLAYER,GAME);
+		//If my turn then enable button
+		ENDTURN.enabled = true;
+		//Otherwise, keep it disabled but update text
+	}
+
+	private void UpdateGameState() {
+
 	}
 
 	//Ends current turn and goes to next player
 	public void EndTurn() {
 		ENDTURN.enabled = false;
 		GAME.EndTurn ();
+		//Serialize the state of the game now
+		SERIALIZER.saveGameState(GAME,PLAYER);
+		//Push the serialize state over the network (with next player?)
 	}
 
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
+		//If not host, dont do shit
 		MedievalWarfare mw = new MedievalWarfare ();
 		GAME = mw.newGame (NETWORK.getPlayers());
 		visualizeMap();
-		NETWORK.startGame(mw);	// TODO React to network's response.
+		NETWORK.startGame(mw);
 	}
 
 	private void visualizeMap() {
@@ -117,7 +124,7 @@ public class GUILogic : MonoBehaviour {
 			//Store it for easier lookup
 			BOARD_TILES.Add(current.gamePosition,current);
 			//Create the game representation of the tile
-			NETWORK.instantiate(tile, new Vector3(x, 0.1f, y), Quaternion.identity);
+			GameObject.Instantiate(tile, new Vector3(x, 0.1f, y), Quaternion.identity);
 		}
 	}
 
@@ -132,8 +139,13 @@ public class GUILogic : MonoBehaviour {
 			default: break;
 		}
 		GAME.myGameLogic.upgradeVillage(building_tile.myVillage, new_type);
-
-		//Name associated or am I doing switch statements
+		//Create new village
+		GameObject upgraded_village = (GameObject)Resources.Load("building"+new_type.ToString().ToLower());
+		GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y), Quaternion.identity);
+		//Destroy old village
+		Object.Destroy(LAST_CLICKED_ON);
+		//Set new last clicked on
+		LAST_CLICKED_ON = upgraded_village.transform;
 	}
 
 	public void UpgradeUnit() {
@@ -148,8 +160,14 @@ public class GUILogic : MonoBehaviour {
 			default: break;
 		}
 		GAME.myGameLogic.upgradeUnit(unit_tile.occupyingUnit, new_type);
+		//Generate the new unit
+		GameObject upgraded_unit = (GameObject)Resources.Load("unit"+new_type.ToString().ToLower());
+		GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position, Quaternion.identity);
+		//Remove the old one
+		GameObject.Destroy(LAST_CLICKED_ON);
+		//Set new last clicked on
+		LAST_CLICKED_ON = upgraded_unit.transform;
 
-		//Name associated or am I doing switch statements?
 	}
 
 	public void HireVillager() {
@@ -162,7 +180,7 @@ public class GUILogic : MonoBehaviour {
 		
 		//Load new unit
 		GameObject new_unit = (GameObject)Resources.Load("peasent");
-		NETWORK.instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
+		GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
 		//Destroy current unit
 		Object.Destroy(LAST_CLICKED_ON);
 		//Set new last clicked on
@@ -171,6 +189,6 @@ public class GUILogic : MonoBehaviour {
 
 	//The leave or disband button depending on host or player
 	public void Leave_Disband() {
-		//TODO: Discuss with kevin on how this should work
+		//TODO: Need callback that tells everyone to call leave_disband if they aren't the host
 	}
 }
