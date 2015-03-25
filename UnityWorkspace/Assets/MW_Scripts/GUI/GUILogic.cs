@@ -76,8 +76,8 @@ public class GUILogic : MonoBehaviour {
 		//Otherwise, keep it disabled but update text
 	}
 
-	private void UpdateGameState() {
-
+	public void UpdateGameState(string gameState) {
+		Debug.Log("Received game state");
 	}
 
 	//Ends current turn and goes to next player
@@ -95,7 +95,7 @@ public class GUILogic : MonoBehaviour {
 		MedievalWarfare mw = new MedievalWarfare ();
 		GAME = mw.newGame (NETWORK.getPlayers());
 		visualizeMap();
-		NETWORK.startGame(mw);
+		NETWORK.startGame();
 	}
 
 	private void visualizeMap() {
