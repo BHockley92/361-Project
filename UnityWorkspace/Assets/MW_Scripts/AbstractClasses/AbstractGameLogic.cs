@@ -9,6 +9,9 @@ public abstract class AbstractGameLogic
 	public abstract void hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile);
 	public abstract void buildRoad (AbstractUnit u);
 	public abstract bool buildTower(AbstractTile t);
+	public abstract bool buildCannon(AbstractTile t, AbstractVillage owner);
+
+	public abstract bool isVillageStillAlive(AbstractVillage v); // for cannonball hits
 
 	public abstract bool upgradeVillage (AbstractVillage v, VillageType newType);
 	public abstract bool upgradeUnit (AbstractUnit u, UnitType newType);

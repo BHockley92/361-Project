@@ -82,6 +82,44 @@ public class GameLogic : AbstractGameLogic
 		return false;
 	}
 
+	public override bool buildCannon(AbstractTile t, AbstractVillage owner)
+	{
+		if( t.myVillage == owner )
+		{
+			if( (int) owner.myType >= (int) VillageType.Fort && t.getNeighbours().Contains(owner.location))
+			{
+				if(t.occupyingUnit == null && owner.gold >= 35 && owner.wood >= 12)
+				{
+					owner.gold -= 35;
+					owner.wood -= 12;
+
+					Unit cannon = new Unit( owner, t );
+					cannon.isCannon = true;
+					cannon.myType = UnitType.Soldier;
+					t.occupyingUnit = cannon;
+
+					owner.supportedUnits.Add(cannon);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public override bool isVillageStillAlive(AbstractVillage v)
+	{
+		if(v.myType == VillageType.Hovel && v.damageTaken >= 1)
+			return false;
+		if(v.myType == VillageType.Town && v.damageTaken >= 2)
+			return false;
+		if(v.myType == VillageType.Fort && v.damageTaken >= 5)
+			return false;
+		if(v.myType == VillageType.Castle && v.damageTaken >= 10)
+			return false;
+
+		return true;
+	}
+
 	// returns true upon successful upgrade
 	public override bool upgradeVillage(AbstractVillage v, VillageType newType)
 	{
