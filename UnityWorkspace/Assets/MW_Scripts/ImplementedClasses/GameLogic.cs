@@ -513,16 +513,23 @@ public class GameLogic : AbstractGameLogic
 	{
 		List<AbstractUnit> supportedUnits = myVillage.supportedUnits;
 		
-		int totalCost = 0;
-		
+		int totalGoldCost = 0;
+
 		foreach(AbstractUnit u in supportedUnits)
 		{
-			totalCost += myValueManager.getMaintenanceCost(u.myType);
+			if( !u.isCannon)
+				totalGoldCost += myValueManager.getMaintenanceCost(u.myType);
+			else
+				totalGoldCost += 5;
+
 		}
+
+		if( myVillage.myType == VillageType.Castle )
+			totalGoldCost += 80;
 		
-		if( myVillage.gold >= totalCost )
+		if( myVillage.gold >= totalGoldCost )
 		{
-			myVillage.gold -= totalCost;
+			myVillage.gold -= totalGoldCost;
 		}
 		
 		// not enough money, EVERYONE DIES (that's associated to the village)
@@ -530,6 +537,9 @@ public class GameLogic : AbstractGameLogic
 		{
 			myVillage.gold = 0;
 			perishVillagers(myVillage);
+
+			if( myVillage.myType == VillageType.Castle )
+				myVillage.myType = VillageType.Fort;
 		}
 	}
 	
