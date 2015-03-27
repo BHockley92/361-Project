@@ -67,6 +67,7 @@ public class Board {
 	/*
 	 * returns neighbours of a given tile
 	 * returns null if the tile is not found
+	 * No sea tiles are returned
 	 */ 
 	public List<Tile> getNeighbours(AbstractTile t)
 	{
@@ -88,6 +89,7 @@ public class Board {
 	/**
 	 * Returns a List of tiles adjacent to the unit.
 	 * Returns an empty list if the coordinates are out of bounds.
+	 * No sea tiles are returned
 	 */
 	public List<Tile> getNeighbours(int x, int z)
 	{
@@ -103,15 +105,16 @@ public class Board {
 				// Check that left adjacent spaces are valid
 				if( x - 1 >= 0 )
 				{
-					ret.Add(board[x - 1, z]);
+					if( board[x - 1, z].myType != LandType.Sea)
+						ret.Add(board[x - 1, z]);
 
 					// Check for the above and below
-					if( z - 1 >= 0 )
+					if( z - 1 >= 0 && board[x - 1, z - 1].myType != LandType.Sea)
 					{
 						ret.Add(board[x - 1, z - 1]);
 					}
 
-					if( z + 1 < board.GetLength(1))
+					if( z + 1 < board.GetLength(1) && board[x - 1, z + 1].myType != LandType.Sea)
 					{
 						ret.Add(board[ x - 1, z + 1 ]);
 					}
@@ -120,22 +123,24 @@ public class Board {
 				// Now check the right adjacent spaces
 				if( x + 1 < board.GetLength(0))
 				{
-					ret.Add ( board[ x + 1, z ] );
+					if( board[ x + 1, z ].myType != LandType.Sea )
+						ret.Add ( board[ x + 1, z ] );
 
 					// Check for the above and below
 					// Check for the above and below
-					if( z - 1 >= 0 )
+					if( z - 1 >= 0 && board[x + 1, z - 1].myType != LandType.Sea)
 					{
 						ret.Add(board[x + 1, z - 1]);
 					}
 					
-					if( z + 1 < board.GetLength(1))
+					if( z + 1 < board.GetLength(1) && board[ x + 1, z + 1 ].myType != LandType.Sea)
 					{
 						ret.Add(board[ x + 1, z + 1 ]);
 					}
 				}
 			}
 		}
+
 		return ret;
 	}
 }
