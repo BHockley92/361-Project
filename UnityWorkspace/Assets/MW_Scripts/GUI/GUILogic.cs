@@ -99,14 +99,21 @@ public class GUILogic : MonoBehaviour {
 
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
-		//If not host, dont do shit
-		MedievalWarfare mw = new MedievalWarfare ();
-		//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
-		//TODO: DON'T GENERATE BOARD IN NEWGAME
-		GAME = mw.newGame (NETWORK.getPlayers(),20,20,2);
-		//Add generated board to GAME
-		//Start the game
-		NETWORK.startGame();
+		if(NETWORK.startGame() == MWNetworkResponse.GAME_START_SUCCESS) {
+			//If not host, dont do shit
+			MedievalWarfare mw = new MedievalWarfare ();
+			//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
+			//TODO: DON'T GENERATE BOARD IN NEWGAME
+			GAME = mw.newGame (NETWORK.getPlayers(),20,20,2);
+			//Add generated board to GAME
+			//Start the game
+			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
+			//How do I push the game state to players initially? Is this sufficient?
+			NETWORK.turnEnded(state.OuterXml);
+		}
+		else {
+			//Check the other possible problems
+		}
 	}
 
 	//TODO: fix this method
