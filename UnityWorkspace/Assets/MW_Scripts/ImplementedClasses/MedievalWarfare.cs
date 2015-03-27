@@ -6,11 +6,11 @@ using GameEnums;
 
 public class MedievalWarfare : AbstractMedievalWarfare
 {
-	public override MW_Game newGame(List<AbstractPlayer> participants)
+	public override MW_Game newGame(List<AbstractPlayer> participants, int width, int height, int waterboarder)
 	{
 		// initalize game for randomly generated board
 		GameLogic gl = new GameLogic (); 
-		MW_Game myGame = new MW_Game (participants, 20, 20, 2, gl);
+		MW_Game myGame = new MW_Game (participants, width, height, waterboarder, gl);
 		
 		//get tiles that make up board 
 		Board myBoard = myGame.gameBoard;

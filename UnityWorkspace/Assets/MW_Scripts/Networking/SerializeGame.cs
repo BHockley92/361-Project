@@ -3,6 +3,7 @@ using System.Xml;
 using System.Collections.Generic;
 using GameEnums;
 using System;
+//TODO: Add width, height, waterboarder as attributes to map
 /************ XML TEMPLATE ********
 <map>
     <tile landType = "" boardPosition = "" gamePosition = "">
@@ -21,7 +22,7 @@ using System;
 
 public class SerializeGame //: MonoBehaviour //uncomment when testing
 {
-	public void saveGameState(MW_Game myGame, MW_Player myPlayer) { //game state of myPlayer who ended turn will be saved
+	public XmlDocument saveGameState(MW_Game myGame, MW_Player myPlayer = null, string path = null) { //game state of myPlayer who ended turn will be saved
 
 		XmlDocument doc = new XmlDocument ();
 		XmlNode rootNode = doc.CreateElement ("map");
@@ -101,8 +102,11 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 		} //end iterating over each tile
 
 		//save xml file state_username.xml
-		string pname = myPlayer.username.ToString ();
-		doc.Save ("state_"+pname+".xml");
+		if(path != null) {
+			string pname = myPlayer.username.ToString ();
+			doc.Save ("state_"+pname+".xml");
+		}
+		return doc;
 	}
 
 

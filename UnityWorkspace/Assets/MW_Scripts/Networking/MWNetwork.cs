@@ -245,7 +245,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	{
 		if (eventCode == UPDATED_GAME_STATE)
 		{
-			gui.UpdateGameState((string)content);
+			gui.UpdateGameState((string)content, senderId);
 		}
 	}
 

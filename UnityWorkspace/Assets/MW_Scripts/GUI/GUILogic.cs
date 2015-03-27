@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using GameEnums;
+using System.Xml;
 
 public class GUILogic : MonoBehaviour {
 
@@ -16,6 +17,7 @@ public class GUILogic : MonoBehaviour {
 	public Transform LAST_CLICKED_ON { get; set;}
 	private Dictionary<Vector2,AbstractTile> BOARD_TILES = new Dictionary<Vector2,AbstractTile>();
 	private SerializeGame SERIALIZER = new SerializeGame();
+	private XmlDocument LOADED_GAME;
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -40,17 +42,20 @@ public class GUILogic : MonoBehaviour {
 
 	//Populate popup with available maps
 	public void NewGame() {
-		//
+
 	}
 
 	//Populate popup with saved maps
 	public void LoadGame() {
-		//
+
 	}
 
 	//Create a lobby and populate with information
 	public void HostGame() {
+		//Will grab room name from selected GUI object
 		NETWORK.hostRoom("demo");
+		//From game object, if object has path, than load the XML
+		//if(.path != null) { LOADED_GAME.Load(.path); }
 	}
 
 	//Sends message in input to all players
@@ -68,37 +73,44 @@ public class GUILogic : MonoBehaviour {
 		SERIALIZER.saveGameState(GAME,PLAYER);
 	}
 
+	public void UpdateGameState(string gameState, int senderId) {
+		XmlDocument state = new XmlDocument();
+		state.LoadXml (gameState);
+		//How do I determine who's turn it is? 
+		BeginTurn ();
+	}
+
 	//When it becomes current players turn, enable the endturn button
 	public void BeginTurn() {
 		GAME.myGameLogic.beginTurn(PLAYER,GAME);
-		//If my turn then enable button
 		ENDTURN.enabled = true;
-		//Otherwise, keep it disabled but update text
-	}
-
-	public void UpdateGameState(string gameState) {
-		Debug.Log("Received game state");
 	}
 
 	//Ends current turn and goes to next player
 	public void EndTurn() {
 		ENDTURN.enabled = false;
+		//Update game state with transitions
 		GAME.EndTurn ();
 		//Serialize the state of the game now
-		SERIALIZER.saveGameState(GAME,PLAYER);
-		//Push the serialize state over the network (with next player?)
+		XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
+		//Push the serialize state over the network
+		NETWORK.turnEnded(state.OuterXml);
 	}
 
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
 		//If not host, dont do shit
 		MedievalWarfare mw = new MedievalWarfare ();
-		GAME = mw.newGame (NETWORK.getPlayers());
-		visualizeMap();
+		//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
+		//TODO: DON'T GENERATE BOARD IN NEWGAME
+		GAME = mw.newGame (NETWORK.getPlayers(),20,20,2);
+		//Add generated board to GAME
+		//Start the game
 		NETWORK.startGame();
 	}
 
-	private void visualizeMap() {
+	//TODO: fix this method
+	private void generateBoard(XmlDocument xml_board) {
 		foreach(Tile current in GAME.gameBoard.board) {
 			GameObject tile = null;
 			//Find the type of terrain to spawn
@@ -126,6 +138,9 @@ public class GUILogic : MonoBehaviour {
 			//Create the game representation of the tile
 			GameObject.Instantiate(tile, new Vector3(x, 0.1f, y), Quaternion.identity);
 		}
+		//Get parameters from XML.
+		//Board game_board = new Board();
+		//return game_board;
 	}
 
 	public void UpgradeVillage() {
@@ -138,14 +153,18 @@ public class GUILogic : MonoBehaviour {
 			case VillageType.Town: new_type = VillageType.Fort; break;
 			default: break;
 		}
-		GAME.myGameLogic.upgradeVillage(building_tile.myVillage, new_type);
-		//Create new village
-		GameObject upgraded_village = (GameObject)Resources.Load("building"+new_type.ToString().ToLower());
-		GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y), Quaternion.identity);
-		//Destroy old village
-		Object.Destroy(LAST_CLICKED_ON);
-		//Set new last clicked on
-		LAST_CLICKED_ON = upgraded_village.transform;
+		if(GAME.myGameLogic.upgradeVillage(building_tile.myVillage, new_type)) {
+			//Create new village
+			GameObject upgraded_village = (GameObject)Resources.Load("building"+new_type.ToString().ToLower());
+			GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y), Quaternion.identity);
+			//Destroy old village
+			Object.Destroy(LAST_CLICKED_ON);
+			//Set new last clicked on
+			LAST_CLICKED_ON = upgraded_village.transform;
+		}
+		else {
+			//Show error
+		}
 	}
 
 	public void UpgradeUnit() {
@@ -159,15 +178,18 @@ public class GUILogic : MonoBehaviour {
 			case UnitType.Soldier: new_type = UnitType.Knight; break;
 			default: break;
 		}
-		GAME.myGameLogic.upgradeUnit(unit_tile.occupyingUnit, new_type);
-		//Generate the new unit
-		GameObject upgraded_unit = (GameObject)Resources.Load("unit"+new_type.ToString().ToLower());
-		GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position, Quaternion.identity);
-		//Remove the old one
-		GameObject.Destroy(LAST_CLICKED_ON);
-		//Set new last clicked on
-		LAST_CLICKED_ON = upgraded_unit.transform;
-
+		if(GAME.myGameLogic.upgradeUnit(unit_tile.occupyingUnit, new_type)) {
+			//Generate the new unit
+			GameObject upgraded_unit = (GameObject)Resources.Load("unit"+new_type.ToString().ToLower());
+			GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position, Quaternion.identity);
+			//Remove the old one
+			GameObject.Destroy(LAST_CLICKED_ON);
+			//Set new last clicked on
+			LAST_CLICKED_ON = upgraded_unit.transform;
+		}
+		else {
+			//Show error
+		}
 	}
 
 	public void HireVillager() {
