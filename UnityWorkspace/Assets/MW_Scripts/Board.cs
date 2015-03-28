@@ -23,10 +23,10 @@ public class Board {
 	}
 
 	// provide a ready made board
-	public Board( Tile[,] b )
+	public Board( Tile[,] b, int waterBorder)
 	{
 		board = b;
-		border = -1;
+		border = waterBorder; //might need to specify waterBorder
 	}
 
 	// Generates a random island that conforms to specs (300 land tiles that aren't water, one big land mass)

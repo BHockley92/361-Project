@@ -5,9 +5,9 @@ using GameEnums;
 using System;
 /************ XML TEMPLATE ********
 <map length = "" width = "", waterBorder ="">
-    <tile landType = "" boardPosition = "" gamePosition = "">
+    <tile landType = "" boardPositionX = "" boardPositionY = "" gamePositionX = "" gamePositionY="">
 
-		<village playerName= "" gold= "" wood="" villageType="" locationOfTile=""/>
+		<village playerName= "" gold= "" wood="" villageType="" locationOfTileX="" locationOfTileY=""/>
        
         <structure structureType = ""/>
     
@@ -19,8 +19,88 @@ using System;
  */
 
 
-public class SerializeGame //: MonoBehaviour //uncomment when testing
+public class SerializeGame  //: MonoBehaviour //uncomment when testing
 {
+
+	//advised not to do an XML diff, so for now we recreate the gameState from scratch by parsing xml file
+	public Board loadGameState(string path){
+		XmlDocument doc = new XmlDocument ();
+		doc.Load (path); //ex: doc.Load("c:\\test.xml");
+
+		//<map> attributes
+		string length = doc.DocumentElement.Attributes["length"].InnerText;
+		string width = doc.DocumentElement.Attributes["width"].InnerText;
+		string waterBorder = doc.DocumentElement.Attributes["waterBorder"].InnerText;
+
+		Tile[,] myTiles = new Tile[ Convert.ToInt32(length), Convert.ToInt32(width) ];
+		Board myGameBoard = new Board(myTiles, Convert.ToInt32(waterBorder)); //will this cause an error because myTiles is null right now?
+
+		//we will build myTiles from the XML file
+		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
+
+			if (node.Name == "tile"){
+				string landType = node.Attributes["landType"].InnerText;
+				string boardPositionX = node.Attributes["boardPositionX"].InnerText;
+				string boardPositionY = node.Attributes["boardPositionY"].InnerText;
+				string gamePositionX = node.Attributes["gamePositionX"].InnerText;
+				string gamePositionY = node.Attributes["gamePositionY"].InnerText;
+
+				//make new tile
+				LandType lType = (LandType)Enum.Parse(typeof(LandType), landType, true );
+				Tile myTile = new Tile(lType,myGameBoard,Convert.ToInt32(boardPositionX),Convert.ToInt32(boardPositionY));
+				Vector2 gamePos = new Vector2(Convert.ToInt32(gamePositionX), Convert.ToInt32(gamePositionY));
+				myTile.gamePosition = gamePos;
+
+
+				//skip this if tile is a sea tile, else iterate over village, structure and unit nodes
+				foreach (XmlNode tileChild in node.ChildNodes) {
+					if(tileChild.Name == "village"){
+						string playerName = tileChild.Attributes["playerName"].InnerText;
+						string gold = tileChild.Attributes["gold"].InnerText;
+						string wood = tileChild.Attributes["wood"].InnerText;
+						string villageType = tileChild.Attributes["villageType"].InnerText;
+						string locationOfTileX = tileChild.Attributes["locationOfTileX"].InnerText;
+						string locationOfTileY = tileChild.Attributes["locationOfTileY"].InnerText;
+						if(locationOfTileX == boardPositionX && locationOfTileY==boardPositionY){
+							//village is on this tile
+
+
+						}
+
+					
+					}
+
+					if(tileChild.Name == "structure"){
+						string structureType = tileChild.Attributes["structureType"].InnerText;
+						//convert string to enum
+						StructureType strucType = (StructureType)Enum.Parse(typeof(StructureType), structureType, true );
+						Structure myStruc = new Structure(myTile,strucType);
+					}
+
+					if(tileChild.Name == "unit"){
+						string unitType = tileChild.Attributes["unitType"].InnerText;
+						//Unit myUnit = new 
+						//myTile.occupyingUnit = myUnit;
+					}
+
+
+
+
+
+			}//end iterating over each tiles children: village, structure, unit
+
+
+			} //end iterating over each tile
+
+		}
+
+		return myGameBoard;
+	} //end loadGameState
+
+
+
+
+
 	public XmlDocument saveGameState(MW_Game myGame, MW_Player myPlayer = null, string path = null) { //game state of myPlayer who ended turn will be saved
 
 		XmlDocument doc = new XmlDocument ();
@@ -49,14 +129,21 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				XmlNode tileNode = doc.CreateElement ("tile");
 				XmlAttribute landTypeAtt = doc.CreateAttribute ("landType");
 				landTypeAtt.Value = "Sea";
-				XmlAttribute boardPositionAtt = doc.CreateAttribute ("boardPosition");
-				boardPositionAtt.Value = "Vector";
-				XmlAttribute gamePositionAtt = doc.CreateAttribute ("gamePosition");
-				gamePositionAtt.Value = "Vector";
-					
+				XmlAttribute x = doc.CreateAttribute ("boardPositionX");
+				x.Value = t.boardPosition.x.ToString(); //x value
+				XmlAttribute y = doc.CreateAttribute ("boardPositionY");
+				x.Value = t.boardPosition.y.ToString(); //y value
+				XmlAttribute gamePositionX = doc.CreateAttribute ("gamePositionX"); //x value
+				gamePositionX.Value = t.gamePosition.x.ToString ();
+				XmlAttribute gamePositionY = doc.CreateAttribute ("gamePositionY"); //y value
+				gamePositionY.Value = t.gamePosition.x.ToString ();
+
+
 				tileNode.Attributes.Append (landTypeAtt);
-				tileNode.Attributes.Append (boardPositionAtt);
-				tileNode.Attributes.Append (gamePositionAtt);
+				tileNode.Attributes.Append (x);
+				tileNode.Attributes.Append (y);
+				tileNode.Attributes.Append (gamePositionX);
+				tileNode.Attributes.Append (gamePositionY);
 				rootNode.AppendChild (tileNode);
 					
 			}
@@ -65,14 +152,22 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				XmlNode tileNode = doc.CreateElement ("tile");
 				XmlAttribute landTypeAtt = doc.CreateAttribute ("landType");
 				landTypeAtt.Value = t.myType.ToString ();
-				XmlAttribute boardPositionAtt = doc.CreateAttribute ("boardPosition");
-				boardPositionAtt.Value = t.boardPosition.ToString ();
-				XmlAttribute gamePositionAtt = doc.CreateAttribute ("gamePosition");
-				gamePositionAtt.Value = t.gamePosition.ToString ();
-			
+
+				XmlAttribute x = doc.CreateAttribute ("boardPositionX");
+				x.Value = t.boardPosition.x.ToString(); //x value
+				XmlAttribute y = doc.CreateAttribute ("boardPositionY");
+				x.Value = t.boardPosition.y.ToString(); //y value
+
+				XmlAttribute gamePositionX = doc.CreateAttribute ("gamePositionX"); //x value
+				gamePositionX.Value = t.gamePosition.x.ToString ();
+				XmlAttribute gamePositionY = doc.CreateAttribute ("gamePositionY"); //y value
+				gamePositionY.Value = t.gamePosition.x.ToString ();
+
 				tileNode.Attributes.Append (landTypeAtt);
-				tileNode.Attributes.Append (boardPositionAtt);
-				tileNode.Attributes.Append (gamePositionAtt);
+				tileNode.Attributes.Append(x);
+				tileNode.Attributes.Append(y);
+				tileNode.Attributes.Append (gamePositionX);
+				tileNode.Attributes.Append (gamePositionY);
 				rootNode.AppendChild (tileNode);
 			
 				XmlNode villageNode = doc.CreateElement ("village");
@@ -84,15 +179,18 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				woodAtt.Value = t.myVillage.wood.ToString ();
 				XmlAttribute vAtt = doc.CreateAttribute ("villageType");
 				vAtt.Value = t.myVillage.myType.ToString ();
-				XmlAttribute locAtt = doc.CreateAttribute ("locationOfTiles");
-				locAtt.Value =t.myVillage.location.boardPosition.ToString ();
-			
+				XmlAttribute locX = doc.CreateAttribute ("locationOfTileX");//removed plural why was it there 
+				locX.Value =t.myVillage.location.boardPosition.x.ToString ();
+				XmlAttribute locY = doc.CreateAttribute ("locationOfTileY");//removed plural why was it there 
+				locY.Value =t.myVillage.location.boardPosition.y.ToString ();
+
 				villageNode.Attributes.Append (pName);
 				villageNode.Attributes.Append (goldAtt);
 				villageNode.Attributes.Append (woodAtt);
 				villageNode.Attributes.Append (vAtt);
-				villageNode.Attributes.Append (locAtt);
-				tileNode.AppendChild (villageNode);
+				villageNode.Attributes.Append (locX);
+				villageNode.Attributes.Append (locY);
+								tileNode.AppendChild (villageNode);
 			
 				XmlNode structureNode = doc.CreateElement ("structure");
 				XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
@@ -123,7 +221,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 
 
 //FOR TESTING PURPOSES
-	void Start(){
+	/*void Start(){
 		XmlDocument doc = new XmlDocument ();
 		XmlNode rootNode = doc.CreateElement ("map");
 		doc.AppendChild (rootNode);
@@ -170,7 +268,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 						woodAtt.Value = (i + 6).ToString ();
 						XmlAttribute vAtt = doc.CreateAttribute ("villageType");
 						vAtt.Value = "Hovel";
-						XmlAttribute locAtt = doc.CreateAttribute ("locationOfTiles");
+						XmlAttribute locAtt = doc.CreateAttribute ("locationOfTile");
 						locAtt.Value = "Vector";
 
 						villageNode.Attributes.Append (pName);
@@ -203,7 +301,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 		string test = "hello";
 		doc.Save ("emily_"+test+".xml");
 		}
-
+*/
 } //end class
 
 
