@@ -3,9 +3,8 @@ using System.Xml;
 using System.Collections.Generic;
 using GameEnums;
 using System;
-//TODO: Add width, height, waterboarder as attributes to map
 /************ XML TEMPLATE ********
-<map>
+<map length = "" width = "", waterBorder ="">
     <tile landType = "" boardPosition = "" gamePosition = "">
 
 		<village playerName= "" gold= "" wood="" villageType="" locationOfTile=""/>
@@ -29,7 +28,20 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 		doc.AppendChild (rootNode);
 
 		Board myBoard = myGame.gameBoard;
-		
+
+		XmlAttribute length = doc.CreateAttribute ("length");
+		length.Value =(myBoard.board.GetLength (0) - 1).ToString ();
+
+		XmlAttribute width = doc.CreateAttribute ("width");
+		width.Value = (myBoard.board.GetLength(1) - 1).ToString (); 
+
+		XmlAttribute waterBorder = doc.CreateAttribute ("waterBorder");
+		waterBorder.Value = myBoard.border.ToString ();
+
+		rootNode.Attributes.Append (length);
+		rootNode.Attributes.Append (width);
+		rootNode.Attributes.Append (waterBorder);
+				
 		foreach (Tile t in myBoard.board) {
 
 			if(t.myType == LandType.Sea){  //  when type is sea, we only serialize tile info
