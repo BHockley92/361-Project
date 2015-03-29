@@ -209,50 +209,79 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 				tileNode.Attributes.Append (gamePositionX);
 				tileNode.Attributes.Append (gamePositionY);
 				rootNode.AppendChild (tileNode);
-			
-				XmlNode villageNode = doc.CreateElement ("village");
-				XmlAttribute pName = doc.CreateAttribute ("playerName");
-				pName.Value = t.myVillage.myPlayer.username;
-				XmlAttribute goldAtt = doc.CreateAttribute ("gold");
-				goldAtt.Value = t.myVillage.gold.ToString ();
-				XmlAttribute woodAtt = doc.CreateAttribute ("wood");
-				woodAtt.Value = t.myVillage.wood.ToString ();
-				XmlAttribute vAtt = doc.CreateAttribute ("villageType");
-				vAtt.Value = t.myVillage.myType.ToString ();
-				XmlAttribute locX = doc.CreateAttribute ("locationOfTileX");//removed plural why was it there 
-				locX.Value =t.myVillage.location.boardPosition.x.ToString ();
-				XmlAttribute locY = doc.CreateAttribute ("locationOfTileY");//removed plural why was it there 
-				locY.Value =t.myVillage.location.boardPosition.y.ToString ();
 
-				XmlNode structureNode = doc.CreateElement ("structure");
-				XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
-				sTypeAtt.Value = t.occupyingStructure.myType.ToString ();
-				structureNode.Attributes.Append (sTypeAtt);
-				tileNode.AppendChild (structureNode);
+				//if there's a structure make a child node for tile <structure>
+				if(t.occupyingStructure != null){
+					XmlNode structureNode = doc.CreateElement ("structure");
+					XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
+					sTypeAtt.Value = t.occupyingStructure.myType.ToString ();
+					structureNode.Attributes.Append (sTypeAtt);
+					tileNode.AppendChild (structureNode);
+				}
+				//if there's a village, make a village node
+				if(t.myVillage != null){
+					XmlNode villageNode = doc.CreateElement ("village");
+					XmlAttribute pName = doc.CreateAttribute ("playerName");
+					pName.Value = t.myVillage.myPlayer.username;
+					XmlAttribute goldAtt = doc.CreateAttribute ("gold");
+					goldAtt.Value = t.myVillage.gold.ToString ();
+					XmlAttribute woodAtt = doc.CreateAttribute ("wood");
+					woodAtt.Value = t.myVillage.wood.ToString ();
+					XmlAttribute vAtt = doc.CreateAttribute ("villageType");
+					vAtt.Value = t.myVillage.myType.ToString ();
+					XmlAttribute locX = doc.CreateAttribute ("locationOfTileX");//removed plural why was it there 
+					locX.Value =t.myVillage.location.boardPosition.x.ToString ();
+					XmlAttribute locY = doc.CreateAttribute ("locationOfTileY");//removed plural why was it there 
+					locY.Value =t.myVillage.location.boardPosition.y.ToString ();
+
+					villageNode.Attributes.Append (pName);
+					villageNode.Attributes.Append (goldAtt);
+					villageNode.Attributes.Append (woodAtt);
+					villageNode.Attributes.Append (vAtt);
+					villageNode.Attributes.Append (locX);
+					villageNode.Attributes.Append (locY);
+					rootNode.AppendChild (villageNode); //changed to a child not subchild
+
+					List<AbstractTile> region = t.myVillage.controlledRegion;
+					foreach(Tile regionTile in region){
+						XmlNode controlledTile = doc.CreateElement("controlledTile");
+						XmlAttribute boardX = doc.CreateAttribute("boardX");
+						boardX.Value = regionTile.boardPosition.x.ToString();
+						XmlAttribute boardY = doc.CreateAttribute("boardY");
+						boardY.Value = regionTile.boardPosition.y.ToString();
+
+						controlledTile.Attributes.Append(boardX);
+						controlledTile.Attributes.Append(boardY);
+						villageNode.AppendChild(controlledTile);
+					}
 
 
-				villageNode.Attributes.Append (pName);
-				villageNode.Attributes.Append (goldAtt);
-				villageNode.Attributes.Append (woodAtt);
-				villageNode.Attributes.Append (vAtt);
-				villageNode.Attributes.Append (locX);
-				villageNode.Attributes.Append (locY);
-				rootNode.AppendChild (villageNode); //changed to a child not subchild
-			
+				}
+				//if there's a unit, make a node <unit>
+				if(t.occupyingUnit != null){
+					XmlNode unitNode = doc.CreateElement ("unit");
+					XmlAttribute uTypeAtt = doc.CreateAttribute ("unitType");
+					uTypeAtt.Value = t.occupyingUnit.myType.ToString ();
+					XmlAttribute uAction = doc.CreateAttribute ("unitAction");
+					uAction.Value = t.occupyingUnit.currentAction.ToString ();
+					XmlAttribute xpos = doc.CreateAttribute("villageOwnerX");
+					xpos.Value = t.occupyingUnit.myVillage.location.boardPosition.x.ToString();
+					XmlAttribute ypos = doc.CreateAttribute("villageOwnerY");
+					ypos.Value = t.occupyingUnit.myVillage.location.boardPosition.y.ToString();
+					XmlAttribute unitPosX = doc.CreateAttribute("unitX");
+					unitPosX.Value=t.occupyingUnit.myLocation.boardPosition.x.ToString();
+					XmlAttribute unitPosY = doc.CreateAttribute("unitY");
+					unitPosX.Value=t.occupyingUnit.myLocation.boardPosition.y.ToString();
 
-				XmlNode unitNode = doc.CreateElement ("unit");
-				XmlAttribute uTypeAtt = doc.CreateAttribute ("unitType");
-				uTypeAtt.Value = t.occupyingUnit.myType.ToString ();
-				XmlAttribute uAction = doc.CreateAttribute ("unitAction");
-				uAction.Value = t.occupyingUnit.currentAction.ToString ();
-				XmlAttribute xpos = doc.CreateAttribute("villageOwnerX");
-				xpos.Value = t.myVillage.location.boardPosition.x.ToString();
-				XmlAttribute ypos = doc.CreateAttribute("villageOwnerY");
-				ypos.Value = t.myVillage.location.boardPosition.y.ToString();
+					unitNode.Attributes.Append (uTypeAtt);
+					unitNode.Attributes.Append (uAction);
+					unitNode.Attributes.Append(xpos);
+					unitNode.Attributes.Append(ypos);
+					unitNode.Attributes.Append(unitPosX);
+					unitNode.Attributes.Append(unitPosY);
+					rootNode.AppendChild (unitNode); //changed to a child not subchild
+				}
 
-				unitNode.Attributes.Append (uTypeAtt);
-				unitNode.Attributes.Append (uAction);
-				rootNode.AppendChild (unitNode); //changed to a child not subchild
 			}
 		} //end iterating over each tile
 
