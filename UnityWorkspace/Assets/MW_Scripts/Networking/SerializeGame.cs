@@ -3,17 +3,22 @@ using System.Xml;
 using System.Collections.Generic;
 using GameEnums;
 using System;
-/************ XML TEMPLATE ********
+/************ XML TEMPLATE (EDITED)********
 <map length = "" width = "", waterBorder ="">
-    <tile landType = "" boardPositionX = "" boardPositionY = "" gamePositionX = "" gamePositionY="">
 
-		<village playerName= "" gold= "" wood="" villageType="" locationOfTileX="" locationOfTileY=""/>
-       
-        <structure structureType = ""/>
-    
-        <unit unitType="" unitAction=""/>  
-        
+	<tile landType = "" boardPositionX = "" boardPositionY = "" gamePositionX = "" gamePositionY="">
+    		<structure structureType = ""/>
     </tile>
+
+	<village playerName= "" gold= "" wood="" villageType="" locationOfTileX="" locationOfTileY="">
+			<controlledTile boardX="" boardY=""/>
+			<controlledTile boardX="" boardY=""/>
+			<controlledTile boardX="" boardY=""/>
+	</village>
+
+	<unit unitType="" unitAction="" unitX = "" unitY="" villageOwnerX="" villageOwnerY=""/>  
+
+
 </map>
 
  */
@@ -38,63 +43,98 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 		//we will build myTiles from the XML file
 		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
 
-			if (node.Name == "tile"){
-				string landType = node.Attributes["landType"].InnerText;
-				string boardPositionX = node.Attributes["boardPositionX"].InnerText;
-				string boardPositionY = node.Attributes["boardPositionY"].InnerText;
-				string gamePositionX = node.Attributes["gamePositionX"].InnerText;
-				string gamePositionY = node.Attributes["gamePositionY"].InnerText;
+			if (node.Name == "tile") {
+					string landType = node.Attributes ["landType"].InnerText;
+					string boardPositionX = node.Attributes ["boardPositionX"].InnerText;
+					string boardPositionY = node.Attributes ["boardPositionY"].InnerText;
+					string gamePositionX = node.Attributes ["gamePositionX"].InnerText;
+					string gamePositionY = node.Attributes ["gamePositionY"].InnerText;
 
-				//make new tile
-				LandType lType = (LandType)Enum.Parse(typeof(LandType), landType, true );
-				Tile myTile = new Tile(lType,myGameBoard,Convert.ToInt32(boardPositionX),Convert.ToInt32(boardPositionY));
-				Vector2 gamePos = new Vector2(Convert.ToInt32(gamePositionX), Convert.ToInt32(gamePositionY));
-				myTile.gamePosition = gamePos;
-
-
-				//skip this if tile is a sea tile, else iterate over village, structure and unit nodes
-				foreach (XmlNode tileChild in node.ChildNodes) {
-					if(tileChild.Name == "village"){
-						string playerName = tileChild.Attributes["playerName"].InnerText;
-						string gold = tileChild.Attributes["gold"].InnerText;
-						string wood = tileChild.Attributes["wood"].InnerText;
-						string villageType = tileChild.Attributes["villageType"].InnerText;
-						string locationOfTileX = tileChild.Attributes["locationOfTileX"].InnerText;
-						string locationOfTileY = tileChild.Attributes["locationOfTileY"].InnerText;
-						if(locationOfTileX == boardPositionX && locationOfTileY==boardPositionY){
-							//village is on this tile
+					//make new tile
+					LandType lType = (LandType)Enum.Parse (typeof(LandType), landType, true);
+					Tile myTile = new Tile (lType, myGameBoard, Convert.ToInt32 (boardPositionX), Convert.ToInt32 (boardPositionY));
+					Vector2 gamePos = new Vector2 (Convert.ToInt32 (gamePositionX), Convert.ToInt32 (gamePositionY));
+					myTile.gamePosition = gamePos;
 
 
-						}
+					//skip this if tile is a sea tile, else iterate over village, structure and unit nodes
+					foreach (XmlNode tileChild in node.ChildNodes) { //should only be one tileChild - structure
+							if (landType == "Sea") {
+									continue;
+							}
+							if (tileChild.Name == "structure") {
+								string structureType = tileChild.Attributes ["structureType"].InnerText;
+								//convert string to enum
+								StructureType strucType = (StructureType)Enum.Parse (typeof(StructureType), structureType, true);
+								Structure myStruc = new Structure (myTile, strucType);
+								myTile.occupyingStructure = myStruc;
+							}
 
-					
 					}
+					//add this tile to myTiles array
+					myTiles [Convert.ToInt32 (boardPositionX), Convert.ToInt32 (boardPositionY)] = myTile;
 
-					if(tileChild.Name == "structure"){
-						string structureType = tileChild.Attributes["structureType"].InnerText;
-						//convert string to enum
-						StructureType strucType = (StructureType)Enum.Parse(typeof(StructureType), structureType, true );
-						Structure myStruc = new Structure(myTile,strucType);
-					}
-
-					if(tileChild.Name == "unit"){
-						string unitType = tileChild.Attributes["unitType"].InnerText;
-						//Unit myUnit = new 
-						//myTile.occupyingUnit = myUnit;
-					}
-
-
-
-
-
-			}//end iterating over each tiles children: village, structure, unit
-
-
-			} //end iterating over each tile
-
+			} // END IF TILE NODES
 		}
 
-		return myGameBoard;
+
+		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
+
+			if (node.Name == "village") {
+				string playerName = node.Attributes ["playerName"].InnerText;
+				string gold = node.Attributes ["gold"].InnerText;
+				string wood = node.Attributes ["wood"].InnerText;
+				string villageType = node.Attributes ["villageType"].InnerText;
+				string locationOfTileX = node.Attributes ["locationOfTileX"].InnerText;
+				string locationOfTileY = node.Attributes ["locationOfTileY"].InnerText;
+
+				List <AbstractTile> region = new List<AbstractTile> (); 
+/*ASK KEVIN*/	MW_Player myPlayer = new MW_Player (); ////get the MW_Player from their username from network? 
+				Village myVillage = new Village (region, myPlayer);
+				myVillage.gold = Convert.ToInt32 (gold);
+				myVillage.wood = Convert.ToInt32 (wood);
+				//convert villageType to enum
+				VillageType vType = (VillageType)Enum.Parse (typeof(VillageType), villageType, true);
+				myVillage.myType = vType;
+				myVillage.location = myTiles [Convert.ToInt32 (locationOfTileX), Convert.ToInt32 (locationOfTileY)];
+
+				//iterate over all controlledTiles of the village
+				foreach (XmlNode villageChild in node.ChildNodes) { 
+					string boardX = villageChild.Attributes ["boardX"].InnerText;
+					string boardY = villageChild.Attributes ["boardY"].InnerText;
+					if (villageChild.Name == "controlledTile") {
+							region.Add (myTiles [Convert.ToInt32 (boardX), Convert.ToInt32 (boardY)]); //myTiles is a list of tiles, region is abstractTiles -  error?
+					}
+				}
+			//controlled region for village made
+			myVillage.controlledRegion = region;
+
+			}
+		}			
+			
+		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
+
+			if (node.Name == "unit") {
+				string unitType = node.Attributes ["unitType"].InnerText;
+				string villageOwnerX = node.Attributes ["villageOwnerX"].InnerText;
+				string villageOwnerY = node.Attributes ["villageOwnerY"].InnerText;
+				string unitX = node.Attributes ["unitX"].InnerText;
+				string unitY = node.Attributes ["unitY"].InnerText;
+				string unitAction = node.Attributes ["unitAction"].InnerText;
+
+				AbstractVillage unitVillage = myTiles [Convert.ToInt32 (villageOwnerX), Convert.ToInt32 (villageOwnerY)].myVillage;
+				Tile unitTile = myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)];
+				Unit myUnit = new Unit (unitVillage, unitTile);
+				unitTile.occupyingUnit = myUnit;
+
+				//convert string to enum
+				ActionType aType = (ActionType)Enum.Parse (typeof(ActionType), unitAction, true);
+				myUnit.currentAction = aType;
+			}
+					
+		}//end iterating over each node
+
+	return myGameBoard;
 	} //end loadGameState
 
 
@@ -184,30 +224,35 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 				XmlAttribute locY = doc.CreateAttribute ("locationOfTileY");//removed plural why was it there 
 				locY.Value =t.myVillage.location.boardPosition.y.ToString ();
 
+				XmlNode structureNode = doc.CreateElement ("structure");
+				XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
+				sTypeAtt.Value = t.occupyingStructure.myType.ToString ();
+				structureNode.Attributes.Append (sTypeAtt);
+				tileNode.AppendChild (structureNode);
+
+
 				villageNode.Attributes.Append (pName);
 				villageNode.Attributes.Append (goldAtt);
 				villageNode.Attributes.Append (woodAtt);
 				villageNode.Attributes.Append (vAtt);
 				villageNode.Attributes.Append (locX);
 				villageNode.Attributes.Append (locY);
-								tileNode.AppendChild (villageNode);
+				rootNode.AppendChild (villageNode); //changed to a child not subchild
 			
-				XmlNode structureNode = doc.CreateElement ("structure");
-				XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
-				sTypeAtt.Value = t.occupyingStructure.myType.ToString ();
-				structureNode.Attributes.Append (sTypeAtt);
-				tileNode.AppendChild (structureNode);
-			
+
 				XmlNode unitNode = doc.CreateElement ("unit");
 				XmlAttribute uTypeAtt = doc.CreateAttribute ("unitType");
 				uTypeAtt.Value = t.occupyingUnit.myType.ToString ();
 				XmlAttribute uAction = doc.CreateAttribute ("unitAction");
 				uAction.Value = t.occupyingUnit.currentAction.ToString ();
-			
+				XmlAttribute xpos = doc.CreateAttribute("villageOwnerX");
+				xpos.Value = t.myVillage.location.boardPosition.x.ToString();
+				XmlAttribute ypos = doc.CreateAttribute("villageOwnerY");
+				ypos.Value = t.myVillage.location.boardPosition.y.ToString();
+
 				unitNode.Attributes.Append (uTypeAtt);
 				unitNode.Attributes.Append (uAction);
-			
-				tileNode.AppendChild (unitNode);
+				rootNode.AppendChild (unitNode); //changed to a child not subchild
 			}
 		} //end iterating over each tile
 
