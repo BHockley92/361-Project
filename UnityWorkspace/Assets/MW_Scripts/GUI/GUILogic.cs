@@ -120,6 +120,7 @@ public class GUILogic : MonoBehaviour {
 				GAME.gameBoard = SERIALIZER.loadGameState(LOADED_GAME, GAME);
 			}
 			else {
+				Debug.Log ("Random map");
 				GAME.gameBoard = new Board(20,20,2);
 				//each tile that's not water gets a village owned by a random player ie: set up tileOwner
 				//during BFS remove all except 1 of the villages that have more than 3 tiles
@@ -130,8 +131,8 @@ public class GUILogic : MonoBehaviour {
 					//region consists of the single tile it occupies
 					t.myVillage = new Village (myTile, GAME.participants[randomPlayer]);
 				}
+				Debug.Log ("Assigned villagers to players");
 				mw.assignRegions (GAME.gameBoard);
-				Debug.Log ("made random board");
 			}
 			//Start the game
 			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
