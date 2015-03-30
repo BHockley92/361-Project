@@ -19,7 +19,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 	{
 		//BFS algorithm
 		foreach (Tile t in gameBoard.board) {
-
+			if (t.myType != LandType.Sea) { //attempt to fix error
 				Stack<Tile> myStack = new Stack<Tile> ();
 				List<AbstractTile> visitedTiles = new List<AbstractTile> ();
 				AbstractPlayer belongsTo = t.myVillage.myPlayer; //current owner of tile t
@@ -34,45 +34,49 @@ public class MedievalWarfare : AbstractMedievalWarfare
 					if (v.isVisited == false) {
 						v.isVisited = true; //mark tile as visited
 
-						List<AbstractTile> neighbours = v.getNeighbours ();
+						List<AbstractTile> neighbours = v.getNeighbours (); //Nick fixed to not return sea tiles
 
 						//for all neighbours that havent been visited and have same owner
-						foreach(Tile neighb in neighbours ){
-							if (neighb.myVillage.myPlayer == belongsTo && neighb.isVisited == false){
-								myStack.Push(neighb);
-							}
-						}// end for each neighbour tile
+						foreach (Tile neighb in neighbours) {
+							if (neighb.myVillage.myPlayer == belongsTo && neighb.isVisited == false) {
+									myStack.Push (neighb);
+							}// end for each neighbour tile
 
-					}// end if tile is not visited
+						}// end if tile is not visited
 
-				} //end when stack is empty
+					} //end when stack is empty
 
 
-			//if region is greater than 3 && tile doesn't belong to official village, remove temp villages and pick random one to have village
-			if (visitedTiles.Count>= 3 && t.hasVillage == false && t.myVillage != null){
-				int randInt = Random.Range(0, visitedTiles.Count -1);
-				AbstractTile villageTile = visitedTiles[randInt];
+					//if region is greater than 3 && tile doesn't belong to official village, remove temp villages and pick random one to have village
+					if (visitedTiles.Count >= 3 && t.hasVillage == false && t.myVillage != null) {
+						int randInt = Random.Range (0, visitedTiles.Count);
+						AbstractTile villageTile = visitedTiles [randInt];
 
-				Village myNewVillage = new Village (visitedTiles, belongsTo);
-				myNewVillage.location = villageTile;
-				foreach (Tile w in visitedTiles){
-					w.hasVillage = true;
-					w.myVillage = myNewVillage;
-				}
-			}
-			else if( visitedTiles.Count <3){
-				//set land to neutral
-				foreach (Tile n in visitedTiles){
-					n.myVillage = null;
-				}
+						//Create the village
+						GameObject village = (GameObject)Object.Instantiate (Resources.Load ("buildinghovel"));
+						village.transform.position = new Vector3 (villageTile.boardPosition.x, 0.7f, villageTile.boardPosition.y - 0.5f);
 
-			}
+						Village myNewVillage = new Village (visitedTiles, belongsTo);
+						myNewVillage.location = villageTile;
+						foreach (Tile w in visitedTiles) {
+							w.hasVillage = true;
+							w.myVillage = myNewVillage;
+						}
+					} 
+					else if (visitedTiles.Count < 3) {
+						//set land to neutral
+						foreach (Tile n in visitedTiles) {
+							n.myVillage = null;
+						}
+
+					}
 
 			}//end tile iteration
+		} //skip if sea tile
+
+	} 
 
 
-	} //end assignRegions
-
+}//end assignRegions
 
 }
-

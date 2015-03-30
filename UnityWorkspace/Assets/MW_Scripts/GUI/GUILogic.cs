@@ -125,11 +125,13 @@ public class GUILogic : MonoBehaviour {
 				//each tile that's not water gets a village owned by a random player ie: set up tileOwner
 				//during BFS remove all except 1 of the villages that have more than 3 tiles
 				foreach (Tile t in GAME.gameBoard.board) {
-					int randomPlayer = Random.Range (0, GAME.participants.Count); //i still think it's -1 need to check
-					List<AbstractTile> myTile = new List<AbstractTile>();
-					myTile.Add(t);
-					//region consists of the single tile it occupies
-					t.myVillage = new Village (myTile, GAME.participants[randomPlayer]);
+					if(t.myType != LandType.Sea){ //attempt to fix error
+						int randomPlayer = Random.Range (0, GAME.participants.Count); 
+						List<AbstractTile> myTile = new List<AbstractTile>();
+						myTile.Add(t);
+						//region consists of the single tile it occupies
+						t.myVillage = new Village (myTile, GAME.participants[randomPlayer]);
+					}
 				}
 				Debug.Log ("Assigned villagers to players");
 				mw.assignRegions (GAME.gameBoard);
