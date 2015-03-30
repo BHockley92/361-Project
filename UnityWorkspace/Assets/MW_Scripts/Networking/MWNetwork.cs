@@ -269,5 +269,6 @@ public class MWNetwork : Photon.MonoBehaviour
         Hashtable roomProps = new Hashtable();
         roomProps.Add("gameStarted", false);
         PhotonNetwork.room.SetCustomProperties(roomProps);
+		Debug.Log ("room created");
     }
 }

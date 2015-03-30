@@ -3,8 +3,6 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour {
 
-	public bool disablePanning = false;
-	public bool disableZoom = false;
 	
 	public float maximumZoom = 1f;
 	public float minimumZoom = 20f;

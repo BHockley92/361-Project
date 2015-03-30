@@ -77,17 +77,21 @@ public class GUILogic : MonoBehaviour {
 		XmlDocument state = new XmlDocument();
 		state.LoadXml (gameState);
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
-		
+		Debug.Log ("Received a state");
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()))
 		{
 			BeginTurn ();
 		}
 		//Always do this
+		Debug.Log ("turned camera on");
+		Camera.main.GetComponent<CameraControl>().enabled = true;
+		Debug.Log ("Showing the board");
 		visualizeBoard();
 	}
 
 	//When it becomes current players turn, enable the endturn button
 	public void BeginTurn() {
+		Debug.Log ("my turn");
 		GAME.myGameLogic.beginTurn(PLAYER,GAME);
 		ENDTURN.enabled = true;
 	}
@@ -105,7 +109,8 @@ public class GUILogic : MonoBehaviour {
 
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
-		if(NETWORK.ReadyStart() == MWNetworkResponse.GAME_START_SUCCESS) {
+		MWNetworkResponse response = NETWORK.ReadyStart();
+		if(response != null) {
 			MedievalWarfare mw = new MedievalWarfare ();
 			//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
 			GAME = mw.newGame (NETWORK.getPlayers());
@@ -125,19 +130,20 @@ public class GUILogic : MonoBehaviour {
 					t.myVillage = new Village (myTile, NETWORK.getPlayers() [randomPlayer]);
 				}
 				mw.assignRegions (GAME.gameBoard);
+				Debug.Log ("made random board");
 			}
 			//Start the game
 			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
-			
+			Debug.Log ("board saved");
 			NETWORK.ShareGameState(state.OuterXml);
-			visualizeBoard();
+			Debug.Log ("pushed board");
 		}
 		else {
 			//Check the other possible problems
+			Debug.Log ("failed to start");
 		}
 	}
 
-	//TODO: Nick
 	private void visualizeBoard() {
 		foreach(Tile current in GAME.gameBoard.board) {
 			GameObject tile = null;
@@ -164,13 +170,12 @@ public class GUILogic : MonoBehaviour {
 			//Store it for easier lookup
 			BOARD_TILES.Add(current.gamePosition,current);
 			//Create the game representation of the tile
-			GameObject.Instantiate(tile, new Vector3(x, 0.1f, y), Quaternion.identity);
-
-			// I tried... -Nick
 			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
+			GameObject.Instantiate(tile, pos, Quaternion.identity);
 
 			// building -- no resources that match this
-			if( current.occupyingStructure.myType != null)
+			//TODO: Go over this and fix
+			if(current.occupyingStructure.myType != null)
 			{
 				switch(current.occupyingStructure.myType)
 				{
