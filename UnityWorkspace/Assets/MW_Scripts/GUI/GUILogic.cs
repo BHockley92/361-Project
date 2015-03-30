@@ -162,6 +162,74 @@ public class GUILogic : MonoBehaviour {
 			BOARD_TILES.Add(current.gamePosition,current);
 			//Create the game representation of the tile
 			GameObject.Instantiate(tile, new Vector3(x, 0.1f, y), Quaternion.identity);
+
+			// I tried... -Nick
+			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
+
+			// building -- no resources that match this
+			if( current.occupyingStructure.myType != null)
+			{
+				switch(current.occupyingStructure.myType)
+				{
+				case StructureType.Road:
+					break;
+				case StructureType.Tombstone:
+					break;
+				case StructureType.Tower:
+					break;
+				}
+			}
+
+			// village
+			if(current.myVillage != null && current.myVillage.location == current)
+			{
+				GameObject village = null;
+				switch(current.myVillage.myType)
+				{
+				case VillageType.Hovel:
+					village = (GameObject)Resources.Load("buildinghovel");
+					break;
+				case VillageType.Town:
+					village = (GameObject)Resources.Load("buildingtown");
+					break;
+				case VillageType.Fort:
+					village = (GameObject)Resources.Load("buildingfort");
+					break;
+				case VillageType.Castle:
+					village = (GameObject)Resources.Load("buildingcastle");
+					break;
+				}
+				GameObject.Instantiate(village, pos, Quaternion.identity);
+			}
+
+			// unit
+			if( current.occupyingUnit != null)
+			{
+				GameObject unit = null;
+				if( !current.occupyingUnit.isCannon)
+				{
+					switch(current.occupyingUnit.myType)
+					{
+					case UnitType.Peasant:
+						unit = (GameObject)Resources.Load("unitPeasant");
+						break;
+					case UnitType.Infantry:
+						unit = (GameObject)Resources.Load("unitInfantry");
+						break;
+					case UnitType.Soldier:
+						unit = (GameObject)Resources.Load("unitSoldier");
+						break;
+					case UnitType.Knight:
+						unit = (GameObject)Resources.Load("unitKnight");
+						break;
+					}
+				}
+				else
+				{
+					unit = (GameObject)Resources.Load("unitCannon");
+				}
+				GameObject.Instantiate(unit, pos, Quaternion.identity);
+			}
 		}
 	}
 
