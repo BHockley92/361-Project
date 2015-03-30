@@ -7,7 +7,7 @@ using System;
 <map length = "" width = "", waterBorder ="">
 
 	<tile landType = "" boardPositionX = "" boardPositionY = "" gamePositionX = "" gamePositionY="">
-    		<structure structureType = ""/>
+    		<structure structureType = ""/> //structure only if not sea
     </tile>
 
 	<village playerName= "" gold= "" wood="" villageType="" locationOfTileX="" locationOfTileY="">
@@ -26,9 +26,8 @@ using System;
 
 public class SerializeGame  //: MonoBehaviour //uncomment when testing
 {
-
 	//advised not to do an XML diff, so for now we recreate the gameState from scratch by parsing xml file
-	public Board loadGameState(XmlDocument doc){
+	public Board loadGameState(XmlDocument doc, MW_Game myGame){
 
 		//<map> attributes
 		string length = doc.DocumentElement.Attributes["length"].InnerText;
@@ -37,6 +36,7 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 
 		Tile[,] myTiles = new Tile[ Convert.ToInt32(length), Convert.ToInt32(width) ];
 		Board myGameBoard = new Board(myTiles, Convert.ToInt32(waterBorder)); //will this cause an error because myTiles is null right now?
+		//myGame.gameBoard = myGameBoard;
 
 		//we will build myTiles from the XML file
 		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
@@ -54,12 +54,12 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 					Vector2 gamePos = new Vector2 (Convert.ToInt32 (gamePositionX), Convert.ToInt32 (gamePositionY));
 					myTile.gamePosition = gamePos;
 
-
-					//skip this if tile is a sea tile, else iterate over village, structure and unit nodes
+				if (landType != "Sea") {
+				
+				
+				//skip this if tile is a sea tile, else iterate over structure
 					foreach (XmlNode tileChild in node.ChildNodes) { //should only be one tileChild - structure
-							if (landType == "Sea") {
-									continue;
-							}
+							
 							if (tileChild.Name == "structure") {
 								string structureType = tileChild.Attributes ["structureType"].InnerText;
 								//convert string to enum
@@ -69,13 +69,14 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 							}
 
 					}
-					//add this tile to myTiles array
-					myTiles [Convert.ToInt32 (boardPositionX), Convert.ToInt32 (boardPositionY)] = myTile;
+				}
+				//add this tile to myTiles array at boardPosition (x,y)
+				myTiles [Convert.ToInt32 (boardPositionX), Convert.ToInt32 (boardPositionY)] = myTile;
 
 			} // END IF TILE NODES
-		}
+		} //end iteration1
 
-
+		//Now all tiles are added to board, iterate to add villages and then occupying units
 		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
 
 			if (node.Name == "village") {
@@ -86,9 +87,16 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 				string locationOfTileX = node.Attributes ["locationOfTileX"].InnerText;
 				string locationOfTileY = node.Attributes ["locationOfTileY"].InnerText;
 
+				MW_Player villageOwner = new MW_Player();
+				foreach(MW_Player myplayer in myGame.participants){
+					if(playerName == myplayer.username){
+						villageOwner = myplayer;
+						break;
+
+					}
+				}
 				List <AbstractTile> region = new List<AbstractTile> (); 
-/*ASK KEVIN*/	MW_Player myPlayer = new MW_Player (); ////get the MW_Player from their username from network? 
-				Village myVillage = new Village (region, myPlayer);
+				Village myVillage = new Village (region, villageOwner);
 				myVillage.gold = Convert.ToInt32 (gold);
 				myVillage.wood = Convert.ToInt32 (wood);
 				//convert villageType to enum
@@ -123,11 +131,15 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 				AbstractVillage unitVillage = myTiles [Convert.ToInt32 (villageOwnerX), Convert.ToInt32 (villageOwnerY)].myVillage;
 				Tile unitTile = myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)];
 				Unit myUnit = new Unit (unitVillage, unitTile);
-				unitTile.occupyingUnit = myUnit;
 
 				//convert string to enum
 				ActionType aType = (ActionType)Enum.Parse (typeof(ActionType), unitAction, true);
 				myUnit.currentAction = aType;
+
+				UnitType uType = (UnitType)Enum.Parse(typeof(UnitType), unitType, true);
+				myUnit.myType = uType;
+				unitTile.occupyingUnit = myUnit;
+
 			}
 					
 		}//end iterating over each node
@@ -143,23 +155,22 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 
 		XmlDocument doc = new XmlDocument ();
 		XmlNode rootNode = doc.CreateElement ("map");
-		doc.AppendChild (rootNode);
 
 		Board myBoard = myGame.gameBoard;
 
+		//<map> attributes: length, width, height
 		XmlAttribute length = doc.CreateAttribute ("length");
-		length.Value =(myBoard.board.GetLength (0) - 1).ToString ();
-
+		length.Value =(myBoard.board.GetLength (0) - 1).ToString (); //length is -1 (?)
 		XmlAttribute width = doc.CreateAttribute ("width");
 		width.Value = (myBoard.board.GetLength(1) - 1).ToString (); 
-
 		XmlAttribute waterBorder = doc.CreateAttribute ("waterBorder");
 		waterBorder.Value = myBoard.border.ToString ();
 
 		rootNode.Attributes.Append (length);
 		rootNode.Attributes.Append (width);
 		rootNode.Attributes.Append (waterBorder);
-				
+		doc.AppendChild (rootNode);
+
 		foreach (Tile t in myBoard.board) {
 
 			if(t.myType == LandType.Sea){  //  when type is sea, we only serialize tile info
@@ -208,7 +219,7 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 				tileNode.Attributes.Append (gamePositionY);
 				rootNode.AppendChild (tileNode);
 
-				//if there's a structure make a child node for tile <structure>
+				//if there's a structure make a child node for tile called <structure>
 				if(t.occupyingStructure != null){
 					XmlNode structureNode = doc.CreateElement ("structure");
 					XmlAttribute sTypeAtt = doc.CreateAttribute ("structureType");
@@ -240,6 +251,7 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 					villageNode.Attributes.Append (locY);
 					rootNode.AppendChild (villageNode); //changed to a child not subchild
 
+					//iterate over each tile in controlledRegion and add as subchildren to village node
 					List<AbstractTile> region = t.myVillage.controlledRegion;
 					foreach(Tile regionTile in region){
 						XmlNode controlledTile = doc.CreateElement("controlledTile");
@@ -250,7 +262,7 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 
 						controlledTile.Attributes.Append(boardX);
 						controlledTile.Attributes.Append(boardY);
-						villageNode.AppendChild(controlledTile);
+						villageNode.AppendChild(controlledTile); //<controlledTile> is a subchild
 					}
 
 
@@ -269,7 +281,7 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 					XmlAttribute unitPosX = doc.CreateAttribute("unitX");
 					unitPosX.Value=t.occupyingUnit.myLocation.boardPosition.x.ToString();
 					XmlAttribute unitPosY = doc.CreateAttribute("unitY");
-					unitPosX.Value=t.occupyingUnit.myLocation.boardPosition.y.ToString();
+					unitPosY.Value=t.occupyingUnit.myLocation.boardPosition.y.ToString();
 
 					unitNode.Attributes.Append (uTypeAtt);
 					unitNode.Attributes.Append (uAction);
@@ -280,7 +292,7 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 					rootNode.AppendChild (unitNode); //changed to a child not subchild
 				}
 
-			}
+			} //end all tiles but sea
 		} //end iterating over each tile
 
 		//save xml file state_username.xml
