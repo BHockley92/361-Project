@@ -78,7 +78,7 @@ public class GUILogic : MonoBehaviour {
 		state.LoadXml (gameState);
 		Board game_board = SERIALIZER.loadGameState(state);
 		GAME.gameBoard = game_board;
-		//If it's my turn then do this
+		//TODO: kevin
 		BeginTurn ();
 		//Always do this
 		visualizeBoard();
@@ -112,6 +112,7 @@ public class GUILogic : MonoBehaviour {
 				GAME.gameBoard = SERIALIZER.loadGameState(LOADED_GAME);
 			}
 			else {
+				GAME.gameBoard = new Board(20,20,2);
 				//each tile that's not water gets a village owned by a random player ie: set up tileOwner
 				//during BFS remove all except 1 of the villages that have more than 3 tiles
 				foreach (Tile t in GAME.gameBoard.board) {
@@ -125,7 +126,7 @@ public class GUILogic : MonoBehaviour {
 			}
 			//Start the game
 			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
-			//How do I push the game state to players initially? Is this sufficient?
+			//TODO: Kevin?
 			NETWORK.turnEnded(state.OuterXml);
 			visualizeBoard();
 		}
@@ -134,7 +135,7 @@ public class GUILogic : MonoBehaviour {
 		}
 	}
 
-	//TODO: fix this method
+	//TODO: Nick
 	private void visualizeBoard() {
 		foreach(Tile current in GAME.gameBoard.board) {
 			GameObject tile = null;
