@@ -311,6 +311,15 @@ public class GUILogic : MonoBehaviour {
 		LAST_CLICKED_ON = new_unit.transform;
 	}
 
+	public void moveUnit(Transform tile) {
+		AbstractTile dest_tile;
+		BOARD_TILES.TryGetValue(new Vector2(tile.position.x, tile.position.z), out dest_tile);
+		AbstractTile unit_tile;
+		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z), out unit_tile);
+		GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
+		LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z);
+	}
+
 	//The leave or disband button depending on host or player
 	public void Leave_Disband() {
 		//TODO: Need callback that tells everyone to call leave_disband if they aren't the host
