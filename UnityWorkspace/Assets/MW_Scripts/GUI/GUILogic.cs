@@ -78,7 +78,10 @@ public class GUILogic : MonoBehaviour {
 		state.LoadXml (gameState);
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		//TODO: kevin
-		BeginTurn ();
+		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()))
+		{
+			BeginTurn ();
+		}
 		//Always do this
 		visualizeBoard();
 	}
@@ -97,12 +100,12 @@ public class GUILogic : MonoBehaviour {
 		//Serialize the state of the game now
 		XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
 		//Push the serialize state over the network
-		NETWORK.turnEnded(state.OuterXml);
+		NETWORK.ShareGameState(state.OuterXml);
 	}
 
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
-		if(NETWORK.startGame() == MWNetworkResponse.GAME_START_SUCCESS) {
+		if(NETWORK.ReadyStart() == MWNetworkResponse.GAME_START_SUCCESS) {
 			MedievalWarfare mw = new MedievalWarfare ();
 			//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
 			GAME = mw.newGame (NETWORK.getPlayers());
@@ -125,8 +128,8 @@ public class GUILogic : MonoBehaviour {
 			}
 			//Start the game
 			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
-			//TODO: Kevin?
-			NETWORK.turnEnded(state.OuterXml);
+			
+			NETWORK.ShareGameState(state.OuterXml);
 			visualizeBoard();
 		}
 		else {

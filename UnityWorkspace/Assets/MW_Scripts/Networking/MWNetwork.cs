@@ -17,10 +17,8 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public enum MWNetworkResponse
 {
     GAME_START_SUCCESS,
-    GAME_ALREADY_STARTED,
-    NOT_HOST,
-    ROOM_NOT_CREATED,
-    BAD_PLAYER_COUNT
+    READY_CHECKED,
+    PLAYERS_NOT_READY
 }
 
 /*
@@ -59,16 +57,6 @@ public class MWNetwork : Photon.MonoBehaviour
     {
 		return instance;
 	}
-	
-	/*
-     * USE THIS GOD DAMN FUNCTION TO INSTANTIATE ALL OBJECTS THAT NEED TO BE SERIALIZED OVER THE NETWORK.
-     * Otherwise they will NOT appear on other players' machine.
-     * Make sure a fucking PhotonView component is attached to the prefabs as well.
-     */
-    public GameObject instantiate(GameObject obj, Vector3 pos, Quaternion rot)
-    {
-        return (GameObject) PhotonNetwork.Instantiate(obj.name, pos, rot, 0);
-    }
 	
 	/*
 	 * Attempts to authenticate the player.
@@ -113,33 +101,26 @@ public class MWNetwork : Photon.MonoBehaviour
 	 * are ordered according to when they joined.
      * Returns a response indicating whether the game was started succesfully or not.
 	 */
-    public MWNetworkResponse startGame()
-	{
-		// Make sure starting conditions are satisfied:
-        // 1.   A room has been joined
-        if (PhotonNetwork.room == null)
-        {
-            Debug.Log("Cannot start game: a room has not yet been created");
-            return MWNetworkResponse.ROOM_NOT_CREATED;
-        }
-        // 2.   You are the host
-        if (!PhotonNetwork.isMasterClient)
-        {
-            Debug.Log("Cannot start game: you are not the host.");
-            return MWNetworkResponse.NOT_HOST;
-        }
-		// 3. 	Game is not already in play.
-		if ((bool) PhotonNetwork.room.customProperties["gameStarted"])
+    public MWNetworkResponse ReadyStart()
+	{		
+		// Ready check
+		Hashtable readyCheck = new Hashtable();
+		readyCheck.Add("ready", true);
+		PhotonNetwork.SetPlayerCustomProperties(readyCheck);
+	
+		// If not host, do nothing else
+		if (!PhotonNetwork.isMasterClient)
 		{
-			Debug.Log("Cannot start game: it has already started.");
-            return MWNetworkResponse.GAME_ALREADY_STARTED;
+			return MWNetworkResponse.READY_CHECKED;
 		}
-		// 4.	2 <= number of players <= maximum players
-		if (PhotonNetwork.playerList.Length < 2 
-			|| PhotonNetwork.room.playerCount > PhotonNetwork.room.maxPlayers)
+		
+		// If host, make sure all players are ready
+		foreach (PhotonPlayer player in PhotonNetwork.playerList)
 		{
-            Debug.Log("Cannot start game: must be between 2 and " + PhotonNetwork.room.maxPlayers + " players.");
-            return MWNetworkResponse.BAD_PLAYER_COUNT;
+			if ((bool)player.customProperties["ready"] == false)
+			{
+				return MWNetworkResponse.PLAYERS_NOT_READY;
+			}
 		}
 		
 		// Make the room impossible to see or join
@@ -152,6 +133,11 @@ public class MWNetwork : Photon.MonoBehaviour
 		PhotonNetwork.room.SetCustomProperties(roomProps);
 
         return MWNetworkResponse.GAME_START_SUCCESS;
+	}
+
+	public string GetLocalPlayerName()
+	{
+		return PhotonNetwork.playerName;
 	}
 
     /*
@@ -223,10 +209,10 @@ public class MWNetwork : Photon.MonoBehaviour
 	}
 	
 	/*
-	 * Call the function at the end of your turn.
-	 * Lets other players know your turn has ended by updating their game state.
+	 * This function shares your game state to other machines.
+	 * These machines will in turn update their game state.
 	 */
-	public void turnEnded(string gameState)
+	public void ShareGameState(string gameState)
 	{
 		if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
 								      gameState,
@@ -238,7 +224,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	}
 	
 	/*
-	 * Called when "turnEnded" is called on another player.
+	 * Called when "ShareGameState" is called on another player.
 	 * Delegates the deserialization task.
 	 */
 	public void OnGameStateReceived(byte eventCode, object content, int senderId)
@@ -255,6 +241,11 @@ public class MWNetwork : Photon.MonoBehaviour
 
     void OnJoinedRoom()
     {
+    	// Set player custom properties
+    	Hashtable readyCheck = new Hashtable();
+    	readyCheck.Add("ready", false);
+    	PhotonNetwork.SetPlayerCustomProperties(readyCheck);
+    
         // TODO Find a way to get MW_Player synced over network.
         if (gui.PLAYER != null)
         {            
