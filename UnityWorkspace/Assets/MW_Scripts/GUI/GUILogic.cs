@@ -77,7 +77,7 @@ public class GUILogic : MonoBehaviour {
 		XmlDocument state = new XmlDocument();
 		state.LoadXml (gameState);
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
-		//TODO: kevin
+		
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()))
 		{
 			BeginTurn ();
