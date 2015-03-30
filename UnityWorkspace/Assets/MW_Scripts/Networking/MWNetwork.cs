@@ -196,7 +196,6 @@ public class MWNetwork : Photon.MonoBehaviour
 	public List<AbstractPlayer> getPlayers()
 	{
 		PhotonPlayer[] players = PhotonNetwork.playerList;
-        Hashtable roomProps = PhotonNetwork.room.customProperties;
 
         List<AbstractPlayer> mwPlayers = new List<AbstractPlayer>();
 
@@ -272,6 +271,7 @@ public class MWNetwork : Photon.MonoBehaviour
         Hashtable roomProps = new Hashtable();
         roomProps.Add("gameStarted", false);
         PhotonNetwork.room.SetCustomProperties(roomProps);
-		Debug.Log ("room created");
+        
+		Debug.Log ("Room created");
     }
 }
