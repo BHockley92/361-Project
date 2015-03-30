@@ -133,11 +133,11 @@ public class GUILogic : MonoBehaviour {
 						t.myVillage = new Village (myTile, GAME.participants[randomPlayer]);
 					}
 				}
-				Debug.Log ("Assigned villagers to players");
 				mw.assignRegions (GAME.gameBoard);
+				Debug.Log ("Assigned villagers to players");
 			}
 			//Start the game
-			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
+			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER); //TODO: Emily debug saveGameState
 			Debug.Log ("board saved");
 			NETWORK.ShareGameState(state.OuterXml);
 			Debug.Log ("pushed board");

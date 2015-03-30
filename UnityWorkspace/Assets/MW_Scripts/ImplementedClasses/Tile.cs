@@ -12,6 +12,7 @@ public class Tile : AbstractTile
 	public bool isVisited{ get; set; } //for assignRegions BFS algorithm
 	public bool hasVillage{ get; set; } //for assignRegions BFS algorithm
 	public Board myBoard { get; private set; }
+	public bool iteratedOver{ get; set; } //for bfs
 
 	public Tile( LandType type, Board b, float i, float j)
 	{
