@@ -6,7 +6,7 @@ using GameEnums;
 
 public class MedievalWarfare : AbstractMedievalWarfare
 {
-	public override MW_Game newGame(List<AbstractPlayer> participants, int width, int height, int waterboarder)
+	public override MW_Game newGame(List<AbstractPlayer> participants)
 	{
 		// initalize game for randomly generated board
 		GameLogic gl = new GameLogic (); 
