@@ -4,13 +4,10 @@ using System.Collections;
 public class CameraControl : MonoBehaviour {
 
 	public bool disablePanning = false;
-	public bool disableSelect = false;
 	public bool disableZoom = false;
 	
 	public float maximumZoom = 1f;
 	public float minimumZoom = 20f;
-	public Color selectColor = Color.green;
-	public float selectLineWidth = 2f;
 	
 	public float lookDamper = 5f;
 	
@@ -27,7 +24,6 @@ public class CameraControl : MonoBehaviour {
 			ready = false;
 			throw exception;
 		}
-		setPixel(selectColor);
 	}
 
 	private void startupChecks() {
@@ -41,12 +37,6 @@ public class CameraControl : MonoBehaviour {
 			throw new UnassignedReferenceException("Inputs " + INPUT_MOUSE_BUTTONS[0] + " and " +
 			                                       INPUT_MOUSE_BUTTONS[1] + " must be defined.");
 		}
-	}
-
-	private void setPixel(Color color) {
-		pixel = new Texture2D(1, 1);
-		pixel.SetPixel(0, 0, color);
-		pixel.Apply();
 	}
 	
 	void Update () {	
