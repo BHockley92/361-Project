@@ -53,6 +53,7 @@ public class GUILogic : MonoBehaviour {
 	//Create a lobby and populate with information
 	public void HostGame() {
 		//Will grab room name from selected GUI object
+		Debug.Log ("Host game called");
 		NETWORK.hostRoom("demo");
 		//From game object, if object has path, than load the XML
 		//if(.path != null) { LOADED_GAME.Load(.path); }
