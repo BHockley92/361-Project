@@ -5,7 +5,7 @@ public class CameraControl : MonoBehaviour {
 
 	public float CamSpeed = 1.00f;
 	public int GUIsize = 25;
-	public bool enabled = false;
+	public bool enabled_camera = false;
 	
 	void Update () {
 		Rect recdown = new Rect (0, 0, Screen.width, GUIsize);
@@ -16,20 +16,31 @@ public class CameraControl : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if(Physics.Raycast(ray, out hit)) {
+			//If we hit something and it's not a tile
+			if(Physics.Raycast(ray, out hit) && !hit.transform.name.Contains("tile")) {
 				GameObject.Find("GUILogic").GetComponent<GUILogic>().LAST_CLICKED_ON = hit.transform;
 			}
 		}
-		if (enabled && recdown.Contains(Input.mousePosition))
+		if(Input.GetMouseButton(1)) {
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			//Must hit something and we have to have a unit selected
+			if(Physics.Raycast(ray, out hit) && GameObject.Find("GUILogic").GetComponent<GUILogic>().LAST_CLICKED_ON.name.Contains("unit")) {
+				GameObject.Find("GUILogic").GetComponent<GUILogic>().moveUnit(hit.transform);
+			}
+		}
+		//Camera panning handlers
+		if (enabled_camera && recdown.Contains(Input.mousePosition)) {
 			transform.Translate(0, 0, -CamSpeed, Space.World);
-		
-		if (enabled && recup.Contains(Input.mousePosition))
+		}
+		if (enabled_camera && recup.Contains(Input.mousePosition)) {
 			transform.Translate(0, 0, CamSpeed, Space.World);
-		
-		if (enabled && recleft.Contains(Input.mousePosition))
+		}
+		if (enabled_camera && recleft.Contains(Input.mousePosition)) {
 			transform.Translate(-CamSpeed, 0, 0, Space.World);
-		
-		if (enabled && recright.Contains(Input.mousePosition))
+		}
+		if (enabled_camera && recright.Contains(Input.mousePosition)) {
 			transform.Translate(CamSpeed, 0, 0, Space.World);
+		}
 	}
 }
