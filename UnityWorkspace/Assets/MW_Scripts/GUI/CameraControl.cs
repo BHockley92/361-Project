@@ -3,41 +3,16 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour {
 
+	public float CamSpeed = 1.00f;
+	public int GUIsize = 25;
+	public bool enabled = false;
 	
-	public float maximumZoom = 1f;
-	public float minimumZoom = 20f;
-	
-	public float lookDamper = 5f;
-	
-	private readonly string[] INPUT_MOUSE_BUTTONS = {"Mouse Look", "Mouse Select"};
-	private bool ready;
-	private Vector3 selectStartPosition;
-	private Texture2D pixel;
+	void Update () {
+		Rect recdown = new Rect (0, 0, Screen.width, GUIsize);
+		Rect recup = new Rect (0, Screen.height-GUIsize, Screen.width, GUIsize);
+		Rect recleft = new Rect (0, 0, GUIsize, Screen.height);
+		Rect recright = new Rect (Screen.width-GUIsize, 0, GUIsize, Screen.height);
 
-	void Start () {
-		try {
-			startupChecks();
-			ready = true;
-		} catch (UnityException exception) {
-			ready = false;
-			throw exception;
-		}
-	}
-
-	private void startupChecks() {
-		if (!Camera.main) {
-			throw new MissingComponentException("RTS Camera must be attached to a camera.");
-		}
-		try {
-			Input.GetAxis(INPUT_MOUSE_BUTTONS[0]);
-			Input.GetAxis(INPUT_MOUSE_BUTTONS[1]);
-		} catch (UnityException) {
-			throw new UnassignedReferenceException("Inputs " + INPUT_MOUSE_BUTTONS[0] + " and " +
-			                                       INPUT_MOUSE_BUTTONS[1] + " must be defined.");
-		}
-	}
-	
-	void Update () {	
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -45,33 +20,16 @@ public class CameraControl : MonoBehaviour {
 				GameObject.Find("GUILogic").GetComponent<GUILogic>().LAST_CLICKED_ON = hit.transform;
 			}
 		}
-		if (!ready) { return; }
-		updateLook();
-		updateZoom();
-	}
-
-	private bool isClicking(int index) {
-		return Input.GetAxis(INPUT_MOUSE_BUTTONS[index]) == 1f;
-	}
-
-
-	private Vector2 getMouseMovement() {
-		return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-	}
-
-	private void updateZoom() {
-		if (disableZoom) { return; }
-		var newSize = Camera.main.orthographicSize - Input.GetAxis("Mouse ScrollWheel");
-		newSize = Mathf.Clamp(newSize, maximumZoom, minimumZoom);
-		Camera.main.orthographicSize = newSize;
-	}
-
-	private void updateLook() {
-		if (disablePanning) { return; }
-		var newPosition = Camera.main.transform.position;
-		var mousePosition = getMouseMovement();
-		newPosition.x = newPosition.x - (mousePosition.x * Camera.main.orthographicSize / lookDamper);
-		newPosition.y = newPosition.y - (mousePosition.y * Camera.main.orthographicSize / lookDamper);
-		Camera.main.transform.position = newPosition;
+		if (enabled && recdown.Contains(Input.mousePosition))
+			transform.Translate(0, 0, -CamSpeed, Space.World);
+		
+		if (enabled && recup.Contains(Input.mousePosition))
+			transform.Translate(0, 0, CamSpeed, Space.World);
+		
+		if (enabled && recleft.Contains(Input.mousePosition))
+			transform.Translate(-CamSpeed, 0, 0, Space.World);
+		
+		if (enabled && recright.Contains(Input.mousePosition))
+			transform.Translate(CamSpeed, 0, 0, Space.World);
 	}
 }
