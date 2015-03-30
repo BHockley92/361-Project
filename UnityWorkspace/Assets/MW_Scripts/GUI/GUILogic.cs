@@ -76,8 +76,7 @@ public class GUILogic : MonoBehaviour {
 	public void UpdateGameState(string gameState, int senderId) {
 		XmlDocument state = new XmlDocument();
 		state.LoadXml (gameState);
-		Board game_board = SERIALIZER.loadGameState(state);
-		GAME.gameBoard = game_board;
+		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		//TODO: kevin
 		BeginTurn ();
 		//Always do this
@@ -109,7 +108,7 @@ public class GUILogic : MonoBehaviour {
 			GAME = mw.newGame (NETWORK.getPlayers());
 			//Add generated board to GAME
 			if(LOADED_GAME != null) {
-				GAME.gameBoard = SERIALIZER.loadGameState(LOADED_GAME);
+				GAME.gameBoard = SERIALIZER.loadGameState(LOADED_GAME, GAME);
 			}
 			else {
 				GAME.gameBoard = new Board(20,20,2);
