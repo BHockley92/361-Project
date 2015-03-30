@@ -28,9 +28,7 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 {
 
 	//advised not to do an XML diff, so for now we recreate the gameState from scratch by parsing xml file
-	public Board loadGameState(string path){
-		XmlDocument doc = new XmlDocument ();
-		doc.Load (path); //ex: doc.Load("c:\\test.xml");
+	public Board loadGameState(XmlDocument doc){
 
 		//<map> attributes
 		string length = doc.DocumentElement.Attributes["length"].InnerText;

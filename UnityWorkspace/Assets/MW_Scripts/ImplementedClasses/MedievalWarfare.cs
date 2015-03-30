@@ -10,27 +10,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 	{
 		// initalize game for randomly generated board
 		GameLogic gl = new GameLogic (); 
-		MW_Game myGame = new MW_Game (participants, width, height, waterboarder, gl);
-		
-		//get tiles that make up board 
-		Board myBoard = myGame.gameBoard;
-
-
-
-		//each tile that's not water gets a village owned by a random player ie: set up tileOwner
-		//during BFS remove all except 1 of the villages that have more than 3 tiles
-		foreach (Tile t in myBoard.board) {
-
-			int randomPlayer = Random.Range (0, participants.Count); //i still think it's -1 need to check
-			List<AbstractTile> myTile = new List<AbstractTile>();
-			myTile.Add(t);
-			//region consists of the single tile it occupies
-			t.myVillage = new Village (myTile, participants [randomPlayer]);
-
-
-		}
-
-		assignRegions (myBoard);
+		MW_Game myGame = new MW_Game (participants, gl);
 
 		return myGame;
 	}//end newGame

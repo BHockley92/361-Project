@@ -76,8 +76,12 @@ public class GUILogic : MonoBehaviour {
 	public void UpdateGameState(string gameState, int senderId) {
 		XmlDocument state = new XmlDocument();
 		state.LoadXml (gameState);
-		//How do I determine who's turn it is? 
+		Board game_board = SERIALIZER.loadGameState(state);
+		GAME.gameBoard = game_board;
+		//If it's my turn then do this
 		BeginTurn ();
+		//Always do this
+		visualizeBoard();
 	}
 
 	//When it becomes current players turn, enable the endturn button
@@ -100,16 +104,30 @@ public class GUILogic : MonoBehaviour {
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
 		if(NETWORK.startGame() == MWNetworkResponse.GAME_START_SUCCESS) {
-			//If not host, dont do shit
 			MedievalWarfare mw = new MedievalWarfare ();
 			//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
-			//TODO: DON'T GENERATE BOARD IN NEWGAME
-			GAME = mw.newGame (NETWORK.getPlayers(),20,20,2);
+			GAME = mw.newGame (NETWORK.getPlayers());
 			//Add generated board to GAME
+			if(LOADED_GAME != null) {
+				GAME.gameBoard = SERIALIZER.loadGameState(LOADED_GAME);
+			}
+			else {
+				//each tile that's not water gets a village owned by a random player ie: set up tileOwner
+				//during BFS remove all except 1 of the villages that have more than 3 tiles
+				foreach (Tile t in GAME.gameBoard.board) {
+					int randomPlayer = Random.Range (0, NETWORK.getPlayers().Count); //i still think it's -1 need to check
+					List<AbstractTile> myTile = new List<AbstractTile>();
+					myTile.Add(t);
+					//region consists of the single tile it occupies
+					t.myVillage = new Village (myTile, NETWORK.getPlayers() [randomPlayer]);
+				}
+				mw.assignRegions (GAME.gameBoard);
+			}
 			//Start the game
 			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
 			//How do I push the game state to players initially? Is this sufficient?
 			NETWORK.turnEnded(state.OuterXml);
+			visualizeBoard();
 		}
 		else {
 			//Check the other possible problems
@@ -117,7 +135,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	//TODO: fix this method
-	private void generateBoard(XmlDocument xml_board) {
+	private void visualizeBoard() {
 		foreach(Tile current in GAME.gameBoard.board) {
 			GameObject tile = null;
 			//Find the type of terrain to spawn
@@ -145,9 +163,6 @@ public class GUILogic : MonoBehaviour {
 			//Create the game representation of the tile
 			GameObject.Instantiate(tile, new Vector3(x, 0.1f, y), Quaternion.identity);
 		}
-		//Get parameters from XML.
-		//Board game_board = new Board();
-		//return game_board;
 	}
 
 	public void UpgradeVillage() {

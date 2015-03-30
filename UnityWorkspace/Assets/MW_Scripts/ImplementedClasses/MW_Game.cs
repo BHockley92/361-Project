@@ -8,9 +8,9 @@ public class MW_Game : AbstractGame
 	private int roundsPlayed { get; set; }
 
 	// for a randomly generated board, assumes length and width are > 0
-	public MW_Game(List<AbstractPlayer> players, int boardLength, int boardWidth, int waterborder, AbstractGameLogic gl)
+	public MW_Game(List<AbstractPlayer> players, AbstractGameLogic gl)
 	{
-		initialize (players, new Board (boardLength, boardWidth, waterborder), gl);
+		initialize (players, gl);
 		roundsPlayed = 0;
 	}
 

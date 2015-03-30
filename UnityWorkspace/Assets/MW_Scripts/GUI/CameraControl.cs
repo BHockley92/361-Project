@@ -13,14 +13,11 @@ public class CameraControl : MonoBehaviour {
 	public float selectLineWidth = 2f;
 	
 	public float lookDamper = 5f;
-	public string selectionObjectName = "RTS Selection";
 	
 	private readonly string[] INPUT_MOUSE_BUTTONS = {"Mouse Look", "Mouse Select"};
 	private bool ready;
-	private bool[] isDragging = new bool[2];
 	private Vector3 selectStartPosition;
 	private Texture2D pixel;
-	private GameObject selection;
 
 	void Start () {
 		try {
@@ -82,11 +79,11 @@ public class CameraControl : MonoBehaviour {
 	}
 
 	private void updateLook() {
-		if (!isDragging[0] || disablePanning) { return; }
-		var newPosition = transform.position;
+		if (disablePanning) { return; }
+		var newPosition = Camera.main.transform.position;
 		var mousePosition = getMouseMovement();
 		newPosition.x = newPosition.x - (mousePosition.x * Camera.main.orthographicSize / lookDamper);
 		newPosition.y = newPosition.y - (mousePosition.y * Camera.main.orthographicSize / lookDamper);
-		transform.position = newPosition;
+		Camera.main.transform.position = newPosition;
 	}
 }
