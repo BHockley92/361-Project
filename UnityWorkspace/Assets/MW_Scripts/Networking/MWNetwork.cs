@@ -201,9 +201,12 @@ public class MWNetwork : Photon.MonoBehaviour
         List<AbstractPlayer> mwPlayers = new List<AbstractPlayer>();
 
 		foreach (PhotonPlayer player in players)
-        {
-			mwPlayers.Add((AbstractPlayer)roomProps[player]);
-        }
+		{
+			MW_Player mwPlayer = new MW_Player();
+			mwPlayer.setAttribute(player.name);
+			
+			mwPlayers.Add(mwPlayer);
+		}
 		
 		return mwPlayers;
 	}
