@@ -19,6 +19,7 @@ public class Village : AbstractVillage
 	{
 		myTile.myVillage.controlledRegion.Remove (myTile);
 		myTile.myVillage = other;
+		myTile.myType = LandType.Meadow; //specs say "the tile is converted to a meadow of the invading player’s color"
 		other.controlledRegion.Add (myTile);
 	}
 }
