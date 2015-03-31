@@ -178,19 +178,19 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				XmlNode tileNode = doc.CreateElement ("tile");
 				XmlAttribute landTypeAtt = doc.CreateAttribute ("landType");
 				landTypeAtt.Value = "Sea";
-				XmlAttribute x = doc.CreateAttribute ("boardPositionX");
-				x.Value = t.boardPosition.x.ToString(); //x value
-				XmlAttribute y = doc.CreateAttribute ("boardPositionY");
-				x.Value = t.boardPosition.y.ToString(); //y value
+				XmlAttribute boardPX = doc.CreateAttribute ("boardPositionX");
+				boardPX.Value = t.boardPosition.x.ToString(); //x value
+				XmlAttribute boardPY = doc.CreateAttribute ("boardPositionY");
+				boardPY.Value = t.boardPosition.y.ToString(); //y value
 				XmlAttribute gamePositionX = doc.CreateAttribute ("gamePositionX"); //x value
 				gamePositionX.Value = t.gamePosition.x.ToString ();
 				XmlAttribute gamePositionY = doc.CreateAttribute ("gamePositionY"); //y value
-				gamePositionY.Value = t.gamePosition.x.ToString ();
+				gamePositionY.Value = t.gamePosition.y.ToString ();
 
 
 				tileNode.Attributes.Append (landTypeAtt);
-				tileNode.Attributes.Append (x);
-				tileNode.Attributes.Append (y);
+				tileNode.Attributes.Append (boardPX);
+				tileNode.Attributes.Append (boardPY);
 				tileNode.Attributes.Append (gamePositionX);
 				tileNode.Attributes.Append (gamePositionY);
 				rootNode.AppendChild (tileNode);
@@ -205,12 +205,12 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				XmlAttribute x = doc.CreateAttribute ("boardPositionX");
 				x.Value = t.boardPosition.x.ToString(); //x value
 				XmlAttribute y = doc.CreateAttribute ("boardPositionY");
-				x.Value = t.boardPosition.y.ToString(); //y value
+				y.Value = t.boardPosition.y.ToString(); //y value
 
 				XmlAttribute gamePositionX = doc.CreateAttribute ("gamePositionX"); //x value
 				gamePositionX.Value = t.gamePosition.x.ToString ();
 				XmlAttribute gamePositionY = doc.CreateAttribute ("gamePositionY"); //y value
-				gamePositionY.Value = t.gamePosition.x.ToString ();
+				gamePositionY.Value = t.gamePosition.y.ToString ();
 
 				tileNode.Attributes.Append (landTypeAtt);
 				tileNode.Attributes.Append(x);

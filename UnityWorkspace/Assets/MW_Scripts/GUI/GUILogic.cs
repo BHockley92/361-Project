@@ -178,7 +178,7 @@ public class GUILogic : MonoBehaviour {
 			GameObject.Instantiate(tile, pos, Quaternion.identity);
 
 			// building -- no resources that match this
-			//TODO: Go over this and fix
+			//TODO: Go over this and fix, Ben note there's a structure type "NONE"
 			if(current.occupyingStructure.myType != null)
 			{
 				switch(current.occupyingStructure.myType)
