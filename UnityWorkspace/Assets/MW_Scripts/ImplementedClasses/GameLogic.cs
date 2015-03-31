@@ -12,17 +12,37 @@ public class GameLogic : AbstractGameLogic
 		//invader takes villages gold
 		invader.myVillage.gold = invaderGold + myGold;
 		invader.myVillage.wood = invaderWood + myWood;
-		//move village to new tile in controlled region
-		int randomTile = Random.Range (0, v.controlledRegion.Count); 
-		//change location of village (not to same tile)
-		while (v.controlledRegion[randomTile] == v.location) {
-			randomTile = Random.Range(0,v.controlledRegion.Count);
-		}
-		v.location = v.controlledRegion [randomTile];
-		//empty villages resources
-		v.gold = 0;
-		v.wood = 0;
+		//invader takes control of tile, no longer part of v's controlledRegion
+		v.swapControl (v.location, invader.myVillage);
 
+		//move village to new tile if controlled region is greater than 3
+		if (v.controlledRegion.Count >= 3) {
+			int randomTile = Random.Range (0, v.controlledRegion.Count); 
+			//change location of village
+			v.location = v.controlledRegion [randomTile];
+			//empty villages resources, empty hovel recreated
+			v.wood = 0;
+			v.myType = VillageType.Hovel;
+			v.gold = 0;
+			
+		}
+		else{
+			AbstractTile myTile = v.location;
+			//controlled region isnt big enough, destroy village and units, make rest of tiles neutral land
+			foreach(Unit u in v.supportedUnits){
+				u.myLocation.occupyingUnit = null;
+			}
+			foreach(Tile t in v.controlledRegion){
+				t.myVillage = null; //neutral land
+			}
+
+			v = null; //destroy village
+			myTile.myType = LandType.Tree;
+			
+		}
+		
+		
+	
 	}
 //TODO: Emily
 	public override void divideRegion(List<AbstractTile> region) {
@@ -356,15 +376,19 @@ public class GameLogic : AbstractGameLogic
 		AbstractUnit attackingUnit = dest.occupyingUnit;
 		AbstractVillage attackingVillage = attackingUnit.myVillage;
 		AbstractVillage occupyingVillage = dest.myVillage;
+		//vilage resides on this tile "dest"
+		if (occupyingVillage != null) {
+				destroyVillage (occupyingVillage, attackingUnit);
+		}
+		//village is not on this tile, swap control, see if region is split
+		else{
+			//TODO: check if it follows specs
+			AbstractVillage myVillage = dest.myVillage;
+			myVillage.swapControl (dest, attackingVillage);
+			List<AbstractTile> controlledRegion = myVillage.controlledRegion;
+			divideRegion (controlledRegion);
 
-		if (occupyingVillage != null)
-			destroyVillage (occupyingVillage, attackingUnit);
-
-		AbstractVillage myVillage = dest.myVillage;
-
-		myVillage.swapControl (dest, attackingVillage);
-		List<AbstractTile> controlledRegion = myVillage.controlledRegion;
-		divideRegion (controlledRegion);
+		}
 	}
 
 	protected override void connectRegions(List<AbstractVillage> villages) 
