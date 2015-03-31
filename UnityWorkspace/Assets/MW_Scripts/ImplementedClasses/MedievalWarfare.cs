@@ -19,7 +19,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 	{
 		//BFS algorithm
 		foreach (Tile t in gameBoard.board) {
-			if (t.myType != LandType.Sea && t.myVillage !=null) { //tile village = null if neutral or hasVillage so skip
+			if (t.myType != LandType.Sea && t.myVillage !=null) { //tile village = null if neutral 
 				Stack<Tile> myStack = new Stack<Tile> ();
 				List<AbstractTile> visitedTiles = new List<AbstractTile> ();
 				AbstractPlayer belongsTo = t.myVillage.myPlayer; //current owner of tile t
@@ -58,8 +58,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 						foreach (Tile w in visitedTiles) {
 							//all these tiles are controlled by myNewVillage
 							w.hasVillage = true;
-							//set village to null
-							w.myVillage = null;
+							w.myVillage = myNewVillage;
 						}
 						villageTile.myVillage = myNewVillage;
 
