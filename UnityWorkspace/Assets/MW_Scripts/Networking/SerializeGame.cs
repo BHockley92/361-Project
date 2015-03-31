@@ -24,7 +24,7 @@ using System;
  */
 
 
-public class SerializeGame  //: MonoBehaviour //uncomment when testing
+public class SerializeGame //: MonoBehaviour //uncomment when testing
 {
 	//advised not to do an XML diff, so for now we recreate the gameState from scratch by parsing xml file
 	public Board loadGameState(XmlDocument doc, MW_Game myGame){
@@ -384,8 +384,14 @@ public class SerializeGame  //: MonoBehaviour //uncomment when testing
 				}
 		string test = "hello";
 		doc.Save ("emily_"+test+".xml");
+
+		string gameState = "";
+		XmlDocument state = new XmlDocument();
+		state.Load (gameState);
+
+
 		}
-*/
+		*/
 } //end class
 
 
