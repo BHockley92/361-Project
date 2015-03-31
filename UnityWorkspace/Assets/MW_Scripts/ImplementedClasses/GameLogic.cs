@@ -4,6 +4,30 @@ using GameEnums;
 
 public class GameLogic : AbstractGameLogic
 {
+//TODO: Emily
+	public override void destroyVillage(AbstractVillage v, AbstractUnit invader){
+		int myGold = v.gold;
+		int invaderGold = invader.myVillage.gold;
+		//invader takes villages gold
+		invader.myVillage.gold = invaderGold + myGold;
+
+
+
+
+	}
+
+	public override void divideRegion(List<AbstractTile> region) {
+
+
+
+
+	}
+
+
+
+
+
+
 	public override void hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
 	{
 		int unitcost = myValueManager.getUnitValue (u.myType);
@@ -317,9 +341,6 @@ public class GameLogic : AbstractGameLogic
 	}
 
 
-	// TODO: unimplemented methods below, but not for the demo. Emily these are both yours
-	public override void destroyVillage(AbstractVillage v, AbstractUnit invader) {}
-	public override void divideRegion(List<AbstractTile> region) {}
 
 	public override void takeoverTile(AbstractTile dest) 
 	{
