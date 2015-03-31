@@ -4,19 +4,24 @@ using GameEnums;
 
 public class GameLogic : AbstractGameLogic
 {
-//TODO: Emily
 	public override void destroyVillage(AbstractVillage v, AbstractUnit invader){
 		int myGold = v.gold;
+		int myWood = v.wood;
 		int invaderGold = invader.myVillage.gold;
+		int invaderWood = invader.myVillage.wood;
 		//invader takes villages gold
 		invader.myVillage.gold = invaderGold + myGold;
+		invader.myVillage.wood = invaderWood + myWood;
 		//move village to new tile in controlled region
 		int randomTile = Random.Range (0, v.controlledRegion.Count); 
+		//change location of village (not to same tile)
 		while (v.controlledRegion[randomTile] == v.location) {
 			randomTile = Random.Range(0,v.controlledRegion.Count);
 		}
 		v.location = v.controlledRegion [randomTile];
+		//empty villages resources
 		v.gold = 0;
+		v.wood = 0;
 
 	}
 //TODO: Emily
