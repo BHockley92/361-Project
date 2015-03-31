@@ -27,14 +27,20 @@ public enum MWNetworkResponse
  */
 public class MWNetwork : Photon.MonoBehaviour
 {
-	// Event codes
-	private const byte UPDATED_GAME_STATE = 1;
 
 	// Useful references to GUI elements
 	public GUILogic gui;
 	public Text GUIplayerList;
+	
+	// Used for sending game state over network.
+	private string     gameState = "";
+	private const byte UPDATED_GAME_STATE = 1;
+	private const int  GAME_STATE_SUBSTRINGS = 2;
+	private int        gameStateSubstringsReceived = 0;
     
+    // Singleton reference
 	private static MWNetwork instance;
+	
 	private static string version = "1.0";    // The game version.  Will probably never change this.
 
 	/* 
@@ -191,7 +197,6 @@ public class MWNetwork : Photon.MonoBehaviour
 	
 	/*
 	 * Returns a list of AbstractPlayers in the room. 
-	 * FIXME Associate MW_Player to a network player.
 	 */
 	public List<AbstractPlayer> getPlayers()
 	{
@@ -216,12 +221,18 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
 	public void ShareGameState(string gameState)
 	{
-		if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
-								      gameState,
-								      true,
-								      new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others }))
+		for (int i = 0; i < GAME_STATE_SUBSTRINGS; i++)
 		{
-			Debug.Log("Error sending game state over network.");
+			if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
+			                              gameState.Substring(i, gameState.Length / GAME_STATE_SUBSTRINGS),
+			                              true,
+			                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All }))
+			{
+				Debug.Log("Error sending game state over network.");
+			}
+			else {
+				Debug.Log("Part of game state sent.");
+			}
 		}
 	}
 	
@@ -233,7 +244,19 @@ public class MWNetwork : Photon.MonoBehaviour
 	{
 		if (eventCode == UPDATED_GAME_STATE)
 		{
-			gui.UpdateGameState((string)content, senderId);
+			gameState += (string) content;
+			gameStateSubstringsReceived++;
+			
+			if (gameStateSubstringsReceived == GAME_STATE_SUBSTRINGS)
+			{
+				Debug.Log("Sending game state string to GUILogic.  String length: " + gameState.Length); 
+				
+				gui.UpdateGameState((string)content, senderId);
+				
+				// Reinitialize game state string cache
+				gameState = "";
+				gameStateSubstringsReceived = 0;
+			}
 		}
 	}
 
