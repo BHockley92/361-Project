@@ -19,7 +19,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 	{
 		//BFS algorithm
 		foreach (Tile t in gameBoard.board) {
-			if (t.myType != LandType.Sea && t.myVillage !=null) { //attempt to fix error
+			if (t.myType != LandType.Sea && t.myVillage !=null) { //tile village = null if neutral or hasVillage so skip
 				Stack<Tile> myStack = new Stack<Tile> ();
 				List<AbstractTile> visitedTiles = new List<AbstractTile> ();
 				AbstractPlayer belongsTo = t.myVillage.myPlayer; //current owner of tile t
@@ -33,7 +33,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 
 					if (v.isVisited == false) {
 						v.isVisited = true; //mark tile as visited
-
+					}
 						List<AbstractTile> neighbours = v.getNeighbours (); //Nick fixed to not return sea tiles
 
 						//for all neighbours that havent been visited and have same owner
@@ -56,24 +56,25 @@ public class MedievalWarfare : AbstractMedievalWarfare
 						Village myNewVillage = new Village (visitedTiles, belongsTo);
 						myNewVillage.location = villageTile;
 						foreach (Tile w in visitedTiles) {
+							//all these tiles are controlled by myNewVillage
 							w.hasVillage = true;
-							w.myVillage = myNewVillage;
+							//set village to null
+							w.myVillage = null;
 						}
+						villageTile.myVillage = myNewVillage;
+
 					} 
 					else if (visitedTiles.Count < 3) {
 						//set land to neutral
 						foreach (Tile n in visitedTiles) {
 							n.myVillage = null;
 						}
-
-
 					}
 
+
+				} //skip if see or already visited
+
 			}//end tile iteration
-		} //skip if sea tile
-
-	} 
-
 
 }//end assignRegions
 

@@ -10,12 +10,16 @@ public class GameLogic : AbstractGameLogic
 		int invaderGold = invader.myVillage.gold;
 		//invader takes villages gold
 		invader.myVillage.gold = invaderGold + myGold;
-
-
-
+		//move village to new tile in controlled region
+		int randomTile = Random.Range (0, v.controlledRegion.Count); 
+		while (v.controlledRegion[randomTile] == v.location) {
+			randomTile = Random.Range(0,v.controlledRegion.Count);
+		}
+		v.location = v.controlledRegion [randomTile];
+		v.gold = 0;
 
 	}
-
+//TODO: Emily
 	public override void divideRegion(List<AbstractTile> region) {
 
 
