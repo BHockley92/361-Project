@@ -221,12 +221,30 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
 	public void ShareGameState(string gameState)
 	{
+		string[] gameStateSubstrings = new string[GAME_STATE_SUBSTRINGS];
+		int gameStateSubtringLength = Mathf.FloorToInt(gameState.Length / GAME_STATE_SUBSTRINGS);
+		
+		Debug.Log("Sharing game state of length " + gameState.Length);
+		
+		// Divide game state string into substrings
+		for (int i = 0; i < GAME_STATE_SUBSTRINGS; i++)
+		{
+			if (i != GAME_STATE_SUBSTRINGS - 1)
+			{
+				gameStateSubstrings[i] = gameState.Substring(i * gameStateSubtringLength, gameStateSubtringLength);
+			}
+			else {
+				gameStateSubstrings[i] = gameState.Substring(i * gameStateSubtringLength);
+			}
+		}
+	
+		// Send each substring over the network
 		for (int i = 0; i < GAME_STATE_SUBSTRINGS; i++)
 		{
 			if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
-			                              gameState.Substring(i, gameState.Length / GAME_STATE_SUBSTRINGS),
+			                              gameStateSubstrings[i],
 			                              true,
-			                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All }))
+			                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All })) // TODO change to others when fixed
 			{
 				Debug.Log("Error sending game state over network.");
 			}
@@ -246,8 +264,7 @@ public class MWNetwork : Photon.MonoBehaviour
 			
 			if (gameStateSubstringsReceived == GAME_STATE_SUBSTRINGS)
 			{
-				Debug.Log("Sending game state string to GUILogic.  String length: " + gameState.Length +
-						  "\nString starts with " + gameState.Substring(0, 5));
+				Debug.Log("Sending game state string to GUILogic.  String length: " + gameState.Length);
 				
 				gui.UpdateGameState(gameState, senderId);
 				
