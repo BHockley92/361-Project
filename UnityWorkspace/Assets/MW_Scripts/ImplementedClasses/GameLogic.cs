@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using GameEnums;
+using System.IO;
 
 public class GameLogic : AbstractGameLogic
 {
@@ -47,6 +48,12 @@ public class GameLogic : AbstractGameLogic
 //TODO: Emily
 	public override void divideRegion(List<AbstractTile> region) {
 
+
+
+		//if tile split region into unconnected regions
+		//region that has village loses all units NOT connected anymore (ie: units in other subregions)
+		// if subregion >=3, new hovel on random tile and occupyingunits on those tiles part of supportedUnits of new village
+		//subregions <3, all occupying units destroyed and subregion tiles become neutral
 
 
 

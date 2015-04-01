@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using System.IO;
 
 // TODO Chat?
 // TODO Matchmaker
@@ -266,7 +267,16 @@ public class MWNetwork : Photon.MonoBehaviour
 			{
 				Debug.Log("Sending game state string to GUILogic.  String length: " + gameState.Length);
 				
+				/*Write the string to a file. TESTING
+				StreamWriter file = new StreamWriter("Kevin_update.txt");
+				file.WriteLine((string)gameState);
+				
+				file.Flush();
+				*/
+
 				gui.UpdateGameState(gameState, senderId);
+
+
 				
 				// Reinitialize game state string cache
 				gameState = "";

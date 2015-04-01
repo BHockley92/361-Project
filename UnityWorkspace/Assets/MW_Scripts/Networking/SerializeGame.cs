@@ -27,6 +27,8 @@ using System.IO;
 
 public class SerializeGame //: MonoBehaviour //uncomment when testing
 {
+	//testing
+	//int count = 0;
 	//advised not to do an XML diff, so for now we recreate the gameState from scratch by parsing xml file
 	public Board loadGameState(XmlDocument doc, MW_Game myGame){
 
@@ -35,7 +37,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 		string width = doc.DocumentElement.Attributes["width"].InnerText;
 		string waterBorder = doc.DocumentElement.Attributes["waterBorder"].InnerText;
 
-		Tile[,] myTiles = new Tile[ Convert.ToInt32(length), Convert.ToInt32(width) ];
+		Tile[,] myTiles = new Tile[Convert.ToInt32(length)+1, Convert.ToInt32(width)+1];
 		Board myGameBoard = new Board(myTiles, Convert.ToInt32(waterBorder)); //will this cause an error because myTiles is null right now?
 		//myGame.gameBoard = myGameBoard;
 
@@ -144,7 +146,9 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 			}
 					
 		}//end iterating over each node
-
+		//testing, see what file is produced
+		//XmlDocument mydoc = new XmlDocument ();
+		//mydoc = saveGameState (myGame); 
 	return myGameBoard;
 	} //end loadGameState
 
@@ -153,10 +157,9 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 
 
 	public XmlDocument saveGameState(MW_Game myGame, MW_Player myPlayer = null, string path = null) { //game state of myPlayer who ended turn will be saved
-
+		//count ++;
 		XmlDocument doc = new XmlDocument ();
 		XmlNode rootNode = doc.CreateElement ("map");
-
 		Board myBoard = myGame.gameBoard;
 
 		//<map> attributes: length, width, height
@@ -170,7 +173,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 		rootNode.Attributes.Append (length);
 		rootNode.Attributes.Append (width);
 		rootNode.Attributes.Append (waterBorder);
-		doc.AppendChild (rootNode);
+		doc.AppendChild (rootNode); 
 
 		foreach (Tile t in myBoard.board) {
 
@@ -297,12 +300,12 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 		} //end iterating over each tile
 
 		//save xml file state_username.xml
-		if(path != null) {
-			string pname = myPlayer.username.ToString ();
-			doc.Save ("state_"+pname+".xml");
-		}
-
-		doc.Save ("test.xml");
+		//if(count == 2) {
+		//	doc.Save ("afterLoad.xml");
+		//}
+		//if (count == 1) {
+			doc.Save ("beforeLoad.xml");
+		//}
 		return doc;
 	}
 
