@@ -35,7 +35,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	// Used for sending game state over network.
 	private string     gameState = "";
 	private const byte UPDATED_GAME_STATE = 1;
-	private const int  GAME_STATE_SUBSTRINGS = 2;
+	private const int  GAME_STATE_SUBSTRINGS = 4;
 	private int        gameStateSubstringsReceived = 0;
     
     // Singleton reference
