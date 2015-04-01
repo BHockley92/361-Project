@@ -490,18 +490,23 @@ public class GameLogic : AbstractGameLogic
 		List<AbstractTile> neighbours = t.getNeighbours();
 		
 		// If the tile neighbour is elegible for tree growth, roll
-		foreach( AbstractTile neighbour in neighbours )
+		if(neighbours.Count == 0) Debug.Log("No neighbours returned");
+
+		if( neighbours.Count > 0)
 		{
-			if( neighbour.occupyingUnit == null 
-			   && neighbour.occupyingStructure.myType == StructureType.NONE
-			   && neighbour.myVillage.location != neighbour 
-			   && neighbour.myType != LandType.Sea )
+			foreach( AbstractTile neighbour in neighbours )
 			{
-				int diceRoll = Random.Range(0, 2);
-				
-				if( diceRoll == 1 )
+				if( neighbour.occupyingUnit == null 
+				   && neighbour.occupyingStructure.myType == StructureType.NONE
+				   && neighbour.myVillage.location != neighbour 
+				   && neighbour.myType != LandType.Sea )
 				{
-					neighbour.myType = LandType.Tree;
+					int diceRoll = Random.Range(0, 2);
+					
+					if( diceRoll == 1 )
+					{
+						neighbour.myType = LandType.Tree;
+					}
 				}
 			}
 		}
