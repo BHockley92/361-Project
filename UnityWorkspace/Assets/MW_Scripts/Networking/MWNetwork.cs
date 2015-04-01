@@ -230,9 +230,6 @@ public class MWNetwork : Photon.MonoBehaviour
 			{
 				Debug.Log("Error sending game state over network.");
 			}
-			else {
-				Debug.Log("Part of game state sent.");
-			}
 		}
 	}
 	
@@ -249,9 +246,10 @@ public class MWNetwork : Photon.MonoBehaviour
 			
 			if (gameStateSubstringsReceived == GAME_STATE_SUBSTRINGS)
 			{
-				Debug.Log("Sending game state string to GUILogic.  String length: " + gameState.Length); 
+				Debug.Log("Sending game state string to GUILogic.  String length: " + gameState.Length +
+						  "\nString starts with " + gameState.Substring(0, 5));
 				
-				gui.UpdateGameState((string)content, senderId);
+				gui.UpdateGameState(gameState, senderId);
 				
 				// Reinitialize game state string cache
 				gameState = "";
