@@ -3,6 +3,7 @@ using System.Xml;
 using System.Collections.Generic;
 using GameEnums;
 using System;
+using System.IO;
 /************ XML TEMPLATE (EDITED)********
 <map length = "" width = "", waterBorder ="">
 
@@ -300,6 +301,8 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 			string pname = myPlayer.username.ToString ();
 			doc.Save ("state_"+pname+".xml");
 		}
+
+		doc.Save ("test.xml");
 		return doc;
 	}
 
@@ -383,15 +386,15 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 			
 				}
 		string test = "hello";
+		string mytest = doc.OuterXml;
 		doc.Save ("emily_"+test+".xml");
-
-		string gameState = "";
-		XmlDocument state = new XmlDocument();
-		state.Load (gameState);
-
-
+		Debug.Log (mytest);
+		XmlDocument mydoc = new XmlDocument ();
+		mydoc.LoadXml (mytest);
+		Debug.Log ("loaded");
 		}
-		*/
+	*/
+
 } //end class
 
 

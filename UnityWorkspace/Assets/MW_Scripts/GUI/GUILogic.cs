@@ -76,7 +76,7 @@ public class GUILogic : MonoBehaviour {
 
 	public void UpdateGameState(string gameState, int senderId) {
 		XmlDocument state = new XmlDocument();
-		state.Load(gameState); //changed from LoadXml to just Load.
+		state.LoadXml(gameState); 
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		Debug.Log ("Received a state");
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()))

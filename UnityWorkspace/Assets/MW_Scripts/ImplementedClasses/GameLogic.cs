@@ -27,18 +27,18 @@ public class GameLogic : AbstractGameLogic
 			
 		}
 		else{
-			AbstractTile myTile = v.location;
 			//controlled region isnt big enough, destroy village and units, make rest of tiles neutral land
+			AbstractTile myTile = v.location;
 			foreach(Unit u in v.supportedUnits){
 				u.myLocation.occupyingUnit = null;
 			}
 			foreach(Tile t in v.controlledRegion){
 				t.myVillage = null; //neutral land
 			}
-
 			v = null; //destroy village
+			//village tile turns to a tree
 			myTile.myType = LandType.Tree;
-			
+
 		}
 		
 		
@@ -382,12 +382,12 @@ public class GameLogic : AbstractGameLogic
 		}
 		//village is not on this tile, swap control, see if region is split
 		else{
-			//TODO: check if it follows specs
+			//swap control of tile, now belongs to attacking unit's village
 			AbstractVillage myVillage = dest.myVillage;
 			myVillage.swapControl (dest, attackingVillage);
+
 			List<AbstractTile> controlledRegion = myVillage.controlledRegion;
 			divideRegion (controlledRegion);
-
 		}
 	}
 
