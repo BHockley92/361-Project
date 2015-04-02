@@ -8,7 +8,7 @@ public abstract class AbstractGame
 	public AbstractPlayer turnOf { get; private set; }
 	public int turnIndex { get; private set; }
 
-	public AbstractGameLogic myGameLogic { get; private set; }
+	public AbstractGameLogic myGameLogic { get; set; }
 	public Board gameBoard { get; set; }
 
 	protected void initialize(List<AbstractPlayer> p, AbstractGameLogic gl)

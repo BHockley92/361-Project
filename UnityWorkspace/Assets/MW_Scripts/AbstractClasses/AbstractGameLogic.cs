@@ -4,7 +4,7 @@ using GameEnums;
 
 public abstract class AbstractGameLogic 
 {
-	public ValueManager myValueManager { get; protected set; }
+	public ValueManager myValueManager { get; set; }
 
 	public abstract void hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile);
 	public abstract void buildRoad (AbstractUnit u);

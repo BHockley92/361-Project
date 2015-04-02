@@ -5,6 +5,12 @@ using System.IO;
 
 public class GameLogic : AbstractGameLogic
 {
+
+
+
+
+
+
 	public override void destroyVillage(AbstractVillage v, AbstractUnit invader){
 		int myGold = v.gold;
 		int myWood = v.wood;
@@ -570,13 +576,13 @@ public class GameLogic : AbstractGameLogic
 		}
 	}
 	
-	protected override void incomePhase( AbstractVillage myVillage )
+	protected override void incomePhase(AbstractVillage myVillage)
 	{
 		List<AbstractTile> controlledRegion = myVillage.controlledRegion;
-		
+
 		foreach(AbstractTile t in controlledRegion)
 		{
-			myVillage.gold += myValueManager.getLandValue(t.myType);
+			myVillage.gold += myValueManager.getLandValue(t.myType);  //null reference error because valueManager is not done!
 		}
 	}
 	

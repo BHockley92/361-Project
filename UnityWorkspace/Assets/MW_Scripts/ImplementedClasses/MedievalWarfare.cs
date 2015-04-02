@@ -10,6 +10,8 @@ public class MedievalWarfare : AbstractMedievalWarfare
 	{
 		// initalize game for randomly generated board
 		GameLogic gl = new GameLogic (); 
+		ValueManager vm = new ValueManager (); //must initalize value manager for game
+		gl.myValueManager = vm;
 		MW_Game myGame = new MW_Game (participants, gl);
 		// instantiate players list of villages to 0;
 		foreach (MW_Player p in participants) {
