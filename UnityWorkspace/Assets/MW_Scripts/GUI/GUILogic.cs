@@ -87,7 +87,7 @@ public class GUILogic : MonoBehaviour {
 		}
 		//Always do this
 		Debug.Log ("turned camera on");
-		Camera.main.GetComponent<CameraControl>().enabled = true;
+		Camera.main.GetComponent<CameraControl>().enabled_camera = true;
 		Debug.Log ("Showing the board");
 		visualizeBoard();
 	}
@@ -153,6 +153,22 @@ public class GUILogic : MonoBehaviour {
 
 	private void visualizeBoard() {
 		foreach(Tile current in GAME.gameBoard.board) {
+			//Calculate it's game coordinates
+			float x = 0;
+			float y = 0;
+			if(current.boardPosition.y%2==0) {
+				x = 2*current.boardPosition.x;
+				y = (2*current.boardPosition.y)-(current.boardPosition.y/2.0f);
+			}
+			else {
+				x = 2*current.boardPosition.x+1;
+				y = current.boardPosition.y + (current.boardPosition.y/2.0f);
+			}
+			//Update the tile object
+			current.gamePosition = new Vector2(x,y);
+			//Store it for easier lookup later
+			BOARD_TILES.Add(current.gamePosition,current);
+			//Making the tile
 			GameObject tile = null;
 			//Find the type of terrain to spawn
 			switch(current.myType) {
@@ -161,88 +177,51 @@ public class GUILogic : MonoBehaviour {
 				case LandType.Sea: tile = (GameObject)Resources.Load("tileWater"); break;
 				case LandType.Tree: tile = (GameObject)Resources.Load("tileForest"); break;
 			}
-			//Calculate it's game coordinates
-			float x = 0;
-			float y = 0;
-			if(current.boardPosition.y%2==0) {
-				x = 2*current.boardPosition.x;
-				y = (2*current.boardPosition.y)-(current.boardPosition.y/2);
-			}
-			else {
-				x = 2*current.boardPosition.x+1;
-				y = current.boardPosition.y + current.boardPosition.y/2.0f;
-			}
-			//Update the tile object
-			current.gamePosition = new Vector2(x,y);
-			//Store it for easier lookup
-			BOARD_TILES.Add(current.gamePosition,current);
 			//Create the game representation of the tile
 			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
-			GameObject.Instantiate(tile, pos, Quaternion.identity);
+			GameObject instantiated_tile = (GameObject)GameObject.Instantiate(tile, pos, Quaternion.identity);
 
-			// building -- no resources that match this
-			//TODO: Go over this and fix, Ben note there's a structure type "NONE"
-			if(current.occupyingStructure.myType != null)
-			{
-				switch(current.occupyingStructure.myType)
-				{
-				case StructureType.Road:
-					break;
-				case StructureType.Tombstone:
-					break;
-				case StructureType.Tower:
-					break;
+			if(current.occupyingStructure.myType != null) {
+				GameObject structure = null;
+				switch(current.occupyingStructure.myType) {
+					case StructureType.Road: instantiated_tile.GetComponent<Renderer>().material.mainTexture = (Texture2D)Resources.Load("Tiles/road"); break;
+					case StructureType.Tombstone: structure = (GameObject)Resources.Load("structureTombstone"); break;
+					case StructureType.Tower: structure = (GameObject)Resources.Load("structureTower"); break;
+					case StructureType.NONE: break;
+				}
+				if(structure != null) {
+					//TODO: Add to position to make sure the object appears naturally
+					GameObject.Instantiate(structure, pos, Quaternion.identity);
 				}
 			}
 
 			// village
-			if(current.myVillage != null && current.myVillage.location == current)
-			{
+			if(current.myVillage != null && current.myVillage.location == current) {
 				GameObject village = null;
-				switch(current.myVillage.myType)
-				{
-				case VillageType.Hovel:
-					village = (GameObject)Resources.Load("buildinghovel");
-					break;
-				case VillageType.Town:
-					village = (GameObject)Resources.Load("buildingtown");
-					break;
-				case VillageType.Fort:
-					village = (GameObject)Resources.Load("buildingfort");
-					break;
-				case VillageType.Castle:
-					village = (GameObject)Resources.Load("buildingcastle");
-					break;
+				switch(current.myVillage.myType) {
+					case VillageType.Hovel: village = (GameObject)Resources.Load("buildinghovel"); break;
+					case VillageType.Town: village = (GameObject)Resources.Load("buildingtown"); break;
+					case VillageType.Fort: village = (GameObject)Resources.Load("buildingfort"); break;
+					case VillageType.Castle: village = (GameObject)Resources.Load("buildingcastle"); break;
 				}
-				GameObject.Instantiate(village, pos, Quaternion.identity);
+				GameObject.Instantiate(village, pos + new Vector3(0,0.5f,-0.3f), Quaternion.identity);
 			}
 
 			// unit
-			if( current.occupyingUnit != null)
-			{
+			if( current.occupyingUnit != null) {
 				GameObject unit = null;
-				if( !current.occupyingUnit.isCannon)
-				{
-					switch(current.occupyingUnit.myType)
-					{
-					case UnitType.Peasant:
-						unit = (GameObject)Resources.Load("unitPeasant");
-						break;
-					case UnitType.Infantry:
-						unit = (GameObject)Resources.Load("unitInfantry");
-						break;
-					case UnitType.Soldier:
-						unit = (GameObject)Resources.Load("unitSoldier");
-						break;
-					case UnitType.Knight:
-						unit = (GameObject)Resources.Load("unitKnight");
-						break;
+				if(!current.occupyingUnit.isCannon) {
+					switch(current.occupyingUnit.myType) {
+						case UnitType.Peasant: unit = (GameObject)Resources.Load("unitPeasant"); break;
+						case UnitType.Infantry: unit = (GameObject)Resources.Load("unitInfantry"); break;
+						case UnitType.Soldier: unit = (GameObject)Resources.Load("unitSoldier"); break;
+						case UnitType.Knight: unit = (GameObject)Resources.Load("unitKnight"); break;
 					}
 				}
-				else
-				{
+				else {
 					unit = (GameObject)Resources.Load("unitCannon");
 				}
+				//TODO: Add to position to make sure the object appears naturally
 				GameObject.Instantiate(unit, pos, Quaternion.identity);
 			}
 		}
