@@ -437,8 +437,7 @@ public class GameLogic : AbstractGameLogic
 		if( g.turnIndex == 0 ) treeGrowthPhase( g.gameBoard );
 
 		List<AbstractVillage> myVillages = p.myVillages;
-		bool test1 = (p.myVillages != null);
-		Debug.Log (p.username+ " " + test1.ToString ());
+
 		foreach(AbstractVillage v in myVillages)
 		{
 			tombStonePhase(v);
@@ -541,28 +540,23 @@ public class GameLogic : AbstractGameLogic
 	
 	protected override void peasantBuild( AbstractTile myTile )
 	{
-		AbstractUnit occupyingUnit = myTile.occupyingUnit;
-		UnitType myType = occupyingUnit.myType;
-		ActionType currentAction = occupyingUnit.currentAction;
+		//if there exists a unit, check if peasant, and buildRoad, else do nothing
+		if (myTile.occupyingUnit != null) {
+				AbstractUnit occupyingUnit = myTile.occupyingUnit;
+				UnitType myType = occupyingUnit.myType;
+				ActionType currentAction = occupyingUnit.currentAction;
 		
-		if(myType == UnitType.Peasant)
-		{
-			if(currentAction == ActionType.BuildingRoad)
-			{
-				myTile.occupyingStructure.myType = StructureType.Road;
-				occupyingUnit.currentAction = ActionType.ReadyForOrders;
-			}
-			
-			else if(currentAction == ActionType.FinishCultivating)
-			{
-				myTile.myType = LandType.Meadow;
-				occupyingUnit.currentAction = ActionType.ReadyForOrders;
-			}
-
-			else if(currentAction == ActionType.StartCultivating)
-			{
-				occupyingUnit.currentAction = ActionType.FinishCultivating;
-			}
+				if (myType == UnitType.Peasant) {
+						if (currentAction == ActionType.BuildingRoad) {
+								myTile.occupyingStructure.myType = StructureType.Road;
+								occupyingUnit.currentAction = ActionType.ReadyForOrders;
+						} else if (currentAction == ActionType.FinishCultivating) {
+								myTile.myType = LandType.Meadow;
+								occupyingUnit.currentAction = ActionType.ReadyForOrders;
+						} else if (currentAction == ActionType.StartCultivating) {
+								occupyingUnit.currentAction = ActionType.FinishCultivating;
+						}
+				}
 		}
 	}
 	
