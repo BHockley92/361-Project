@@ -437,7 +437,8 @@ public class GameLogic : AbstractGameLogic
 		if( g.turnIndex == 0 ) treeGrowthPhase( g.gameBoard );
 
 		List<AbstractVillage> myVillages = p.myVillages;
-		
+		bool test1 = (p.myVillages != null);
+		Debug.Log (p.username+ " " + test1.ToString ());
 		foreach(AbstractVillage v in myVillages)
 		{
 			tombStonePhase(v);
@@ -488,7 +489,7 @@ public class GameLogic : AbstractGameLogic
 	private void spawnTreesInNeighbours( AbstractTile t)
 	{
 		List<AbstractTile> neighbours = t.getNeighbours();
-		
+
 		// If the tile neighbour is elegible for tree growth, roll
 		if(neighbours.Count == 0) Debug.Log("No neighbours returned");
 
@@ -496,18 +497,28 @@ public class GameLogic : AbstractGameLogic
 		{
 			foreach( AbstractTile neighbour in neighbours )
 			{
-				if( neighbour.occupyingUnit == null 
-				   && neighbour.occupyingStructure.myType == StructureType.NONE
-				   && neighbour.myVillage.location != neighbour 
-				   && neighbour.myType != LandType.Sea )
+			 	if( !(neighbour.occupyingUnit != null) && neighbour.occupyingStructure.myType == StructureType.NONE)
 				{
-					int diceRoll = Random.Range(0, 2);
+					if(neighbour.myVillage != null && neighbour.myVillage.location != neighbour){ //tile has a village, and it's not on that tile
+						int diceRoll = Random.Range(0, 2);
 					
-					if( diceRoll == 1 )
-					{
-						neighbour.myType = LandType.Tree;
+						if( diceRoll == 1 )
+						{
+							neighbour.myType = LandType.Tree;
+						}
+					}
+
+					else if(!(neighbour.myVillage != null)){ //tile's village is null
+						int diceRoll = Random.Range(0, 2);
+						
+						if( diceRoll == 1 )
+						{
+							neighbour.myType = LandType.Tree;
+						}
+
 					}
 				}
+
 			}
 		}
 	}
