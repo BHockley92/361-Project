@@ -89,7 +89,6 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				string villageType = node.Attributes ["villageType"].InnerText;
 				string locationOfTileX = node.Attributes ["locationOfTileX"].InnerText;
 				string locationOfTileY = node.Attributes ["locationOfTileY"].InnerText;
-
 				MW_Player villageOwner = new MW_Player();
 				foreach(MW_Player myplayer in myGame.participants){
 					if(playerName == myplayer.username){
@@ -106,18 +105,19 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				VillageType vType = (VillageType)Enum.Parse (typeof(VillageType), villageType, true);
 				myVillage.myType = vType;
 				myVillage.location = myTiles [Convert.ToInt32 (locationOfTileX), Convert.ToInt32 (locationOfTileY)];
-
 				//iterate over all controlledTiles of the village
 				foreach (XmlNode villageChild in node.ChildNodes) { 
 					string boardX = villageChild.Attributes ["boardX"].InnerText;
 					string boardY = villageChild.Attributes ["boardY"].InnerText;
 					if (villageChild.Name == "controlledTile") {
-							region.Add (myTiles [Convert.ToInt32 (boardX), Convert.ToInt32 (boardY)]); //myTiles is a list of tiles, region is abstractTiles -  error?
+							region.Add (myTiles [Convert.ToInt32 (boardX), Convert.ToInt32 (boardY)]);
+							myTiles [Convert.ToInt32 (boardX), Convert.ToInt32 (boardY)].myVillage = myVillage;
+
 					}
 				}
 			//controlled region for village made
 			myVillage.controlledRegion = region;
-
+			villageOwner.myVillages.Add(myVillage);//null reference because myVillges is not isntantiated because we never actually create an MW_Player
 			}
 		}			
 			

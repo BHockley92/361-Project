@@ -31,6 +31,7 @@ public class GUILogic : MonoBehaviour {
 	//Authenticates the user to view stats
 	public void Authenticate() {
 		PLAYER = new MW_Player();
+		Debug.Log ("Authenticate Player has been called");
 		PLAYER.setAttribute(USERNAME.text);
 		NETWORK.Authenticate(USERNAME.text, PASSWORD.text);
 	}
@@ -81,6 +82,7 @@ public class GUILogic : MonoBehaviour {
 		Debug.Log ("Received a state");
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()))
 		{
+			Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
 			BeginTurn ();
 		}
 		//Always do this
@@ -93,6 +95,7 @@ public class GUILogic : MonoBehaviour {
 	//When it becomes current players turn, enable the endturn button
 	public void BeginTurn() {
 		Debug.Log ("my turn");
+		Debug.Log(PLAYER.username + " " + (PLAYER.myVillages != null).ToString());
 		GAME.myGameLogic.beginTurn(PLAYER,GAME);
 		ENDTURN.enabled = true;
 	}
