@@ -31,7 +31,7 @@ public class GUILogic : MonoBehaviour {
 	//Authenticates the user to view stats
 	public void Authenticate() {
 		PLAYER = new MW_Player();
-		Debug.Log ("Authenticate Player has been called");
+		Debug.Log ("Authenticate Player has been called"); //only called once why?
 		PLAYER.setAttribute(USERNAME.text);
 		NETWORK.Authenticate(USERNAME.text, PASSWORD.text);
 	}
@@ -72,7 +72,7 @@ public class GUILogic : MonoBehaviour {
 
 	//Saves the current state of the game and informs all players
 	public void SaveGame() {
-		SERIALIZER.saveGameState(GAME,PLAYER);
+		SERIALIZER.saveGameState(GAME);
 	}
 
 	public void UpdateGameState(string gameState, int senderId) {
@@ -95,8 +95,8 @@ public class GUILogic : MonoBehaviour {
 	//When it becomes current players turn, enable the endturn button
 	public void BeginTurn() {
 		Debug.Log ("my turn");
-		Debug.Log(PLAYER.username + " " + (PLAYER.myVillages != null).ToString());
-		GAME.myGameLogic.beginTurn(PLAYER,GAME);
+		Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
+		GAME.myGameLogic.beginTurn(GAME.turnOf,GAME);
 		ENDTURN.enabled = true;
 	}
 
@@ -106,7 +106,7 @@ public class GUILogic : MonoBehaviour {
 		//Update game state with transitions
 		GAME.EndTurn ();
 		//Serialize the state of the game now
-		XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER);
+		XmlDocument state = SERIALIZER.saveGameState(GAME);
 		//Push the serialize state over the network
 		NETWORK.ShareGameState(state.OuterXml);
 	}
@@ -140,7 +140,7 @@ public class GUILogic : MonoBehaviour {
 				Debug.Log ("Assigned villagers to players");
 			}
 			//Start the game
-			XmlDocument state = SERIALIZER.saveGameState(GAME,PLAYER); //TODO: Emily debug saveGameState
+			XmlDocument state = SERIALIZER.saveGameState(GAME); //TODO: Emily debug saveGameState
 			Debug.Log ("board saved");
 			NETWORK.ShareGameState(state.OuterXml);
 			Debug.Log ("pushed board");

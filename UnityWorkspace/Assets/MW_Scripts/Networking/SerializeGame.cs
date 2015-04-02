@@ -156,7 +156,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 
 
 
-	public XmlDocument saveGameState(MW_Game myGame, MW_Player myPlayer = null, string path = null) { //game state of myPlayer who ended turn will be saved
+	public XmlDocument saveGameState(MW_Game myGame) { //game state of myPlayer who ended turn will be saved
 		//count ++;
 		XmlDocument doc = new XmlDocument ();
 		XmlNode rootNode = doc.CreateElement ("map");
