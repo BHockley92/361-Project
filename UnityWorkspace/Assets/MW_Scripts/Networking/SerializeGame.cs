@@ -53,7 +53,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 
 					//make new tile
 					LandType lType = (LandType)Enum.Parse (typeof(LandType), landType, true);
-					Tile myTile = new Tile (lType, myGameBoard, Convert.ToSingle (boardPositionX), Convert.ToSingle (boardPositionY));
+					Tile myTile = new Tile (lType, myGameBoard, Convert.ToInt32 (boardPositionX), Convert.ToInt32 (boardPositionY));
 					Vector2 gamePos = new Vector2 (Convert.ToSingle (gamePositionX), Convert.ToSingle (gamePositionY)); //needs to be a float aka "single"
 					myTile.gamePosition = gamePos;
 
