@@ -159,6 +159,8 @@ public class GUILogic : MonoBehaviour {
 			children.Add (child.gameObject);
 		}
 		children.ForEach(child => Destroy (child));
+		//Remove the old tiles since I'm loading in the new ones
+		BOARD_TILES.Clear();
 		//Load in the current map
 		foreach(Tile current in GAME.gameBoard.board) {
 			//Calculate it's game coordinates
