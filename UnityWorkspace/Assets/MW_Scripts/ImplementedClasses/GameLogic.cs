@@ -6,70 +6,6 @@ using System.IO;
 public class GameLogic : AbstractGameLogic
 {
 
-
-
-
-
-
-	public override void destroyVillage(AbstractVillage v, AbstractUnit invader){
-		int myGold = v.gold;
-		int myWood = v.wood;
-		int invaderGold = invader.myVillage.gold;
-		int invaderWood = invader.myVillage.wood;
-		//invader takes villages gold
-		invader.myVillage.gold = invaderGold + myGold;
-		invader.myVillage.wood = invaderWood + myWood;
-		//invader takes control of tile, no longer part of v's controlledRegion
-		v.swapControl (v.location, invader.myVillage);
-
-		//move village to new tile if controlled region is greater than 3
-		if (v.controlledRegion.Count >= 3) {
-			int randomTile = Random.Range (0, v.controlledRegion.Count); 
-			//change location of village
-			v.location = v.controlledRegion [randomTile];
-			//empty villages resources, empty hovel recreated
-			v.wood = 0;
-			v.myType = VillageType.Hovel;
-			v.gold = 0;
-			
-		}
-		else{
-			//controlled region isnt big enough, destroy village and units, make rest of tiles neutral land
-			AbstractTile myTile = v.location;
-			foreach(Unit u in v.supportedUnits){
-				u.myLocation.occupyingUnit = null;
-			}
-			foreach(Tile t in v.controlledRegion){
-				t.myVillage = null; //neutral land
-			}
-			v = null; //destroy village
-			//village tile turns to a tree
-			myTile.myType = LandType.Tree;
-
-		}
-		
-		
-	
-	}
-//TODO: Emily
-	public override void divideRegion(List<AbstractTile> region) {
-
-
-
-		//if tile split region into unconnected regions
-		//region that has village loses all units NOT connected anymore (ie: units in other subregions)
-		// if subregion >=3, new hovel on random tile and occupyingunits on those tiles part of supportedUnits of new village
-		//subregions <3, all occupying units destroyed and subregion tiles become neutral
-
-
-
-	}
-
-
-
-
-
-
 	public override void hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
 	{
 		int unitcost = myValueManager.getUnitValue (u.myType);
@@ -399,10 +335,158 @@ public class GameLogic : AbstractGameLogic
 			AbstractVillage myVillage = dest.myVillage;
 			myVillage.swapControl (dest, attackingVillage);
 
-			List<AbstractTile> controlledRegion = myVillage.controlledRegion;
-			divideRegion (controlledRegion);
+			List<AbstractTile> controlledRegion = myVillage.controlledRegion; //new controlled region - tile
+			divideRegion (controlledRegion, occupyingVillage);
 		}
 	}
+
+
+	public override void destroyVillage(AbstractVillage v, AbstractUnit invader){
+		int myGold = v.gold;
+		int myWood = v.wood;
+		int invaderGold = invader.myVillage.gold;
+		int invaderWood = invader.myVillage.wood;
+		//invader takes villages gold
+		invader.myVillage.gold = invaderGold + myGold;
+		invader.myVillage.wood = invaderWood + myWood;
+		//invader takes control of tile, no longer part of v's controlledRegion
+		v.swapControl (v.location, invader.myVillage);
+		
+		//move village to new tile if controlled region is greater than 3
+		if (v.controlledRegion.Count >= 3) {
+			int randomTile = Random.Range (0, v.controlledRegion.Count); 
+			//change location of village
+			v.location = v.controlledRegion [randomTile];
+			//empty villages resources, empty hovel recreated
+			v.wood = 0;
+			v.myType = VillageType.Hovel;
+			v.gold = 0;
+			
+		}
+		else{
+			//controlled region isnt big enough, destroy village and units, make rest of tiles neutral land
+			AbstractTile myTile = v.location;
+			foreach(Unit u in v.supportedUnits){
+				u.myLocation.occupyingUnit = null;
+			}
+			foreach(Tile t in v.controlledRegion){
+				t.myVillage = null; //neutral land
+			}
+			v = null; //destroy village
+			//village tile turns to a tree
+			myTile.myType = LandType.Tree;
+			
+		}
+		
+		
+		
+	}
+	//TODO: Emily
+	public override void divideRegion(List<AbstractTile> region, AbstractVillage occupyingVillage) {
+		//reset tile for BFS 	
+		foreach (Tile t in region) {
+			t.isVisited = false;
+		}
+
+		//keep track of subregions, max 3 subregions produced on tile takeOver
+		AbstractPlayer regionOwner = occupyingVillage.myPlayer;
+
+		foreach (Tile t in region) {
+			Stack<Tile> myStack = new Stack<Tile> ();
+			List<AbstractTile> visitedTiles = new List<AbstractTile> ();
+			bool villageInRegion = false;
+			myStack.Push (t);
+			
+			//make list of tiles belonging to this player
+			while (myStack.Count != 0) {
+				Tile v = myStack.Pop ();
+				visitedTiles.Add (v);
+
+				if (v.isVisited == false) {
+					v.isVisited = true; //mark tile as visited
+				
+					List<AbstractTile> neighbours = v.getNeighbours (); 
+					
+					//for all neighbours that havent been visited and have same owner
+					foreach (Tile neighb in neighbours) {
+						if(neighb.myVillage != null){ //skip neutral land
+							if (neighb.myVillage.myPlayer == regionOwner && neighb.isVisited == false) {
+								myStack.Push (neighb);
+							}// end for each neighbour tile
+						}
+					}
+				
+				}
+			} //end while stack is not empty
+
+			//region is not split into subregions
+			if (visitedTiles.Count == region.Count) {
+				break;
+			} 
+
+			//visitedTiles < controlledRegion so takeOverTile split region into unconnected regions
+			else{   
+
+				foreach(Tile subTile in visitedTiles){
+					if(occupyingVillage.location == subTile){
+						villageInRegion = true;
+						//this subregion has village, so it loses all units NOT connected anymore (ie: units in other subregions)
+						List<AbstractUnit> subregionUnits = new List<AbstractUnit>();
+						foreach(Tile u in visitedTiles){
+							if(u.occupyingUnit != null){
+								subregionUnits.Add(u.occupyingUnit);
+							}
+						}
+						occupyingVillage.supportedUnits = subregionUnits;
+						break;
+					} //end if village is in subregion
+				}
+
+				if(visitedTiles.Count >= 3 && villageInRegion == false){
+					// if subregion >=3, new hovel village and occupyingunits on those tiles part of supportedUnits of new village
+					Village newVillage = new Village(visitedTiles, regionOwner);
+					List<AbstractUnit> newVillageUnits = new List<AbstractUnit>();
+					foreach(Tile subTile in visitedTiles){
+						if(subTile.occupyingUnit != null){
+							newVillageUnits.Add(subTile.occupyingUnit);
+							subTile.occupyingUnit.myVillage = newVillage; //no longer belongs to old village
+						}
+					}
+					newVillage.supportedUnits = newVillageUnits; 
+					//village placed on random Tile 
+					int randInt = Random.Range (0, visitedTiles.Count);
+					AbstractTile villageTile = visitedTiles [randInt];
+					newVillage.location = villageTile;
+				}
+				else if(visitedTiles.Count <3 && villageInRegion == false){
+					//subregion too small to support a village, all units destroyed and tiles become neutral
+					foreach(Tile subTile in visitedTiles){
+						if(subTile.occupyingUnit != null){
+							subTile.occupyingUnit = null; 
+						}
+						subTile.myVillage = null;
+					}
+				}
+				else if(visitedTiles.Count <3 && villageInRegion == true){
+						//VILLAGE IS IN SUBREGION THAT CAN NO LONGER SUPPORT A VILLAGE
+
+				}
+
+
+			}
+
+		} //end iterating over region
+
+
+
+
+
+	} //end divide region
+
+
+
+
+
 
 	protected override void connectRegions(List<AbstractVillage> villages) 
 	{

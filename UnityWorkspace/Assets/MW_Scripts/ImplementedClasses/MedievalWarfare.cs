@@ -38,7 +38,7 @@ public class MedievalWarfare : AbstractMedievalWarfare
 
 					if (v.isVisited == false) {
 						v.isVisited = true; //mark tile as visited
-					}
+					
 						List<AbstractTile> neighbours = v.getNeighbours (); //Nick fixed to not return sea tiles
 
 						//for all neighbours that havent been visited and have same owner
@@ -48,10 +48,11 @@ public class MedievalWarfare : AbstractMedievalWarfare
 									myStack.Push (neighb);
 								}// end for each neighbour tile
 							}
-						}// end if tile is not visited
+						}
+					}// end if tile is not visited
 						
 
-					} //end when stack is empty
+				} //end when stack is empty
 
 					//if region is greater than 3 && tile doesn't belong to official village, remove temp villages and pick random one to have village
 					if (visitedTiles.Count >= 3 && t.hasVillage == false && t.myVillage != null) {

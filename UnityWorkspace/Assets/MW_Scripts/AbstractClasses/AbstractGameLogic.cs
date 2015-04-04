@@ -19,7 +19,7 @@ public abstract class AbstractGameLogic
 
 	public abstract bool moveUnit(AbstractUnit u, AbstractTile dest);
 	public abstract void destroyVillage(AbstractVillage v, AbstractUnit invader);
-	public abstract void divideRegion(List<AbstractTile> region);
+	public abstract void divideRegion(List<AbstractTile> region, AbstractVillage occupyingVillage);
 	public abstract void takeoverTile(AbstractTile dest);
 
 	protected abstract void connectRegions (List<AbstractVillage> v);
