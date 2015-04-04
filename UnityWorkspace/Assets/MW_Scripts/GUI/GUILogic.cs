@@ -152,6 +152,14 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	private void visualizeBoard() {
+		//Clear the old map
+		GameObject map = GameObject.Find ("map");
+		List<GameObject> children = new List<GameObject>();
+		foreach(Transform child in map.transform) {
+			children.Add (child.gameObject);
+		}
+		children.ForEach(child => Destroy (child));
+
 		foreach(Tile current in GAME.gameBoard.board) {
 			//Calculate it's game coordinates
 			float x = 0;
@@ -180,6 +188,8 @@ public class GUILogic : MonoBehaviour {
 			//Create the game representation of the tile
 			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
 			GameObject instantiated_tile = (GameObject)GameObject.Instantiate(tile, pos, Quaternion.identity);
+			//Set as child
+			instantiated_tile.transform.parent = map.transform;
 
 			if(current.occupyingStructure.myType != null) {
 				GameObject structure = null;
@@ -191,7 +201,9 @@ public class GUILogic : MonoBehaviour {
 				}
 				if(structure != null) {
 					//TODO: Add to position to make sure the object appears naturally
-					GameObject.Instantiate(structure, pos, Quaternion.identity);
+					GameObject instantiated_structure = (GameObject)GameObject.Instantiate(structure, pos, Quaternion.identity);
+					//Set as child
+					instantiated_structure.transform.parent = map.transform;
 				}
 			}
 
@@ -204,7 +216,9 @@ public class GUILogic : MonoBehaviour {
 					case VillageType.Fort: village = (GameObject)Resources.Load("buildingfort"); break;
 					case VillageType.Castle: village = (GameObject)Resources.Load("buildingcastle"); break;
 				}
-				GameObject.Instantiate(village, pos + new Vector3(0,0.5f,-0.3f), Quaternion.identity);
+				GameObject instantiated_village = (GameObject)GameObject.Instantiate(village, pos + new Vector3(0,0.5f,-0.3f), Quaternion.identity);
+				//Set as child
+				instantiated_village.transform.parent = map.transform;
 			}
 
 			// unit
@@ -222,7 +236,9 @@ public class GUILogic : MonoBehaviour {
 					unit = (GameObject)Resources.Load("unitCannon");
 				}
 				//TODO: Add to position to make sure the object appears naturally
-				GameObject.Instantiate(unit, pos, Quaternion.identity);
+				GameObject instantiated_unit = (GameObject)GameObject.Instantiate(unit, pos, Quaternion.identity);
+				//Set as child
+				instantiated_unit.transform.parent = map.transform;
 			}
 		}
 	}
@@ -240,7 +256,9 @@ public class GUILogic : MonoBehaviour {
 		if(GAME.myGameLogic.upgradeVillage(building_tile.myVillage, new_type)) {
 			//Create new village
 			GameObject upgraded_village = (GameObject)Resources.Load("building"+new_type.ToString().ToLower());
-			GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y), Quaternion.identity);
+			GameObject new_village = (GameObject)GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y), Quaternion.identity);
+			//Set as child
+			new_village.transform.parent = GameObject.Find ("map").transform;
 			//Destroy old village
 			Object.Destroy(LAST_CLICKED_ON);
 			//Set new last clicked on
@@ -265,7 +283,9 @@ public class GUILogic : MonoBehaviour {
 		if(GAME.myGameLogic.upgradeUnit(unit_tile.occupyingUnit, new_type)) {
 			//Generate the new unit
 			GameObject upgraded_unit = (GameObject)Resources.Load("unit"+new_type.ToString().ToLower());
-			GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position, Quaternion.identity);
+			GameObject new_unit = (GameObject)GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position, Quaternion.identity);
+			//Set as child
+			new_unit.transform.parent = GameObject.Find("map").transform;
 			//Remove the old one
 			GameObject.Destroy(LAST_CLICKED_ON);
 			//Set new last clicked on
@@ -286,7 +306,9 @@ public class GUILogic : MonoBehaviour {
 		
 		//Load new unit
 		GameObject new_unit = (GameObject)Resources.Load("peasent");
-		GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
+		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
+		//Set as child
+		hired_villager.transform.parent = GameObject.Find("map").transform;
 		//Destroy current unit
 		Object.Destroy(LAST_CLICKED_ON);
 		//Set new last clicked on
