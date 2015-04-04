@@ -231,8 +231,8 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 					structureNode.Attributes.Append (sTypeAtt);
 					tileNode.AppendChild (structureNode);
 				}
-				//if there's a village, make a village node
-				if(t.myVillage != null){
+				//if there's a village and it's on the tile, make a village node
+				if(t.myVillage != null && t.myVillage.location == t){
 					XmlNode villageNode = doc.CreateElement ("village");
 					XmlAttribute pName = doc.CreateAttribute ("playerName");
 					pName.Value = t.myVillage.myPlayer.username;
