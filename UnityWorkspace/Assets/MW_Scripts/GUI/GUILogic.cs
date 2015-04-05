@@ -301,7 +301,7 @@ public class GUILogic : MonoBehaviour {
 	public void HireVillager() {
 		//Finds the tile associated with the village
 		AbstractTile building_tile;
-		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z), out building_tile);
+		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z+0.3f), out building_tile);
 		//...Doesn't have to be a villager?
 		AbstractUnit new_villager = new Unit(building_tile.myVillage, building_tile);
 		GAME.myGameLogic.hireVillager(new_villager, building_tile.myVillage, building_tile);
