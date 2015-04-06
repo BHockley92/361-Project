@@ -14,16 +14,16 @@ public class CameraControl : MonoBehaviour {
 		Rect recright = new Rect (Screen.width-GUIsize, 0, GUIsize, Screen.height);
 		
 		//Camera panning handlers
-		if (enabled_camera && recdown.Contains(Input.mousePosition)) {
+		if (enabled_camera && (recdown.Contains(Input.mousePosition) || Input.GetKey(KeyCode.DownArrow)) ) {
 			transform.Translate(0, 0, -CamSpeed, Space.World);
 		}
-		if (enabled_camera && recup.Contains(Input.mousePosition)) {
+		if (enabled_camera && (recup.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.UpArrow)) ) {
 			transform.Translate(0, 0, CamSpeed, Space.World);
 		}
-		if (enabled_camera && recleft.Contains(Input.mousePosition)) {
+		if (enabled_camera && (recleft.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.LeftArrow)) ) {
 			transform.Translate(-CamSpeed, 0, 0, Space.World);
 		}
-		if (enabled_camera && recright.Contains(Input.mousePosition)) {
+		if (enabled_camera && (recright.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.RightArrow)) ) {
 			transform.Translate(CamSpeed, 0, 0, Space.World);
 		}
 	}
