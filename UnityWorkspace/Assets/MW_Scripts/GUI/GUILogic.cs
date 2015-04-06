@@ -344,20 +344,17 @@ public class GUILogic : MonoBehaviour {
 			return;
 		}
 		AbstractUnit new_villager = new Unit(building_tile.myVillage, building_tile);
-		if(GAME.myGameLogic.hireVillager(new_villager, building_tile.myVillage, building_tile)) {
-			//Load new unit
-			GameObject new_unit = (GameObject)Resources.Load("peasent");
-			GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
-			//Set as child
-			hired_villager.transform.parent = GameObject.Find("map").transform;
-			//Destroy current unit
-			Object.Destroy(LAST_CLICKED_ON);
-			//Set new last clicked on
-			LAST_CLICKED_ON = new_unit.transform;
-		}
-		else {
-			//Show error
-		}
+		//TODO: Needs to return a bool so I can handle any issues
+		GAME.myGameLogic.hireVillager(new_villager, building_tile.myVillage, building_tile);
+		//Load new unit
+		GameObject new_unit = (GameObject)Resources.Load("peasent");
+		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
+		//Set as child
+		hired_villager.transform.parent = GameObject.Find("map").transform;
+		//Destroy current unit
+		Object.Destroy(LAST_CLICKED_ON);
+		//Set new last clicked on
+		LAST_CLICKED_ON = new_unit.transform;
 	}
 
 	public void moveUnit(Transform tile) {
