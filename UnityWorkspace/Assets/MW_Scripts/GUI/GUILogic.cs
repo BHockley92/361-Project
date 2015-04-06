@@ -92,7 +92,7 @@ public class GUILogic : MonoBehaviour {
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		Debug.Log ("Received a state");
 		//TODO: Test this works
-		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponent<Text>();
+		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>();
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: Covey it is your turn to the user (Need error message thingy)
 			Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
