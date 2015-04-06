@@ -5,7 +5,7 @@ using GameEnums;
 public class MW_Game : AbstractGame
 {
 	// Global stats tracked, not for each player
-	private int roundsPlayed { get; set; }
+	public int roundsPlayed { get; set; }
 
 	// for a randomly generated board, assumes length and width are > 0
 	public MW_Game(List<AbstractPlayer> players, AbstractGameLogic gl)
@@ -16,5 +16,7 @@ public class MW_Game : AbstractGame
 
 	public void EndTurn() {
 		nextTurn ();
+		if(turnIndex == 0)
+			roundsPlayed++;
 	}
 }

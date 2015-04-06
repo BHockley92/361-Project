@@ -521,10 +521,22 @@ public class GameLogic : AbstractGameLogic
 		}
 	}
 	
-	public override void beginTurn( AbstractPlayer p, AbstractGame g)
+	public override void beginTurn( AbstractPlayer p, AbstractGame ag)
 	{
+		MW_Game g;
+	
+		if(ag.GetType() != typeof(MW_Game))
+			throw new UnityException("MW_Game is the only game type!");
+		else
+			g = (MW_Game)ag;
+			
+		// skip initial round
+		if(g.roundsPlayed == 0 && g.turnIndex == 0)
+			return;
+	
 		// If it's a new round, tree growth
-		if( g.turnIndex == 0 ) treeGrowthPhase( g.gameBoard );
+		if( g.turnIndex == 0) 
+			treeGrowthPhase( g.gameBoard );
 
 		List<AbstractVillage> myVillages = p.myVillages;
 
