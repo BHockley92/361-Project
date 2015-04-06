@@ -55,21 +55,21 @@ public class MedievalWarfare : AbstractMedievalWarfare
 				} //end when stack is empty
 
 					//if region is greater than 3 && tile doesn't belong to official village, remove temp villages and pick random one to have village
-					if (visitedTiles.Count >= 3 && t.hasVillage == false && t.myVillage != null) {
+					if (visitedTiles.Count >= 3 && t.hasVillage == false) {
 						int randInt = Random.Range (0, visitedTiles.Count);
-						AbstractTile villageTile = visitedTiles [randInt];
-
 						Village myNewVillage = new Village (visitedTiles, belongsTo);
-						myNewVillage.location = villageTile;
+						myNewVillage.location = visitedTiles [randInt];
+						 
 						foreach (Tile w in visitedTiles) {
 							//all these tiles are controlled by myNewVillage
 							w.hasVillage = true;
 							w.myVillage = myNewVillage;
 						}
-						villageTile.myVillage = myNewVillage;
-
+					t.myVillage = myNewVillage;
+					belongsTo.myVillages.Add(myNewVillage);
+	
 					} 
-					else if (visitedTiles.Count < 3) {
+					else if (visitedTiles.Count < 3 && t.hasVillage == false) {
 						//set land to neutral
 						foreach (Tile n in visitedTiles) {
 							n.myVillage = null;
