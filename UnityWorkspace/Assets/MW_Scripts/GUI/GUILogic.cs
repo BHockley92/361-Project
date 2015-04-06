@@ -142,6 +142,10 @@ public class GUILogic : MonoBehaviour {
 			else {
 				Debug.Log ("Random map");
 				GAME.gameBoard = new Board(20,20,2);
+				
+				// ALL THE ASSIGNMENT STUFF SHOULD BE DONE IN THE
+				// BACKEND YOU RETARDS
+				
 				//each tile that's not water gets a village owned by a random player ie: set up tileOwner
 				//during BFS remove all except 1 of the villages that have more than 3 tiles
 				foreach (Tile t in GAME.gameBoard.board) {
@@ -154,6 +158,14 @@ public class GUILogic : MonoBehaviour {
 					}
 				}
 				mw.assignRegions (GAME.gameBoard);
+				
+				// remove all special land types from village tiles
+				foreach (Tile t in GAME.gameBoard.board) {
+					if(t.myVillage != null && t.myVillage.location == t) {
+						t.myType = LandType.Grass;
+					}
+				}
+				
 				Debug.Log ("Assigned villagers to players");
 			}
 			//Start the game
@@ -223,6 +235,9 @@ public class GUILogic : MonoBehaviour {
 				if(structure != null) {
 					//TODO: Add to position to make sure the object appears naturally
 					GameObject instantiated_structure = (GameObject)GameObject.Instantiate(structure, pos, Quaternion.identity);
+					instantiated_structure.AddComponent<BoxCollider2D>();
+					instantiated_structure.AddComponent(typeof(Clicker));
+					instantiated_structure.tag = "Structure";
 					//Set as child
 					instantiated_structure.transform.parent = map.transform;
 				}
