@@ -193,7 +193,7 @@ public class GUILogic : MonoBehaviour {
 			//Set as child
 			instantiated_tile.transform.parent = map.transform;
 
-			if(current.occupyingStructure.myType != null) {
+			if(current.occupyingStructure.myType != StructureType.NONE) {
 				GameObject structure = null;
 				switch(current.occupyingStructure.myType) {
 					case StructureType.Road: instantiated_tile.GetComponent<Renderer>().material.mainTexture = (Texture2D)Resources.Load("Tiles/road"); break;
