@@ -376,7 +376,7 @@ public class GUILogic : MonoBehaviour {
 		//TODO: Needs to return a bool so I can handle any issues
 		GAME.myGameLogic.hireVillager(new_villager, building_tile.myVillage, building_tile);
 		//Load new unit
-		GameObject new_unit = (GameObject)Resources.Load("peasent");
+		GameObject new_unit = (GameObject)Resources.Load("unitpeasant");
 		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
 		//Set as child
 		hired_villager.transform.parent = GameObject.Find("map").transform;
