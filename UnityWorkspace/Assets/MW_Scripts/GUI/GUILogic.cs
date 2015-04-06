@@ -131,7 +131,7 @@ public class GUILogic : MonoBehaviour {
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
 		MWNetworkResponse response = NETWORK.ReadyStart();
-		if(response != null) {
+		if(response == MWNetworkResponse.GAME_START_SUCCESS) {
 			MedievalWarfare mw = new MedievalWarfare ();
 			//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
 			GAME = mw.newGame (NETWORK.getPlayers());
