@@ -34,7 +34,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	public Text GUIplayerList;
 	
 	// Used for sending game state over network.
-	private string     gameState = "";
+	private string     cachedGameState = "";
 	private const byte UPDATED_GAME_STATE = 1;
 	private const int  GAME_STATE_SUBSTRINGS = 4;
 	private int        gameStateSubstringsReceived = 0;
@@ -245,7 +245,7 @@ public class MWNetwork : Photon.MonoBehaviour
 			if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
 			                              gameStateSubstrings[i],
 			                              true,
-			                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All })) // TODO change to others when fixed
+			                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others }))
 			{
 				Debug.Log("Error sending game state over network.");
 			}
@@ -260,12 +260,12 @@ public class MWNetwork : Photon.MonoBehaviour
 	{
 		if (eventCode == UPDATED_GAME_STATE)
 		{
-			gameState += (string) content;
+			cachedGameState += (string) content;
 			gameStateSubstringsReceived++;
 			
 			if (gameStateSubstringsReceived == GAME_STATE_SUBSTRINGS)
 			{
-				Debug.Log("Sending game state string to GUILogic.  String length: " + gameState.Length);
+				Debug.Log("Sending game state string to GUILogic.  String length: " + cachedGameState.Length);
 				
 				/*Write the string to a file. TESTING
 				StreamWriter file = new StreamWriter("Kevin_update.txt");
@@ -274,12 +274,12 @@ public class MWNetwork : Photon.MonoBehaviour
 				file.Flush();
 				*/
 
-				gui.UpdateGameState(gameState, senderId);
+				gui.UpdateGameState(cachedGameState, senderId);
 
 
 				
 				// Reinitialize game state string cache
-				gameState = "";
+				cachedGameState = "";
 				gameStateSubstringsReceived = 0;
 			}
 		}
