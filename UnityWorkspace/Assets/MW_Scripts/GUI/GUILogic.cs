@@ -276,6 +276,10 @@ public class GUILogic : MonoBehaviour {
 				}
 				//TODO: Add to position to make sure the object appears naturally
 				GameObject instantiated_unit = (GameObject)GameObject.Instantiate(unit, pos, Quaternion.identity);
+				instantiated_unit.AddComponent<BoxCollider2D>();
+				instantiated_unit.AddComponent(typeof(Clicker));
+				instantiated_unit.tag = "Unit";
+				
 				//Set as child
 				instantiated_unit.transform.parent = map.transform;
 			}
@@ -317,7 +321,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void UpgradeUnit() {
-		if(LAST_CLICKED_ON == null) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit")) {
 			//TODO: They need to have selected a unit to upgrade so we should be hiding buttons until certain conditions are met
 			return;
 		}
