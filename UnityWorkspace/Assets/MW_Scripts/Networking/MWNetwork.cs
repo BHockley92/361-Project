@@ -110,21 +110,21 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
     public MWNetworkResponse ReadyStart()
 	{		
-		// Ready check
-		Hashtable readyCheck = new Hashtable();
-		readyCheck.Add("ready", true);
-		PhotonNetwork.SetPlayerCustomProperties(readyCheck);
-	
-		// If not host, do nothing else
+        // If not host, ready check
 		if (!PhotonNetwork.isMasterClient)
-		{
-			return MWNetworkResponse.READY_CHECKED;
-		}
+        {
+            // Ready check
+            Hashtable readyCheck = new Hashtable();
+            readyCheck.Add("ready", true);
+            PhotonNetwork.SetPlayerCustomProperties(readyCheck);
+
+            return MWNetworkResponse.READY_CHECKED;
+        }
 		
 		// If host, make sure all players are ready
 		foreach (PhotonPlayer player in PhotonNetwork.playerList)
 		{
-			if ((bool)player.customProperties["ready"] == false)
+			if (!player.isMasterClient && (bool)player.customProperties["ready"] == false)
 			{
 				return MWNetworkResponse.PLAYERS_NOT_READY;
 			}
