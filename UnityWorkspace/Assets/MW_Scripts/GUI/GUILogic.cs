@@ -223,6 +223,9 @@ public class GUILogic : MonoBehaviour {
 			//Create the game representation of the tile
 			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
 			GameObject instantiated_tile = (GameObject)GameObject.Instantiate(tile, pos, Quaternion.identity);
+			instantiated_tile.AddComponent<BoxCollider>();
+			instantiated_tile.AddComponent(typeof(TileClicker));
+			instantiated_tile.tag = "Tile";
 			//Set as child
 			instantiated_tile.transform.parent = map.transform;
 
@@ -237,7 +240,7 @@ public class GUILogic : MonoBehaviour {
 				if(structure != null) {
 					//TODO: Add to position to make sure the object appears naturally
 					GameObject instantiated_structure = (GameObject)GameObject.Instantiate(structure, pos, Quaternion.identity);
-					instantiated_structure.AddComponent<BoxCollider2D>();
+					instantiated_structure.AddComponent<BoxCollider>();
 					instantiated_structure.AddComponent(typeof(Clicker));
 					instantiated_structure.tag = "Structure";
 					//Set as child
@@ -255,7 +258,7 @@ public class GUILogic : MonoBehaviour {
 					case VillageType.Castle: village = (GameObject)Resources.Load("buildingcastle"); break;
 				}
 				GameObject instantiated_village = (GameObject)GameObject.Instantiate(village, pos + VILLAGE_OFFSET, Quaternion.identity);
-				instantiated_village.AddComponent<BoxCollider2D>();
+				instantiated_village.AddComponent<BoxCollider>();
 				instantiated_village.AddComponent(typeof(Clicker));
 				instantiated_village.tag = "Village";
 				//Set as child
@@ -278,7 +281,7 @@ public class GUILogic : MonoBehaviour {
 				}
 				//TODO: Add to position to make sure the object appears naturally
 				GameObject instantiated_unit = (GameObject)GameObject.Instantiate(unit, pos, Quaternion.identity);
-				instantiated_unit.AddComponent<BoxCollider2D>();
+				instantiated_unit.AddComponent<BoxCollider>();
 				instantiated_unit.AddComponent(typeof(Clicker));
 				instantiated_unit.tag = "Unit";
 				
@@ -311,6 +314,9 @@ public class GUILogic : MonoBehaviour {
 			//Create new village
 			GameObject upgraded_village = (GameObject)Resources.Load("building"+new_type.ToString().ToLower());
 			GameObject new_village = (GameObject)GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y), Quaternion.identity);
+			new_village.AddComponent<BoxCollider>();
+			new_village.AddComponent(typeof(Clicker));
+			new_village.tag = "Village";
 			//Set as child
 			new_village.transform.parent = GameObject.Find ("map").transform;
 			//Destroy old village
@@ -347,6 +353,9 @@ public class GUILogic : MonoBehaviour {
 			//Generate the new unit
 			GameObject upgraded_unit = (GameObject)Resources.Load("unit"+new_type.ToString().ToLower());
 			GameObject new_unit = (GameObject)GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position, Quaternion.identity);
+			new_unit.AddComponent<BoxCollider>();
+			new_unit.AddComponent(typeof(Clicker));
+			new_unit.tag = "Unit";
 			//Set as child
 			new_unit.transform.parent = GameObject.Find("map").transform;
 			//Remove the old one
@@ -378,6 +387,9 @@ public class GUILogic : MonoBehaviour {
 		//Load new unit
 		GameObject new_unit = (GameObject)Resources.Load("unitpeasant");
 		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
+		hired_villager.AddComponent<BoxCollider>();
+		hired_villager.AddComponent(typeof(Clicker));
+		hired_villager.tag = "Unit";
 		//Set as child
 		hired_villager.transform.parent = GameObject.Find("map").transform;
 

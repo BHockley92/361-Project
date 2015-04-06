@@ -13,14 +13,6 @@ public class CameraControl : MonoBehaviour {
 		Rect recleft = new Rect (0, 0, GUIsize, Screen.height);
 		Rect recright = new Rect (Screen.width-GUIsize, 0, GUIsize, Screen.height);
 		
-		if(Input.GetMouseButton(1)) {
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			//Must hit something and we have to have a unit selected
-			if(Physics.Raycast(ray, out hit) && GameObject.Find("GUILogic").GetComponent<GUILogic>().LAST_CLICKED_ON.name.Contains("unit")) {
-				GameObject.Find("GUILogic").GetComponent<GUILogic>().moveUnit(hit.transform);
-			}
-		}
 		//Camera panning handlers
 		if (enabled_camera && recdown.Contains(Input.mousePosition)) {
 			transform.Translate(0, 0, -CamSpeed, Space.World);
