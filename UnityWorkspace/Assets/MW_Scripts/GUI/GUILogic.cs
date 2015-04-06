@@ -204,6 +204,8 @@ public class GUILogic : MonoBehaviour {
 				case LandType.Sea: tile = (GameObject)Resources.Load("tileWater"); break;
 				case LandType.Tree: tile = (GameObject)Resources.Load("tileForest"); break;
 			}
+		
+			
 			//Create the game representation of the tile
 			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
 			GameObject instantiated_tile = (GameObject)GameObject.Instantiate(tile, pos, Quaternion.identity);
@@ -236,6 +238,8 @@ public class GUILogic : MonoBehaviour {
 					case VillageType.Castle: village = (GameObject)Resources.Load("buildingcastle"); break;
 				}
 				GameObject instantiated_village = (GameObject)GameObject.Instantiate(village, pos + new Vector3(0,0.5f,-0.3f), Quaternion.identity);
+				instantiated_village.AddComponent<BoxCollider2D>();
+				instantiated_village.AddComponent(typeof(Clicker));
 				//Set as child
 				instantiated_village.transform.parent = map.transform;
 			}
