@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using GameEnums;
 using System.Xml;
+using System.IO;
 
 public class GUILogic : MonoBehaviour {
 
@@ -28,6 +29,10 @@ public class GUILogic : MonoBehaviour {
 		#endif
 	}
 
+	public void Update() {
+		//TODO: Should be changing what buttons we display based on what LAST_CLICKED_ON is
+	}
+
 	//Authenticates the user to view stats
 	public void Authenticate() {
 		PLAYER = new MW_Player();
@@ -36,19 +41,26 @@ public class GUILogic : MonoBehaviour {
 		NETWORK.Authenticate(USERNAME.text, PASSWORD.text);
 	}
 
+	public void ListRooms() {
+		//TODO: From the popup, make the "buttons" text this
+		string[] rooms = NETWORK.getRooms();
+	}
+
 	//Loads lobby info of selected game
 	public void JoinGame() {
+		//TODO: From the popup with the list of rooms, grab the room name and join it
 		NETWORK.joinRoom("demo");
 	}
 
 	//Populate popup with available maps
 	public void NewGame() {
-
+		//TODO: Do we have presets or are we just doing a random no matter what?
 	}
 
 	//Populate popup with saved maps
 	public void LoadGame() {
-
+		//TODO: Find the popup to populate, set the "buttons" text to this
+		string[] files = Directory.GetFiles("/saves");
 	}
 
 	//Create a lobby and populate with information
@@ -56,23 +68,22 @@ public class GUILogic : MonoBehaviour {
 		//Will grab room name from selected GUI object
 		Debug.Log ("Host game called");
 		NETWORK.hostRoom("demo");
-		//From game object, if object has path, than load the XML
-		//if(.path != null) { LOADED_GAME.Load(.path); }
 	}
 
 	//Sends message in input to all players
 	public void SendMessage() {
-		//Chat api
+		//TODO: Chat api (may scrap?)
 	}
 
 	//Terminates the current game and sends to main menu
 	public void EndGame() {
-		//How do we want to handle when a player ends the game?
+		//TODO: How do we want to handle when a player ends the game? Does it do it differently if one is the host or not
 	}
 
 	//Saves the current state of the game and informs all players
 	public void SaveGame() {
 		SERIALIZER.saveGameState(GAME);
+		//TODO: Show a window that says saving is happening, delay like 5 seconds and then go away
 	}
 
 	public void UpdateGameState(string gameState, int senderId) {
@@ -80,10 +91,16 @@ public class GUILogic : MonoBehaviour {
 		state.LoadXml(gameState); 
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		Debug.Log ("Received a state");
-		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()))
-		{
+		//TODO: Test this works
+		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponent<Text>();
+		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
+			//TODO: Covey it is your turn to the user (Need error message thingy)
 			Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
+			end_turn.text = "End Turn";
 			BeginTurn ();
+		}
+		else {
+			end_turn.text = "Waiting for " + GAME.turnOf.username;
 		}
 		//Always do this
 		Debug.Log ("turned camera on");
@@ -246,9 +263,17 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void UpgradeVillage() {
+		if(LAST_CLICKED_ON == null) {
+			//TODO: They need to have selected a village to upgrade so we should be hiding buttons until certain conditions are met
+			return;
+		}
 		//Finds the tile associated with the building
 		AbstractTile building_tile;
 		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z), out building_tile);
+		if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
+			//TODO: Show error and stop
+			return;
+		}
 		VillageType new_type = VillageType.Fort;
 		switch(building_tile.myVillage.myType) {
 			case VillageType.Hovel: new_type = VillageType.Town; break;
@@ -272,10 +297,18 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void UpgradeUnit() {
+		if(LAST_CLICKED_ON == null) {
+			//TODO: They need to have selected a unit to upgrade so we should be hiding buttons until certain conditions are met
+			return;
+		}
 		//Finds the tile associated with the unit
 		AbstractTile unit_tile;
 		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z), out unit_tile);
 		UnitType new_type = UnitType.Knight;
+		if(!unit_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
+			//TODO: Show error and stop
+			return;
+		}
 		switch(unit_tile.occupyingUnit.myType) {
 			case UnitType.Peasant: new_type = UnitType.Infantry; break;
 			case UnitType.Infantry: new_type = UnitType.Soldier; break;
@@ -299,22 +332,32 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void HireVillager() {
+		if(LAST_CLICKED_ON == null) {
+			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
+			return;
+		}
 		//Finds the tile associated with the village
 		AbstractTile building_tile;
 		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z+0.3f), out building_tile);
-		//...Doesn't have to be a villager?
+		if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
+			//TODO: Show error and stop
+			return;
+		}
 		AbstractUnit new_villager = new Unit(building_tile.myVillage, building_tile);
-		GAME.myGameLogic.hireVillager(new_villager, building_tile.myVillage, building_tile);
-		
-		//Load new unit
-		GameObject new_unit = (GameObject)Resources.Load("peasent");
-		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
-		//Set as child
-		hired_villager.transform.parent = GameObject.Find("map").transform;
-		//Destroy current unit
-		Object.Destroy(LAST_CLICKED_ON);
-		//Set new last clicked on
-		LAST_CLICKED_ON = new_unit.transform;
+		if(GAME.myGameLogic.hireVillager(new_villager, building_tile.myVillage, building_tile)) {
+			//Load new unit
+			GameObject new_unit = (GameObject)Resources.Load("peasent");
+			GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
+			//Set as child
+			hired_villager.transform.parent = GameObject.Find("map").transform;
+			//Destroy current unit
+			Object.Destroy(LAST_CLICKED_ON);
+			//Set new last clicked on
+			LAST_CLICKED_ON = new_unit.transform;
+		}
+		else {
+			//Show error
+		}
 	}
 
 	public void moveUnit(Transform tile) {
