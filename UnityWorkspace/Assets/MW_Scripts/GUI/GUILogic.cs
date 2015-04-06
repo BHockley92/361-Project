@@ -19,6 +19,8 @@ public class GUILogic : MonoBehaviour {
 	private Dictionary<Vector2,AbstractTile> BOARD_TILES = new Dictionary<Vector2,AbstractTile>();
 	private SerializeGame SERIALIZER = new SerializeGame();
 	private XmlDocument LOADED_GAME;
+	
+	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.3f);
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -252,7 +254,7 @@ public class GUILogic : MonoBehaviour {
 					case VillageType.Fort: village = (GameObject)Resources.Load("buildingfort"); break;
 					case VillageType.Castle: village = (GameObject)Resources.Load("buildingcastle"); break;
 				}
-				GameObject instantiated_village = (GameObject)GameObject.Instantiate(village, pos + new Vector3(0,0.5f,-0.3f), Quaternion.identity);
+				GameObject instantiated_village = (GameObject)GameObject.Instantiate(village, pos + VILLAGE_OFFSET, Quaternion.identity);
 				instantiated_village.AddComponent<BoxCollider2D>();
 				instantiated_village.AddComponent(typeof(Clicker));
 				instantiated_village.tag = "Village";
@@ -293,7 +295,8 @@ public class GUILogic : MonoBehaviour {
 		}
 		//Finds the tile associated with the building
 		AbstractTile building_tile;
-		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z), out building_tile);
+		Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
+		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
 		if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: Show error and stop
 			return;
