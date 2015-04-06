@@ -21,6 +21,7 @@ public class GUILogic : MonoBehaviour {
 	private XmlDocument LOADED_GAME;
 	
 	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.3f);
+	private Vector3 UNIT_OFFSET = new Vector3(0,0.5f,-0.3f);
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -386,7 +387,8 @@ public class GUILogic : MonoBehaviour {
 		GAME.myGameLogic.hireVillager(new_villager, building_tile.myVillage, building_tile);
 		//Load new unit
 		GameObject new_unit = (GameObject)Resources.Load("unitpeasant");
-		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
+		// will instantiate on VILLAGE'S TRANSFORM'S POSITION!!!
+		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position, Quaternion.identity);
 		hired_villager.AddComponent<BoxCollider>();
 		hired_villager.AddComponent(typeof(Clicker));
 		hired_villager.tag = "Unit";
@@ -401,9 +403,10 @@ public class GUILogic : MonoBehaviour {
 		AbstractTile dest_tile;
 		BOARD_TILES.TryGetValue(new Vector2(tile.position.x, tile.position.z), out dest_tile);
 		AbstractTile unit_tile;
-		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z), out unit_tile);
+		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
+		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
 		GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
-		LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z);
+		LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z) + UNIT_OFFSET;
 	}
 
 	//The leave or disband button depending on host or player

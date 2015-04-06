@@ -229,10 +229,9 @@ public class GameLogic : AbstractGameLogic
 					AbstractPlayer neighbourPlayer = neighbourVillage.myPlayer;
 
 					AbstractStructure neighbourStructure = destNeighbour.occupyingStructure;
-					UnitType neighbourUnitType = neighbourUnit.myType;
-
+					
 					if( neighbourPlayer != player && 
-					   	( (int) neighbourUnitType > (int) unitType ||
+					   ( (neighbourUnit != null && (int) neighbourUnit.myType > (int) unitType) ||
 					 		( (int) unitType < (int) UnitType.Soldier && 
 					 			( neighbourVillage != null || neighbourStructure.myType == StructureType.Tower)
 					 		) ||
