@@ -178,7 +178,7 @@ public class GUILogic : MonoBehaviour {
 		}
 		else {
 			//Check the other possible problems
-			Debug.Log ("failed to start");
+			Debug.Log ("failed to start: " + response.ToString());
 		}
 	}
 
@@ -320,6 +320,7 @@ public class GUILogic : MonoBehaviour {
 		}
 		else {
 			//Show error
+			Debug.Log("Could not upgrade village from " + building_tile.myVillage.myType.ToString() + " to " + new_type.ToString());
 		}
 	}
 
