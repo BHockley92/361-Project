@@ -133,11 +133,6 @@ public class MWNetwork : Photon.MonoBehaviour
 		// Make the room impossible to see or join
 		PhotonNetwork.room.visible = false;
 		PhotonNetwork.room.open = false;
-		
-		// Mark the game as having started
-		Hashtable roomProps = new Hashtable();
-		roomProps.Add("gameStarted", true);
-		PhotonNetwork.room.SetCustomProperties(roomProps);
 
         return MWNetworkResponse.GAME_START_SUCCESS;
 	}
@@ -242,10 +237,25 @@ public class MWNetwork : Photon.MonoBehaviour
 		// Send each substring over the network
 		for (int i = 0; i < GAME_STATE_SUBSTRINGS; i++)
 		{
+			ExitGames.Client.Photon.Lite.ReceiverGroup receivers;
+			
+			if (gameStarted())
+			{
+				receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others;
+			}
+			else {
+				receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All;
+				
+				// Mark the game as having started
+				Hashtable roomProps = new Hashtable();
+				roomProps.Add("gameStarted", true);
+				PhotonNetwork.room.SetCustomProperties(roomProps);
+			}
+			
 			if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
 			                              gameStateSubstrings[i],
 			                              true,
-			                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others }))
+			                              new RaiseEventOptions() { Receivers = receivers }))
 			{
 				Debug.Log("Error sending game state over network.");
 			}
