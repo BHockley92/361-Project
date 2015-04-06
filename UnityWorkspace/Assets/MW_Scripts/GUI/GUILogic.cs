@@ -366,7 +366,8 @@ public class GUILogic : MonoBehaviour {
 		}
 		//Finds the tile associated with the village
 		AbstractTile building_tile;
-		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z+0.3f), out building_tile);
+		Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
+		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
 		if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: Show error and stop
 			return;
