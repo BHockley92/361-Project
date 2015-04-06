@@ -28,7 +28,6 @@ public enum MWNetworkResponse
  */
 public class MWNetwork : Photon.MonoBehaviour
 {
-
 	// Useful references to GUI elements
 	public GUILogic gui;
 	public Text GUIplayerList;
@@ -234,24 +233,28 @@ public class MWNetwork : Photon.MonoBehaviour
 			}
 		}
 	
+		// Figure out to whom the same state is sent
+		ExitGames.Client.Photon.Lite.ReceiverGroup receivers;
+		
+		if (gameStarted())
+		{
+			Debug.Log("Sending game state to others.");
+			receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others;
+		}
+		else {
+			Debug.Log("Sending game state to all.");
+			
+			receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All;
+			
+			// Mark the game as having started
+			Hashtable roomProps = new Hashtable();
+			roomProps.Add("gameStarted", true);
+			PhotonNetwork.room.SetCustomProperties(roomProps);
+		}
+		
 		// Send each substring over the network
 		for (int i = 0; i < GAME_STATE_SUBSTRINGS; i++)
-		{
-			ExitGames.Client.Photon.Lite.ReceiverGroup receivers;
-			
-			if (gameStarted())
-			{
-				receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others;
-			}
-			else {
-				receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All;
-				
-				// Mark the game as having started
-				Hashtable roomProps = new Hashtable();
-				roomProps.Add("gameStarted", true);
-				PhotonNetwork.room.SetCustomProperties(roomProps);
-			}
-			
+		{			
 			if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
 			                              gameStateSubstrings[i],
 			                              true,
