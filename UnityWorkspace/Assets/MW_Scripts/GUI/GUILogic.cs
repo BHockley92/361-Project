@@ -82,7 +82,6 @@ public class GUILogic : MonoBehaviour {
 		Debug.Log ("Received a state");
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()))
 		{
-			Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
 			BeginTurn ();
 		}
 		//Always do this
@@ -94,8 +93,7 @@ public class GUILogic : MonoBehaviour {
 
 	//When it becomes current players turn, enable the endturn button
 	public void BeginTurn() {
-		Debug.Log ("my turn");
-		Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
+		Debug.Log (GAME.turnOf.username + "my turn");
 		GAME.myGameLogic.beginTurn(GAME.turnOf,GAME);
 		ENDTURN.enabled = true;
 	}

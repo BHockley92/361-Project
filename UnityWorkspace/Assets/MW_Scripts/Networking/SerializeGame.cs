@@ -299,13 +299,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 			} //end all tiles but sea
 		} //end iterating over each tile
 
-		//save xml file state_username.xml
-		//if(count == 2) {
-		//	doc.Save ("afterLoad.xml");
-		//}
-		//if (count == 1) {
-			doc.Save ("beforeLoad.xml");
-		//}
+		doc.Save ("beforeLoad.xml");
 		return doc;
 	}
 
