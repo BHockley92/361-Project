@@ -314,7 +314,7 @@ public class GUILogic : MonoBehaviour {
 			//Set as child
 			new_village.transform.parent = GameObject.Find ("map").transform;
 			//Destroy old village
-			Object.Destroy(LAST_CLICKED_ON);
+			Object.Destroy(LAST_CLICKED_ON.gameObject);
 			//Set new last clicked on
 			LAST_CLICKED_ON = upgraded_village.transform;
 		}
@@ -350,7 +350,7 @@ public class GUILogic : MonoBehaviour {
 			//Set as child
 			new_unit.transform.parent = GameObject.Find("map").transform;
 			//Remove the old one
-			GameObject.Destroy(LAST_CLICKED_ON);
+			GameObject.Destroy(LAST_CLICKED_ON.gameObject);
 			//Set new last clicked on
 			LAST_CLICKED_ON = upgraded_unit.transform;
 		}
@@ -380,8 +380,7 @@ public class GUILogic : MonoBehaviour {
 		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position + new Vector3(0,0,0), Quaternion.identity);
 		//Set as child
 		hired_villager.transform.parent = GameObject.Find("map").transform;
-		//Destroy current unit
-		Object.Destroy(LAST_CLICKED_ON);
+
 		//Set new last clicked on
 		LAST_CLICKED_ON = new_unit.transform;
 	}
