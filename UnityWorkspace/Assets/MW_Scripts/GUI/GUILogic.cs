@@ -240,6 +240,7 @@ public class GUILogic : MonoBehaviour {
 				GameObject instantiated_village = (GameObject)GameObject.Instantiate(village, pos + new Vector3(0,0.5f,-0.3f), Quaternion.identity);
 				instantiated_village.AddComponent<BoxCollider2D>();
 				instantiated_village.AddComponent(typeof(Clicker));
+				instantiated_village.tag = "Village";
 				//Set as child
 				instantiated_village.transform.parent = map.transform;
 			}
@@ -267,7 +268,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void UpgradeVillage() {
-		if(LAST_CLICKED_ON == null) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
 			//TODO: They need to have selected a village to upgrade so we should be hiding buttons until certain conditions are met
 			return;
 		}
