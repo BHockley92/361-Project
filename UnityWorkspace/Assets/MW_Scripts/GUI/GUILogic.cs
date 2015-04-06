@@ -92,7 +92,7 @@ public class GUILogic : MonoBehaviour {
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		Debug.Log ("Received a state");
 		//TODO: Test this works
-		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>();
+		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: Covey it is your turn to the user (Need error message thingy)
 			Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
@@ -131,7 +131,7 @@ public class GUILogic : MonoBehaviour {
 	//The ready or start button depending on host or player
 	public void Ready_Start() {
 		MWNetworkResponse response = NETWORK.ReadyStart();
-		if(response != null) {
+		if(response == MWNetworkResponse.GAME_START_SUCCESS) {
 			MedievalWarfare mw = new MedievalWarfare ();
 			//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
 			GAME = mw.newGame (NETWORK.getPlayers());
@@ -204,6 +204,8 @@ public class GUILogic : MonoBehaviour {
 				case LandType.Sea: tile = (GameObject)Resources.Load("tileWater"); break;
 				case LandType.Tree: tile = (GameObject)Resources.Load("tileForest"); break;
 			}
+		
+			
 			//Create the game representation of the tile
 			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
 			GameObject instantiated_tile = (GameObject)GameObject.Instantiate(tile, pos, Quaternion.identity);
@@ -236,6 +238,9 @@ public class GUILogic : MonoBehaviour {
 					case VillageType.Castle: village = (GameObject)Resources.Load("buildingcastle"); break;
 				}
 				GameObject instantiated_village = (GameObject)GameObject.Instantiate(village, pos + new Vector3(0,0.5f,-0.3f), Quaternion.identity);
+				instantiated_village.AddComponent<BoxCollider2D>();
+				instantiated_village.AddComponent(typeof(Clicker));
+				instantiated_village.tag = "Village";
 				//Set as child
 				instantiated_village.transform.parent = map.transform;
 			}
@@ -263,7 +268,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void UpgradeVillage() {
-		if(LAST_CLICKED_ON == null) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
 			//TODO: They need to have selected a village to upgrade so we should be hiding buttons until certain conditions are met
 			return;
 		}
