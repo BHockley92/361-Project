@@ -12,15 +12,7 @@ public class CameraControl : MonoBehaviour {
 		Rect recup = new Rect (0, Screen.height-GUIsize, Screen.width, GUIsize);
 		Rect recleft = new Rect (0, 0, GUIsize, Screen.height);
 		Rect recright = new Rect (Screen.width-GUIsize, 0, GUIsize, Screen.height);
-
-		if (Input.GetMouseButtonDown (0)) {
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			//If we hit something and it's not a tile
-			if(Physics.Raycast(ray, out hit) && !hit.transform.name.Contains("tile")) {
-				GameObject.Find("GUILogic").GetComponent<GUILogic>().LAST_CLICKED_ON = hit.transform;
-			}
-		}
+		
 		if(Input.GetMouseButton(1)) {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
