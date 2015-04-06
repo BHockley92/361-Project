@@ -235,6 +235,9 @@ public class GUILogic : MonoBehaviour {
 				if(structure != null) {
 					//TODO: Add to position to make sure the object appears naturally
 					GameObject instantiated_structure = (GameObject)GameObject.Instantiate(structure, pos, Quaternion.identity);
+					instantiated_structure.AddComponent<BoxCollider2D>();
+					instantiated_structure.AddComponent(typeof(Clicker));
+					instantiated_structure.tag = "Structure";
 					//Set as child
 					instantiated_structure.transform.parent = map.transform;
 				}
