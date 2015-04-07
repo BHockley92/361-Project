@@ -44,9 +44,9 @@ public class SerializeGame
 		Board myGameBoard = new Board(myTiles, Convert.ToInt32(waterBorder)); 
 		GameLogic gl = new GameLogic ();
 		List<AbstractPlayer> gamePlayers = new List<AbstractPlayer> ();
-		MW_Game myGame = new MW_Game (gamePlayers, gl);
+		string turnIndex = "";
+		string turnOf = "";
 
-		//make new instance of MW_Game from XML specs
 		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
 			if (node.Name == "game") {
 				//create participant list
@@ -55,23 +55,25 @@ public class SerializeGame
 					MW_Player myPlayer = new MW_Player();
 					myPlayer.username = username;
 					myPlayer.myVillages = new List<AbstractVillage>();
-					myGame.participants.Add(myPlayer);
+					gamePlayers.Add(myPlayer);
 				}
 
-				myGame.gameBoard = myGameBoard;
-				string turnIndex = node.Attributes ["turnIndex"].InnerText;
-				myGame.turnIndex = Convert.ToInt32 (turnIndex);
-				string turnOf = node.Attributes ["turnOf"].InnerText;
-				foreach (AbstractPlayer p in myGame.participants) {
-					if (turnOf == p.username) {
-						myGame.turnOf = p;
-						break;
-					}
-				}
+				turnIndex = node.Attributes ["turnIndex"].InnerText;
+				turnOf = node.Attributes ["turnOf"].InnerText;
 
-			} //end initializing game
+			} 
 		}
-			
+		//make new instance of MW_Game from XML specs
+		MW_Game myGame = new MW_Game(gamePlayers,gl);
+		foreach (AbstractPlayer p in myGame.participants) {
+			if (turnOf == p.username) {
+				myGame.turnOf = p;
+				break;
+			}
+		}
+		myGame.gameBoard = myGameBoard;
+		myGame.turnIndex = Convert.ToInt32 (turnIndex);
+
 		// update gameBoard
 		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
 							

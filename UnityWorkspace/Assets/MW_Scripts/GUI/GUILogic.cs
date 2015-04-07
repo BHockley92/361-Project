@@ -79,7 +79,13 @@ public class GUILogic : MonoBehaviour {
 	//Populate popup with saved maps
 	public void LoadGame() {
 		//TODO: Find the popup to populate, set the "buttons" text to this
-		string[] files = Directory.GetFiles("/saves");
+		Debug.Log ("Load Game called");
+		string[] files = Directory.GetFiles("saves");
+		XmlDocument mydoc = new XmlDocument();
+		//load first file in directory for testing
+		mydoc.Load (files [0]);
+		MW_Game loadedGame = SERIALIZER.loadGame (mydoc);
+		Debug.Log ("Game Loaded - Success");
 	}
 
 	//Create a lobby and populate with information
