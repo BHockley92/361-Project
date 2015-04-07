@@ -78,19 +78,15 @@ public class GUILogic : MonoBehaviour {
 
 	//Populate popup with saved maps
 	public void LoadGame() {
-		//TODO: Find the popup to populate, set the "buttons" text to this
 		Debug.Log ("Load Game called");
-		string[] files = Directory.GetFiles("saves");
-		XmlDocument mydoc = new XmlDocument();
-		//load first file in directory for testing
-		mydoc.Load (files [0]);
-		MW_Game loadedGame = SERIALIZER.loadGame (mydoc);
+		GameObject.Find("Lobbies").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 		Debug.Log ("Game Loaded - Success");
 	}
 
 	//Create a lobby and populate with information
 	public void HostGame() {
 		//Will grab room name from selected GUI object
+		LOADED_GAME.Load ("saves/" + GameObject.Find("Lobbies").GetComponent<GameSelect>().getSelected());
 		Debug.Log ("Host game called");
 		NETWORK.hostRoom("demo");
 	}
@@ -161,13 +157,12 @@ public class GUILogic : MonoBehaviour {
 		MWNetworkResponse response = NETWORK.ReadyStart();
 		if(response == MWNetworkResponse.GAME_START_SUCCESS) {
 			MedievalWarfare mw = new MedievalWarfare ();
-			//Get width,height, and water boarder from game UI stuff or xml if exists otherwise have defaults
-			GAME = mw.newGame (NETWORK.getPlayers());
 			//Add generated board to GAME
 			if(LOADED_GAME != null) {
-				GAME.gameBoard = SERIALIZER.loadGameState(LOADED_GAME, GAME);
+				GAME = SERIALIZER.loadGame(LOADED_GAME);
 			}
 			else {
+				GAME = mw.newGame (NETWORK.getPlayers());
 				Debug.Log ("Random map");
 				GAME.gameBoard = new Board(20,20,2);
 				
