@@ -144,7 +144,7 @@ public class GameLogic : AbstractGameLogic
 	
 	public override bool attackVillageWithCannon(AbstractVillage target, AbstractUnit cannon)
 	{
-		if( cannon.isCannon && cannon.currentAction == readyForOrders && cannon.myVillage.wood >= 1)
+		if( cannon.isCannon && cannon.currentAction == ActionType.ReadyForOrders && cannon.myVillage.wood >= 1)
 		{
 			AbstractTile targetLoc = target.location;
 			AbstractTile cannonLoc = cannon.myLocation;
@@ -177,7 +177,7 @@ public class GameLogic : AbstractGameLogic
 
 	public override bool attackUnitWithCannon(AbstractUnit target, AbstractUnit cannon)
 	{
-		if( cannon.isCannon && cannon.currentAction == readyForOrders && cannon.myVillage.wood >= 1)
+		if( cannon.isCannon && cannon.currentAction == ActionType.ReadyForOrders && cannon.myVillage.wood >= 1)
 		{
 			AbstractTile targetLoc = target.myLocation;
 			AbstractTile cannonLoc = cannon.myLocation;
