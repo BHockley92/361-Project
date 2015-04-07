@@ -291,8 +291,10 @@ public class GUILogic : MonoBehaviour {
 				if(structure != null) {
 					//TODO: Add to position to make sure the object appears naturally
 					GameObject instantiated_structure = (GameObject)GameObject.Instantiate(structure, pos, Quaternion.identity);
-					instantiated_structure.AddComponent<BoxCollider>();
-					instantiated_structure.AddComponent(typeof(Clicker));
+					
+					// TODO: do structures even need a clicker?
+					//instantiated_structure.AddComponent<BoxCollider>();
+					//instantiated_structure.AddComponent(typeof(Clicker));
 					instantiated_structure.tag = "Structure";
 					//Set as child
 					instantiated_structure.transform.parent = map.transform;
@@ -309,8 +311,11 @@ public class GUILogic : MonoBehaviour {
 					case VillageType.Castle: village = (GameObject)Resources.Load("buildingcastle"); break;
 				}
 				GameObject instantiated_village = (GameObject)GameObject.Instantiate(village, pos + VILLAGE_OFFSET, Quaternion.identity);
-				instantiated_village.AddComponent<BoxCollider>();
-				instantiated_village.AddComponent(typeof(Clicker));
+				
+				if(current.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
+					instantiated_village.AddComponent<BoxCollider>();
+					instantiated_village.AddComponent(typeof(Clicker));
+				}
 				instantiated_village.tag = "Village";
 				//Set as child
 				instantiated_village.transform.parent = map.transform;
@@ -332,8 +337,11 @@ public class GUILogic : MonoBehaviour {
 				}
 				//TODO: Add to position to make sure the object appears naturally
 				GameObject instantiated_unit = (GameObject)GameObject.Instantiate(unit, pos, Quaternion.identity);
-				instantiated_unit.AddComponent<BoxCollider>();
-				instantiated_unit.AddComponent(typeof(Clicker));
+				
+				if(current.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
+					instantiated_unit.AddComponent<BoxCollider>();
+					instantiated_unit.AddComponent(typeof(Clicker));
+				}
 				instantiated_unit.tag = "Unit";
 				
 				//Set as child
@@ -365,6 +373,8 @@ public class GUILogic : MonoBehaviour {
 			//Create new village
 			GameObject upgraded_village = (GameObject)Resources.Load("building"+new_type.ToString().ToLower());
 			GameObject new_village = (GameObject)GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y), Quaternion.identity);
+			
+			// don't need to check for player ownership: is upgrade so of course it's player-owned
 			new_village.AddComponent<BoxCollider>();
 			new_village.AddComponent(typeof(Clicker));
 			new_village.tag = "Village";
@@ -404,6 +414,8 @@ public class GUILogic : MonoBehaviour {
 			//Generate the new unit
 			GameObject upgraded_unit = (GameObject)Resources.Load("unit"+new_type.ToString().ToLower());
 			GameObject new_unit = (GameObject)GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position, Quaternion.identity);
+			
+			// don't need to check for player ownership: is upgrade so of course it's player-owned
 			new_unit.AddComponent<BoxCollider>();
 			new_unit.AddComponent(typeof(Clicker));
 			new_unit.tag = "Unit";
@@ -439,6 +451,8 @@ public class GUILogic : MonoBehaviour {
 		GameObject new_unit = (GameObject)Resources.Load("unitpeasant");
 		// will instantiate on VILLAGE'S TRANSFORM'S POSITION!!!
 		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position, Quaternion.identity);
+		
+		// don't need to check for player ownership: is purchase so of course it's player-owned
 		hired_villager.AddComponent<BoxCollider>();
 		hired_villager.AddComponent(typeof(Clicker));
 		hired_villager.tag = "Unit";

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+// only attach this to >local player's< units/villages
 public class Clicker : MonoBehaviour
 {	
 	public GUILogic guiLogic;
