@@ -8,12 +8,7 @@ public class HexTile : MonoBehaviour {
 	public int[] 	  TRIANGLES;
 	public Texture    TEXTURE;
 	
-	void Start ()
-	{
-		MeshSetup();
-	}
-	
-	void MeshSetup()
+	public void MeshSetup(Color playerColour)
 	{
 		float floorLevel = 0;
 		VERTICES  = new Vector3 []
@@ -58,5 +53,6 @@ public class HexTile : MonoBehaviour {
 		meshFilter.mesh = mesh;
 
 		meshRenderer.material.mainTexture = TEXTURE;
+		meshRenderer.material.color = playerColour;
 	}
 }

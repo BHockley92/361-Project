@@ -155,7 +155,7 @@ public class GUILogic : MonoBehaviour {
 				//each tile that's not water gets a village owned by a random player ie: set up tileOwner
 				//during BFS remove all except 1 of the villages that have more than 3 tiles
 				foreach (Tile t in GAME.gameBoard.board) {
-					if(t.myType != LandType.Sea){ //attempt to fix error
+					if(t.myType != LandType.Sea){
 						int randomPlayer = Random.Range (0, GAME.participants.Count); 
 						List<AbstractTile> myTile = new List<AbstractTile>();
 						myTile.Add(t);
@@ -232,9 +232,36 @@ public class GUILogic : MonoBehaviour {
 			//Create the game representation of the tile
 			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
 			GameObject instantiated_tile = (GameObject)GameObject.Instantiate(tile, pos, Quaternion.identity);
+			// set it up here because we change the colour below
+		
+			Color playerColour = new Color(0,0,0);
+			//set colour as fn of player
+			if(current.myVillage != null) {
+				switch(GAME.participants.IndexOf(current.myVillage.myPlayer)) {
+					case 0:
+						playerColour = new Color(0.5f,0.0f,0.0f);
+						break;
+					case 1:
+						playerColour = new Color(0.0f,0.5f,0.0f);
+						break;
+					case 2:
+						playerColour = new Color(0.0f,0.0f,0.5f);
+						break;
+					case 3:
+						playerColour = new Color(0.0f,0.5f,0.5f);
+						break;
+					default:
+						Debug.Log("Too many players!");
+						break;
+				}
+			}
+			
+			instantiated_tile.GetComponent<HexTile>().MeshSetup(playerColour);
 			instantiated_tile.AddComponent<BoxCollider>();
 			instantiated_tile.AddComponent(typeof(TileClicker));
 			instantiated_tile.tag = "Tile";
+			
+			
 			//Set as child
 			instantiated_tile.transform.parent = map.transform;
 
