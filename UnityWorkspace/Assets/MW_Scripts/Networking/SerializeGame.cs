@@ -65,6 +65,8 @@ public class SerializeGame
 		}
 		//make new instance of MW_Game from XML specs
 		MW_Game myGame = new MW_Game(gamePlayers,gl);
+		ValueManager vm = new ValueManager (); //must initalize value manager for game
+		gl.myValueManager = vm;
 		foreach (AbstractPlayer p in myGame.participants) {
 			if (turnOf == p.username) {
 				myGame.turnOf = p;
