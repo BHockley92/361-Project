@@ -190,6 +190,20 @@ public class MWNetwork : Photon.MonoBehaviour
 		return roomNames;
 	}
 	
+	/* 
+	 * Retrieves a player's statistics from the cloud
+	 */
+	 // TODO Retrieve from Playfab
+	public Hashtable getPlayerStatistics(string username)
+	{
+		Hashtable stats = new Hashtable();
+		
+		stats["wins"] = 0;
+		stats["losses"] = 0;
+		
+		return stats;
+	}
+	
 	/*
 	 * Returns a list of AbstractPlayers in the room. 
 	 */
