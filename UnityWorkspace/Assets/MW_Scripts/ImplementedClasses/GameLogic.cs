@@ -144,7 +144,7 @@ public class GameLogic : AbstractGameLogic
 	
 	public override bool attackVillageWithCannon(AbstractVillage target, AbstractUnit cannon)
 	{
-		if( cannon.isCannon && cannon.currentAction == readyForOrders)
+		if( cannon.isCannon && cannon.currentAction == readyForOrders && cannon.myVillage.wood >= 1)
 		{
 			AbstractTile targetLoc = target.location;
 			AbstractTile cannonLoc = cannon.myLocation;
@@ -168,6 +168,7 @@ public class GameLogic : AbstractGameLogic
 					targetLoc.myType = LandType.Tree;
 				}
 				cannon.currentAction = ActionType.Moved;
+				cannon.myVillage.wood--; // cost for firing
 				return true;
 			}
 		}
@@ -176,7 +177,7 @@ public class GameLogic : AbstractGameLogic
 
 	public override bool attackUnitWithCannon(AbstractUnit target, AbstractUnit cannon)
 	{
-		if( cannon.isCannon && cannon.currentAction == readyForOrders)
+		if( cannon.isCannon && cannon.currentAction == readyForOrders && cannon.myVillage.wood >= 1)
 		{
 			AbstractTile targetLoc = target.myLocation;
 			AbstractTile cannonLoc = cannon.myLocation;
@@ -196,6 +197,7 @@ public class GameLogic : AbstractGameLogic
 					targetLoc.occupyingStructure.myType = StructureType.Tombstone;
 
 				cannon.currentAction = ActionType.Moved;
+				cannon.myVillage.wood--; // cost for firing
 				return true;
 			}
 		}
