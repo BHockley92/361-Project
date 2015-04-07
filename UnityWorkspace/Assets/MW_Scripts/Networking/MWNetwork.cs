@@ -304,6 +304,8 @@ public class MWNetwork : Photon.MonoBehaviour
 	{
 		PhotonNetwork.playerName = gui.PLAYER.username;
 		Debug.Log("Login success!");
+		
+		UpdateLocalPlayerStatistics();
 	}
 	
 	/*
@@ -322,6 +324,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		GetUserDataRequest request = new GetUserDataRequest ();
 		if (PlayFabData.AuthKey != null)
 			PlayFabClientAPI.GetUserData (request, OnStatisticsReceived, OnStatisticsError);
+		else 
 	}
 	
 	/*
@@ -329,10 +332,12 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
 	private void OnStatisticsReceived(GetUserDataResult result)
 	{
-		Debug.Log("Statistics downloaded successfully!");
-		
 		statistics["wins"] = result.Data["wins"];
 		statistics["losses"] = result.Data["losses"];
+		
+		Debug.Log("Statistics downloaded successfully: " +
+				  statistics["wins"] + " wins, " +
+				  statistics["losses"] + " losses.");
 	}
 	
 	/*
