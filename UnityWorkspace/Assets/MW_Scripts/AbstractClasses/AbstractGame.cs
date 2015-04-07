@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public abstract class AbstractGame
 {
-	public List<AbstractPlayer> participants { get; private set; }
-	public AbstractPlayer turnOf { get; private set; }
-	public int turnIndex { get; private set; }
+	public List<AbstractPlayer> participants { get;  set; }
+	public AbstractPlayer turnOf { get;  set; }
+	public int turnIndex { get;  set; }
 
 	public AbstractGameLogic myGameLogic { get; set; }
 	public Board gameBoard { get; set; }
