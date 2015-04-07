@@ -493,6 +493,7 @@ public class GUILogic : MonoBehaviour {
 		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
 		Debug.Log ("Unit moved: "+movedUnit.ToString () + " "+  (dest_tile.occupyingUnit != null).ToString());
 		LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z) + UNIT_OFFSET;
+		Clicker.MoveSelectionArrow(LAST_CLICKED_ON.position);
 	}
 
 	//The leave or disband button depending on host or player
