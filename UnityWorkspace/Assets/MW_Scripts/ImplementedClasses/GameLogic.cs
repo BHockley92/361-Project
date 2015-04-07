@@ -399,9 +399,9 @@ public class GameLogic : AbstractGameLogic
 					u.currentAction = ActionType.Moved;
 				}
 				else destPlayer = dest.myVillage.myPlayer;
-
 				u.myLocation.occupyingUnit = null;
 				u.myLocation = dest;
+				dest.occupyingUnit = u; //was not being set!!!!
 
 				if( destPlayer != player && destPlayer != null)
 				{
