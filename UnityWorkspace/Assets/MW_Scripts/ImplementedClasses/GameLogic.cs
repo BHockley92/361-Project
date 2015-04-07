@@ -123,6 +123,88 @@ public class GameLogic : AbstractGameLogic
 		return true;
 	}
 
+	public override bool isTileWithinCannonFiringRange(AbstractTile cannonLocation, AbstractTile targetLocation)
+	{
+		// check to see if the unit is on an adjacent tile
+		List<AbstractTile> neighbours = cannonLocation.getNeighbours ();
+		if (neighbours.Contains (targetLocation))
+			return true;
+		
+		// check to see if one of the adjacent tiles has it as a neighbour
+		foreach( AbstractTile t in neighbours )
+		{
+			if( t.getNeighbours().Contains(targetLocation))
+				return true;
+		}
+		
+		// out of range
+		return false;
+	}
+	
+	
+	public override bool attackVillageWithCannon(AbstractVillage target, AbstractUnit cannon)
+	{
+		if( cannon.isCannon && cannon.currentAction == ActionType.ReadyForOrders && cannon.myVillage.wood >= 1)
+		{
+			AbstractTile targetLoc = target.location;
+			AbstractTile cannonLoc = cannon.myLocation;
+			if(isTileWithinCannonFiringRange(cannonLoc, targetLoc))
+			{
+				target.damageTaken++;
+
+				// also kills all units supported by the village and the gold in the village is lost
+				if(!isVillageStillAlive(target))
+				{
+					perishVillagers(target);
+					target.gold = 0;
+					target.wood = 0;
+
+					foreach(AbstractTile t in target.controlledRegion)
+					{
+						t.myVillage = null;
+					}
+					target = null; //destroy village
+					//village tile turns to a tree
+					targetLoc.myType = LandType.Tree;
+				}
+				cannon.currentAction = ActionType.Moved;
+				cannon.myVillage.wood--; // cost for firing
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public override bool attackUnitWithCannon(AbstractUnit target, AbstractUnit cannon)
+	{
+		if( cannon.isCannon && cannon.currentAction == ActionType.ReadyForOrders && cannon.myVillage.wood >= 1)
+		{
+			AbstractTile targetLoc = target.myLocation;
+			AbstractTile cannonLoc = cannon.myLocation;
+
+			if(isTileWithinCannonFiringRange(cannonLoc, targetLoc))
+			{
+				// kill the unit
+				target.myLocation.occupyingUnit = null;
+				target.myLocation = null;
+
+				target.myVillage.supportedUnits.Remove(target);
+				target.myVillage = null;
+
+				if(targetLoc.occupyingStructure == null)
+					targetLoc.occupyingStructure = new Structure(targetLoc, StructureType.Tombstone);
+				else
+					targetLoc.occupyingStructure.myType = StructureType.Tombstone;
+
+				cannon.currentAction = ActionType.Moved;
+				cannon.myVillage.wood--; // cost for firing
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	// returns true upon successful upgrade
 	public override bool upgradeVillage(AbstractVillage v, VillageType newType)
 	{
@@ -381,6 +463,7 @@ public class GameLogic : AbstractGameLogic
 		
 		
 	}
+
 	//TODO: Emily
 	public override void divideRegion(List<AbstractTile> region, AbstractVillage occupyingVillage) {
 		//reset tile for BFS 	
@@ -663,7 +746,7 @@ public class GameLogic : AbstractGameLogic
 			myVillage.gold += myValueManager.getLandValue(t.myType);  //null reference error because valueManager is not done!
 		}
 	}
-	
+
 	protected override void paymentPhase( AbstractVillage myVillage )
 	{
 		List<AbstractUnit> supportedUnits = myVillage.supportedUnits;

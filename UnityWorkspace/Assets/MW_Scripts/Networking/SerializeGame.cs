@@ -89,6 +89,8 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				string villageType = node.Attributes ["villageType"].InnerText;
 				string locationOfTileX = node.Attributes ["locationOfTileX"].InnerText;
 				string locationOfTileY = node.Attributes ["locationOfTileY"].InnerText;
+				string damageTaken = node.Attributes["damageTaken"].InnerText;
+
 				MW_Player villageOwner = new MW_Player();
 				foreach(MW_Player myplayer in myGame.participants){
 					if(playerName == myplayer.username){
@@ -101,6 +103,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				Village myVillage = new Village (region, villageOwner);
 				myVillage.gold = Convert.ToInt32 (gold);
 				myVillage.wood = Convert.ToInt32 (wood);
+				myVillage.damageTaken = Convert.ToInt32(damageTaken); //added damage taken 
 				//convert villageType to enum
 				VillageType vType = (VillageType)Enum.Parse (typeof(VillageType), villageType, true);
 				myVillage.myType = vType;
@@ -130,6 +133,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 				string unitX = node.Attributes ["unitX"].InnerText;
 				string unitY = node.Attributes ["unitY"].InnerText;
 				string unitAction = node.Attributes ["unitAction"].InnerText;
+				string isCannon = node.Attributes["isCannon"].InnerText;
 
 				AbstractVillage unitVillage = myTiles [Convert.ToInt32 (villageOwnerX), Convert.ToInt32 (villageOwnerY)].myVillage;
 				Tile unitTile = myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)];
@@ -141,6 +145,7 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 
 				UnitType uType = (UnitType)Enum.Parse(typeof(UnitType), unitType, true);
 				myUnit.myType = uType;
+				myUnit.isCannon = Convert.ToBoolean(isCannon);
 				unitTile.occupyingUnit = myUnit;
 
 			}
@@ -242,10 +247,13 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 					woodAtt.Value = t.myVillage.wood.ToString ();
 					XmlAttribute vAtt = doc.CreateAttribute ("villageType");
 					vAtt.Value = t.myVillage.myType.ToString ();
-					XmlAttribute locX = doc.CreateAttribute ("locationOfTileX");//removed plural why was it there 
+					XmlAttribute locX = doc.CreateAttribute ("locationOfTileX"); 
 					locX.Value =t.myVillage.location.boardPosition.x.ToString ();
-					XmlAttribute locY = doc.CreateAttribute ("locationOfTileY");//removed plural why was it there 
+					XmlAttribute locY = doc.CreateAttribute ("locationOfTileY");
 					locY.Value =t.myVillage.location.boardPosition.y.ToString ();
+					XmlAttribute damageTaken = doc.CreateAttribute("damageTaken"); //added damageTaken to village
+					damageTaken.Value = t.myVillage.damageTaken.ToString();
+
 
 					villageNode.Attributes.Append (pName);
 					villageNode.Attributes.Append (goldAtt);
@@ -253,7 +261,8 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 					villageNode.Attributes.Append (vAtt);
 					villageNode.Attributes.Append (locX);
 					villageNode.Attributes.Append (locY);
-					rootNode.AppendChild (villageNode); //changed to a child not subchild
+					villageNode.Attributes.Append(damageTaken);
+					rootNode.AppendChild (villageNode); 
 
 					//iterate over each tile in controlledRegion and add as subchildren to village node
 					List<AbstractTile> region = t.myVillage.controlledRegion;
@@ -286,6 +295,8 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 					unitPosX.Value=t.occupyingUnit.myLocation.boardPosition.x.ToString();
 					XmlAttribute unitPosY = doc.CreateAttribute("unitY");
 					unitPosY.Value=t.occupyingUnit.myLocation.boardPosition.y.ToString();
+					XmlAttribute isCannon = doc.CreateAttribute("isCannon"); //added isCannon boolean 
+					isCannon.Value = t.occupyingUnit.isCannon.ToString();
 
 					unitNode.Attributes.Append (uTypeAtt);
 					unitNode.Attributes.Append (uAction);
@@ -293,7 +304,8 @@ public class SerializeGame //: MonoBehaviour //uncomment when testing
 					unitNode.Attributes.Append(ypos);
 					unitNode.Attributes.Append(unitPosX);
 					unitNode.Attributes.Append(unitPosY);
-					rootNode.AppendChild (unitNode); //changed to a child not subchild
+					unitNode.Attributes.Append(isCannon);
+					rootNode.AppendChild (unitNode); 
 				}
 
 			} //end all tiles but sea
