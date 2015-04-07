@@ -32,8 +32,21 @@ public class GUILogic : MonoBehaviour {
 		#endif
 	}
 
-	public void Update() {
+	public void OnGUI() {
 		//TODO: Should be changing what buttons we display based on what LAST_CLICKED_ON is
+		if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
+			AbstractTile building_tile;
+			Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
+			BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
+			if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
+				return;
+			}
+			else {
+				GameObject.Find("Gold").GetComponent<Text>().text = "Gold: " + building_tile.myVillage.gold;
+				GameObject.Find("Wood").GetComponent<Text>().text = "Wood: " + building_tile.myVillage.gold;
+				GameObject.Find("Pop").GetComponent<Text>().text = "Population: " + building_tile.myVillage.supportedUnits;
+			}
+		}
 	}
 
 	//Authenticates the user to view stats
@@ -52,10 +65,10 @@ public class GUILogic : MonoBehaviour {
 	//Loads lobby info of selected game
 	public void JoinGame() {
 		//TODO: From the popup with the list of rooms, grab the room name and join it
-		NETWORK.joinRoom("demo");	// temporary fix for single room instances
+		//NETWORK.joinRoom("demo");	// temporary fix for single room instances
 		
 		//DO THIS FOR OFFLINE WORK
-		//NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());
+		NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());
 	}
 
 	//Populate popup with available maps
@@ -151,6 +164,8 @@ public class GUILogic : MonoBehaviour {
 				
 				// ALL THE ASSIGNMENT STUFF SHOULD BE DONE IN THE
 				// BACKEND YOU RETARDS
+
+				// I PUT IT HERE WHILE I DEALT WITH OTHER SHIT! FUCK YOU!
 				
 				//each tile that's not water gets a village owned by a random player ie: set up tileOwner
 				//during BFS remove all except 1 of the villages that have more than 3 tiles
