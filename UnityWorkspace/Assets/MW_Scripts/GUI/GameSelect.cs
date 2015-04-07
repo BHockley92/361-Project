@@ -29,6 +29,11 @@ public class GameSelect : MonoBehaviour {
 	}
 
 	public string getSelected() {
-		return GAMES[SELECTION];
+		if(GAMES.Length > 0) {
+			return GAMES[SELECTION];
+		}
+		else {
+			return null;
+		}
 	}
 }

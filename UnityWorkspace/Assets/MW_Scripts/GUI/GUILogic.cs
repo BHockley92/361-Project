@@ -19,6 +19,7 @@ public class GUILogic : MonoBehaviour {
 	private Dictionary<Vector2,AbstractTile> BOARD_TILES = new Dictionary<Vector2,AbstractTile>();
 	private SerializeGame SERIALIZER = new SerializeGame();
 	private XmlDocument LOADED_GAME;
+	private bool FROM_LOADED = false;
 	
 	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.3f);
 	private Vector3 UNIT_OFFSET = new Vector3(0,0.5f,-0.3f);
@@ -79,6 +80,7 @@ public class GUILogic : MonoBehaviour {
 	//Populate popup with saved maps
 	public void LoadGame() {
 		Debug.Log ("Load Game called");
+		FROM_LOADED = true;
 		GameObject.Find("Lobbies").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 		Debug.Log ("Game Loaded - Success");
 	}
@@ -86,7 +88,9 @@ public class GUILogic : MonoBehaviour {
 	//Create a lobby and populate with information
 	public void HostGame() {
 		//Will grab room name from selected GUI object
-		LOADED_GAME.Load ("saves/" + GameObject.Find("Lobbies").GetComponent<GameSelect>().getSelected());
+		if(FROM_LOADED) {
+			LOADED_GAME.Load ("saves/" + GameObject.Find("Lobbies").GetComponent<GameSelect>().getSelected());
+		}
 		Debug.Log ("Host game called");
 		NETWORK.hostRoom("demo");
 	}
