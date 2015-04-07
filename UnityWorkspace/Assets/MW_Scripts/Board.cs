@@ -40,12 +40,19 @@ public class Board {
 			for(int j = 0 + border; j < board.GetLength(1) - border; j++)
 			{
 				// Generate a random land type
-				LandType lt;
-				int randInt = Random.Range(0, 3);
-				if( randInt == 0 ) lt = LandType.Meadow;
-				else if( randInt == 1 ) lt = LandType.Grass;
-				else lt = LandType.Tree;
-
+				LandType lt = LandType.Grass;
+				int randInt = Random.Range(0, 10);
+				switch (randInt) {
+					case 0:
+					case 1:
+						lt = LandType.Tree;
+						break;
+					case 2:
+						lt = LandType.Meadow;
+						break;
+					default:
+						break;
+				}
 				// Now make and place the tile
 				board[ i , j ] = new Tile( lt, this, i, j);
 			}

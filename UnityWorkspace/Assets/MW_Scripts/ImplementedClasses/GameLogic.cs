@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GameEnums;
 using System.IO;
+using System.Linq;
 
 public class GameLogic : AbstractGameLogic
 {
@@ -589,36 +590,18 @@ public class GameLogic : AbstractGameLogic
 	private void spawnTreesInNeighbours( AbstractTile t)
 	{
 		List<AbstractTile> neighbours = t.getNeighbours();
+		
+		List<AbstractTile> valid_neighbours = neighbours.Where( x => x.occupyingUnit == null 
+			&& x.occupyingStructure.myType == StructureType.NONE && x.myVillage.location != x).ToList();
 
-		// If the tile neighbour is elegible for tree growth, roll
-		if(neighbours.Count == 0) Debug.Log("No neighbours returned");
-
-		if( neighbours.Count > 0)
+		if(neighbours.Count > 0) 
 		{
-			foreach( AbstractTile neighbour in neighbours )
+			AbstractTile n = neighbours[Random.Range(0,neighbours.Count)];
+			int diceRoll = Random.Range(0, 2);
+			
+			if( diceRoll == 1 )
 			{
-			 	if( !(neighbour.occupyingUnit != null) && neighbour.occupyingStructure.myType == StructureType.NONE)
-				{
-					if(neighbour.myVillage != null && neighbour.myVillage.location != neighbour){ //tile has a village, and it's not on that tile
-						int diceRoll = Random.Range(0, 2);
-					
-						if( diceRoll == 1 )
-						{
-							neighbour.myType = LandType.Tree;
-						}
-					}
-
-					else if(!(neighbour.myVillage != null)){ //tile's village is null
-						int diceRoll = Random.Range(0, 2);
-						
-						if( diceRoll == 1 )
-						{
-							neighbour.myType = LandType.Tree;
-						}
-
-					}
-				}
-
+				n.myType = LandType.Tree;
 			}
 		}
 	}
