@@ -530,11 +530,11 @@ public class GameLogic : AbstractGameLogic
 			g = (MW_Game)ag;
 			
 		// skip initial round
-		if(g.roundsPlayed == 0 && g.turnIndex == 0)
+		if(g.turnIndex == 0)
 			return;
 	
 		// If it's a new round, tree growth
-		if( g.turnIndex == 0) 
+		if( g.turnIndex % g.participants.Count == 0) 
 			treeGrowthPhase( g.gameBoard );
 
 		List<AbstractVillage> myVillages = p.myVillages;
