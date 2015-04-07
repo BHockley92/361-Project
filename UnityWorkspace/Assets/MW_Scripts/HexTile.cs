@@ -53,6 +53,19 @@ public class HexTile : MonoBehaviour {
 		meshFilter.mesh = mesh;
 
 		meshRenderer.material.mainTexture = TEXTURE;
-		meshRenderer.material.color = playerColour;
+		
+		// make border tile
+		GameObject tile = (GameObject)Resources.Load("Tile");
+		GameObject border = Instantiate(tile, transform.position, Quaternion.identity) as GameObject;
+		HexTile ht = border.GetComponent<HexTile>();
+		
+		
+		MeshFilter  meshFilter2 = border.AddComponent<MeshFilter>();
+		MeshRenderer meshRenderer2 = border.AddComponent<MeshRenderer>();
+		
+		meshFilter2.mesh = mesh;
+		meshRenderer2.material.mainTexture = (Texture)Resources.Load ("border-white");
+		meshRenderer2.material.shader = Shader.Find ("Transparent/Diffuse");
+		meshRenderer2.material.color = playerColour;
 	}
 }

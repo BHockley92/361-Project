@@ -249,7 +249,7 @@ public class GUILogic : MonoBehaviour {
 			GameObject instantiated_tile = (GameObject)GameObject.Instantiate(tile, pos, Quaternion.identity);
 			// set it up here because we change the colour below
 		
-			Color playerColour = new Color(0,0,0);
+			Color playerColour = new Color(1,1,1);
 			//set colour as fn of player
 			if(current.myVillage != null) {
 				switch(GAME.participants.IndexOf(current.myVillage.myPlayer)) {
