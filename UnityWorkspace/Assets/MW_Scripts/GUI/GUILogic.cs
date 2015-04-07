@@ -53,6 +53,9 @@ public class GUILogic : MonoBehaviour {
 	public void JoinGame() {
 		//TODO: From the popup with the list of rooms, grab the room name and join it
 		NETWORK.joinRoom("demo");	// temporary fix for single room instances
+		
+		//DO THIS FOR OFFLINE WORK
+		//NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());
 	}
 
 	//Populate popup with available maps
