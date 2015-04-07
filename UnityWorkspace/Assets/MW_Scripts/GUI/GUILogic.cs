@@ -453,7 +453,7 @@ public class GUILogic : MonoBehaviour {
 			//TODO: Show error and stop
 			return;
 		}
-		//check if unit doesn't exist on tile already
+		//check if unit doesn't exist on tile alreadyf
 		if (building_tile.occupyingUnit == null) {
 			AbstractUnit new_villager = new Unit (building_tile.myVillage, building_tile);
 
@@ -491,7 +491,7 @@ public class GUILogic : MonoBehaviour {
 		AbstractTile unit_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
-		Debug.Log ("Unit position before move" + unit_tile.occupyingUnit.myLocation.boardPosition.x.ToString () + ", " + unit_tile.occupyingUnit.myLocation.boardPosition.y.ToString ());
+		//Debug.Log ("Unit position before move" + unit_tile.occupyingUnit.myLocation.boardPosition.x.ToString () + ", " + unit_tile.occupyingUnit.myLocation.boardPosition.y.ToString ());
 		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
 		Debug.Log ("Unit moved: "+movedUnit.ToString () + " "+  (dest_tile.occupyingUnit != null).ToString());
 		LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z) + UNIT_OFFSET;

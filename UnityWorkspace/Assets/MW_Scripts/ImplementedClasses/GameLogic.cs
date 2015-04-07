@@ -710,9 +710,9 @@ public class GameLogic : AbstractGameLogic
 		List<AbstractTile> valid_neighbours = neighbours.Where( x => x.occupyingUnit == null 
 			&& x.occupyingStructure.myType == StructureType.NONE && x.myVillage.location != x).ToList();
 
-		if(neighbours.Count > 0) 
+		if(valid_neighbours.Count > 0) 
 		{
-			AbstractTile n = neighbours[Random.Range(0,neighbours.Count)];
+			AbstractTile n = valid_neighbours[Random.Range(0,valid_neighbours.Count)];
 			int diceRoll = Random.Range(0, 2);
 			
 			if( diceRoll == 1 )
