@@ -285,6 +285,7 @@ public class GameLogic : AbstractGameLogic
 	}
 
 	// returns true upon successful movement of unit
+	// TODO: account for moving into a tile with a cannon and that cannons do NOT protect adjacent tiles
 	public override bool moveUnit(AbstractUnit u, AbstractTile dest) 
 	{
 		AbstractTile unitLocation = u.myLocation;
@@ -296,8 +297,22 @@ public class GameLogic : AbstractGameLogic
 
 		if( unitTileNeighbours.Contains(dest) && u.currentAction == ActionType.ReadyForOrders)
 		{
+			if( dest.occupyingUnit != null )
+			{
+				// no stacking units or moving onto occupied spaces
+				if(dest.myVillage == u.myVillage)
+					return false;
+
+				if(dest.occupyingUnit.isCannon && u.myType != UnitType.Knight)
+					return false;
+			}
+
+			// cannons cannot move outside of their territory
+			if( u.isCannon && dest.myVillage != u.myVillage)
+				return false;
+
 			if( 
-			   (unitType == UnitType.Knight && landtype != LandType.Tree)
+			    ( (unitType == UnitType.Knight || u.isCannon) && landtype != LandType.Tree)
 				 || unitType != UnitType.Knight
 			   )
 			{
@@ -307,12 +322,15 @@ public class GameLogic : AbstractGameLogic
 				{
 					AbstractUnit neighbourUnit = destNeighbour.occupyingUnit;
 
+					// cannons are a special case as they don't protect the surrounding tiles
+					if( neighbourUnit != null && neighbourUnit.isCannon )
+						continue;
+
 					AbstractVillage neighbourVillage = destNeighbour.myVillage;
 					VillageType neighbourVillageType = neighbourVillage.myType;
 					AbstractPlayer neighbourPlayer = neighbourVillage.myPlayer;
 
 					AbstractStructure neighbourStructure = destNeighbour.occupyingStructure;
-					
 					if( neighbourPlayer != player && 
 					   ( (neighbourUnit != null && (int) neighbourUnit.myType > (int) unitType) ||
 					 		( (int) unitType < (int) UnitType.Soldier && 
@@ -330,15 +348,24 @@ public class GameLogic : AbstractGameLogic
 				// All systems go, move is allowed
 
 				// kill enemy units/structures
+				AbstractUnit destUnit = dest.occupyingUnit;
+				if( destUnit != null && destUnit.isCannon)
+				{
+					destUnit.myLocation.occupyingUnit = null;
+					destUnit.myVillage.supportedUnits.Remove(destUnit);
+					destUnit.myLocation = null;
+					
+					dest.occupyingStructure = new Structure( dest, StructureType.Tombstone);
+				}
 				foreach( AbstractTile t in dest.getNeighbours())
 				{
+					AbstractUnit unit = t.occupyingUnit;
 					if( t.myVillage != null)
 					{
 						AbstractPlayer p = t.myVillage.myPlayer;
-						if( p != player )
+						if( p != player && !unit.isCannon)
 						{
 							AbstractStructure s = t.occupyingStructure;
-							AbstractUnit unit = t.occupyingUnit;
 
 							if(s != null)
 							{
@@ -394,6 +421,9 @@ public class GameLogic : AbstractGameLogic
 				if( dest.myType == LandType.Meadow && (int) u.myType >= (int) UnitType.Soldier )
 					dest.myType = LandType.Grass;
 
+				// cannons can only move once
+				if( u.isCannon )
+					u.currentAction = ActionType.Moved;
 				return true;
 			}
 		}
@@ -670,7 +700,7 @@ public class GameLogic : AbstractGameLogic
 
 	// Goes through each neighbour of the tile and if they are eligible 
 	// for tree growth, a dice is rolled to determine if it actually happens
-	private void spawnTreesInNeighbours( AbstractTile t)
+	private void spawnTreesInNeighbours(AbstractTile t)
 	{
 		List<AbstractTile> neighbours = t.getNeighbours();
 		
