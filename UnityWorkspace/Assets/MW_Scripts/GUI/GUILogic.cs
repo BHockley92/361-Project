@@ -21,7 +21,7 @@ public class GUILogic : MonoBehaviour {
 	private XmlDocument LOADED_GAME;
 	private bool FROM_LOADED = false;
 	
-	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.3f);
+	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.8f);
 	private Vector3 UNIT_OFFSET = new Vector3(0,0.5f,-0.3f);
 
 	//Exit to desktop/quit button
@@ -59,17 +59,16 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void ListRooms() {
-		//TODO: From the popup, make the "buttons" text this
-		string[] rooms = NETWORK.getRooms();
+		GameObject.Find ("Lobbies").GetComponent<GameSelect>().GAMES = NETWORK.getRooms();
 	}
 
 	//Loads lobby info of selected game
 	public void JoinGame() {
 		//TODO: From the popup with the list of rooms, grab the room name and join it
-		//NETWORK.joinRoom("demo");	// temporary fix for single room instances
+		NETWORK.joinRoom(GameObject.Find ("Lobbies").GetComponent<GameSelect>().getSelected());	// temporary fix for single room instances
 		
 		//DO THIS FOR OFFLINE WORK
-		NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());
+		//NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());
 	}
 
 	//Populate popup with available maps
@@ -81,15 +80,15 @@ public class GUILogic : MonoBehaviour {
 	public void LoadGame() {
 		Debug.Log ("Load Game called");
 		FROM_LOADED = true;
-		GameObject.Find("Lobbies").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
-		Debug.Log ("Game Loaded - Success");
+		GameObject.Find("SavedGames").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 	}
 
 	//Create a lobby and populate with information
 	public void HostGame() {
 		//Will grab room name from selected GUI object
 		if(FROM_LOADED) {
-			LOADED_GAME.Load ("saves/" + GameObject.Find("Lobbies").GetComponent<GameSelect>().getSelected());
+			LOADED_GAME = new XmlDocument();
+			LOADED_GAME.Load (GameObject.Find("SavedGames").GetComponent<GameSelect>().getSelected());
 		}
 		Debug.Log ("Host game called");
 		NETWORK.hostRoom("demo");
