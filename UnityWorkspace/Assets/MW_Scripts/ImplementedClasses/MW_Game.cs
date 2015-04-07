@@ -16,7 +16,10 @@ public class MW_Game : AbstractGame
 
 	public void EndTurn() {
 		nextTurn ();
-		if(turnIndex == 0)
+		if(turnIndex % participants.Count == 0) {
 			roundsPlayed++;
+			Debug.Log ("Rounds played: " + roundsPlayed);
+		}
+			
 	}
 }
