@@ -52,7 +52,7 @@ public class GUILogic : MonoBehaviour {
 	//Loads lobby info of selected game
 	public void JoinGame() {
 		//TODO: From the popup with the list of rooms, grab the room name and join it
-		NETWORK.joinRoom("demo");
+		NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());	// temporary fix for single room instances
 	}
 
 	//Populate popup with available maps
