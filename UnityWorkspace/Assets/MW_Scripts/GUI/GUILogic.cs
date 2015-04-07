@@ -120,7 +120,6 @@ public class GUILogic : MonoBehaviour {
 		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: Covey it is your turn to the user (Need error message thingy)
-			Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
 			end_turn.text = "End Turn";
 			BeginTurn ();
 		}
@@ -132,12 +131,16 @@ public class GUILogic : MonoBehaviour {
 		Camera.main.GetComponent<CameraControl>().enabled_camera = true;
 		Debug.Log ("Showing the board");
 		visualizeBoard();
+		foreach (Tile t in GAME.gameBoard.board) {
+			if(t.occupyingUnit!=null)
+				Debug.Log("there is still a unit on tile"+ t.boardPosition.x.ToString() +"," + t.boardPosition.y.ToString());
+
+		}
 	}
 
 	//When it becomes current players turn, enable the endturn button
 	public void BeginTurn() {
 		Debug.Log ("my turn");
-		Debug.Log(GAME.turnOf.username + " " + (GAME.turnOf.myVillages != null).ToString());
 		GAME.myGameLogic.beginTurn(GAME.turnOf,GAME);
 		ENDTURN.enabled = true;
 	}
@@ -438,35 +441,48 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void HireVillager() {
-		if(LAST_CLICKED_ON == null) {
+		if (LAST_CLICKED_ON == null) {
 			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
 			return;
 		}
 		//Finds the tile associated with the village
 		AbstractTile building_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
-		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
-		if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
+		BOARD_TILES.TryGetValue (new Vector2 (tilepos.x, tilepos.z), out building_tile);
+		if (!building_tile.myVillage.myPlayer.username.Equals (NETWORK.GetLocalPlayerName ())) {
 			//TODO: Show error and stop
 			return;
 		}
-		AbstractUnit new_villager = new Unit(building_tile.myVillage, building_tile);
-		//TODO: Needs to return a bool so I can handle any issues
-		GAME.myGameLogic.hireVillager(new_villager, building_tile.myVillage, building_tile);
-		//Load new unit
-		GameObject new_unit = (GameObject)Resources.Load("unitpeasant");
-		// will instantiate on VILLAGE'S TRANSFORM'S POSITION!!!
-		GameObject hired_villager = (GameObject)GameObject.Instantiate(new_unit ,LAST_CLICKED_ON.position, Quaternion.identity);
-		
-		// don't need to check for player ownership: is purchase so of course it's player-owned
-		hired_villager.AddComponent<BoxCollider>();
-		hired_villager.AddComponent(typeof(Clicker));
-		hired_villager.tag = "Unit";
-		//Set as child
-		hired_villager.transform.parent = GameObject.Find("map").transform;
+		//check if unit doesn't exist on tile already
+		if (building_tile.occupyingUnit == null) {
+			AbstractUnit new_villager = new Unit (building_tile.myVillage, building_tile);
 
-		//Set new last clicked on
-		LAST_CLICKED_ON = new_unit.transform;
+			bool isHired = GAME.myGameLogic.hireVillager (new_villager, building_tile.myVillage, building_tile);
+			Debug.Log ("Unit Hired: " + isHired.ToString ());
+			//Load new unit if return true
+			if (isHired) {
+				GameObject new_unit = (GameObject)Resources.Load ("unitpeasant");
+				// will instantiate on VILLAGE'S TRANSFORM'S POSITION!!!
+				GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, LAST_CLICKED_ON.position, Quaternion.identity);
+		
+				// don't need to check for player ownership: is purchase so of course it's player-owned
+				hired_villager.AddComponent<BoxCollider> ();
+				hired_villager.AddComponent (typeof(Clicker));
+				hired_villager.tag = "Unit";
+				//Set as child
+				hired_villager.transform.parent = GameObject.Find ("map").transform;
+
+				//Set new last clicked on
+				LAST_CLICKED_ON = new_unit.transform;
+			} else {
+				//remove this new villager made because hireVillager failed
+				new_villager = null;
+
+			}
+		} 
+		else {
+			Debug.Log("Unit exists at this location already");
+		}
 	}
 
 	public void moveUnit(Transform tile) {
@@ -475,7 +491,9 @@ public class GUILogic : MonoBehaviour {
 		AbstractTile unit_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
-		GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
+		Debug.Log ("Unit position before move" + unit_tile.occupyingUnit.myLocation.boardPosition.x.ToString () + ", " + unit_tile.occupyingUnit.myLocation.boardPosition.y.ToString ());
+		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
+		Debug.Log ("Unit moved: "+movedUnit.ToString () + " "+  (dest_tile.occupyingUnit != null).ToString());
 		LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z) + UNIT_OFFSET;
 	}
 

@@ -7,52 +7,55 @@ using System.Linq;
 public class GameLogic : AbstractGameLogic
 {
 
-	public override void hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
+	public override bool hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
 	{
 		int unitcost = myValueManager.getUnitValue (u.myType);
 		// Check to make sure the village can afford it
-		if( commandingVillage.gold >= unitcost )
-		{
+		if (commandingVillage.gold >= unitcost) {
 			// Check to make sure the tile the villager will be spawned on is controlled by the
 			// commanding village
-			if(spawnedTile.myVillage == commandingVillage)
-			{
+			if (spawnedTile.myVillage == commandingVillage) {
 				// Check to make sure there is not unit where the
 				// villager is being spawned
-				if( spawnedTile.occupyingUnit == null )
-				{
-					// Now check to make sure there are no enemy units blocking it
-					// from being spawned
-					List<AbstractTile> neighbourTiles = spawnedTile.getNeighbours();
-					foreach(AbstractTile t in neighbourTiles)
-					{
-						// If the adjacent tiles aren't neutral
-						if ( t.myVillage != null)
-						{
-							// and they belong to another player
-							if( t.myVillage.myPlayer != commandingVillage.myPlayer)
-							{
-								// If there is a unit or watchtower there, you can't
-								// spawn the player here
-								if(t.occupyingUnit != null || t.occupyingStructure.myType == StructureType.Tower)
-									return;
-							}
+				//if( spawnedTile.occupyingUnit == null ) //already checked in GUI logic that a unit does not exist already
+				//{
+				// Now check to make sure there are no enemy units blocking it
+				// from being spawned
+				List<AbstractTile> neighbourTiles = spawnedTile.getNeighbours ();
+				foreach (AbstractTile t in neighbourTiles) {
+					// If the adjacent tiles aren't neutral
+					if (t.myVillage != null) {
+						// and they belong to another player
+						if (t.myVillage.myPlayer != commandingVillage.myPlayer) {
+							// If there is a unit or watchtower there, you can't
+							// spawn the player here
+							if (t.occupyingUnit != null || t.occupyingStructure.myType == StructureType.Tower)
+								return false;
 						}
 					}
-
-					// If we made it past all of these checks, we can spawn the unit
-
-					// first charge the village for it
-					commandingVillage.gold -= unitcost;
-
-					// now add it to supported units and spawn it
-					commandingVillage.supportedUnits.Add(u);
-					u.myVillage = commandingVillage;
-					u.myLocation = spawnedTile;
-					spawnedTile.occupyingUnit = u;
 				}
+
+				// If we made it past all of these checks, we can spawn the unit
+
+				// first charge the village for it
+				commandingVillage.gold -= unitcost;
+
+				// now add it to supported units and spawn it
+				commandingVillage.supportedUnits.Add (u);
+				u.myVillage = commandingVillage;
+				u.myLocation = spawnedTile;
+				spawnedTile.occupyingUnit = u;
+				Debug.Log ("made unit");
+				return true;
 			}
+			//}
+		} 
+
+		else {
+			Debug.Log("Not enough money");
+
 		}
+		return false;
 	}
 
 

@@ -16,7 +16,7 @@ public class ValueManager
 	{
 		//I'm going to hard code this instead of loading from a file, at least for now
 		unitValues = new Dictionary<UnitType, int>();
-		unitValues.Add(GameEnums.UnitType.Peasant, 10);
+		unitValues.Add(GameEnums.UnitType.Peasant, 7); //changed to 7 because want to hire villager on first round
 		unitValues.Add(GameEnums.UnitType.Infantry, 20);
 		unitValues.Add(GameEnums.UnitType.Soldier, 30);
 		unitValues.Add(GameEnums.UnitType.Knight, 40);

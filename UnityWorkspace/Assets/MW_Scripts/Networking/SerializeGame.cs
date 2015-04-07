@@ -32,7 +32,7 @@ using System.IO;
 
 public class SerializeGame 
 {
-
+	string fromWhere = "";
 	public MW_Game loadGame(XmlDocument doc){
 		
 		//<map> attributes
@@ -302,9 +302,9 @@ public class SerializeGame
 				string unitAction = node.Attributes ["unitAction"].InnerText;
 				string isCannon = node.Attributes["isCannon"].InnerText;
 
-				AbstractVillage unitVillage = myTiles [Convert.ToInt32 (villageOwnerX), Convert.ToInt32 (villageOwnerY)].myVillage;
-				Tile unitTile = myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)];
-				Unit myUnit = new Unit (unitVillage, unitTile);
+				//AbstractVillage unitVillage = myTiles [Convert.ToInt32 (villageOwnerX), Convert.ToInt32 (villageOwnerY)].myVillage;
+				//Tile unitTile = myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)];
+				Unit myUnit = new Unit (myTiles [Convert.ToInt32 (villageOwnerX), Convert.ToInt32 (villageOwnerY)].myVillage, myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)]);
 
 				//convert string to enum
 				ActionType aType = (ActionType)Enum.Parse (typeof(ActionType), unitAction, true);
@@ -313,14 +313,18 @@ public class SerializeGame
 				UnitType uType = (UnitType)Enum.Parse(typeof(UnitType), unitType, true);
 				myUnit.myType = uType;
 				myUnit.isCannon = Convert.ToBoolean(isCannon);
-				unitTile.occupyingUnit = myUnit;
+				myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)].occupyingUnit = myUnit;
+				myTiles [Convert.ToInt32 (villageOwnerX), Convert.ToInt32 (villageOwnerY)].myVillage.supportedUnits.Add(myUnit);
+
 
 			}
 					
 		}//end iterating over each node
 		//testing, see what file is produced
 		//XmlDocument mydoc = new XmlDocument ();
+		//fromWhere = "fromLoad";
 		//mydoc = saveGameState (myGame); 
+		//fromWhere = "";
 	return myGameBoard;
 	} //end loadGameState
 
@@ -496,8 +500,11 @@ public class SerializeGame
 		}
 
 
-
-		doc.Save ("beforeLoad.xml");
+		if (fromWhere== "fromLoad")
+			doc.Save ("afterLoad.xml");
+		else {
+			doc.Save("beforeLoad.xml");
+		}
 		return doc;
 	}
 
