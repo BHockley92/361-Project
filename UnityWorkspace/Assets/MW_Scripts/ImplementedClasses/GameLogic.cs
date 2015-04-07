@@ -144,7 +144,7 @@ public class GameLogic : AbstractGameLogic
 	
 	public override bool attackVillageWithCannon(AbstractVillage target, AbstractUnit cannon)
 	{
-		if( cannon.isCannon )
+		if( cannon.isCannon && cannon.currentAction == readyForOrders)
 		{
 			AbstractTile targetLoc = target.location;
 			AbstractTile cannonLoc = cannon.myLocation;
@@ -167,6 +167,7 @@ public class GameLogic : AbstractGameLogic
 					//village tile turns to a tree
 					targetLoc.myType = LandType.Tree;
 				}
+				cannon.currentAction = ActionType.Moved;
 				return true;
 			}
 		}
@@ -175,7 +176,7 @@ public class GameLogic : AbstractGameLogic
 
 	public override bool attackUnitWithCannon(AbstractUnit target, AbstractUnit cannon)
 	{
-		if(cannon.isCannon)
+		if( cannon.isCannon && cannon.currentAction == readyForOrders)
 		{
 			AbstractTile targetLoc = target.myLocation;
 			AbstractTile cannonLoc = cannon.myLocation;
@@ -194,6 +195,7 @@ public class GameLogic : AbstractGameLogic
 				else
 					targetLoc.occupyingStructure.myType = StructureType.Tombstone;
 
+				cannon.currentAction = ActionType.Moved;
 				return true;
 			}
 		}
@@ -742,7 +744,7 @@ public class GameLogic : AbstractGameLogic
 			myVillage.gold += myValueManager.getLandValue(t.myType);  //null reference error because valueManager is not done!
 		}
 	}
-	
+
 	protected override void paymentPhase( AbstractVillage myVillage )
 	{
 		List<AbstractUnit> supportedUnits = myVillage.supportedUnits;
