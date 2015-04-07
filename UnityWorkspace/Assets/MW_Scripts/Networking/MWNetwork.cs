@@ -205,6 +205,8 @@ public class MWNetwork : Photon.MonoBehaviour
 		return mwPlayers;
 	}
 	
+	
+	
 	/***************************************************************************************************
 	 * GAME STATE NETWORK PERSISTENCE
 	 ***************************************************************************************************/
@@ -340,38 +342,29 @@ public class MWNetwork : Photon.MonoBehaviour
 	{
 		Debug.Log("Statistics retreival error: " + error.ErrorMessage);
 	}
-
+	
 	/***************************************************************************************************
      * PHOTON CALLBACKS
      ***************************************************************************************************/
-    
-	// TODO update gui PlayerList as it should
-    void OnPhotonPlayerConnected()
+     
+    void OnJoinedRoom()
     {
     	// Set player custom properties
     	Hashtable readyCheck = new Hashtable();
     	readyCheck.Add("ready", false);
     	PhotonNetwork.SetPlayerCustomProperties(readyCheck);
     
-        // TODO Find a way to get MW_Player synced over network.
-        if (gui.PLAYER != null)
-        {            
-			// Update player list on GUI
-			string playerNames = "";
-			foreach (PhotonPlayer player in PhotonNetwork.playerList)
-			{
-				playerNames += player.name + '\n';
-			}
-			GUIplayerList.text = playerNames;
-        }
-        else { // FIXME this should probably be an exception but will probably remove it eventually anyways...
-            Debug.Log("Joined room before MW_Player was instantiated in GUILogic.\n"
-                      + "Player was therefore not added to the room properties.\n"
-                      + "Probable cause: MW_Player not instantiated.");
-        }
-    }
-
-    void OnCreatedRoom()
+		UpdateGUIPlayerList();
+	}
+	
+	
+	void OnPhotonPlayerConnected()
+	{
+		UpdateGUIPlayerList();
+	}
+	
+	
+	void OnCreatedRoom()
     {
         Hashtable roomProps = new Hashtable();
         roomProps.Add("gameStarted", false);
@@ -379,4 +372,16 @@ public class MWNetwork : Photon.MonoBehaviour
         
 		Debug.Log ("Room created");
     }
+    
+    
+	// Update player list on GUI
+	private void UpdateGUIPlayerList()
+	{
+		string playerNames = "";
+		foreach (PhotonPlayer player in PhotonNetwork.playerList)
+		{
+			playerNames += player.name + '\n';
+		}
+		GUIplayerList.text = playerNames;
+	}
 }
