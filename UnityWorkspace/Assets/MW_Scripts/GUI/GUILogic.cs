@@ -52,7 +52,7 @@ public class GUILogic : MonoBehaviour {
 	//Loads lobby info of selected game
 	public void JoinGame() {
 		//TODO: From the popup with the list of rooms, grab the room name and join it
-		NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());	// temporary fix for single room instances
+		NETWORK.joinRoom("demo");	// temporary fix for single room instances
 	}
 
 	//Populate popup with available maps
@@ -176,6 +176,11 @@ public class GUILogic : MonoBehaviour {
 			Debug.Log ("board saved");
 			NETWORK.ShareGameState(state.OuterXml);
 			Debug.Log ("pushed board");
+		}
+		else if (response == MWNetworkResponse.READY_CHECKED)
+		{
+			MedievalWarfare mw = new MedievalWarfare ();
+			GAME = mw.newGame (NETWORK.getPlayers());
 		}
 		else {
 			//Check the other possible problems
