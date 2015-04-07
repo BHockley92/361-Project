@@ -250,13 +250,15 @@ public class SerializeGame
 
 			if (node.Name == "village") {
 				string playerName = node.Attributes ["playerName"].InnerText;
+				string locationOfTileX = node.Attributes ["locationOfTileX"].InnerText;
+				string locationOfTileY = node.Attributes ["locationOfTileY"].InnerText;
+				/*
 				string gold = node.Attributes ["gold"].InnerText;
 				string wood = node.Attributes ["wood"].InnerText;
 				string villageType = node.Attributes ["villageType"].InnerText;
-				string locationOfTileX = node.Attributes ["locationOfTileX"].InnerText;
-				string locationOfTileY = node.Attributes ["locationOfTileY"].InnerText;
-				string damageTaken = node.Attributes["damageTaken"].InnerText;
 
+				string damageTaken = node.Attributes["damageTaken"].InnerText;
+				*/
 				MW_Player villageOwner = new MW_Player();
 				foreach(MW_Player myplayer in myGame.participants){
 					if(playerName == myplayer.username){
@@ -265,7 +267,19 @@ public class SerializeGame
 
 					}
 				}
+				Village myVillage = null;
+				foreach(Village v in villageOwner.myVillages){
+					if(v.location.boardPosition.x.ToString() == locationOfTileX && v.location.boardPosition.y.ToString() == locationOfTileY){
+						myVillage = v;
+						myVillage.location = myTiles [Convert.ToInt32 (locationOfTileX), Convert.ToInt32 (locationOfTileY)];
+						myTiles [Convert.ToInt32 (locationOfTileX), Convert.ToInt32 (locationOfTileY)].myVillage = myVillage;
+						break;
+					}
+				}
+
+
 				List <AbstractTile> region = new List<AbstractTile> (); 
+				/*
 				Village myVillage = new Village (region, villageOwner);
 				myVillage.gold = Convert.ToInt32 (gold);
 				myVillage.wood = Convert.ToInt32 (wood);
@@ -274,6 +288,7 @@ public class SerializeGame
 				VillageType vType = (VillageType)Enum.Parse (typeof(VillageType), villageType, true);
 				myVillage.myType = vType;
 				myVillage.location = myTiles [Convert.ToInt32 (locationOfTileX), Convert.ToInt32 (locationOfTileY)];
+				*/
 				//iterate over all controlledTiles of the village
 				foreach (XmlNode villageChild in node.ChildNodes) { 
 					string boardX = villageChild.Attributes ["boardX"].InnerText;
@@ -286,8 +301,7 @@ public class SerializeGame
 				}
 			//controlled region for village made
 			myVillage.controlledRegion = region;
-			//dont add to myVillages list because was added on creation
-				//villageOwner.myVillages.Add(myVillage);//null reference because myVillges is not isntantiated because we never actually create an MW_Player
+			
 			}
 		}			
 			

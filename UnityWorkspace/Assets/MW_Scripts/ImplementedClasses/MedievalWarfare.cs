@@ -66,8 +66,8 @@ public class MedievalWarfare : AbstractMedievalWarfare
 							w.myVillage = myNewVillage;
 						}
 					t.myVillage = myNewVillage;
-					belongsTo.myVillages.Add(myNewVillage);
-	
+					belongsTo.myVillages.Add(t.myVillage);
+				
 					} 
 					else if (visitedTiles.Count < 3 && t.hasVillage == false) {
 						//set land to neutral

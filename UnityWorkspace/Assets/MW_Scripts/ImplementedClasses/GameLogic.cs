@@ -776,8 +776,9 @@ public class GameLogic : AbstractGameLogic
 
 		foreach(AbstractTile t in controlledRegion)
 		{
-			myVillage.gold += myValueManager.getLandValue(t.myType);  //null reference error because valueManager is not done!
+			myVillage.gold += myValueManager.getLandValue(t.myType); 
 		}
+
 	}
 
 	protected override void paymentPhase( AbstractVillage myVillage )
@@ -812,7 +813,10 @@ public class GameLogic : AbstractGameLogic
 			if( myVillage.myType == VillageType.Castle )
 				myVillage.myType = VillageType.Fort;
 		}
+	
+
 	}
+
 	
 	protected override void perishVillagers (AbstractVillage myVillage )
 	{
