@@ -31,7 +31,7 @@ public class CameraControl : MonoBehaviour {
 		if (enabled_camera && (recleft.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.LeftArrow)) && middleX - transform.position.x < boardY * 9.0f/22) {
 			transform.Translate(-CamSpeed, 0, 0, Space.World);
 		}
-		if (enabled_camera && (recright.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.RightArrow)) && middleX - transform.position.x > -boardY * 9.0f/22) {
+		if (enabled_camera && (recright.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.RightArrow)) && middleX - transform.position.x > -boardY * 9.0f/24) {
 			transform.Translate(CamSpeed, 0, 0, Space.World);
 		}
 	}
