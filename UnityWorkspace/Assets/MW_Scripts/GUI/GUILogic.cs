@@ -21,8 +21,8 @@ public class GUILogic : MonoBehaviour {
 	private XmlDocument LOADED_GAME;
 	private bool FROM_LOADED = false;
 	
-	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.8f);
-	private Vector3 UNIT_OFFSET = new Vector3(0,0.5f,-0.3f);
+	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.3f);
+	private Vector3 UNIT_OFFSET = new Vector3(0,0.5f,-0.3f); //changed to be the same as village otherwise error
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -489,7 +489,11 @@ public class GUILogic : MonoBehaviour {
 		AbstractTile unit_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
-		//Debug.Log ("Unit position before move" + unit_tile.occupyingUnit.myLocation.boardPosition.x.ToString () + ", " + unit_tile.occupyingUnit.myLocation.boardPosition.y.ToString ());
+//		Debug.Log ("Dest tile positon: " + tile.position.x.ToString () + " , " + tile.position.z.ToString ());
+		Debug.Log ("Dest board position: " + dest_tile.boardPosition.x.ToString () + " , " + dest_tile.boardPosition.y.ToString ());
+//		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
+		Debug.Log ("Unit board position: " + unit_tile.boardPosition.x.ToString () + " , " + unit_tile.boardPosition.y.ToString ());
+
 		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
 		Debug.Log ("Unit moved: "+movedUnit.ToString () + " "+  (dest_tile.occupyingUnit != null).ToString());
 		LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z) + UNIT_OFFSET;

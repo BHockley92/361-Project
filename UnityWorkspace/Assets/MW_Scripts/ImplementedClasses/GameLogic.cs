@@ -297,22 +297,34 @@ public class GameLogic : AbstractGameLogic
 		AbstractPlayer player = u.getPlayer ();
 		List<AbstractTile> unitTileNeighbours = unitLocation.getNeighbours ();
 		LandType landtype = dest.myType;
+		Debug.Log("Unit location : " + unitLocation.boardPosition.x.ToString()+ ", " +unitLocation.boardPosition.y.ToString());
+
+		foreach (Tile t in unitTileNeighbours) {
+			Debug.Log("Tile Neighbour at board position: " + t.boardPosition.x.ToString()+ ", " +t.boardPosition.y.ToString());
+
+		}
+
 
 		if( unitTileNeighbours.Contains(dest) && u.currentAction == ActionType.ReadyForOrders)
 		{
 			if( dest.occupyingUnit != null )
 			{
 				// no stacking units or moving onto occupied spaces
-				if(dest.myVillage == u.myVillage)
+				if(dest.myVillage == u.myVillage){
+					Debug.Log("Moving onto village - Illegal");
 					return false;
-
-				if(dest.occupyingUnit.isCannon && u.myType != UnitType.Knight)
+				}
+				if(dest.occupyingUnit.isCannon && u.myType != UnitType.Knight){
+					Debug.Log("Cannon in the way - Illegal");
 					return false;
+				}
 			}
 
 			// cannons cannot move outside of their territory
-			if( u.isCannon && dest.myVillage != u.myVillage)
+			if( u.isCannon && dest.myVillage != u.myVillage){
+				Debug.Log("Cannon can't move outside of territory");
 				return false;
+			}
 
 			if( 
 			    ( (unitType == UnitType.Knight || u.isCannon) && landtype != LandType.Tree)
@@ -343,6 +355,7 @@ public class GameLogic : AbstractGameLogic
 					 	)
 					  )
 					{
+						Debug.Log("Crazy if statement evaluated to true");
 						return false;
 					}
 				}
@@ -427,8 +440,11 @@ public class GameLogic : AbstractGameLogic
 				// cannons can only move once
 				if( u.isCannon )
 					u.currentAction = ActionType.Moved;
+
 				return true;
 			}
+			Debug.Log("Knight or Cannon can't move over tree");
+
 		}
 		return false;
 	}
