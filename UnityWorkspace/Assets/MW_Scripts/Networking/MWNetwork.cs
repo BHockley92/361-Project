@@ -382,7 +382,27 @@ public class MWNetwork : Photon.MonoBehaviour
 	
 	void OnPhotonCreateRoomFailed(object[] codeAndMsg)
 	{
-		Debug.Log("Could not create room: " + (string)codeAndMsg[1]);
+		Debug.Log("Could not create room: " + (string)(codeAndMsg[1]));
+	}
+	
+	void OnPhotonJoinRoomFailed(object[] codeAndMsg)
+	{
+		Debug.Log("Could not join room: " + (string)(codeAndMsg[1]));
+	}
+	
+	void OnFailedToConnectToPhoton(DisconnectCause cause)
+	{
+		Debug.Log("Could not connect to server: " + cause.ToString());
+	}
+	
+	void OnDisconnectedFromPhoton()
+	{
+		Debug.Log("Disconnected from Photon server.");
+	}
+	
+	void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+	{
+		Debug.Log(otherPlayer.name + " left the room.");
 	}
 	
 	// Update player list on GUI
