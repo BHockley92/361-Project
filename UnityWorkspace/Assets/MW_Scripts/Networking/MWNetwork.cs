@@ -2,24 +2,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.IO;
 
-// TODO Chat?
-// TODO Matchmaker
+// Photon networking namespaces
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-// TODO Call Authenticate upon login.
-// TODO Set player turns. How? Should MW_Player implement the Equals() method?
-// TODO Make sure ONLY host spawns map via the instantiate method below
+// Authentication namespaces
+using PlayFab;
+using PlayFab.ClientModels;
+
+// TODO Chat?
 
 /*
  * An enum for MWNetwork responses.
  */
 public enum MWNetworkResponse
 {
-    GAME_START_SUCCESS,
-    READY_CHECKED,
-    PLAYERS_NOT_READY
+	GAME_START_SUCCESS,
+	READY_CHECKED,
+	PLAYERS_NOT_READY
 }
 
 /*
@@ -37,50 +38,44 @@ public class MWNetwork : Photon.MonoBehaviour
 	private const byte UPDATED_GAME_STATE = 1;
 	private const int  GAME_STATE_SUBSTRINGS = 4;
 	private int        gameStateSubstringsReceived = 0;
-    
-    // Singleton reference
+	
+	// Fields for interfacing with Playfab
+	private Hashtable statistics = new Hashtable();
+	
+	// Singleton reference
 	private static MWNetwork instance;
 	
 	private static string version = "1.0";    // The game version.  Will probably never change this.
-
+	
 	/* 
 	 * Connects to Photon's master server using current version number.
 	 */
-    void Start()
-    {
-    	instance = this;
-    
-        PhotonNetwork.ConnectUsingSettings(version);
-        Debug.Log("Connected to master server!");
-        
-        PhotonNetwork.OnEventCall += this.OnGameStateReceived;
-    }
-
-    /* 
-     * Returns the MWNetwork component upon which you can call all functions below.
-     */
-    public static MWNetwork getInstance()
-    {
-		return instance;
+	void Start()
+	{
+		instance = this;
+		
+		// Photon initialization
+		PhotonNetwork.ConnectUsingSettings(version);
+		Debug.Log("Connected to master server!");
+		PhotonNetwork.OnEventCall += this.OnGameStateReceived;
+		
+		// Playfab initialization
+		statistics.Add("wins", 0);
+		statistics.Add("losses", 0);
 	}
 	
-	/*
-	 * Attempts to authenticate the player.
-	 * Returns whether or not the player autheticated successfully
-	 * TODO return an error code?
-	 */
-	public bool Authenticate(string username, string password)
+	/* 
+     * Returns the MWNetwork component upon which you can call all functions below.
+     */
+	public static MWNetwork getInstance()
 	{
-		// TODO Check username/password in database (playfab?)
-		PhotonNetwork.playerName = gui.PLAYER.username;
-		
-		return true;
+		return instance;
 	}
 	
 	/*
 	 * Sets a maximum number of players that can join a room/game.
 	 */
-    public void setMaxPlayers(int max)
+	public void setMaxPlayers(int max)
 	{
 		PhotonNetwork.room.maxPlayers = max;
 	}
@@ -90,7 +85,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
 	public void hostRoom(string roomName)
 	{
-        PhotonNetwork.CreateRoom(roomName, new RoomOptions() { maxPlayers = 4 }, null);
+		PhotonNetwork.CreateRoom(roomName, new RoomOptions() { maxPlayers = 4 }, null);
 	}
 	
 	/*
@@ -107,18 +102,18 @@ public class MWNetwork : Photon.MonoBehaviour
 	 * are ordered according to when they joined.
      * Returns a response indicating whether the game was started succesfully or not.
 	 */
-    public MWNetworkResponse ReadyStart()
+	public MWNetworkResponse ReadyStart()
 	{		
-        // If not host, ready check
+		// If not host, ready check
 		if (!PhotonNetwork.isMasterClient)
-        {
-            // Ready check
-            Hashtable readyCheck = new Hashtable();
-            readyCheck.Add("ready", true);
-            PhotonNetwork.SetPlayerCustomProperties(readyCheck);
-
-            return MWNetworkResponse.READY_CHECKED;
-        }
+		{
+			// Ready check
+			Hashtable readyCheck = new Hashtable();
+			readyCheck.Add("ready", true);
+			PhotonNetwork.SetPlayerCustomProperties(readyCheck);
+			
+			return MWNetworkResponse.READY_CHECKED;
+		}
 		
 		// If host, make sure all players are ready
 		foreach (PhotonPlayer player in PhotonNetwork.playerList)
@@ -132,46 +127,46 @@ public class MWNetwork : Photon.MonoBehaviour
 		// Make the room impossible to see or join
 		PhotonNetwork.room.visible = false;
 		PhotonNetwork.room.open = false;
-
-        return MWNetworkResponse.GAME_START_SUCCESS;
+		
+		return MWNetworkResponse.GAME_START_SUCCESS;
 	}
-
+	
 	public string GetLocalPlayerName()
 	{
 		return PhotonNetwork.playerName;
 	}
-
-    /*
+	
+	/*
      * Returns whether or not you have joined a game.
      */ 
-    public bool joinedRoom()
-    {
-        return PhotonNetwork.room != null;
-    }
-
-    /*
+	public bool joinedRoom()
+	{
+		return PhotonNetwork.room != null;
+	}
+	
+	/*
     * Returns whether or not you have started the game.
     */ 
-    public bool gameStarted()
-    {
-        return (bool) PhotonNetwork.room.customProperties["gameStarted"];
-    }
-
-    /*
+	public bool gameStarted()
+	{
+		return (bool) PhotonNetwork.room.customProperties["gameStarted"];
+	}
+	
+	/*
      * Returns whether or not you are the host
      */
-    public bool amHost()
-    {
-        return PhotonNetwork.isMasterClient;
-    }
-
-    /*
+	public bool amHost()
+	{
+		return PhotonNetwork.isMasterClient;
+	}
+	
+	/*
      * Returns whether or not you are connected to Photon's master server.
      */ 
-    public bool connected()
-    {
-        return PhotonNetwork.connected;
-    }
+	public bool connected()
+	{
+		return PhotonNetwork.connected;
+	}
 	
 	/*
 	 * Returns an array of room names.
@@ -190,29 +185,15 @@ public class MWNetwork : Photon.MonoBehaviour
 		return roomNames;
 	}
 	
-	/* 
-	 * Retrieves a player's statistics from the cloud
-	 */
-	 // TODO Retrieve from Playfab
-	public Hashtable getPlayerStatistics(string username)
-	{
-		Hashtable stats = new Hashtable();
-		
-		stats["wins"] = 0;
-		stats["losses"] = 0;
-		
-		return stats;
-	}
-	
 	/*
 	 * Returns a list of AbstractPlayers in the room. 
 	 */
 	public List<AbstractPlayer> getPlayers()
 	{
 		PhotonPlayer[] players = PhotonNetwork.playerList;
-
-        List<AbstractPlayer> mwPlayers = new List<AbstractPlayer>();
-
+		
+		List<AbstractPlayer> mwPlayers = new List<AbstractPlayer>();
+		
 		foreach (PhotonPlayer player in players)
 		{
 			MW_Player mwPlayer = new MW_Player();
@@ -224,9 +205,16 @@ public class MWNetwork : Photon.MonoBehaviour
 		return mwPlayers;
 	}
 	
+	
+	
+	/***************************************************************************************************
+	 * GAME STATE NETWORK PERSISTENCE
+	 ***************************************************************************************************/
+	
 	/*
 	 * This function shares your game state to other machines.
 	 * These machines will in turn update their game state.
+	 * TODO If necessary, dynamically choose the number of substrings to send
 	 */
 	public void ShareGameState(string gameState)
 	{
@@ -246,33 +234,13 @@ public class MWNetwork : Photon.MonoBehaviour
 				gameStateSubstrings[i] = gameState.Substring(i * gameStateSubtringLength);
 			}
 		}
-	
-		// Figure out to whom the same state is sent
-		ExitGames.Client.Photon.Lite.ReceiverGroup receivers;
-		
-//		if (gameStarted())
-//		{
-//			Debug.Log("Sending game state to others.");
-//			receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others;
-//		}
-//		else {
-//			Debug.Log("Sending game state to all.");
-			
-			receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All;
-			
-//			// Mark the game as having started
-//			Hashtable roomProps = new Hashtable();
-//			roomProps.Add("gameStarted", true);
-//			PhotonNetwork.room.SetCustomProperties(roomProps);
-//		}
-		
 		// Send each substring over the network
 		for (int i = 0; i < GAME_STATE_SUBSTRINGS; i++)
 		{			
 			if (!PhotonNetwork.RaiseEvent(UPDATED_GAME_STATE,
 			                              gameStateSubstrings[i],
 			                              true,
-			                              new RaiseEventOptions() { Receivers = receivers }))
+			                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All }))
 			{
 				Debug.Log("Error sending game state over network.");
 			}
@@ -300,10 +268,10 @@ public class MWNetwork : Photon.MonoBehaviour
 				
 				file.Flush();
 				*/
-
+				
 				gui.UpdateGameState(cachedGameState, senderId);
-
-
+				
+				
 				
 				// Reinitialize game state string cache
 				cachedGameState = "";
@@ -311,42 +279,116 @@ public class MWNetwork : Photon.MonoBehaviour
 			}
 		}
 	}
-
-    /*****************************************************************************************************
-     * The following functions implement pertinent Photon callbacks to react to certain networking events.
-     *****************************************************************************************************/
-
-    void OnJoinedRoom()
-    {
-    	// Set player custom properties
-    	Hashtable readyCheck = new Hashtable();
-    	readyCheck.Add("ready", false);
-    	PhotonNetwork.SetPlayerCustomProperties(readyCheck);
-    
-        // TODO Find a way to get MW_Player synced over network.
-        if (gui.PLAYER != null)
-        {            
-			// Update player list on GUI
-			string playerNames = "";
-			foreach (PhotonPlayer player in PhotonNetwork.playerList)
-			{
-				playerNames += player.name + '\n';
-			}
-			GUIplayerList.text = playerNames;
-        }
-        else { // FIXME this should probably be an exception but will probably remove it eventually anyways...
-            Debug.Log("Joined room before MW_Player was instantiated in GUILogic.\n"
-                      + "Player was therefore not added to the room properties.\n"
-                      + "Probable cause: MW_Player not instantiated.");
-        }
-    }
-
-    void OnCreatedRoom()
-    {
-        Hashtable roomProps = new Hashtable();
-        roomProps.Add("gameStarted", false);
-        PhotonNetwork.room.SetCustomProperties(roomProps);
-        
+	
+	/***************************************************************************************************
+	 * PLAYFAB AUTHENTICATION & STATS RETRIEVAL
+	 ***************************************************************************************************/
+	
+	/*
+	 * Attempts to authenticate the player.
+	 */
+	public void Authenticate(string username, string password)
+	{
+		LoginWithPlayFabRequest request = new LoginWithPlayFabRequest();
+		
+		request.Username = username;
+		request.Password = password;
+		request.TitleId = PlayFabData.TitleId;
+		PlayFabClientAPI.LoginWithPlayFab(request, OnLoginResult, OnLoginError);
+	} 
+	
+	/*
+	 * A callback for the local player's successful login.
+	 */
+	private void OnLoginResult(LoginResult result)
+	{
+		PhotonNetwork.playerName = gui.PLAYER.username;
+		PlayFabData.AuthKey = PlayFabClientAPI.AuthKey;
+		Debug.Log("Login success!");
+		
+		UpdateLocalPlayerStatistics();
+	}
+	
+	/*
+	 * A callback for the local player's unsuccessful login.
+	 */
+	private void OnLoginError(PlayFabError error)
+	{
+		Debug.Log("Login error: " + error.ErrorMessage);
+	}
+	
+	/* 
+	 * Request to update the local player's statistics from Playfab.
+	 */
+	private void UpdateLocalPlayerStatistics()
+	{
+		GetUserDataRequest request = new GetUserDataRequest ();
+		if (PlayFabData.AuthKey != null)
+			PlayFabClientAPI.GetUserData (request, OnStatisticsReceived, OnStatisticsError);
+		else 
+			Debug.Log("AuthKey null.");
+	}
+	
+	/*
+	 * A callback for successfully downloading the local player's statistics.
+	 */
+	private void OnStatisticsReceived(GetUserDataResult result)
+	{
+		statistics["wins"] = result.Data["wins"].Value;
+		statistics["losses"] = result.Data["losses"].Value;
+		
+		Debug.Log("Statistics downloaded successfully: " +
+		          statistics["wins"].ToString() + " wins, " +
+		          statistics["losses"].ToString() + " losses.");
+	}
+	
+	/*
+	 * A callback for unsuccessfully downloading the local player's statistics.
+	 */
+	private void OnStatisticsError(PlayFabError error)
+	{
+		Debug.Log("Statistics retreival error: " + error.ErrorMessage);
+	}
+	
+	/***************************************************************************************************
+     * PHOTON CALLBACKS
+     ***************************************************************************************************/
+	
+	void OnJoinedRoom()
+	{
+		// Set player custom properties
+		Hashtable readyCheck = new Hashtable();
+		readyCheck.Add("ready", false);
+		PhotonNetwork.SetPlayerCustomProperties(readyCheck);
+		
+		UpdateGUIPlayerList();
+	}
+	
+	
+	void OnPhotonPlayerConnected()
+	{
+		UpdateGUIPlayerList();
+	}
+	
+	
+	void OnCreatedRoom()
+	{
+		Hashtable roomProps = new Hashtable();
+		roomProps.Add("gameStarted", false);
+		PhotonNetwork.room.SetCustomProperties(roomProps);
+		
 		Debug.Log ("Room created");
-    }
+	}
+	
+	
+	// Update player list on GUI
+	private void UpdateGUIPlayerList()
+	{
+		string playerNames = "";
+		foreach (PhotonPlayer player in PhotonNetwork.playerList)
+		{
+			playerNames += player.name + '\n';
+		}
+		GUIplayerList.text = playerNames;
+	}
 }
