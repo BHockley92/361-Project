@@ -377,13 +377,9 @@ public class MWNetwork : Photon.MonoBehaviour
 		roomProps.Add("gameStarted", false);
 		PhotonNetwork.room.SetCustomProperties(roomProps);
 		
-		Debug.Log ("Room created.");
+		Debug.Log ("Room created");
 	}
 	
-	void OnPhotonCreateRoomFailed(object[] codeAndMsg)
-	{
-		Debug.Log("Could not create room: " + (string)codeAndMsg[1]);
-	}
 	
 	// Update player list on GUI
 	private void UpdateGUIPlayerList()
