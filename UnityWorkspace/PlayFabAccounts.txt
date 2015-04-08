@@ -1,4 +1,4 @@
 username,password
-emilyraso,soccer
-martymcfly88,future
-tonytiger93,cornflakes
+emilyraso, soccer
+martymcfly88, future
+tonytiger93, cornflakes
