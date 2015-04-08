@@ -21,8 +21,8 @@ public class GUILogic : MonoBehaviour {
 	private XmlDocument LOADED_GAME;
 	private bool FROM_LOADED = false;
 	
-	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.3f);
-	private Vector3 UNIT_OFFSET = new Vector3(0,0.5f,-0.3f); //changed to be the same as village otherwise error
+	private Vector3 VILLAGE_OFFSET = new Vector3(0,-0.7f,0.0f);
+	private Vector3 UNIT_OFFSET = new Vector3(0,-0.71f,0.0f);
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -146,6 +146,9 @@ public class GUILogic : MonoBehaviour {
 
 	//Ends current turn and goes to next player
 	public void EndTurn() {
+		//Clear old selection
+		Destroy(GameObject.Find("SelectionArrow(Clone)"));
+	
 		ENDTURN.enabled = false;
 		//Update game state with transitions
 		GAME.EndTurn ();
@@ -460,8 +463,8 @@ public class GUILogic : MonoBehaviour {
 			//Load new unit if return true
 			if (isHired) {
 				GameObject new_unit = (GameObject)Resources.Load ("unitpeasant");
-				// will instantiate on VILLAGE'S TRANSFORM'S POSITION!!!
-				GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, LAST_CLICKED_ON.position, Quaternion.identity);
+				Vector3 unit_village_delta = UNIT_OFFSET - VILLAGE_OFFSET;
+				GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, LAST_CLICKED_ON.position + unit_village_delta, Quaternion.identity);
 		
 				// don't need to check for player ownership: is purchase so of course it's player-owned
 				hired_villager.AddComponent<BoxCollider> ();
