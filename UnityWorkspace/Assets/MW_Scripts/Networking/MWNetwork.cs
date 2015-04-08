@@ -303,7 +303,6 @@ public class MWNetwork : Photon.MonoBehaviour
 	private void OnLoginResult(LoginResult result)
 	{
 		PhotonNetwork.playerName = gui.PLAYER.username;
-		PlayFabData.AuthKey = PlayFabClientAPI.AuthKey;
 		Debug.Log("Login success!");
 		
 		UpdateLocalPlayerStatistics();
@@ -326,7 +325,6 @@ public class MWNetwork : Photon.MonoBehaviour
 		if (PlayFabData.AuthKey != null)
 			PlayFabClientAPI.GetUserData (request, OnStatisticsReceived, OnStatisticsError);
 		else 
-			Debug.Log("AuthKey null.");
 	}
 	
 	/*
@@ -334,12 +332,12 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
 	private void OnStatisticsReceived(GetUserDataResult result)
 	{
-		statistics["wins"] = result.Data["wins"].Value;
-		statistics["losses"] = result.Data["losses"].Value;
+		statistics["wins"] = result.Data["wins"];
+		statistics["losses"] = result.Data["losses"];
 		
 		Debug.Log("Statistics downloaded successfully: " +
-				  statistics["wins"].ToString() + " wins, " +
-		          statistics["losses"].ToString() + " losses.");
+				  statistics["wins"] + " wins, " +
+				  statistics["losses"] + " losses.");
 	}
 	
 	/*
