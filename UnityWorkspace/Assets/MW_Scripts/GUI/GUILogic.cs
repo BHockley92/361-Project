@@ -23,6 +23,9 @@ public class GUILogic : MonoBehaviour {
 	
 	private Vector3 VILLAGE_OFFSET = new Vector3(0,-0.7f,0.0f);
 	private Vector3 UNIT_OFFSET = new Vector3(0,-0.71f,0.0f);
+	
+	// TEMPORARY: CHANGE THIS STRING TO A UNIQUE ROOM NAME
+	private const string ROOM_NAME = "thisIsAUniqueRoomName27134678936912734"; 
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -65,10 +68,7 @@ public class GUILogic : MonoBehaviour {
 	//Loads lobby info of selected game
 	public void JoinGame() {
 		//TODO: From the popup with the list of rooms, grab the room name and join it
-		NETWORK.joinRoom(GameObject.Find ("Lobbies").GetComponent<GameSelect>().getSelected());	// temporary fix for single room instances
-		
-		//DO THIS FOR OFFLINE WORK
-		//NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());
+		NETWORK.joinRoom(ROOM_NAME);
 	}
 
 	//Populate popup with available maps
@@ -91,7 +91,7 @@ public class GUILogic : MonoBehaviour {
 			LOADED_GAME.Load (GameObject.Find("SavedGames").GetComponent<GameSelect>().getSelected());
 		}
 		Debug.Log ("Host game called");
-		NETWORK.hostRoom("demo");
+		NETWORK.hostRoom(ROOM_NAME);
 	}
 
 	//Sends message in input to all players
