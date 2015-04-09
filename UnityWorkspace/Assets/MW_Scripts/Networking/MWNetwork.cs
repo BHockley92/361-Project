@@ -32,10 +32,12 @@ public class MWNetwork : Photon.MonoBehaviour
 	// Useful references to GUI elements
 	public GUILogic gui;
 	public Text GUIplayerList;
+	public Text Chat;
 	
 	// Used for sending game state over network.
 	private string     cachedGameState = "";
 	private const byte UPDATED_GAME_STATE = 1;
+	private const byte CHAT_MESSAGE_SENT = 2;
 	private const int  GAME_STATE_SUBSTRINGS = 4;
 	private int        gameStateSubstringsReceived = 0;
 	
@@ -54,10 +56,13 @@ public class MWNetwork : Photon.MonoBehaviour
 	{
 		instance = this;
 		
+		Chat = GameObject.Find("Main Camera/Canvas/LobbyMenu/Chat/Chat").GetComponent<Text>();
+		
 		// Photon initialization
 		PhotonNetwork.ConnectUsingSettings(version);
 		Debug.Log("Connected to master server!");
-		PhotonNetwork.OnEventCall += this.OnGameStateReceived;
+		PhotonNetwork.OnEventCall += OnGameStateReceived;
+		PhotonNetwork.OnEventCall += OnChatMessageReceived;
 		
 		// Playfab initialization
 		statistics.Add("wins", 0);
@@ -206,6 +211,28 @@ public class MWNetwork : Photon.MonoBehaviour
 	}
 	
 	
+	/***************************************************************************************************
+	 * CHAT
+	 ***************************************************************************************************/
+	
+	public void SendChatMessage(string message)
+	{
+		if (!PhotonNetwork.RaiseEvent(CHAT_MESSAGE_SENT,
+		                              message,
+		                              true,
+		                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All }))
+		{
+			Debug.Log("Error sending chat message over network.");
+		}
+	}
+	
+	public void OnChatMessageReceived(byte eventCode, object content, int senderId)
+	{
+		if (eventCode == CHAT_MESSAGE_SENT)
+		{
+			Chat.text += PhotonPlayer.Find(senderId).name + " says: " + (string) content + '\n';
+		}
+	}
 	
 	/***************************************************************************************************
 	 * GAME STATE NETWORK PERSISTENCE
