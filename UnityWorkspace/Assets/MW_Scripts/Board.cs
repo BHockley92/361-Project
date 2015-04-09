@@ -111,6 +111,9 @@ public class Board {
 				if( z - 1 >= 0 && board[x, z-1].myType != LandType.Sea)
 					ret.Add(board[x, z-1]);
 
+				if( z + 1 >= 0 && board[x, z+1].myType != LandType.Sea)
+					ret.Add(board[x, z+1]);
+
 				// Check that left adjacent spaces are valid
 				if( x - 1 >= 0 )
 				{
@@ -129,9 +132,6 @@ public class Board {
 
 					if( z-1 >= 0 && board[x+1, z-1].myType != LandType.Sea)
 						ret.Add(board[x+1, z-1]);
-
-					if( z+1 < board.GetLength(1) && board[x, z+1].myType != LandType.Sea)
-						ret.Add(board[x,z+1]);
 				}
 			}
 		}
