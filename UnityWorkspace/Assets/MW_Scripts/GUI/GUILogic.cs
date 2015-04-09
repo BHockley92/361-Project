@@ -81,7 +81,7 @@ public class GUILogic : MonoBehaviour {
 	public void LoadGame() {
 		Debug.Log ("Load Game called");
 		FROM_LOADED = true;
-		GameObject.Find("SaveGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
+		GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 	}
 
 	//Create a lobby and populate with information
@@ -92,9 +92,9 @@ public class GUILogic : MonoBehaviour {
 			LOADED_GAME.Load (GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().getSelected());
 		}
 		Debug.Log ("Host game called");
-		string room_name = GameObject.Find("RoomName").GetComponentInChildren<Text>().text;
-		NETWORK.hostRoom(room_name);
+		string room_name = GameObject.Find("RoomName").GetComponentsInChildren<Text>()[1].text;
 		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
+		NETWORK.hostRoom(room_name);
 	}
 
 	//Sends message in input to all players
@@ -111,7 +111,7 @@ public class GUILogic : MonoBehaviour {
 	public void SaveGame() {
 		//TODO: No way of saving the game currently......Emily
 		//If they entered a name it means they want to save the game and not overwrite
-		if(GameObject.Find ("SaveName").GetComponentInChildren<Text>().text != "") {
+		if(GameObject.Find ("SaveName").GetComponentsInChildren<Text>()[1].text != "") {
 			//
 		}
 		//Otherwise they want to overwrite so find the file, delete it and save the game with the same name
@@ -138,7 +138,7 @@ public class GUILogic : MonoBehaviour {
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		Debug.Log ("Received a state");
 		//TODO: Test this works
-		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
+		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentInChildren<Text>();
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: Covey it is your turn to the user (Need error message thingy)
 			end_turn.text = "End Turn";
