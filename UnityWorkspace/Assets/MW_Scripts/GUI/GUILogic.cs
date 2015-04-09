@@ -20,9 +20,17 @@ public class GUILogic : MonoBehaviour {
 	private SerializeGame SERIALIZER = new SerializeGame();
 	private XmlDocument LOADED_GAME;
 	private bool FROM_LOADED = false;
+	private UNIT_ACTION BUTTON_CLICKED_ON = UNIT_ACTION.NONE;
 	
 	private Vector3 VILLAGE_OFFSET = new Vector3(0,0.5f,-0.3f);
 	private Vector3 UNIT_OFFSET = new Vector3(0,0.5f,-0.3f); //changed to be the same as village otherwise error
+
+	private enum UNIT_ACTION {
+		NONE,
+		BUILD_ROAD,
+		COMBINE_UNIT,
+		CULTIVATE_MEADOW
+	};
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -34,8 +42,18 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void OnGUI() {
+		GameObject[] VillageButtons = GameObject.FindGameObjectsWithTag("ForStructures");
+		GameObject[] UnitButtons = GameObject.FindGameObjectsWithTag("ForUnits");
 		//TODO: Should be changing what buttons we display based on what LAST_CLICKED_ON is
 		if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
+			//Show Village Buttons
+			foreach(GameObject button in VillageButtons) {
+				button.SetActive (true);
+			}
+			//Hide Unit Buttons
+			foreach(GameObject button in UnitButtons) {
+				button.SetActive (false);
+			}
 			AbstractTile building_tile;
 			Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
 			BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
@@ -46,6 +64,16 @@ public class GUILogic : MonoBehaviour {
 				GameObject.Find("Gold").GetComponent<Text>().text = "Gold: " + building_tile.myVillage.gold;
 				GameObject.Find("Wood").GetComponent<Text>().text = "Wood: " + building_tile.myVillage.gold;
 				GameObject.Find("Pop").GetComponent<Text>().text = "Population: " + building_tile.myVillage.supportedUnits;
+			}
+		}
+		else if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals ("Unit")) {
+			//Show Unit Buttons
+			foreach(GameObject button in VillageButtons) {
+				button.SetActive (true);
+			}
+			//Hide Village Buttons
+			foreach(GameObject button in VillageButtons) {
+				button.SetActive (false);
 			}
 		}
 	}
@@ -223,6 +251,15 @@ public class GUILogic : MonoBehaviour {
 			Debug.Log ("board saved");
 			NETWORK.ShareGameState(state.OuterXml);
 			Debug.Log ("pushed board");
+			//Hide all the buttons until they click on something
+			GameObject[] VillageButtons = GameObject.FindGameObjectsWithTag("ForStructures");
+			foreach(GameObject button in VillageButtons) {
+				button.SetActive(false);
+			}
+			GameObject[] UnitButtons = GameObject.FindGameObjectsWithTag("ForUnits");
+			foreach(GameObject button in UnitButtons) {
+				button.SetActive(false);
+			}
 		}
 		else if (response == MWNetworkResponse.READY_CHECKED)
 		{
@@ -505,6 +542,18 @@ public class GUILogic : MonoBehaviour {
 		}
 	}
 
+	public void BuildRoad() {
+		BUTTON_CLICKED_ON = UNIT_ACTION.BUILD_ROAD;
+	}
+
+	public void CombineUnit() {
+		BUTTON_CLICKED_ON = UNIT_ACTION.COMBINE_UNIT;
+	}
+
+	public void CultivateMeadow() {
+		BUTTON_CLICKED_ON = UNIT_ACTION.CULTIVATE_MEADOW;
+	}
+
 	public void moveUnit(Transform tile) {
 		AbstractTile dest_tile;
 		BOARD_TILES.TryGetValue(new Vector2(tile.position.x, tile.position.z), out dest_tile);
@@ -515,11 +564,31 @@ public class GUILogic : MonoBehaviour {
 		Debug.Log ("Dest board position: " + dest_tile.boardPosition.x.ToString () + " , " + dest_tile.boardPosition.y.ToString ());
 //		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
 		Debug.Log ("Unit board position: " + unit_tile.boardPosition.x.ToString () + " , " + unit_tile.boardPosition.y.ToString ());
+		
+		if(GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile)) {
+			//Make sure the unit's current action is changed
+			switch(BUTTON_CLICKED_ON) {
+				case UNIT_ACTION.BUILD_ROAD: dest_tile.occupyingUnit.currentAction = ActionType.BuildingRoad; break;
+				case UNIT_ACTION.COMBINE_UNIT: dest_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; break;
+				case UNIT_ACTION.CULTIVATE_MEADOW: dest_tile.occupyingUnit.currentAction = ActionType.StartCultivating; break;
+				default: dest_tile.occupyingUnit.currentAction = ActionType.Moved; break;
+			}
+			Debug.Log ("Unit moved: true "+  (dest_tile.occupyingUnit != null).ToString());
+			LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z) + UNIT_OFFSET;
+			Clicker.MoveSelectionArrow(LAST_CLICKED_ON.position);
+		}
+		else {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "Some Error Message Here";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+		}
+	}
 
-		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
-		Debug.Log ("Unit moved: "+movedUnit.ToString () + " "+  (dest_tile.occupyingUnit != null).ToString());
-		LAST_CLICKED_ON.position = new Vector3(tile.position.x, 0, tile.position.z) + UNIT_OFFSET;
-		Clicker.MoveSelectionArrow(LAST_CLICKED_ON.position);
+	//Will fake that the game is saving
+	private IEnumerator DelayError(GameObject error) {
+		yield return new WaitForSeconds(3);
+		error.GetComponent<Text>().enabled = false;
 	}
 
 	//The leave or disband button depending on host or player
