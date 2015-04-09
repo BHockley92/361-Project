@@ -94,7 +94,7 @@ public class GUILogic : MonoBehaviour {
 		Debug.Log ("Host game called");
 		string room_name = GameObject.Find("RoomName").GetComponentInChildren<Text>().text;
 		NETWORK.hostRoom(room_name);
-		GameObject.Find ("GameName").GetComponent<Text>().text = room_name;
+		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
 	}
 
 	//Sends message in input to all players
