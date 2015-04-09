@@ -21,8 +21,8 @@ public class GUILogic : MonoBehaviour {
 	private XmlDocument LOADED_GAME;
 	private bool FROM_LOADED = false;
 	
-	private Vector3 VILLAGE_OFFSET = new Vector3(0,-0.7f,0.0f);
-	private Vector3 UNIT_OFFSET = new Vector3(0,-0.71f,0.0f);
+	private Vector3 VILLAGE_OFFSET = new Vector3(0.0f,0.5f,-0.7f);
+	private Vector3 UNIT_OFFSET = new Vector3(0.0f,0.5f,-0.71f);
 	
 	// TEMPORARY: CHANGE THIS STRING TO A UNIQUE ROOM NAME
 	private const string ROOM_NAME = "thisIsAUniqueRoomName27134678936912734"; 
@@ -346,7 +346,7 @@ public class GUILogic : MonoBehaviour {
 					unit = (GameObject)Resources.Load("unitCannon");
 				}
 				//TODO: Add to position to make sure the object appears naturally
-				GameObject instantiated_unit = (GameObject)GameObject.Instantiate(unit, pos, Quaternion.identity);
+				GameObject instantiated_unit = (GameObject)GameObject.Instantiate(unit, pos + UNIT_OFFSET, Quaternion.identity);
 				
 				if(current.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
 					instantiated_unit.AddComponent<BoxCollider>();
