@@ -105,49 +105,36 @@ public class Board {
 		// Check that the coordinate is within bounds
 		if(x >= 0 && z >= 0)
 		{
-			if( x < board.GetLength(0) && z < board.GetLength(0))
+			if( x < board.GetLength(0) && z < board.GetLength(1))
 			{
 				// Now we know the coordinate is valid
+				if( z - 1 >= 0 && board[x, z-1].myType != LandType.Sea)
+					ret.Add(board[x, z-1]);
 
 				// Check that left adjacent spaces are valid
 				if( x - 1 >= 0 )
 				{
-					if( board[x - 1, z].myType != LandType.Sea)
-						ret.Add(board[x - 1, z]);
+					if(board[x-1, z].myType != LandType.Sea)
+						ret.Add(board[x-1,z]);
 
-					// Check for the above and below
-					if( z - 1 >= 0 && board[x - 1, z - 1].myType != LandType.Sea)
-					{
-						ret.Add(board[x - 1, z - 1]);
-					}
-
-					if( z + 1 < board.GetLength(1) && board[x - 1, z + 1].myType != LandType.Sea)
-					{
-						ret.Add(board[ x - 1, z + 1 ]);
-					}
+					if( z + 1 < board.GetLength(1) && board[x-1, z+1].myType != LandType.Sea)
+						ret.Add(board[x-1, z+1]);
 				}
 
 				// Now check the right adjacent spaces
 				if( x + 1 < board.GetLength(0))
 				{
-					if( board[ x + 1, z ].myType != LandType.Sea )
-						ret.Add ( board[ x + 1, z ] );
+					if(board[x+1, z].myType != LandType.Sea)
+						ret.Add(board[x+1, z]);
 
-					// Check for the above and below
-					// Check for the above and below
-					if( z - 1 >= 0 && board[x + 1, z - 1].myType != LandType.Sea)
-					{
-						ret.Add(board[x + 1, z - 1]);
-					}
-					
-					if( z + 1 < board.GetLength(1) && board[ x + 1, z + 1 ].myType != LandType.Sea)
-					{
-						ret.Add(board[ x + 1, z + 1 ]);
-					}
+					if( z-1 >= 0 && board[x+1, z-1].myType != LandType.Sea)
+						ret.Add(board[x+1, z-1]);
+
+					if( z+1 < board.GetLength(1) && board[x, z+1].myType != LandType.Sea)
+						ret.Add(board[x,z+1]);
 				}
 			}
 		}
-
 		return ret;
 	}
 }
