@@ -7,7 +7,7 @@ using System.Linq;
 public class GameLogic : AbstractGameLogic
 {
 
-	public override bool hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
+	public override AbstractTile hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
 	{
 		int unitcost = myValueManager.getUnitValue (u.myType);
 		// Check to make sure the village can afford it
@@ -30,7 +30,7 @@ public class GameLogic : AbstractGameLogic
 							// If there is a unit or watchtower there, you can't
 							// spawn the player here
 							if (t.occupyingUnit != null || t.occupyingStructure.myType == StructureType.Tower)
-								return false;
+								return null;
 						}
 					}
 				}
@@ -46,7 +46,7 @@ public class GameLogic : AbstractGameLogic
 				u.myLocation = spawnedTile;
 				spawnedTile.occupyingUnit = u;
 				Debug.Log ("made unit");
-				return true;
+				return spawnedTile;
 			}
 			//}
 		} 
@@ -55,7 +55,7 @@ public class GameLogic : AbstractGameLogic
 			Debug.Log("Not enough money");
 
 		}
-		return false;
+		return null;
 	}
 
 
