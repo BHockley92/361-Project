@@ -73,6 +73,9 @@ public class GameLogic : AbstractGameLogic
 	{
 		if( t.myVillage != null)
 		{
+			if(t.myVillage.upgradeInProgress)
+				return false;
+
 			if( t.myVillage.wood >= 5 && (int) t.myVillage.myType >= (int) VillageType.Town)
 			{
 				t.myVillage.wood -= 5;
@@ -211,6 +214,9 @@ public class GameLogic : AbstractGameLogic
 	// returns true upon successful upgrade
 	public override bool upgradeVillage(AbstractVillage v, VillageType newType)
 	{
+		if (v.upgradeInProgress)
+			return false;
+
 		int wood = v.wood;
 		int newValue = myValueManager.getVillageValue (newType);
 		int oldValue = myValueManager.getVillageValue (v.myType);
@@ -228,6 +234,8 @@ public class GameLogic : AbstractGameLogic
 				}
 			}
 			v.myType = newType;
+			v.upgradeInProgress = true;
+
 			return true;
 		}
 		return false;
@@ -679,6 +687,8 @@ public class GameLogic : AbstractGameLogic
 
 		foreach(AbstractVillage v in myVillages)
 		{
+			v.upgradeInProgress = false;
+
 			tombStonePhase(v);
 			buildPhase(v);
 			incomePhase(v);

@@ -4,6 +4,7 @@ using GameEnums;
 
 public abstract class AbstractVillage 
 {
+	public bool upgradeInProgress = false;
 	public int damageTaken = 0;
 	public VillageType myType { get; set; }
 	public int gold { get; set; }
