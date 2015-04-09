@@ -31,7 +31,7 @@ public class MWNetwork : Photon.MonoBehaviour
 {
 	// Useful references to GUI elements
 	public GUILogic gui;
-	public Text GUIplayerList;
+	public GameObject GUIPlayerList;
 	
 	// Used for sending game state over network.
 	private string     cachedGameState = "";
@@ -377,9 +377,9 @@ public class MWNetwork : Photon.MonoBehaviour
 		roomProps.Add("gameStarted", false);
 		PhotonNetwork.room.SetCustomProperties(roomProps);
 		
-		Debug.Log ("Room created.");
+		Debug.Log ("Room created");
 	}
-	
+
 	void OnPhotonCreateRoomFailed(object[] codeAndMsg)
 	{
 		Debug.Log("Could not create room: " + (string)(codeAndMsg[1]));
@@ -408,11 +408,11 @@ public class MWNetwork : Photon.MonoBehaviour
 	// Update player list on GUI
 	private void UpdateGUIPlayerList()
 	{
-		string playerNames = "";
+		string[] players = new string[8];
 		foreach (PhotonPlayer player in PhotonNetwork.playerList)
 		{
-			playerNames += player.name + '\n';
+			players[players.Length] = player.name;
 		}
-		GUIplayerList.text = playerNames;
+		GUIPlayerList.GetComponent<PlayerList>().PLAYERS = players;
 	}
 }

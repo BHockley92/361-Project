@@ -65,8 +65,9 @@ public class GUILogic : MonoBehaviour {
 	//Loads lobby info of selected game
 	public void JoinGame() {
 		//TODO: From the popup with the list of rooms, grab the room name and join it
-		NETWORK.joinRoom(GameObject.Find ("Lobbies").GetComponent<GameSelect>().getSelected());	// temporary fix for single room instances
-		
+		string room_name = GameObject.Find ("Lobbies").GetComponent<GameSelect>().getSelected();
+		NETWORK.joinRoom(room_name);	// temporary fix for single room instances
+		GameObject.Find ("GameName").GetComponent<Text>().text = room_name;
 		//DO THIS FOR OFFLINE WORK
 		//NETWORK.joinRoom("MW_Demo" + Random.Range(0, 10000000).ToString());
 	}
@@ -80,7 +81,7 @@ public class GUILogic : MonoBehaviour {
 	public void LoadGame() {
 		Debug.Log ("Load Game called");
 		FROM_LOADED = true;
-		GameObject.Find("SavedGames").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
+		GameObject.Find("SaveGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 	}
 
 	//Create a lobby and populate with information
@@ -88,10 +89,12 @@ public class GUILogic : MonoBehaviour {
 		//Will grab room name from selected GUI object
 		if(FROM_LOADED) {
 			LOADED_GAME = new XmlDocument();
-			LOADED_GAME.Load (GameObject.Find("SavedGames").GetComponent<GameSelect>().getSelected());
+			LOADED_GAME.Load (GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().getSelected());
 		}
 		Debug.Log ("Host game called");
-		NETWORK.hostRoom("demo");
+		string room_name = GameObject.Find("RoomName").GetComponentInChildren<Text>().text;
+		NETWORK.hostRoom(room_name);
+		GameObject.Find ("GameName").GetComponent<Text>().text = room_name;
 	}
 
 	//Sends message in input to all players
@@ -106,8 +109,27 @@ public class GUILogic : MonoBehaviour {
 
 	//Saves the current state of the game and informs all players
 	public void SaveGame() {
+		//TODO: No way of saving the game currently......Emily
+		//If they entered a name it means they want to save the game and not overwrite
+		if(GameObject.Find ("SaveName").GetComponentInChildren<Text>().text != "") {
+			//
+		}
+		//Otherwise they want to overwrite so find the file, delete it and save the game with the same name
+		else {
+			GameObject.Find ("SavedGames").GetComponent<GameSelect>().getSelected();
+		}
 		SERIALIZER.saveGameState(GAME);
-		//TODO: Show a window that says saving is happening, delay like 5 seconds and then go away
+		//Fake that the game is saving
+		StartCoroutine(FakeSaving ());
+	}
+
+	//Will fake that the game is saving
+	private IEnumerator FakeSaving() {
+		yield return new WaitForSeconds(2);
+		CanvasGroup saving_text = GameObject.Find ("Saving").GetComponent<CanvasGroup>();
+		saving_text.alpha = 0;
+		saving_text.interactable = false;
+		saving_text.blocksRaycasts = false;
 	}
 
 	public void UpdateGameState(string gameState, int senderId) {
