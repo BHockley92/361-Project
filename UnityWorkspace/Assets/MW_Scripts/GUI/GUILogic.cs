@@ -377,6 +377,7 @@ public class GUILogic : MonoBehaviour {
 		switch(building_tile.myVillage.myType) {
 			case VillageType.Hovel: new_type = VillageType.Town; break;
 			case VillageType.Town: new_type = VillageType.Fort; break;
+			case VillageType.Fort: new_type = VillageType.Castle; break; 
 			default: break;
 		}
 		if(GAME.myGameLogic.upgradeVillage(building_tile.myVillage, new_type)) {

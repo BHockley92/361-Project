@@ -211,20 +211,20 @@ public class GameLogic : AbstractGameLogic
 	// returns true upon successful upgrade
 	public override bool upgradeVillage(AbstractVillage v, VillageType newType)
 	{
-		int gold = v.gold;
+		int wood = v.wood;
 		int newValue = myValueManager.getVillageValue (newType);
 		int oldValue = myValueManager.getVillageValue (v.myType);
 		int upgradeValue = newValue - oldValue;
-		
+		Debug.Log ("Want to upgrade to:" + newType.ToString () + "from " + v.myType.ToString ());
 		// >= 0 because presumably higher levels cost more, so you don't want
 		// to downgrade a unit
-		if (upgradeValue <= gold && upgradeValue >= 0)
+		if (upgradeValue <= wood && upgradeValue >= 0)
 		{
-			v.gold = gold - upgradeValue;
+			v.wood = wood - upgradeValue;
 			//Update the GUI
 			foreach(GUIText current in GameObject.FindObjectsOfType<GUIText>()) {
-				if(current.name == "Gold") {
-					current.text = "Gold: " + v.gold;
+				if(current.name == "Wood") {
+					current.text = "Wood: " + v.wood;
 				}
 			}
 			v.myType = newType;
