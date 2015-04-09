@@ -761,16 +761,23 @@ public class GameLogic : AbstractGameLogic
 				AbstractUnit occupyingUnit = myTile.occupyingUnit;
 				UnitType myType = occupyingUnit.myType;
 				ActionType currentAction = occupyingUnit.currentAction;
-		
-				if (myType == UnitType.Peasant) {
-						if (currentAction == ActionType.BuildingRoad) {
+			//knights don't do labour, the rest all gather wood(chop trees), only peasant builds roads and cultivates
+				if (myType != UnitType.Knight) {
+						if (currentAction == ActionType.BuildingRoad && myType == UnitType.Peasant) {
 								myTile.occupyingStructure.myType = StructureType.Road;
 								occupyingUnit.currentAction = ActionType.ReadyForOrders;
-						} else if (currentAction == ActionType.FinishCultivating) {
+						} else if (currentAction == ActionType.FinishCultivating && UnitType.Peasant == myType) {
 								myTile.myType = LandType.Meadow;
 								occupyingUnit.currentAction = ActionType.ReadyForOrders;
-						} else if (currentAction == ActionType.StartCultivating) {
+						} else if (currentAction == ActionType.StartCultivating && myType == UnitType.Peasant) {
 								occupyingUnit.currentAction = ActionType.FinishCultivating;
+						}
+						else if(currentAction == ActionType.ChoppingTree){
+								occupyingUnit.currentAction = ActionType.ReadyForOrders;
+								myTile.myType = LandType.Grass;
+								myTile.myVillage.wood+= 1;
+								Debug.Log("Forest cleared, wood Added");
+
 						}
 				}
 		}
@@ -784,6 +791,9 @@ public class GameLogic : AbstractGameLogic
 		{
 			peasantBuild(t);
 		}
+
+
+
 	}
 	
 	protected override void incomePhase(AbstractVillage myVillage)
