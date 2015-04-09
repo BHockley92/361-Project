@@ -125,7 +125,8 @@ public class SerializeGame
 				string locationOfTileX = node.Attributes ["locationOfTileX"].InnerText;
 				string locationOfTileY = node.Attributes ["locationOfTileY"].InnerText;
 				string damageTaken = node.Attributes["damageTaken"].InnerText;
-				
+				string upgradeInProgress = node.Attributes["upgradeInProgress"].InnerText;
+
 				MW_Player villageOwner = new MW_Player();
 				foreach(MW_Player myplayer in myGame.participants){
 					if(playerName == myplayer.username){
@@ -139,6 +140,8 @@ public class SerializeGame
 				myVillage.gold = Convert.ToInt32 (gold);
 				myVillage.wood = Convert.ToInt32 (wood);
 				myVillage.damageTaken = Convert.ToInt32(damageTaken); //added damage taken 
+				myVillage.upgradeInProgress = Convert.ToBoolean(upgradeInProgress);
+
 				//convert villageType to enum
 				VillageType vType = (VillageType)Enum.Parse (typeof(VillageType), villageType, true);
 				myVillage.myType = vType;
@@ -269,6 +272,8 @@ public class SerializeGame
 				string villageType = node.Attributes ["villageType"].InnerText;
 
 				string damageTaken = node.Attributes["damageTaken"].InnerText;
+				string upgradeInProgress = node.Attributes["upgradeInProgress"].InnerText;
+
 
 				MW_Player villageOwner = new MW_Player();
 				foreach(MW_Player myplayer in myGame.participants){
@@ -282,6 +287,7 @@ public class SerializeGame
 				Village myVillage = new Village (region, villageOwner);
 				myVillage.gold = Convert.ToInt32 (gold);
 				myVillage.wood = Convert.ToInt32 (wood);
+				myVillage.upgradeInProgress = Convert.ToBoolean(upgradeInProgress);
 				myVillage.damageTaken = Convert.ToInt32(damageTaken); //added damage taken 
 				//convert villageType to enum
 				VillageType vType = (VillageType)Enum.Parse (typeof(VillageType), villageType, true);
@@ -437,7 +443,8 @@ public class SerializeGame
 					locY.Value =t.myVillage.location.boardPosition.y.ToString ();
 					XmlAttribute damageTaken = doc.CreateAttribute("damageTaken"); //added damageTaken to village
 					damageTaken.Value = t.myVillage.damageTaken.ToString();
-
+					XmlAttribute upgradeInProgress = doc.CreateAttribute("upgradeInProgress"); //recent add
+					upgradeInProgress.Value = t.myVillage.upgradeInProgress.ToString();
 
 					villageNode.Attributes.Append (pName);
 					villageNode.Attributes.Append (goldAtt);
@@ -446,6 +453,7 @@ public class SerializeGame
 					villageNode.Attributes.Append (locX);
 					villageNode.Attributes.Append (locY);
 					villageNode.Attributes.Append(damageTaken);
+					villageNode.Attributes.Append(upgradeInProgress);
 					rootNode.AppendChild (villageNode); 
 
 					//iterate over each tile in controlledRegion and add as subchildren to village node
