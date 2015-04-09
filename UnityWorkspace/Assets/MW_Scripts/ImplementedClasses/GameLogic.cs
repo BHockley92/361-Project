@@ -311,7 +311,7 @@ public class GameLogic : AbstractGameLogic
 			{
 				// no stacking units or moving onto occupied spaces
 				if(dest.myVillage == u.myVillage){
-					Debug.Log("Moving onto village - Illegal");
+					Debug.Log("Moving onto another unit - Illegal");
 					return false;
 				}
 				if(dest.occupyingUnit.isCannon && u.myType != UnitType.Knight){
@@ -408,14 +408,17 @@ public class GameLogic : AbstractGameLogic
 				AbstractPlayer destPlayer = null;
 				if( dest.myVillage == null )
 				{
+					Debug.Log("Taking over netural land");
 					connectRegions( player.myVillages );
 					u.currentAction = ActionType.Moved;
 				}
-				else{ destPlayer = dest.myVillage.myPlayer;
+				else{ 
+				destPlayer = dest.myVillage.myPlayer;
 				u.myLocation.occupyingUnit = null;
 				u.myLocation = dest;
 				dest.occupyingUnit = u; //was not being set!!!!
 				}
+
 				if( destPlayer != player && destPlayer != null)
 				{
 					takeoverTile( dest );

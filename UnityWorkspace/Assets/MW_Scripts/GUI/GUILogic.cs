@@ -26,7 +26,7 @@ public class GUILogic : MonoBehaviour {
 	private Vector3 UNIT_OFFSET = new Vector3(0.0f,0.5f,-0.71f);
 	
 	// TEMPORARY: CHANGE THIS STRING TO A UNIQUE ROOM NAME
-	private const string ROOM_NAME = "thisIsAUniqueRoomName2713467893hfgh6912734"; 
+	private const string ROOM_NAME = "thisIsAUniqueRoomName271346789ee3hfgh6912734"; 
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -107,7 +107,7 @@ public class GUILogic : MonoBehaviour {
 
 	//Saves the current state of the game and informs all players
 	public void SaveGame() {
-		SERIALIZER.saveGameState(GAME);
+		SERIALIZER.saveGameState (GAME);
 		//TODO: Show a window that says saving is happening, delay like 5 seconds and then go away
 	}
 
@@ -131,11 +131,6 @@ public class GUILogic : MonoBehaviour {
 		Camera.main.GetComponent<CameraControl>().enabled_camera = true;
 		Debug.Log ("Showing the board");
 		visualizeBoard();
-		foreach (Tile t in GAME.gameBoard.board) {
-			if(t.occupyingUnit!=null)
-				Debug.Log("there is still a unit on tile"+ t.boardPosition.x.ToString() +"," + t.boardPosition.y.ToString());
-
-		}
 	}
 
 	//When it becomes current players turn, enable the endturn button
@@ -408,9 +403,11 @@ public class GUILogic : MonoBehaviour {
 			//TODO: They need to have selected a unit to upgrade so we should be hiding buttons until certain conditions are met
 			return;
 		}
+
 		//Finds the tile associated with the unit
 		AbstractTile unit_tile;
-		BOARD_TILES.TryGetValue(new Vector2(LAST_CLICKED_ON.position.x, LAST_CLICKED_ON.position.z), out unit_tile);
+		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
+		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
 		UnitType new_type = UnitType.Knight;
 		Debug.Log ((unit_tile != null).ToString ());
 		if(!unit_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
@@ -496,14 +493,12 @@ public class GUILogic : MonoBehaviour {
 		AbstractTile unit_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
-		Debug.Log ("Dest tile positon: " + tile.position.x.ToString () + " , " + tile.position.z.ToString ());
+//		Debug.Log ("Dest tile positon: " + tile.position.x.ToString () + " , " + tile.position.z.ToString ());
 		Debug.Log ("Dest board position: " + dest_tile.boardPosition.x.ToString () + " , " + dest_tile.boardPosition.y.ToString ());
-		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
+//		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
 //		Debug.Log ("Unit board position: " + unit_tile.boardPosition.x.ToString () + " , " + unit_tile.boardPosition.y.ToString ());
 		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
-		Debug.Log ("Unit moved: "+movedUnit.ToString () + " "+  (dest_tile.occupyingUnit != null).ToString());
 		if (movedUnit) {
-			Debug.Log("moved unit returned true");
 			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0, tile.position.z) + UNIT_OFFSET;
 			Clicker.MoveSelectionArrow (LAST_CLICKED_ON.position);
 		}
