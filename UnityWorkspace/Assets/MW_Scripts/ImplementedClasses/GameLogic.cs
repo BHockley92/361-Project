@@ -411,11 +411,11 @@ public class GameLogic : AbstractGameLogic
 					connectRegions( player.myVillages );
 					u.currentAction = ActionType.Moved;
 				}
-				else destPlayer = dest.myVillage.myPlayer;
+				else{ destPlayer = dest.myVillage.myPlayer;
 				u.myLocation.occupyingUnit = null;
 				u.myLocation = dest;
 				dest.occupyingUnit = u; //was not being set!!!!
-
+				}
 				if( destPlayer != player && destPlayer != null)
 				{
 					takeoverTile( dest );
@@ -438,14 +438,16 @@ public class GameLogic : AbstractGameLogic
 					dest.myType = LandType.Grass;
 
 				// cannons can only move once
-				if( u.isCannon )
+				if( u.isCannon ){
 					u.currentAction = ActionType.Moved;
+				}
 
 				return true;
 			}
 			Debug.Log("Knight or Cannon can't move over tree");
 
 		}
+		Debug.Log ("Destination is not a neghbour OR unit is busy working");
 		return false;
 	}
 
