@@ -16,7 +16,6 @@ public class GUILogic : MonoBehaviour {
 	public MW_Player PLAYER;
 	public Button ENDTURN;
 	public Transform LAST_CLICKED_ON { get; set;}
-	public InputField CHAT;
 	private Dictionary<Vector2,AbstractTile> BOARD_TILES = new Dictionary<Vector2,AbstractTile>();
 	private SerializeGame SERIALIZER = new SerializeGame();
 	private XmlDocument LOADED_GAME;
@@ -97,7 +96,7 @@ public class GUILogic : MonoBehaviour {
 
 	//Sends message in input to all players
 	public void SendMessage() {
-		NETWORK.SendChatMessage(CHAT.text);
+		//TODO: Chat api (may scrap?)
 	}
 
 	//Terminates the current game and sends to main menu
