@@ -408,11 +408,11 @@ public class MWNetwork : Photon.MonoBehaviour
 	// Update player list on GUI
 	private void UpdateGUIPlayerList()
 	{
-		string[] players = new string[8];
+		List<string> players = new List<string>();
 		foreach (PhotonPlayer player in PhotonNetwork.playerList)
 		{
-			players[players.Length] = player.name;
+			players.Add(player.name);
 		}
-		GUIPlayerList.GetComponent<PlayerList>().PLAYERS = players;
+		GUIPlayerList.GetComponent<PlayerList>().PLAYERS = players.ToArray();
 	}
 }
