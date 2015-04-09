@@ -291,7 +291,7 @@ public class MWNetwork : Photon.MonoBehaviour
 				
 				/*Write the string to a file. TESTING
 				StreamWriter file = new StreamWriter("Kevin_update.txt");
-				file.WriteLine((string)gameState);
+				file.WriteLine((string)cachedGameState);
 				
 				file.Flush();
 				*/

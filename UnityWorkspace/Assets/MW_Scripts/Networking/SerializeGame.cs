@@ -181,7 +181,7 @@ public class SerializeGame
 				UnitType uType = (UnitType)Enum.Parse(typeof(UnitType), unitType, true);
 				myUnit.myType = uType;
 				myUnit.isCannon = Convert.ToBoolean(isCannon);
-				unitTile.occupyingUnit = myUnit;
+				myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)].occupyingUnit = myUnit;
 				
 			}
 			
@@ -210,6 +210,13 @@ public class SerializeGame
 		Tile[,] myTiles = new Tile[Convert.ToInt32(length)+1, Convert.ToInt32(width)+1];
 		Board myGameBoard = new Board(myTiles, Convert.ToInt32(waterBorder)); 
 
+		foreach (MW_Player p in myGame.participants) {
+			//reset village list we are going to build up again from xml file
+			p.myVillages.Clear();
+
+		}
+
+
 		//we will build myTiles from the XML file
 		foreach (XmlNode node in doc.DocumentElement.ChildNodes) {
 			if (node.Name == "tile") {
@@ -232,11 +239,13 @@ public class SerializeGame
 					foreach (XmlNode tileChild in node.ChildNodes) { //should only be one tileChild - structure
 							
 							if (tileChild.Name == "structure") {
+							//making a structure
 								string structureType = tileChild.Attributes ["structureType"].InnerText;
 								//convert string to enum
 								StructureType strucType = (StructureType)Enum.Parse (typeof(StructureType), structureType, true);
 								Structure myStruc = new Structure (myTile, strucType);
 								myTile.occupyingStructure = myStruc;
+
 							}
 
 					}
@@ -254,34 +263,22 @@ public class SerializeGame
 				string playerName = node.Attributes ["playerName"].InnerText;
 				string locationOfTileX = node.Attributes ["locationOfTileX"].InnerText;
 				string locationOfTileY = node.Attributes ["locationOfTileY"].InnerText;
-				/*
+
 				string gold = node.Attributes ["gold"].InnerText;
 				string wood = node.Attributes ["wood"].InnerText;
 				string villageType = node.Attributes ["villageType"].InnerText;
 
 				string damageTaken = node.Attributes["damageTaken"].InnerText;
-				*/
+
 				MW_Player villageOwner = new MW_Player();
 				foreach(MW_Player myplayer in myGame.participants){
 					if(playerName == myplayer.username){
 						villageOwner = myplayer;
 						break;
-
+						
 					}
 				}
-				Village myVillage = null;
-				foreach(Village v in villageOwner.myVillages){
-					if(v.location.boardPosition.x.ToString() == locationOfTileX && v.location.boardPosition.y.ToString() == locationOfTileY){
-						myVillage = v;
-						myVillage.location = myTiles [Convert.ToInt32 (locationOfTileX), Convert.ToInt32 (locationOfTileY)];
-						myTiles [Convert.ToInt32 (locationOfTileX), Convert.ToInt32 (locationOfTileY)].myVillage = myVillage;
-						break;
-					}
-				}
-
-
 				List <AbstractTile> region = new List<AbstractTile> (); 
-				/*
 				Village myVillage = new Village (region, villageOwner);
 				myVillage.gold = Convert.ToInt32 (gold);
 				myVillage.wood = Convert.ToInt32 (wood);
@@ -290,19 +287,19 @@ public class SerializeGame
 				VillageType vType = (VillageType)Enum.Parse (typeof(VillageType), villageType, true);
 				myVillage.myType = vType;
 				myVillage.location = myTiles [Convert.ToInt32 (locationOfTileX), Convert.ToInt32 (locationOfTileY)];
-				*/
 				//iterate over all controlledTiles of the village
 				foreach (XmlNode villageChild in node.ChildNodes) { 
 					string boardX = villageChild.Attributes ["boardX"].InnerText;
 					string boardY = villageChild.Attributes ["boardY"].InnerText;
 					if (villageChild.Name == "controlledTile") {
-							region.Add (myTiles [Convert.ToInt32 (boardX), Convert.ToInt32 (boardY)]);
-							myTiles [Convert.ToInt32 (boardX), Convert.ToInt32 (boardY)].myVillage = myVillage;
-
+						region.Add (myTiles [Convert.ToInt32 (boardX), Convert.ToInt32 (boardY)]);
+						myTiles [Convert.ToInt32 (boardX), Convert.ToInt32 (boardY)].myVillage = myVillage;
+						
 					}
 				}
-			//controlled region for village made
-			myVillage.controlledRegion = region;
+				//controlled region for village made
+				myVillage.controlledRegion = region;
+				villageOwner.myVillages.Add(myVillage);
 			
 			}
 		}			

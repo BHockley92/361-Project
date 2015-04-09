@@ -41,28 +41,28 @@
   <tile landType="Sea" boardPositionX="1" boardPositionY="19" gamePositionX="3" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="2" boardPositionY="0" gamePositionX="4" gamePositionY="0" />
   <tile landType="Sea" boardPositionX="2" boardPositionY="1" gamePositionX="5" gamePositionY="1.5" />
-  <tile landType="Grass" boardPositionX="2" boardPositionY="2" gamePositionX="4" gamePositionY="3">
+  <tile landType="Tree" boardPositionX="2" boardPositionY="2" gamePositionX="4" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="2" boardPositionY="3" gamePositionX="5" gamePositionY="4.5">
+  <tile landType="Tree" boardPositionX="2" boardPositionY="3" gamePositionX="5" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="2" boardPositionY="4" gamePositionX="4" gamePositionY="6">
+  <tile landType="Grass" boardPositionX="2" boardPositionY="4" gamePositionX="4" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="2" boardPositionY="5" gamePositionX="5" gamePositionY="7.5">
+  <tile landType="Grass" boardPositionX="2" boardPositionY="5" gamePositionX="5" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="2" boardPositionY="6" gamePositionX="4" gamePositionY="9">
+  <tile landType="Grass" boardPositionX="2" boardPositionY="6" gamePositionX="4" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Tree" boardPositionX="2" boardPositionY="7" gamePositionX="5" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="2" boardPositionY="8" gamePositionX="4" gamePositionY="12">
+  <tile landType="Tree" boardPositionX="2" boardPositionY="8" gamePositionX="4" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="2" boardPositionY="9" gamePositionX="5" gamePositionY="13.5">
+  <tile landType="Grass" boardPositionX="2" boardPositionY="9" gamePositionX="5" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="2" boardPositionY="10" gamePositionX="4" gamePositionY="15">
@@ -71,16 +71,21 @@
   <tile landType="Grass" boardPositionX="2" boardPositionY="11" gamePositionX="5" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="2" boardPositionY="12" gamePositionX="4" gamePositionY="18">
+  <tile landType="Grass" boardPositionX="2" boardPositionY="12" gamePositionX="4" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="2" boardPositionY="13" gamePositionX="5" gamePositionY="19.5">
+  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="2" locationOfTileY="12" damageTaken="0">
+    <controlledTile boardX="2" boardY="12" />
+    <controlledTile boardX="3" boardY="12" />
+    <controlledTile boardX="2" boardY="13" />
+  </village>
+  <tile landType="Grass" boardPositionX="2" boardPositionY="13" gamePositionX="5" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="2" boardPositionY="14" gamePositionX="4" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="2" boardPositionY="15" gamePositionX="5" gamePositionY="22.5">
+  <tile landType="Tree" boardPositionX="2" boardPositionY="15" gamePositionX="5" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="2" boardPositionY="16" gamePositionX="4" gamePositionY="24">
@@ -96,22 +101,13 @@
   <tile landType="Grass" boardPositionX="3" boardPositionY="2" gamePositionX="6" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="3" boardPositionY="3" gamePositionX="7" gamePositionY="4.5">
+  <tile landType="Tree" boardPositionX="3" boardPositionY="3" gamePositionX="7" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="7" wood="12" villageType="Town" locationOfTileX="3" locationOfTileY="3" damageTaken="0">
-    <controlledTile boardX="2" boardY="2" />
-    <controlledTile boardX="3" boardY="2" />
-    <controlledTile boardX="4" boardY="2" />
-    <controlledTile boardX="3" boardY="3" />
-    <controlledTile boardX="2" boardY="4" />
-    <controlledTile boardX="2" boardY="5" />
-    <controlledTile boardX="3" boardY="3" />
-  </village>
   <tile landType="Grass" boardPositionX="3" boardPositionY="4" gamePositionX="6" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="3" boardPositionY="5" gamePositionX="7" gamePositionY="7.5">
+  <tile landType="Tree" boardPositionX="3" boardPositionY="5" gamePositionX="7" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="3" boardPositionY="6" gamePositionX="6" gamePositionY="9">
@@ -126,23 +122,10 @@
   <tile landType="Grass" boardPositionX="3" boardPositionY="9" gamePositionX="7" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="3" locationOfTileY="9" damageTaken="0">
-    <controlledTile boardX="2" boardY="8" />
-    <controlledTile boardX="3" boardY="8" />
-    <controlledTile boardX="2" boardY="9" />
-    <controlledTile boardX="3" boardY="9" />
-    <controlledTile boardX="4" boardY="9" />
-    <controlledTile boardX="5" boardY="9" />
-    <controlledTile boardX="6" boardY="9" />
-    <controlledTile boardX="4" boardY="10" />
-    <controlledTile boardX="4" boardY="10" />
-    <controlledTile boardX="3" boardY="9" />
-    <controlledTile boardX="2" boardY="9" />
-  </village>
-  <tile landType="Tree" boardPositionX="3" boardPositionY="10" gamePositionX="6" gamePositionY="15">
+  <tile landType="Grass" boardPositionX="3" boardPositionY="10" gamePositionX="6" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="3" boardPositionY="11" gamePositionX="7" gamePositionY="16.5">
+  <tile landType="Meadow" boardPositionX="3" boardPositionY="11" gamePositionX="7" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="3" boardPositionY="12" gamePositionX="6" gamePositionY="18">
@@ -157,59 +140,29 @@
   <tile landType="Grass" boardPositionX="3" boardPositionY="15" gamePositionX="7" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="3" boardPositionY="16" gamePositionX="6" gamePositionY="24">
+  <tile landType="Grass" boardPositionX="3" boardPositionY="16" gamePositionX="6" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="3" boardPositionY="17" gamePositionX="7" gamePositionY="25.5">
+  <tile landType="Meadow" boardPositionX="3" boardPositionY="17" gamePositionX="7" gamePositionY="25.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Sea" boardPositionX="3" boardPositionY="18" gamePositionX="6" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="3" boardPositionY="19" gamePositionX="7" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="4" boardPositionY="0" gamePositionX="8" gamePositionY="0" />
   <tile landType="Sea" boardPositionX="4" boardPositionY="1" gamePositionX="9" gamePositionY="1.5" />
-  <tile landType="Meadow" boardPositionX="4" boardPositionY="2" gamePositionX="8" gamePositionY="3">
+  <tile landType="Tree" boardPositionX="4" boardPositionY="2" gamePositionX="8" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="4" boardPositionY="3" gamePositionX="9" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="4" locationOfTileY="3" damageTaken="0">
-    <controlledTile boardX="2" boardY="6" />
-    <controlledTile boardX="3" boardY="5" />
-    <controlledTile boardX="4" boardY="4" />
-    <controlledTile boardX="5" boardY="3" />
-    <controlledTile boardX="6" boardY="2" />
-    <controlledTile boardX="5" boardY="2" />
-    <controlledTile boardX="4" boardY="3" />
-    <controlledTile boardX="3" boardY="4" />
-    <controlledTile boardX="6" boardY="3" />
-    <controlledTile boardX="7" boardY="3" />
-    <controlledTile boardX="8" boardY="2" />
-    <controlledTile boardX="9" boardY="2" />
-    <controlledTile boardX="10" boardY="2" />
-    <controlledTile boardX="11" boardY="2" />
-    <controlledTile boardX="9" boardY="3" />
-    <controlledTile boardX="8" boardY="4" />
-    <controlledTile boardX="9" boardY="3" />
-    <controlledTile boardX="5" boardY="4" />
-    <controlledTile boardX="5" boardY="5" />
-    <controlledTile boardX="5" boardY="6" />
-    <controlledTile boardX="6" boardY="3" />
-    <controlledTile boardX="4" boardY="3" />
-    <controlledTile boardX="5" boardY="4" />
-    <controlledTile boardX="5" boardY="2" />
-    <controlledTile boardX="5" boardY="4" />
-    <controlledTile boardX="3" boardY="4" />
-    <controlledTile boardX="4" boardY="3" />
-    <controlledTile boardX="3" boardY="4" />
-  </village>
   <tile landType="Grass" boardPositionX="4" boardPositionY="4" gamePositionX="8" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="4" boardPositionY="5" gamePositionX="9" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="4" boardPositionY="6" gamePositionX="8" gamePositionY="9">
+  <tile landType="Grass" boardPositionX="4" boardPositionY="6" gamePositionX="8" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="4" boardPositionY="7" gamePositionX="9" gamePositionY="10.5">
@@ -227,56 +180,57 @@
   <tile landType="Grass" boardPositionX="4" boardPositionY="11" gamePositionX="9" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="4" boardPositionY="12" gamePositionX="8" gamePositionY="18">
+  <tile landType="Tree" boardPositionX="4" boardPositionY="12" gamePositionX="8" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="4" boardPositionY="13" gamePositionX="9" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="4" boardPositionY="14" gamePositionX="8" gamePositionY="21">
+  <tile landType="Meadow" boardPositionX="4" boardPositionY="14" gamePositionX="8" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="4" boardPositionY="15" gamePositionX="9" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="4" boardPositionY="16" gamePositionX="8" gamePositionY="24">
+  <tile landType="Tree" boardPositionX="4" boardPositionY="16" gamePositionX="8" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="4" boardPositionY="17" gamePositionX="9" gamePositionY="25.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="4" locationOfTileY="17" damageTaken="0">
-    <controlledTile boardX="2" boardY="17" />
-    <controlledTile boardX="3" boardY="17" />
-    <controlledTile boardX="4" boardY="16" />
-    <controlledTile boardX="5" boardY="15" />
-    <controlledTile boardX="6" boardY="15" />
-    <controlledTile boardX="4" boardY="17" />
-    <controlledTile boardX="4" boardY="17" />
-  </village>
   <tile landType="Sea" boardPositionX="4" boardPositionY="18" gamePositionX="8" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="4" boardPositionY="19" gamePositionX="9" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="5" boardPositionY="0" gamePositionX="10" gamePositionY="0" />
   <tile landType="Sea" boardPositionX="5" boardPositionY="1" gamePositionX="11" gamePositionY="1.5" />
-  <tile landType="Grass" boardPositionX="5" boardPositionY="2" gamePositionX="10" gamePositionY="3">
+  <tile landType="Meadow" boardPositionX="5" boardPositionY="2" gamePositionX="10" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="5" boardPositionY="3" gamePositionX="11" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="5" boardPositionY="4" gamePositionX="10" gamePositionY="6">
+  <tile landType="Grass" boardPositionX="5" boardPositionY="4" gamePositionX="10" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
+  <village playerName="martymcfly88" gold="7" wood="20" villageType="Hovel" locationOfTileX="5" locationOfTileY="4" damageTaken="0">
+    <controlledTile boardX="2" boardY="4" />
+    <controlledTile boardX="3" boardY="5" />
+    <controlledTile boardX="4" boardY="4" />
+    <controlledTile boardX="5" boardY="4" />
+    <controlledTile boardX="6" boardY="3" />
+    <controlledTile boardX="5" boardY="2" />
+    <controlledTile boardX="3" boardY="3" />
+    <controlledTile boardX="3" boardY="3" />
+  </village>
   <tile landType="Grass" boardPositionX="5" boardPositionY="5" gamePositionX="11" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="5" boardPositionY="6" gamePositionX="10" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="5" boardPositionY="7" gamePositionX="11" gamePositionY="10.5">
+  <tile landType="Meadow" boardPositionX="5" boardPositionY="7" gamePositionX="11" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="5" boardPositionY="8" gamePositionX="10" gamePositionY="12">
+  <tile landType="Tree" boardPositionX="5" boardPositionY="8" gamePositionX="10" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="5" boardPositionY="9" gamePositionX="11" gamePositionY="13.5">
@@ -288,33 +242,19 @@
   <tile landType="Grass" boardPositionX="5" boardPositionY="11" gamePositionX="11" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="5" locationOfTileY="11" damageTaken="0">
-    <controlledTile boardX="2" boardY="15" />
-    <controlledTile boardX="3" boardY="15" />
-    <controlledTile boardX="4" boardY="14" />
-    <controlledTile boardX="4" boardY="13" />
-    <controlledTile boardX="5" boardY="12" />
-    <controlledTile boardX="6" boardY="12" />
-    <controlledTile boardX="7" boardY="12" />
-    <controlledTile boardX="6" boardY="13" />
-    <controlledTile boardX="6" boardY="13" />
-    <controlledTile boardX="5" boardY="11" />
-    <controlledTile boardX="3" boardY="13" />
-    <controlledTile boardX="3" boardY="12" />
-  </village>
   <tile landType="Grass" boardPositionX="5" boardPositionY="12" gamePositionX="10" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="5" boardPositionY="13" gamePositionX="11" gamePositionY="19.5">
+  <tile landType="Meadow" boardPositionX="5" boardPositionY="13" gamePositionX="11" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="5" boardPositionY="14" gamePositionX="10" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="5" boardPositionY="15" gamePositionX="11" gamePositionY="22.5">
+  <tile landType="Grass" boardPositionX="5" boardPositionY="15" gamePositionX="11" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="5" boardPositionY="16" gamePositionX="10" gamePositionY="24">
+  <tile landType="Tree" boardPositionX="5" boardPositionY="16" gamePositionX="10" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="5" boardPositionY="17" gamePositionX="11" gamePositionY="25.5">
@@ -330,7 +270,7 @@
   <tile landType="Grass" boardPositionX="6" boardPositionY="3" gamePositionX="13" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="6" boardPositionY="4" gamePositionX="12" gamePositionY="6">
+  <tile landType="Grass" boardPositionX="6" boardPositionY="4" gamePositionX="12" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="6" boardPositionY="5" gamePositionX="13" gamePositionY="7.5">
@@ -339,28 +279,56 @@
   <tile landType="Grass" boardPositionX="6" boardPositionY="6" gamePositionX="12" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="6" boardPositionY="7" gamePositionX="13" gamePositionY="10.5">
+  <tile landType="Meadow" boardPositionX="6" boardPositionY="7" gamePositionX="13" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="6" boardPositionY="8" gamePositionX="12" gamePositionY="12">
+  <tile landType="Grass" boardPositionX="6" boardPositionY="8" gamePositionX="12" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="6" boardPositionY="9" gamePositionX="13" gamePositionY="13.5">
+  <village playerName="martymcfly88" gold="7" wood="20" villageType="Hovel" locationOfTileX="6" locationOfTileY="8" damageTaken="0">
+    <controlledTile boardX="2" boardY="11" />
+    <controlledTile boardX="3" boardY="10" />
+    <controlledTile boardX="4" boardY="11" />
+    <controlledTile boardX="5" boardY="12" />
+    <controlledTile boardX="6" boardY="12" />
+    <controlledTile boardX="7" boardY="12" />
+    <controlledTile boardX="8" boardY="13" />
+    <controlledTile boardX="4" boardY="13" />
+    <controlledTile boardX="3" boardY="14" />
+    <controlledTile boardX="4" boardY="14" />
+    <controlledTile boardX="3" boardY="13" />
+    <controlledTile boardX="4" boardY="12" />
+    <controlledTile boardX="3" boardY="11" />
+    <controlledTile boardX="2" boardY="14" />
+    <controlledTile boardX="2" boardY="14" />
+    <controlledTile boardX="3" boardY="13" />
+    <controlledTile boardX="4" boardY="12" />
+    <controlledTile boardX="5" boardY="10" />
+    <controlledTile boardX="6" boardY="10" />
+    <controlledTile boardX="7" boardY="9" />
+    <controlledTile boardX="6" boardY="8" />
+    <controlledTile boardX="5" boardY="9" />
+    <controlledTile boardX="7" boardY="10" />
+    <controlledTile boardX="5" boardY="9" />
+    <controlledTile boardX="3" boardY="11" />
+    <controlledTile boardX="3" boardY="11" />
+  </village>
+  <tile landType="Grass" boardPositionX="6" boardPositionY="9" gamePositionX="13" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="6" boardPositionY="10" gamePositionX="12" gamePositionY="15">
+  <tile landType="Grass" boardPositionX="6" boardPositionY="10" gamePositionX="12" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="6" boardPositionY="11" gamePositionX="13" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="6" boardPositionY="12" gamePositionX="12" gamePositionY="18">
+  <tile landType="Grass" boardPositionX="6" boardPositionY="12" gamePositionX="12" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="6" boardPositionY="13" gamePositionX="13" gamePositionY="19.5">
+  <tile landType="Tree" boardPositionX="6" boardPositionY="13" gamePositionX="13" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="6" boardPositionY="14" gamePositionX="12" gamePositionY="21">
+  <tile landType="Grass" boardPositionX="6" boardPositionY="14" gamePositionX="12" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="6" boardPositionY="15" gamePositionX="13" gamePositionY="22.5">
@@ -376,16 +344,16 @@
   <tile landType="Sea" boardPositionX="6" boardPositionY="19" gamePositionX="13" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="7" boardPositionY="0" gamePositionX="14" gamePositionY="0" />
   <tile landType="Sea" boardPositionX="7" boardPositionY="1" gamePositionX="15" gamePositionY="1.5" />
-  <tile landType="Grass" boardPositionX="7" boardPositionY="2" gamePositionX="14" gamePositionY="3">
+  <tile landType="Tree" boardPositionX="7" boardPositionY="2" gamePositionX="14" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="7" boardPositionY="3" gamePositionX="15" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="7" boardPositionY="4" gamePositionX="14" gamePositionY="6">
+  <tile landType="Grass" boardPositionX="7" boardPositionY="4" gamePositionX="14" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="7" boardPositionY="5" gamePositionX="15" gamePositionY="7.5">
+  <tile landType="Grass" boardPositionX="7" boardPositionY="5" gamePositionX="15" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="7" boardPositionY="6" gamePositionX="14" gamePositionY="9">
@@ -394,22 +362,22 @@
   <tile landType="Tree" boardPositionX="7" boardPositionY="7" gamePositionX="15" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="7" boardPositionY="8" gamePositionX="14" gamePositionY="12">
+  <tile landType="Grass" boardPositionX="7" boardPositionY="8" gamePositionX="14" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="7" boardPositionY="9" gamePositionX="15" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="7" boardPositionY="10" gamePositionX="14" gamePositionY="15">
+  <tile landType="Meadow" boardPositionX="7" boardPositionY="10" gamePositionX="14" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="7" boardPositionY="11" gamePositionX="15" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="7" boardPositionY="12" gamePositionX="14" gamePositionY="18">
+  <tile landType="Tree" boardPositionX="7" boardPositionY="12" gamePositionX="14" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="7" boardPositionY="13" gamePositionX="15" gamePositionY="19.5">
+  <tile landType="Meadow" boardPositionX="7" boardPositionY="13" gamePositionX="15" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="7" boardPositionY="14" gamePositionX="14" gamePositionY="21">
@@ -428,10 +396,10 @@
   <tile landType="Sea" boardPositionX="7" boardPositionY="19" gamePositionX="15" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="8" boardPositionY="0" gamePositionX="16" gamePositionY="0" />
   <tile landType="Sea" boardPositionX="8" boardPositionY="1" gamePositionX="17" gamePositionY="1.5" />
-  <tile landType="Tree" boardPositionX="8" boardPositionY="2" gamePositionX="16" gamePositionY="3">
+  <tile landType="Grass" boardPositionX="8" boardPositionY="2" gamePositionX="16" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="8" boardPositionY="3" gamePositionX="17" gamePositionY="4.5">
+  <tile landType="Meadow" boardPositionX="8" boardPositionY="3" gamePositionX="17" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="8" boardPositionY="4" gamePositionX="16" gamePositionY="6">
@@ -446,13 +414,13 @@
   <tile landType="Grass" boardPositionX="8" boardPositionY="7" gamePositionX="17" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="8" boardPositionY="8" gamePositionX="16" gamePositionY="12">
+  <tile landType="Grass" boardPositionX="8" boardPositionY="8" gamePositionX="16" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="8" boardPositionY="9" gamePositionX="17" gamePositionY="13.5">
+  <tile landType="Grass" boardPositionX="8" boardPositionY="9" gamePositionX="17" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="8" boardPositionY="10" gamePositionX="16" gamePositionY="15">
+  <tile landType="Grass" boardPositionX="8" boardPositionY="10" gamePositionX="16" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="8" boardPositionY="11" gamePositionX="17" gamePositionY="16.5">
@@ -473,15 +441,9 @@
   <tile landType="Grass" boardPositionX="8" boardPositionY="16" gamePositionX="16" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="8" boardPositionY="17" gamePositionX="17" gamePositionY="25.5">
+  <tile landType="Tree" boardPositionX="8" boardPositionY="17" gamePositionX="17" gamePositionY="25.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="8" locationOfTileY="17" damageTaken="0">
-    <controlledTile boardX="8" boardY="16" />
-    <controlledTile boardX="8" boardY="17" />
-    <controlledTile boardX="9" boardY="17" />
-    <controlledTile boardX="10" boardY="17" />
-  </village>
   <tile landType="Sea" boardPositionX="8" boardPositionY="18" gamePositionX="16" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="8" boardPositionY="19" gamePositionX="17" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="9" boardPositionY="0" gamePositionX="18" gamePositionY="0" />
@@ -498,22 +460,6 @@
   <tile landType="Grass" boardPositionX="9" boardPositionY="5" gamePositionX="19" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="9" locationOfTileY="5" damageTaken="0">
-    <controlledTile boardX="6" boardY="7" />
-    <controlledTile boardX="7" boardY="7" />
-    <controlledTile boardX="8" boardY="7" />
-    <controlledTile boardX="9" boardY="6" />
-    <controlledTile boardX="10" boardY="5" />
-    <controlledTile boardX="11" boardY="4" />
-    <controlledTile boardX="12" boardY="3" />
-    <controlledTile boardX="13" boardY="3" />
-    <controlledTile boardX="10" boardY="4" />
-    <controlledTile boardX="9" boardY="5" />
-    <controlledTile boardX="9" boardY="5" />
-    <controlledTile boardX="10" boardY="4" />
-    <controlledTile boardX="9" boardY="5" />
-    <controlledTile boardX="8" boardY="8" />
-  </village>
   <tile landType="Grass" boardPositionX="9" boardPositionY="6" gamePositionX="18" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
@@ -526,235 +472,16 @@
   <tile landType="Grass" boardPositionX="9" boardPositionY="9" gamePositionX="19" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="9" boardPositionY="10" gamePositionX="18" gamePositionY="15">
+  <tile landType="Grass" boardPositionX="9" boardPositionY="10" gamePositionX="18" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="9" boardPositionY="11" gamePositionX="19" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="0" wood="20" villageType="Hovel" locationOfTileX="9" locationOfTileY="11" damageTaken="0">
-    <controlledTile boardX="2" boardY="7" />
-    <controlledTile boardX="3" boardY="6" />
-    <controlledTile boardX="4" boardY="5" />
-    <controlledTile boardX="4" boardY="6" />
-    <controlledTile boardX="3" boardY="7" />
-    <controlledTile boardX="4" boardY="7" />
-    <controlledTile boardX="5" boardY="7" />
-    <controlledTile boardX="6" boardY="6" />
-    <controlledTile boardX="7" boardY="5" />
-    <controlledTile boardX="8" boardY="5" />
-    <controlledTile boardX="9" boardY="4" />
-    <controlledTile boardX="10" boardY="3" />
-    <controlledTile boardX="11" boardY="3" />
-    <controlledTile boardX="12" boardY="2" />
-    <controlledTile boardX="13" boardY="2" />
-    <controlledTile boardX="14" boardY="2" />
-    <controlledTile boardX="15" boardY="2" />
-    <controlledTile boardX="14" boardY="3" />
-    <controlledTile boardX="13" boardY="4" />
-    <controlledTile boardX="12" boardY="5" />
-    <controlledTile boardX="11" boardY="6" />
-    <controlledTile boardX="12" boardY="6" />
-    <controlledTile boardX="13" boardY="6" />
-    <controlledTile boardX="14" boardY="6" />
-    <controlledTile boardX="15" boardY="5" />
-    <controlledTile boardX="16" boardY="4" />
-    <controlledTile boardX="17" boardY="4" />
-    <controlledTile boardX="16" boardY="5" />
-    <controlledTile boardX="16" boardY="6" />
-    <controlledTile boardX="17" boardY="6" />
-    <controlledTile boardX="17" boardY="7" />
-    <controlledTile boardX="15" boardY="7" />
-    <controlledTile boardX="14" boardY="7" />
-    <controlledTile boardX="13" boardY="8" />
-    <controlledTile boardX="12" boardY="9" />
-    <controlledTile boardX="11" boardY="10" />
-    <controlledTile boardX="10" boardY="10" />
-    <controlledTile boardX="11" boardY="9" />
-    <controlledTile boardX="10" boardY="9" />
-    <controlledTile boardX="9" boardY="10" />
-    <controlledTile boardX="8" boardY="11" />
-    <controlledTile boardX="9" boardY="11" />
-    <controlledTile boardX="8" boardY="12" />
-    <controlledTile boardX="7" boardY="13" />
-    <controlledTile boardX="6" boardY="14" />
-    <controlledTile boardX="7" boardY="14" />
-    <controlledTile boardX="8" boardY="14" />
-    <controlledTile boardX="9" boardY="14" />
-    <controlledTile boardX="10" boardY="13" />
-    <controlledTile boardX="11" boardY="13" />
-    <controlledTile boardX="12" boardY="13" />
-    <controlledTile boardX="12" boardY="14" />
-    <controlledTile boardX="13" boardY="14" />
-    <controlledTile boardX="14" boardY="14" />
-    <controlledTile boardX="13" boardY="15" />
-    <controlledTile boardX="14" boardY="15" />
-    <controlledTile boardX="13" boardY="16" />
-    <controlledTile boardX="14" boardY="16" />
-    <controlledTile boardX="15" boardY="16" />
-    <controlledTile boardX="16" boardY="15" />
-    <controlledTile boardX="16" boardY="16" />
-    <controlledTile boardX="16" boardY="14" />
-    <controlledTile boardX="17" boardY="13" />
-    <controlledTile boardX="17" boardY="12" />
-    <controlledTile boardX="16" boardY="12" />
-    <controlledTile boardX="17" boardY="11" />
-    <controlledTile boardX="17" boardY="10" />
-    <controlledTile boardX="15" boardY="12" />
-    <controlledTile boardX="17" boardY="11" />
-    <controlledTile boardX="16" boardY="16" />
-    <controlledTile boardX="14" boardY="17" />
-    <controlledTile boardX="14" boardY="17" />
-    <controlledTile boardX="12" boardY="17" />
-    <controlledTile boardX="11" boardY="17" />
-    <controlledTile boardX="11" boardY="16" />
-    <controlledTile boardX="12" boardY="15" />
-    <controlledTile boardX="11" boardY="15" />
-    <controlledTile boardX="10" boardY="16" />
-    <controlledTile boardX="9" boardY="16" />
-    <controlledTile boardX="10" boardY="15" />
-    <controlledTile boardX="9" boardY="15" />
-    <controlledTile boardX="10" boardY="14" />
-    <controlledTile boardX="8" boardY="15" />
-    <controlledTile boardX="7" boardY="16" />
-    <controlledTile boardX="6" boardY="16" />
-    <controlledTile boardX="7" boardY="15" />
-    <controlledTile boardX="5" boardY="17" />
-    <controlledTile boardX="5" boardY="16" />
-    <controlledTile boardX="5" boardY="16" />
-    <controlledTile boardX="7" boardY="17" />
-    <controlledTile boardX="7" boardY="15" />
-    <controlledTile boardX="7" boardY="15" />
-    <controlledTile boardX="10" boardY="14" />
-    <controlledTile boardX="9" boardY="15" />
-    <controlledTile boardX="10" boardY="15" />
-    <controlledTile boardX="10" boardY="15" />
-    <controlledTile boardX="10" boardY="16" />
-    <controlledTile boardX="11" boardY="15" />
-    <controlledTile boardX="14" boardY="16" />
-    <controlledTile boardX="12" boardY="15" />
-    <controlledTile boardX="13" boardY="16" />
-    <controlledTile boardX="14" boardY="15" />
-    <controlledTile boardX="12" boardY="15" />
-    <controlledTile boardX="13" boardY="15" />
-    <controlledTile boardX="11" boardY="15" />
-    <controlledTile boardX="12" boardY="15" />
-    <controlledTile boardX="10" boardY="14" />
-    <controlledTile boardX="10" boardY="14" />
-    <controlledTile boardX="10" boardY="14" />
-    <controlledTile boardX="8" boardY="15" />
-    <controlledTile boardX="9" boardY="15" />
-    <controlledTile boardX="7" boardY="15" />
-    <controlledTile boardX="8" boardY="15" />
-    <controlledTile boardX="7" boardY="15" />
-    <controlledTile boardX="5" boardY="14" />
-    <controlledTile boardX="4" boardY="15" />
-    <controlledTile boardX="3" boardY="16" />
-    <controlledTile boardX="2" boardY="16" />
-    <controlledTile boardX="5" boardY="13" />
-    <controlledTile boardX="7" boardY="14" />
-    <controlledTile boardX="7" boardY="11" />
-    <controlledTile boardX="8" boardY="10" />
-    <controlledTile boardX="9" boardY="9" />
-    <controlledTile boardX="8" boardY="9" />
-    <controlledTile boardX="9" boardY="8" />
-    <controlledTile boardX="9" boardY="7" />
-    <controlledTile boardX="10" boardY="6" />
-    <controlledTile boardX="11" boardY="5" />
-    <controlledTile boardX="12" boardY="4" />
-    <controlledTile boardX="7" boardY="10" />
-    <controlledTile boardX="6" boardY="11" />
-    <controlledTile boardX="6" boardY="10" />
-    <controlledTile boardX="7" boardY="9" />
-    <controlledTile boardX="7" boardY="8" />
-    <controlledTile boardX="6" boardY="8" />
-    <controlledTile boardX="5" boardY="8" />
-    <controlledTile boardX="4" boardY="8" />
-    <controlledTile boardX="5" boardY="10" />
-    <controlledTile boardX="4" boardY="11" />
-    <controlledTile boardX="3" boardY="11" />
-    <controlledTile boardX="2" boardY="12" />
-    <controlledTile boardX="2" boardY="13" />
-    <controlledTile boardX="2" boardY="14" />
-    <controlledTile boardX="3" boardY="14" />
-    <controlledTile boardX="2" boardY="11" />
-    <controlledTile boardX="3" boardY="10" />
-    <controlledTile boardX="2" boardY="10" />
-    <controlledTile boardX="2" boardY="10" />
-    <controlledTile boardX="2" boardY="11" />
-    <controlledTile boardX="3" boardY="10" />
-    <controlledTile boardX="4" boardY="12" />
-    <controlledTile boardX="6" boardY="10" />
-    <controlledTile boardX="7" boardY="9" />
-    <controlledTile boardX="7" boardY="9" />
-    <controlledTile boardX="9" boardY="8" />
-    <controlledTile boardX="7" boardY="10" />
-    <controlledTile boardX="8" boardY="9" />
-    <controlledTile boardX="6" boardY="11" />
-    <controlledTile boardX="7" boardY="10" />
-    <controlledTile boardX="8" boardY="12" />
-    <controlledTile boardX="8" boardY="10" />
-    <controlledTile boardX="8" boardY="10" />
-    <controlledTile boardX="9" boardY="11" />
-    <controlledTile boardX="9" boardY="9" />
-    <controlledTile boardX="9" boardY="9" />
-    <controlledTile boardX="9" boardY="11" />
-    <controlledTile boardX="9" boardY="10" />
-    <controlledTile boardX="10" boardY="9" />
-    <controlledTile boardX="11" boardY="11" />
-    <controlledTile boardX="12" boardY="11" />
-    <controlledTile boardX="13" boardY="10" />
-    <controlledTile boardX="14" boardY="9" />
-    <controlledTile boardX="15" boardY="8" />
-    <controlledTile boardX="15" boardY="9" />
-    <controlledTile boardX="16" boardY="9" />
-    <controlledTile boardX="15" boardY="10" />
-    <controlledTile boardX="15" boardY="10" />
-    <controlledTile boardX="15" boardY="9" />
-    <controlledTile boardX="13" boardY="11" />
-    <controlledTile boardX="13" boardY="11" />
-    <controlledTile boardX="11" boardY="9" />
-    <controlledTile boardX="11" boardY="9" />
-    <controlledTile boardX="15" boardY="8" />
-    <controlledTile boardX="15" boardY="4" />
-    <controlledTile boardX="16" boardY="5" />
-    <controlledTile boardX="16" boardY="5" />
-    <controlledTile boardX="15" boardY="4" />
-    <controlledTile boardX="14" boardY="7" />
-    <controlledTile boardX="12" boardY="7" />
-    <controlledTile boardX="12" boardY="7" />
-    <controlledTile boardX="10" boardY="6" />
-    <controlledTile boardX="11" boardY="5" />
-    <controlledTile boardX="11" boardY="5" />
-    <controlledTile boardX="12" boardY="6" />
-    <controlledTile boardX="12" boardY="4" />
-    <controlledTile boardX="12" boardY="4" />
-    <controlledTile boardX="14" boardY="3" />
-    <controlledTile boardX="7" boardY="6" />
-    <controlledTile boardX="8" boardY="6" />
-    <controlledTile boardX="8" boardY="6" />
-    <controlledTile boardX="6" boardY="5" />
-    <controlledTile boardX="7" boardY="4" />
-    <controlledTile boardX="8" boardY="3" />
-    <controlledTile boardX="6" boardY="4" />
-    <controlledTile boardX="6" boardY="4" />
-    <controlledTile boardX="7" boardY="6" />
-    <controlledTile boardX="7" boardY="4" />
-    <controlledTile boardX="7" boardY="6" />
-    <controlledTile boardX="6" boardY="5" />
-    <controlledTile boardX="4" boardY="8" />
-    <controlledTile boardX="5" boardY="8" />
-    <controlledTile boardX="4" boardY="8" />
-    <controlledTile boardX="4" boardY="7" />
-    <controlledTile boardX="4" boardY="6" />
-    <controlledTile boardX="3" boardY="7" />
-    <controlledTile boardX="3" boardY="7" />
-  </village>
-  <unit unitType="Peasant" unitAction="ReadyForOrders" villageOwnerX="9" villageOwnerY="11" unitX="9" unitY="11" isCannon="False" />
   <tile landType="Grass" boardPositionX="9" boardPositionY="12" gamePositionX="18" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="9" boardPositionY="13" gamePositionX="19" gamePositionY="19.5">
+  <tile landType="Tree" boardPositionX="9" boardPositionY="13" gamePositionX="19" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="9" boardPositionY="14" gamePositionX="18" gamePositionY="21">
@@ -766,7 +493,7 @@
   <tile landType="Grass" boardPositionX="9" boardPositionY="16" gamePositionX="18" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="9" boardPositionY="17" gamePositionX="19" gamePositionY="25.5">
+  <tile landType="Meadow" boardPositionX="9" boardPositionY="17" gamePositionX="19" gamePositionY="25.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Sea" boardPositionX="9" boardPositionY="18" gamePositionX="18" gamePositionY="27" />
@@ -779,32 +506,22 @@
   <tile landType="Tree" boardPositionX="10" boardPositionY="3" gamePositionX="21" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="10" boardPositionY="4" gamePositionX="20" gamePositionY="6">
+  <tile landType="Tree" boardPositionX="10" boardPositionY="4" gamePositionX="20" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="10" boardPositionY="5" gamePositionX="21" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="10" boardPositionY="6" gamePositionX="20" gamePositionY="9">
+  <tile landType="Meadow" boardPositionX="10" boardPositionY="6" gamePositionX="20" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="10" boardPositionY="7" gamePositionX="21" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="10" locationOfTileY="7" damageTaken="0">
-    <controlledTile boardX="10" boardY="7" />
-    <controlledTile boardX="11" boardY="7" />
-    <controlledTile boardX="10" boardY="8" />
-    <controlledTile boardX="11" boardY="8" />
-    <controlledTile boardX="12" boardY="8" />
-    <controlledTile boardX="13" boardY="7" />
-    <controlledTile boardX="11" boardY="8" />
-    <controlledTile boardX="10" boardY="8" />
-  </village>
-  <tile landType="Tree" boardPositionX="10" boardPositionY="8" gamePositionX="20" gamePositionY="12">
+  <tile landType="Grass" boardPositionX="10" boardPositionY="8" gamePositionX="20" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="10" boardPositionY="9" gamePositionX="21" gamePositionY="13.5">
+  <tile landType="Grass" boardPositionX="10" boardPositionY="9" gamePositionX="21" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="10" boardPositionY="10" gamePositionX="20" gamePositionY="15">
@@ -813,7 +530,7 @@
   <tile landType="Grass" boardPositionX="10" boardPositionY="11" gamePositionX="21" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="10" boardPositionY="12" gamePositionX="20" gamePositionY="18">
+  <tile landType="Grass" boardPositionX="10" boardPositionY="12" gamePositionX="20" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="10" boardPositionY="13" gamePositionX="21" gamePositionY="19.5">
@@ -822,10 +539,10 @@
   <tile landType="Grass" boardPositionX="10" boardPositionY="14" gamePositionX="20" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="10" boardPositionY="15" gamePositionX="21" gamePositionY="22.5">
+  <tile landType="Tree" boardPositionX="10" boardPositionY="15" gamePositionX="21" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="10" boardPositionY="16" gamePositionX="20" gamePositionY="24">
+  <tile landType="Tree" boardPositionX="10" boardPositionY="16" gamePositionX="20" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="10" boardPositionY="17" gamePositionX="21" gamePositionY="25.5">
@@ -835,7 +552,7 @@
   <tile landType="Sea" boardPositionX="10" boardPositionY="19" gamePositionX="21" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="11" boardPositionY="0" gamePositionX="22" gamePositionY="0" />
   <tile landType="Sea" boardPositionX="11" boardPositionY="1" gamePositionX="23" gamePositionY="1.5" />
-  <tile landType="Meadow" boardPositionX="11" boardPositionY="2" gamePositionX="22" gamePositionY="3">
+  <tile landType="Tree" boardPositionX="11" boardPositionY="2" gamePositionX="22" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="11" boardPositionY="3" gamePositionX="23" gamePositionY="4.5">
@@ -844,13 +561,13 @@
   <tile landType="Grass" boardPositionX="11" boardPositionY="4" gamePositionX="22" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="11" boardPositionY="5" gamePositionX="23" gamePositionY="7.5">
+  <tile landType="Tree" boardPositionX="11" boardPositionY="5" gamePositionX="23" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="11" boardPositionY="6" gamePositionX="22" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="11" boardPositionY="7" gamePositionX="23" gamePositionY="10.5">
+  <tile landType="Grass" boardPositionX="11" boardPositionY="7" gamePositionX="23" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="11" boardPositionY="8" gamePositionX="22" gamePositionY="12">
@@ -862,32 +579,32 @@
   <tile landType="Grass" boardPositionX="11" boardPositionY="10" gamePositionX="22" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="11" boardPositionY="11" gamePositionX="23" gamePositionY="16.5">
+  <tile landType="Grass" boardPositionX="11" boardPositionY="11" gamePositionX="23" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="11" boardPositionY="12" gamePositionX="22" gamePositionY="18">
+  <tile landType="Tree" boardPositionX="11" boardPositionY="12" gamePositionX="22" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="11" boardPositionY="13" gamePositionX="23" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="11" boardPositionY="14" gamePositionX="22" gamePositionY="21">
+  <tile landType="Meadow" boardPositionX="11" boardPositionY="14" gamePositionX="22" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="11" boardPositionY="15" gamePositionX="23" gamePositionY="22.5">
+  <tile landType="Tree" boardPositionX="11" boardPositionY="15" gamePositionX="23" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="11" boardPositionY="16" gamePositionX="22" gamePositionY="24">
+  <tile landType="Tree" boardPositionX="11" boardPositionY="16" gamePositionX="22" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="11" boardPositionY="17" gamePositionX="23" gamePositionY="25.5">
+  <tile landType="Tree" boardPositionX="11" boardPositionY="17" gamePositionX="23" gamePositionY="25.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Sea" boardPositionX="11" boardPositionY="18" gamePositionX="22" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="11" boardPositionY="19" gamePositionX="23" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="12" boardPositionY="0" gamePositionX="24" gamePositionY="0" />
   <tile landType="Sea" boardPositionX="12" boardPositionY="1" gamePositionX="25" gamePositionY="1.5" />
-  <tile landType="Grass" boardPositionX="12" boardPositionY="2" gamePositionX="24" gamePositionY="3">
+  <tile landType="Tree" boardPositionX="12" boardPositionY="2" gamePositionX="24" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="12" boardPositionY="3" gamePositionX="25" gamePositionY="4.5">
@@ -905,7 +622,7 @@
   <tile landType="Grass" boardPositionX="12" boardPositionY="7" gamePositionX="25" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="12" boardPositionY="8" gamePositionX="24" gamePositionY="12">
+  <tile landType="Grass" boardPositionX="12" boardPositionY="8" gamePositionX="24" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="12" boardPositionY="9" gamePositionX="25" gamePositionY="13.5">
@@ -914,25 +631,25 @@
   <tile landType="Grass" boardPositionX="12" boardPositionY="10" gamePositionX="24" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="12" boardPositionY="11" gamePositionX="25" gamePositionY="16.5">
+  <tile landType="Grass" boardPositionX="12" boardPositionY="11" gamePositionX="25" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="12" boardPositionY="12" gamePositionX="24" gamePositionY="18">
+  <tile landType="Tree" boardPositionX="12" boardPositionY="12" gamePositionX="24" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="12" boardPositionY="13" gamePositionX="25" gamePositionY="19.5">
+  <tile landType="Grass" boardPositionX="12" boardPositionY="13" gamePositionX="25" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Tree" boardPositionX="12" boardPositionY="14" gamePositionX="24" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="12" boardPositionY="15" gamePositionX="25" gamePositionY="22.5">
+  <tile landType="Grass" boardPositionX="12" boardPositionY="15" gamePositionX="25" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="12" boardPositionY="16" gamePositionX="24" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="12" boardPositionY="17" gamePositionX="25" gamePositionY="25.5">
+  <tile landType="Meadow" boardPositionX="12" boardPositionY="17" gamePositionX="25" gamePositionY="25.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Sea" boardPositionX="12" boardPositionY="18" gamePositionX="24" gamePositionY="27" />
@@ -942,7 +659,7 @@
   <tile landType="Grass" boardPositionX="13" boardPositionY="2" gamePositionX="26" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="13" boardPositionY="3" gamePositionX="27" gamePositionY="4.5">
+  <tile landType="Grass" boardPositionX="13" boardPositionY="3" gamePositionX="27" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="13" boardPositionY="4" gamePositionX="26" gamePositionY="6">
@@ -951,22 +668,22 @@
   <tile landType="Grass" boardPositionX="13" boardPositionY="5" gamePositionX="27" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="13" boardPositionY="6" gamePositionX="26" gamePositionY="9">
+  <tile landType="Grass" boardPositionX="13" boardPositionY="6" gamePositionX="26" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="13" boardPositionY="7" gamePositionX="27" gamePositionY="10.5">
+  <tile landType="Grass" boardPositionX="13" boardPositionY="7" gamePositionX="27" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="13" boardPositionY="8" gamePositionX="26" gamePositionY="12">
+  <tile landType="Grass" boardPositionX="13" boardPositionY="8" gamePositionX="26" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="13" boardPositionY="9" gamePositionX="27" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="13" boardPositionY="10" gamePositionX="26" gamePositionY="15">
+  <tile landType="Meadow" boardPositionX="13" boardPositionY="10" gamePositionX="26" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="13" boardPositionY="11" gamePositionX="27" gamePositionY="16.5">
+  <tile landType="Tree" boardPositionX="13" boardPositionY="11" gamePositionX="27" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="13" boardPositionY="12" gamePositionX="26" gamePositionY="18">
@@ -975,45 +692,10 @@
   <tile landType="Grass" boardPositionX="13" boardPositionY="13" gamePositionX="27" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="13" locationOfTileY="13" damageTaken="0">
-    <controlledTile boardX="8" boardY="13" />
-    <controlledTile boardX="9" boardY="12" />
-    <controlledTile boardX="10" boardY="11" />
-    <controlledTile boardX="10" boardY="12" />
-    <controlledTile boardX="11" boardY="12" />
-    <controlledTile boardX="12" boardY="12" />
-    <controlledTile boardX="13" boardY="12" />
-    <controlledTile boardX="14" boardY="11" />
-    <controlledTile boardX="15" boardY="11" />
-    <controlledTile boardX="16" boardY="10" />
-    <controlledTile boardX="17" boardY="9" />
-    <controlledTile boardX="17" boardY="8" />
-    <controlledTile boardX="16" boardY="8" />
-    <controlledTile boardX="16" boardY="7" />
-    <controlledTile boardX="16" boardY="11" />
-    <controlledTile boardX="16" boardY="11" />
-    <controlledTile boardX="14" boardY="12" />
-    <controlledTile boardX="13" boardY="13" />
-    <controlledTile boardX="14" boardY="13" />
-    <controlledTile boardX="15" boardY="13" />
-    <controlledTile boardX="16" boardY="13" />
-    <controlledTile boardX="15" boardY="14" />
-    <controlledTile boardX="15" boardY="15" />
-    <controlledTile boardX="15" boardY="14" />
-    <controlledTile boardX="14" boardY="13" />
-    <controlledTile boardX="14" boardY="12" />
-    <controlledTile boardX="14" boardY="10" />
-    <controlledTile boardX="14" boardY="12" />
-    <controlledTile boardX="13" boardY="13" />
-    <controlledTile boardX="9" boardY="13" />
-    <controlledTile boardX="10" boardY="12" />
-    <controlledTile boardX="9" boardY="13" />
-    <controlledTile boardX="9" boardY="13" />
-  </village>
   <tile landType="Grass" boardPositionX="13" boardPositionY="14" gamePositionX="26" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="13" boardPositionY="15" gamePositionX="27" gamePositionY="22.5">
+  <tile landType="Tree" boardPositionX="13" boardPositionY="15" gamePositionX="27" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="13" boardPositionY="16" gamePositionX="26" gamePositionY="24">
@@ -1029,41 +711,162 @@
   <tile landType="Grass" boardPositionX="14" boardPositionY="2" gamePositionX="28" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
+  <village playerName="martymcfly88" gold="7" wood="20" villageType="Hovel" locationOfTileX="14" locationOfTileY="2" damageTaken="0">
+    <controlledTile boardX="3" boardY="16" />
+    <controlledTile boardX="4" boardY="16" />
+    <controlledTile boardX="5" boardY="17" />
+    <controlledTile boardX="5" boardY="16" />
+    <controlledTile boardX="6" boardY="15" />
+    <controlledTile boardX="7" boardY="16" />
+    <controlledTile boardX="8" boardY="17" />
+    <controlledTile boardX="9" boardY="16" />
+    <controlledTile boardX="10" boardY="17" />
+    <controlledTile boardX="11" boardY="16" />
+    <controlledTile boardX="12" boardY="16" />
+    <controlledTile boardX="13" boardY="16" />
+    <controlledTile boardX="14" boardY="17" />
+    <controlledTile boardX="15" boardY="16" />
+    <controlledTile boardX="16" boardY="17" />
+    <controlledTile boardX="17" boardY="16" />
+    <controlledTile boardX="16" boardY="16" />
+    <controlledTile boardX="17" boardY="17" />
+    <controlledTile boardX="17" boardY="15" />
+    <controlledTile boardX="15" boardY="17" />
+    <controlledTile boardX="14" boardY="16" />
+    <controlledTile boardX="15" boardY="15" />
+    <controlledTile boardX="14" boardY="14" />
+    <controlledTile boardX="15" boardY="13" />
+    <controlledTile boardX="16" boardY="13" />
+    <controlledTile boardX="17" boardY="14" />
+    <controlledTile boardX="17" boardY="13" />
+    <controlledTile boardX="15" boardY="12" />
+    <controlledTile boardX="14" boardY="13" />
+    <controlledTile boardX="13" boardY="14" />
+    <controlledTile boardX="14" boardY="15" />
+    <controlledTile boardX="12" boardY="13" />
+    <controlledTile boardX="13" boardY="12" />
+    <controlledTile boardX="14" boardY="12" />
+    <controlledTile boardX="13" boardY="13" />
+    <controlledTile boardX="12" boardY="14" />
+    <controlledTile boardX="11" boardY="15" />
+    <controlledTile boardX="10" boardY="16" />
+    <controlledTile boardX="11" boardY="17" />
+    <controlledTile boardX="9" boardY="17" />
+    <controlledTile boardX="9" boardY="15" />
+    <controlledTile boardX="10" boardY="14" />
+    <controlledTile boardX="11" boardY="14" />
+    <controlledTile boardX="10" boardY="15" />
+    <controlledTile boardX="10" boardY="13" />
+    <controlledTile boardX="11" boardY="12" />
+    <controlledTile boardX="12" boardY="11" />
+    <controlledTile boardX="13" boardY="10" />
+    <controlledTile boardX="14" boardY="10" />
+    <controlledTile boardX="15" boardY="9" />
+    <controlledTile boardX="16" boardY="9" />
+    <controlledTile boardX="17" boardY="10" />
+    <controlledTile boardX="17" boardY="8" />
+    <controlledTile boardX="17" boardY="9" />
+    <controlledTile boardX="14" boardY="8" />
+    <controlledTile boardX="13" boardY="9" />
+    <controlledTile boardX="13" boardY="7" />
+    <controlledTile boardX="12" boardY="6" />
+    <controlledTile boardX="13" boardY="5" />
+    <controlledTile boardX="12" boardY="4" />
+    <controlledTile boardX="13" boardY="3" />
+    <controlledTile boardX="14" boardY="2" />
+    <controlledTile boardX="15" boardY="3" />
+    <controlledTile boardX="16" boardY="4" />
+    <controlledTile boardX="15" boardY="5" />
+    <controlledTile boardX="15" boardY="4" />
+    <controlledTile boardX="14" boardY="3" />
+    <controlledTile boardX="13" boardY="2" />
+    <controlledTile boardX="12" boardY="3" />
+    <controlledTile boardX="12" boardY="2" />
+    <controlledTile boardX="14" boardY="3" />
+    <controlledTile boardX="13" boardY="2" />
+    <controlledTile boardX="14" boardY="3" />
+    <controlledTile boardX="12" boardY="2" />
+    <controlledTile boardX="12" boardY="3" />
+    <controlledTile boardX="11" boardY="5" />
+    <controlledTile boardX="10" boardY="4" />
+    <controlledTile boardX="9" boardY="5" />
+    <controlledTile boardX="10" boardY="5" />
+    <controlledTile boardX="9" boardY="6" />
+    <controlledTile boardX="10" boardY="5" />
+    <controlledTile boardX="11" boardY="7" />
+    <controlledTile boardX="10" boardY="8" />
+    <controlledTile boardX="9" boardY="9" />
+    <controlledTile boardX="10" boardY="9" />
+    <controlledTile boardX="11" boardY="5" />
+    <controlledTile boardX="13" boardY="9" />
+    <controlledTile boardX="11" boardY="11" />
+    <controlledTile boardX="12" boardY="12" />
+    <controlledTile boardX="12" boardY="12" />
+    <controlledTile boardX="10" boardY="15" />
+    <controlledTile boardX="8" boardY="14" />
+    <controlledTile boardX="7" boardY="15" />
+    <controlledTile boardX="8" boardY="15" />
+    <controlledTile boardX="6" boardY="14" />
+    <controlledTile boardX="8" boardY="15" />
+    <controlledTile boardX="10" boardY="14" />
+    <controlledTile boardX="10" boardY="15" />
+    <controlledTile boardX="11" boardY="14" />
+    <controlledTile boardX="12" boardY="12" />
+    <controlledTile boardX="12" boardY="11" />
+    <controlledTile boardX="12" boardY="12" />
+    <controlledTile boardX="13" boardY="13" />
+    <controlledTile boardX="11" boardY="14" />
+    <controlledTile boardX="11" boardY="12" />
+    <controlledTile boardX="12" boardY="14" />
+    <controlledTile boardX="13" boardY="12" />
+    <controlledTile boardX="13" boardY="13" />
+    <controlledTile boardX="14" boardY="12" />
+    <controlledTile boardX="14" boardY="12" />
+    <controlledTile boardX="14" boardY="13" />
+    <controlledTile boardX="13" boardY="13" />
+    <controlledTile boardX="13" boardY="14" />
+    <controlledTile boardX="14" boardY="15" />
+    <controlledTile boardX="15" boardY="15" />
+    <controlledTile boardX="17" boardY="17" />
+    <controlledTile boardX="15" boardY="17" />
+    <controlledTile boardX="16" boardY="16" />
+    <controlledTile boardX="14" boardY="15" />
+    <controlledTile boardX="14" boardY="16" />
+    <controlledTile boardX="15" boardY="17" />
+    <controlledTile boardX="14" boardY="15" />
+    <controlledTile boardX="14" boardY="16" />
+    <controlledTile boardX="11" boardY="17" />
+    <controlledTile boardX="11" boardY="15" />
+    <controlledTile boardX="10" boardY="15" />
+    <controlledTile boardX="10" boardY="16" />
+    <controlledTile boardX="11" boardY="17" />
+    <controlledTile boardX="9" boardY="17" />
+    <controlledTile boardX="10" boardY="15" />
+    <controlledTile boardX="10" boardY="16" />
+    <controlledTile boardX="8" boardY="15" />
+    <controlledTile boardX="9" boardY="17" />
+    <controlledTile boardX="7" boardY="17" />
+    <controlledTile boardX="8" boardY="15" />
+    <controlledTile boardX="7" boardY="15" />
+  </village>
   <tile landType="Grass" boardPositionX="14" boardPositionY="3" gamePositionX="29" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="14" boardPositionY="4" gamePositionX="28" gamePositionY="6">
+  <tile landType="Grass" boardPositionX="14" boardPositionY="4" gamePositionX="28" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="14" boardPositionY="5" gamePositionX="29" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="14" locationOfTileY="5" damageTaken="0">
-    <controlledTile boardX="13" boardY="5" />
-    <controlledTile boardX="14" boardY="4" />
-    <controlledTile boardX="15" boardY="3" />
-    <controlledTile boardX="16" boardY="2" />
-    <controlledTile boardX="16" boardY="3" />
-    <controlledTile boardX="17" boardY="3" />
-    <controlledTile boardX="16" boardY="3" />
-    <controlledTile boardX="14" boardY="5" />
-    <controlledTile boardX="14" boardY="5" />
-  </village>
-  <tile landType="Tree" boardPositionX="14" boardPositionY="6" gamePositionX="28" gamePositionY="9">
+  <tile landType="Grass" boardPositionX="14" boardPositionY="6" gamePositionX="28" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="14" boardPositionY="7" gamePositionX="29" gamePositionY="10.5">
+  <tile landType="Grass" boardPositionX="14" boardPositionY="7" gamePositionX="29" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="14" boardPositionY="8" gamePositionX="28" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="0" wood="20" villageType="Hovel" locationOfTileX="14" locationOfTileY="8" damageTaken="0">
-    <controlledTile boardX="12" boardY="10" />
-    <controlledTile boardX="13" boardY="9" />
-    <controlledTile boardX="14" boardY="8" />
-  </village>
-  <unit unitType="Peasant" unitAction="ReadyForOrders" villageOwnerX="14" villageOwnerY="8" unitX="14" unitY="8" isCannon="False" />
   <tile landType="Grass" boardPositionX="14" boardPositionY="9" gamePositionX="29" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
@@ -1073,13 +876,13 @@
   <tile landType="Grass" boardPositionX="14" boardPositionY="11" gamePositionX="29" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="14" boardPositionY="12" gamePositionX="28" gamePositionY="18">
+  <tile landType="Tree" boardPositionX="14" boardPositionY="12" gamePositionX="28" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="14" boardPositionY="13" gamePositionX="29" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="14" boardPositionY="14" gamePositionX="28" gamePositionY="21">
+  <tile landType="Grass" boardPositionX="14" boardPositionY="14" gamePositionX="28" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="14" boardPositionY="15" gamePositionX="29" gamePositionY="22.5">
@@ -1098,10 +901,10 @@
   <tile landType="Grass" boardPositionX="15" boardPositionY="2" gamePositionX="30" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="15" boardPositionY="3" gamePositionX="31" gamePositionY="4.5">
+  <tile landType="Grass" boardPositionX="15" boardPositionY="3" gamePositionX="31" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="15" boardPositionY="4" gamePositionX="30" gamePositionY="6">
+  <tile landType="Grass" boardPositionX="15" boardPositionY="4" gamePositionX="30" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="15" boardPositionY="5" gamePositionX="31" gamePositionY="7.5">
@@ -1113,45 +916,36 @@
   <tile landType="Meadow" boardPositionX="15" boardPositionY="7" gamePositionX="31" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="15" boardPositionY="8" gamePositionX="30" gamePositionY="12">
+  <tile landType="Tree" boardPositionX="15" boardPositionY="8" gamePositionX="30" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="15" boardPositionY="9" gamePositionX="31" gamePositionY="13.5">
+  <tile landType="Tree" boardPositionX="15" boardPositionY="9" gamePositionX="31" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="15" boardPositionY="10" gamePositionX="30" gamePositionY="15">
+  <tile landType="Grass" boardPositionX="15" boardPositionY="10" gamePositionX="30" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="15" boardPositionY="11" gamePositionX="31" gamePositionY="16.5">
+  <tile landType="Grass" boardPositionX="15" boardPositionY="11" gamePositionX="31" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="15" boardPositionY="12" gamePositionX="30" gamePositionY="18">
+  <tile landType="Grass" boardPositionX="15" boardPositionY="12" gamePositionX="30" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="15" boardPositionY="13" gamePositionX="31" gamePositionY="19.5">
+  <tile landType="Tree" boardPositionX="15" boardPositionY="13" gamePositionX="31" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="15" boardPositionY="14" gamePositionX="30" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="15" boardPositionY="15" gamePositionX="31" gamePositionY="22.5">
+  <tile landType="Grass" boardPositionX="15" boardPositionY="15" gamePositionX="31" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="15" boardPositionY="16" gamePositionX="30" gamePositionY="24">
+  <tile landType="Meadow" boardPositionX="15" boardPositionY="16" gamePositionX="30" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="15" boardPositionY="17" gamePositionX="31" gamePositionY="25.5">
+  <tile landType="Tree" boardPositionX="15" boardPositionY="17" gamePositionX="31" gamePositionY="25.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="15" locationOfTileY="17" damageTaken="0">
-    <controlledTile boardX="15" boardY="17" />
-    <controlledTile boardX="16" boardY="17" />
-    <controlledTile boardX="17" boardY="16" />
-    <controlledTile boardX="17" boardY="17" />
-    <controlledTile boardX="17" boardY="15" />
-    <controlledTile boardX="17" boardY="14" />
-    <controlledTile boardX="17" boardY="17" />
-  </village>
   <tile landType="Sea" boardPositionX="15" boardPositionY="18" gamePositionX="30" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="15" boardPositionY="19" gamePositionX="31" gamePositionY="28.5" />
   <tile landType="Sea" boardPositionX="16" boardPositionY="0" gamePositionX="32" gamePositionY="0" />
@@ -1159,7 +953,7 @@
   <tile landType="Grass" boardPositionX="16" boardPositionY="2" gamePositionX="32" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="16" boardPositionY="3" gamePositionX="33" gamePositionY="4.5">
+  <tile landType="Tree" boardPositionX="16" boardPositionY="3" gamePositionX="33" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="16" boardPositionY="4" gamePositionX="32" gamePositionY="6">
@@ -1168,22 +962,22 @@
   <tile landType="Grass" boardPositionX="16" boardPositionY="5" gamePositionX="33" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="16" boardPositionY="6" gamePositionX="32" gamePositionY="9">
+  <tile landType="Grass" boardPositionX="16" boardPositionY="6" gamePositionX="32" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="16" boardPositionY="7" gamePositionX="33" gamePositionY="10.5">
+  <tile landType="Tree" boardPositionX="16" boardPositionY="7" gamePositionX="33" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="16" boardPositionY="8" gamePositionX="32" gamePositionY="12">
+  <tile landType="Tree" boardPositionX="16" boardPositionY="8" gamePositionX="32" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Tree" boardPositionX="16" boardPositionY="9" gamePositionX="33" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="16" boardPositionY="10" gamePositionX="32" gamePositionY="15">
+  <tile landType="Grass" boardPositionX="16" boardPositionY="10" gamePositionX="32" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="16" boardPositionY="11" gamePositionX="33" gamePositionY="16.5">
+  <tile landType="Grass" boardPositionX="16" boardPositionY="11" gamePositionX="33" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="16" boardPositionY="12" gamePositionX="32" gamePositionY="18">
@@ -1195,7 +989,13 @@
   <tile landType="Grass" boardPositionX="16" boardPositionY="14" gamePositionX="32" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="16" boardPositionY="15" gamePositionX="33" gamePositionY="22.5">
+  <village playerName="emilyraso" gold="0" wood="20" villageType="Hovel" locationOfTileX="16" locationOfTileY="14" damageTaken="0">
+    <controlledTile boardX="15" boardY="14" />
+    <controlledTile boardX="16" boardY="15" />
+    <controlledTile boardX="16" boardY="14" />
+  </village>
+  <unit unitType="Peasant" unitAction="ReadyForOrders" villageOwnerX="16" villageOwnerY="14" unitX="15" unitY="14" isCannon="False" />
+  <tile landType="Tree" boardPositionX="16" boardPositionY="15" gamePositionX="33" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="16" boardPositionY="16" gamePositionX="32" gamePositionY="24">
@@ -1211,19 +1011,227 @@
   <tile landType="Tree" boardPositionX="17" boardPositionY="2" gamePositionX="34" gamePositionY="3">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="17" boardPositionY="3" gamePositionX="35" gamePositionY="4.5">
+  <tile landType="Meadow" boardPositionX="17" boardPositionY="3" gamePositionX="35" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="17" boardPositionY="4" gamePositionX="34" gamePositionY="6">
+  <tile landType="Tree" boardPositionX="17" boardPositionY="4" gamePositionX="34" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="17" boardPositionY="5" gamePositionX="35" gamePositionY="7.5">
+  <tile landType="Grass" boardPositionX="17" boardPositionY="5" gamePositionX="35" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
+  <village playerName="emilyraso" gold="7" wood="20" villageType="Hovel" locationOfTileX="17" locationOfTileY="5" damageTaken="0">
+    <controlledTile boardX="2" boardY="3" />
+    <controlledTile boardX="3" boardY="4" />
+    <controlledTile boardX="4" boardY="5" />
+    <controlledTile boardX="5" boardY="6" />
+    <controlledTile boardX="6" boardY="7" />
+    <controlledTile boardX="7" boardY="8" />
+    <controlledTile boardX="8" boardY="9" />
+    <controlledTile boardX="9" boardY="10" />
+    <controlledTile boardX="10" boardY="11" />
+    <controlledTile boardX="11" boardY="10" />
+    <controlledTile boardX="12" boardY="9" />
+    <controlledTile boardX="13" boardY="8" />
+    <controlledTile boardX="14" boardY="9" />
+    <controlledTile boardX="15" boardY="10" />
+    <controlledTile boardX="16" boardY="11" />
+    <controlledTile boardX="17" boardY="12" />
+    <controlledTile boardX="16" boardY="12" />
+    <controlledTile boardX="15" boardY="11" />
+    <controlledTile boardX="16" boardY="10" />
+    <controlledTile boardX="14" boardY="11" />
+    <controlledTile boardX="13" boardY="11" />
+    <controlledTile boardX="12" boardY="10" />
+    <controlledTile boardX="11" boardY="9" />
+    <controlledTile boardX="12" boardY="8" />
+    <controlledTile boardX="11" boardY="8" />
+    <controlledTile boardX="12" boardY="7" />
+    <controlledTile boardX="13" boardY="6" />
+    <controlledTile boardX="14" boardY="7" />
+    <controlledTile boardX="15" boardY="8" />
+    <controlledTile boardX="16" boardY="7" />
+    <controlledTile boardX="17" boardY="6" />
+    <controlledTile boardX="16" boardY="5" />
+    <controlledTile boardX="17" boardY="4" />
+    <controlledTile boardX="16" boardY="3" />
+    <controlledTile boardX="17" boardY="2" />
+    <controlledTile boardX="16" boardY="2" />
+    <controlledTile boardX="17" boardY="3" />
+    <controlledTile boardX="15" boardY="2" />
+    <controlledTile boardX="17" boardY="3" />
+    <controlledTile boardX="15" boardY="2" />
+    <controlledTile boardX="17" boardY="5" />
+    <controlledTile boardX="16" boardY="6" />
+    <controlledTile boardX="15" boardY="7" />
+    <controlledTile boardX="16" boardY="8" />
+    <controlledTile boardX="14" boardY="6" />
+    <controlledTile boardX="15" boardY="6" />
+    <controlledTile boardX="14" boardY="5" />
+    <controlledTile boardX="13" boardY="4" />
+    <controlledTile boardX="14" boardY="4" />
+    <controlledTile boardX="12" boardY="5" />
+    <controlledTile boardX="11" boardY="6" />
+    <controlledTile boardX="10" boardY="7" />
+    <controlledTile boardX="9" boardY="8" />
+    <controlledTile boardX="8" boardY="7" />
+    <controlledTile boardX="9" boardY="7" />
+    <controlledTile boardX="10" boardY="6" />
+    <controlledTile boardX="8" boardY="8" />
+    <controlledTile boardX="7" boardY="7" />
+    <controlledTile boardX="8" boardY="6" />
+    <controlledTile boardX="7" boardY="5" />
+    <controlledTile boardX="8" boardY="4" />
+    <controlledTile boardX="9" boardY="3" />
+    <controlledTile boardX="10" boardY="2" />
+    <controlledTile boardX="11" boardY="3" />
+    <controlledTile boardX="10" boardY="3" />
+    <controlledTile boardX="11" boardY="4" />
+    <controlledTile boardX="11" boardY="2" />
+    <controlledTile boardX="9" boardY="4" />
+    <controlledTile boardX="8" boardY="5" />
+    <controlledTile boardX="7" boardY="6" />
+    <controlledTile boardX="6" boardY="5" />
+    <controlledTile boardX="7" boardY="4" />
+    <controlledTile boardX="8" boardY="3" />
+    <controlledTile boardX="9" boardY="2" />
+    <controlledTile boardX="8" boardY="2" />
+    <controlledTile boardX="7" boardY="3" />
+    <controlledTile boardX="6" boardY="4" />
+    <controlledTile boardX="5" boardY="5" />
+    <controlledTile boardX="6" boardY="6" />
+    <controlledTile boardX="5" boardY="7" />
+    <controlledTile boardX="4" boardY="8" />
+    <controlledTile boardX="5" boardY="8" />
+    <controlledTile boardX="6" boardY="9" />
+    <controlledTile boardX="4" boardY="9" />
+    <controlledTile boardX="3" boardY="8" />
+    <controlledTile boardX="2" boardY="9" />
+    <controlledTile boardX="2" boardY="7" />
+    <controlledTile boardX="3" boardY="6" />
+    <controlledTile boardX="4" boardY="6" />
+    <controlledTile boardX="3" boardY="7" />
+    <controlledTile boardX="2" boardY="8" />
+    <controlledTile boardX="2" boardY="6" />
+    <controlledTile boardX="2" boardY="5" />
+    <controlledTile boardX="2" boardY="6" />
+    <controlledTile boardX="3" boardY="7" />
+    <controlledTile boardX="2" boardY="8" />
+    <controlledTile boardX="3" boardY="7" />
+    <controlledTile boardX="3" boardY="8" />
+    <controlledTile boardX="4" boardY="6" />
+    <controlledTile boardX="4" boardY="6" />
+    <controlledTile boardX="5" boardY="3" />
+    <controlledTile boardX="6" boardY="2" />
+    <controlledTile boardX="7" boardY="2" />
+    <controlledTile boardX="4" boardY="2" />
+    <controlledTile boardX="4" boardY="3" />
+    <controlledTile boardX="6" boardY="2" />
+    <controlledTile boardX="7" boardY="2" />
+    <controlledTile boardX="7" boardY="2" />
+    <controlledTile boardX="7" boardY="3" />
+    <controlledTile boardX="6" boardY="4" />
+    <controlledTile boardX="5" boardY="5" />
+    <controlledTile boardX="6" boardY="6" />
+    <controlledTile boardX="7" boardY="4" />
+    <controlledTile boardX="8" boardY="3" />
+    <controlledTile boardX="9" boardY="2" />
+    <controlledTile boardX="11" boardY="2" />
+    <controlledTile boardX="9" boardY="2" />
+    <controlledTile boardX="10" boardY="3" />
+    <controlledTile boardX="8" boardY="2" />
+    <controlledTile boardX="8" boardY="3" />
+    <controlledTile boardX="9" boardY="4" />
+    <controlledTile boardX="7" boardY="3" />
+    <controlledTile boardX="7" boardY="4" />
+    <controlledTile boardX="8" boardY="5" />
+    <controlledTile boardX="6" boardY="6" />
+    <controlledTile boardX="6" boardY="4" />
+    <controlledTile boardX="6" boardY="5" />
+    <controlledTile boardX="7" boardY="6" />
+    <controlledTile boardX="6" boardY="6" />
+    <controlledTile boardX="8" boardY="6" />
+    <controlledTile boardX="7" boardY="6" />
+    <controlledTile boardX="7" boardY="7" />
+    <controlledTile boardX="8" boardY="8" />
+    <controlledTile boardX="9" boardY="7" />
+    <controlledTile boardX="10" boardY="6" />
+    <controlledTile boardX="11" boardY="4" />
+    <controlledTile boardX="15" boardY="6" />
+    <controlledTile boardX="15" boardY="6" />
+    <controlledTile boardX="16" boardY="6" />
+    <controlledTile boardX="15" boardY="6" />
+    <controlledTile boardX="15" boardY="7" />
+    <controlledTile boardX="16" boardY="8" />
+    <controlledTile boardX="15" boardY="6" />
+    <controlledTile boardX="15" boardY="7" />
+    <controlledTile boardX="14" boardY="5" />
+    <controlledTile boardX="14" boardY="6" />
+    <controlledTile boardX="12" boardY="5" />
+    <controlledTile boardX="11" boardY="6" />
+    <controlledTile boardX="10" boardY="7" />
+    <controlledTile boardX="10" boardY="10" />
+    <controlledTile boardX="15" boardY="11" />
+    <controlledTile boardX="16" boardY="10" />
+    <controlledTile boardX="14" boardY="11" />
+    <controlledTile boardX="15" boardY="8" />
+    <controlledTile boardX="14" boardY="7" />
+    <controlledTile boardX="12" boardY="7" />
+    <controlledTile boardX="12" boardY="8" />
+    <controlledTile boardX="11" boardY="8" />
+    <controlledTile boardX="11" boardY="9" />
+    <controlledTile boardX="12" boardY="10" />
+    <controlledTile boardX="10" boardY="10" />
+    <controlledTile boardX="9" boardY="12" />
+    <controlledTile boardX="10" boardY="12" />
+    <controlledTile boardX="11" boardY="13" />
+    <controlledTile boardX="9" boardY="13" />
+    <controlledTile boardX="8" boardY="12" />
+    <controlledTile boardX="7" boardY="13" />
+    <controlledTile boardX="6" boardY="13" />
+    <controlledTile boardX="7" boardY="14" />
+    <controlledTile boardX="5" boardY="14" />
+    <controlledTile boardX="4" boardY="15" />
+    <controlledTile boardX="5" boardY="15" />
+    <controlledTile boardX="6" boardY="16" />
+    <controlledTile boardX="3" boardY="15" />
+    <controlledTile boardX="2" boardY="16" />
+    <controlledTile boardX="3" boardY="17" />
+    <controlledTile boardX="4" boardY="17" />
+    <controlledTile boardX="2" boardY="17" />
+    <controlledTile boardX="2" boardY="15" />
+    <controlledTile boardX="5" boardY="13" />
+    <controlledTile boardX="7" boardY="11" />
+    <controlledTile boardX="8" boardY="10" />
+    <controlledTile boardX="8" boardY="11" />
+    <controlledTile boardX="6" boardY="11" />
+    <controlledTile boardX="5" boardY="11" />
+    <controlledTile boardX="4" boardY="10" />
+    <controlledTile boardX="8" boardY="11" />
+    <controlledTile boardX="8" boardY="12" />
+    <controlledTile boardX="10" boardY="10" />
+    <controlledTile boardX="8" boardY="11" />
+    <controlledTile boardX="8" boardY="10" />
+    <controlledTile boardX="9" boardY="8" />
+    <controlledTile boardX="8" boardY="7" />
+    <controlledTile boardX="8" boardY="8" />
+    <controlledTile boardX="6" boardY="9" />
+    <controlledTile boardX="7" boardY="6" />
+    <controlledTile boardX="7" boardY="7" />
+    <controlledTile boardX="5" boardY="8" />
+    <controlledTile boardX="5" boardY="7" />
+    <controlledTile boardX="6" boardY="5" />
+    <controlledTile boardX="6" boardY="6" />
+    <controlledTile boardX="4" boardY="6" />
+    <controlledTile boardX="5" boardY="5" />
+    <controlledTile boardX="3" boardY="6" />
+    <controlledTile boardX="4" boardY="3" />
+    <controlledTile boardX="2" boardY="5" />
+  </village>
   <tile landType="Grass" boardPositionX="17" boardPositionY="6" gamePositionX="34" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Grass" boardPositionX="17" boardPositionY="7" gamePositionX="35" gamePositionY="10.5">
+  <tile landType="Meadow" boardPositionX="17" boardPositionY="7" gamePositionX="35" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="17" boardPositionY="8" gamePositionX="34" gamePositionY="12">
@@ -1241,7 +1249,7 @@
   <tile landType="Grass" boardPositionX="17" boardPositionY="12" gamePositionX="34" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="17" boardPositionY="13" gamePositionX="35" gamePositionY="19.5">
+  <tile landType="Grass" boardPositionX="17" boardPositionY="13" gamePositionX="35" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="17" boardPositionY="14" gamePositionX="34" gamePositionY="21">
@@ -1250,10 +1258,10 @@
   <tile landType="Grass" boardPositionX="17" boardPositionY="15" gamePositionX="35" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Tree" boardPositionX="17" boardPositionY="16" gamePositionX="34" gamePositionY="24">
+  <tile landType="Grass" boardPositionX="17" boardPositionY="16" gamePositionX="34" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
-  <tile landType="Meadow" boardPositionX="17" boardPositionY="17" gamePositionX="35" gamePositionY="25.5">
+  <tile landType="Grass" boardPositionX="17" boardPositionY="17" gamePositionX="35" gamePositionY="25.5">
     <structure structureType="NONE" />
   </tile>
   <tile landType="Sea" boardPositionX="17" boardPositionY="18" gamePositionX="34" gamePositionY="27" />
@@ -1298,8 +1306,8 @@
   <tile landType="Sea" boardPositionX="19" boardPositionY="17" gamePositionX="39" gamePositionY="25.5" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="18" gamePositionX="38" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="19" gamePositionX="39" gamePositionY="28.5" />
-  <game turnIndex="1" turnOf="emilyraso">
-    <participant username="martymcfly88" />
+  <game turnIndex="2" turnOf="emilyraso">
     <participant username="emilyraso" />
+    <participant username="martymcfly88" />
   </game>
 </map>
