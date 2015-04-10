@@ -23,6 +23,8 @@ public class GUILogic : MonoBehaviour {
 	private XmlDocument LOADED_GAME;
 	private bool FROM_LOADED = false;
 	private UNIT_ACTION BUTTON_CLICKED_ON = UNIT_ACTION.NONE;
+	private GameObject[] VillageButtons;
+	private GameObject[] UnitButtons;
 	
 	private Vector3 VILLAGE_OFFSET = new Vector3(0.0f,0.5f,-0.7f);
 	private Vector3 UNIT_OFFSET = new Vector3(0.0f,0.5f,-0.71f);
@@ -43,19 +45,41 @@ public class GUILogic : MonoBehaviour {
 		#endif
 	}
 
+	public void Start() {
+		VillageButtons = GameObject.FindGameObjectsWithTag("ForStructures");
+		foreach(GameObject button in VillageButtons) {
+			button.AddComponent<CanvasGroup>();
+			button.GetComponent<CanvasGroup>().alpha = 0;
+			button.GetComponent<CanvasGroup>().interactable = false;
+			button.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		}
+		UnitButtons = GameObject.FindGameObjectsWithTag("ForUnits");
+		foreach(GameObject button in UnitButtons) {
+			button.AddComponent<CanvasGroup>();
+			button.GetComponent<CanvasGroup>().alpha = 0;
+			button.GetComponent<CanvasGroup>().interactable = false;
+			button.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		}
+	}
+
 	public void OnGUI() {
 		//Only show the button when clicking on things if it's the players turn.
 		if (GAME != null && GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			GameObject[] VillageButtons = GameObject.FindGameObjectsWithTag("ForStructures");
-			GameObject[] UnitButtons = GameObject.FindGameObjectsWithTag("ForUnits");
+			Debug.Log ("My Turn");
 			if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
 				//Show Village Buttons
 				foreach(GameObject button in VillageButtons) {
-					button.SetActive (true);
+					button.AddComponent<CanvasGroup>();
+					button.GetComponent<CanvasGroup>().alpha = 1;
+					button.GetComponent<CanvasGroup>().interactable = true;
+					button.GetComponent<CanvasGroup>().blocksRaycasts = true;
 				}
 				//Hide Unit Buttons
 				foreach(GameObject button in UnitButtons) {
-					button.SetActive (false);
+					button.AddComponent<CanvasGroup>();
+					button.GetComponent<CanvasGroup>().alpha = 0;
+					button.GetComponent<CanvasGroup>().interactable = false;
+					button.GetComponent<CanvasGroup>().blocksRaycasts = false;
 				}
 				AbstractTile building_tile;
 				Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
@@ -72,12 +96,21 @@ public class GUILogic : MonoBehaviour {
 			else if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals ("Unit")) {
 				//Show Unit Buttons
 				foreach(GameObject button in UnitButtons) {
-					button.SetActive (true);
+					button.AddComponent<CanvasGroup>();
+					button.GetComponent<CanvasGroup>().alpha = 1;
+					button.GetComponent<CanvasGroup>().interactable = true;
+					button.GetComponent<CanvasGroup>().blocksRaycasts = true;
 				}
 				//Hide Village Buttons
 				foreach(GameObject button in VillageButtons) {
-					button.SetActive (false);
+					button.AddComponent<CanvasGroup>();
+					button.GetComponent<CanvasGroup>().alpha = 0;
+					button.GetComponent<CanvasGroup>().interactable = false;
+					button.GetComponent<CanvasGroup>().blocksRaycasts = false;
 				}
+			}
+			else {
+				Debug.Log ("Neither being hit");
 			}
 		}
 	}
@@ -598,10 +631,6 @@ public class GUILogic : MonoBehaviour {
 
 	public void buildTower(Transform build_spot) {
 		BUILD_TOWER = false;
-		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
-			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
-			return;
-		}
 		AbstractTile dest_tile;
 		BOARD_TILES.TryGetValue(new Vector2(build_spot.position.x, build_spot.position.z), out dest_tile);
 		AbstractTile village_tile;
@@ -668,7 +697,6 @@ public class GUILogic : MonoBehaviour {
 
 	public void moveUnit(Transform tile) {
 		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			
 			return;
 		}
 		AbstractTile dest_tile;
