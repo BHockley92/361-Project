@@ -850,6 +850,6 @@ public class GUILogic : MonoBehaviour {
 
 	//The leave or disband button depending on host or player
 	public void Leave_Disband() {
-		//TODO: Need callback that tells everyone to call leave_disband if they aren't the host
+		NETWORK.EndGame();
 	}
 }
