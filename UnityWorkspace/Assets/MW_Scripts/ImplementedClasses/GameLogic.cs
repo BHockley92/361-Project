@@ -361,7 +361,14 @@ public class GameLogic : AbstractGameLogic
 						continue;
 
 					AbstractVillage neighbourVillage = destNeighbour.myVillage;
-					VillageType neighbourVillageType = neighbourVillage.myType;
+					bool neighbourIsFort = false;
+					if(neighbourVillage != null)
+					{
+						VillageType neighbourVillageType = neighbourVillage.myType;
+						if(neighbourVillageType == VillageType.Fort)
+							neighbourIsFort = true;
+					}
+
 					AbstractPlayer neighbourPlayer = neighbourVillage.myPlayer;
 
 					AbstractStructure neighbourStructure = destNeighbour.occupyingStructure;
@@ -370,7 +377,7 @@ public class GameLogic : AbstractGameLogic
 					 		( (int) unitType < (int) UnitType.Soldier && 
 					 			( neighbourVillage != null || neighbourStructure.myType == StructureType.Tower)
 					 		) ||
-					 		( (int) unitType < (int) UnitType.Knight && neighbourVillageType == VillageType.Fort )
+					 		( (int) unitType < (int) UnitType.Knight && neighbourIsFort )
 					 	)
 					  )
 					{
@@ -463,8 +470,11 @@ public class GameLogic : AbstractGameLogic
 				if( u.isCannon ){
 					u.currentAction = ActionType.Moved;
 				}
+				u.myLocation.occupyingUnit = null;
 				u.myLocation = dest;
 				dest.occupyingUnit = u;
+				if(u.myVillage != dest.myVillage)
+					dest.myVillage = u.myVillage;
 				return true;
 			}
 			Debug.Log("Knight or Cannon can't move over tree");
