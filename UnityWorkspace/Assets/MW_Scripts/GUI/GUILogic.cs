@@ -689,26 +689,53 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void BuildRoad() {
-		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			BUTTON_CLICKED_ON = UNIT_ACTION.BUILD_ROAD;
-		}
+		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()) && LAST_CLICKED_ON != null) {
+			Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
+			AbstractTile unit_tile;
+			BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
+			
+			if(unit_tile.occupyingUnit.myType != UnitType.Peasant){
+				GameObject error = GameObject.Find ("Error");
+				error.GetComponent<Text>().text = "Only peasants can build roads.";
+				error.GetComponent<Text>().enabled = true;
+				StartCoroutine(DelayError (error));
+			}
+			else{
+				unit_tile.occupyingUnit.currentAction = ActionType.BuildingRoad;
+        	}
+        }
 	}
-	
-	public void CombineUnit() {
-		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			BUTTON_CLICKED_ON = UNIT_ACTION.COMBINE_UNIT;
+    
+    public void CombineUnit() {
+		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()) && LAST_CLICKED_ON != null) {
+			Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
+			AbstractTile unit_tile;
+			BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
+			unit_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; 
 		}
 	}
 	
 	public void CultivateMeadow() {
-		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			BUTTON_CLICKED_ON = UNIT_ACTION.CULTIVATE_MEADOW;
-		}
-	}
-
-	public void BuildTower() {
-		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			BUILD_TOWER = true;
+		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()) && LAST_CLICKED_ON != null) {
+			Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
+			AbstractTile unit_tile;
+			BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
+			
+			if(unit_tile.occupyingUnit.myType != UnitType.Peasant){
+				GameObject error = GameObject.Find ("Error");
+				error.GetComponent<Text>().text = "Only peasants can cultivate meadows.";
+				error.GetComponent<Text>().enabled = true;
+				StartCoroutine(DelayError (error));
+			}
+			else{
+				unit_tile.occupyingUnit.currentAction = ActionType.StartCultivating; 
+            }
+        }
+    }
+    
+    public void BuildTower() {
+		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()) && LAST_CLICKED_ON != null) {
+			//TODO: build tower
 		}
 	}
 
@@ -799,47 +826,6 @@ public class GUILogic : MonoBehaviour {
 //		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
 //		Debug.Log ("Unit board position: " + unit_tile.boardPosition.x.ToString () + " , " + unit_tile.boardPosition.y.ToString ());
 		if (GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile)) {
-			//Make sure the unit's current action is changed if it wasn't changed in moveUnit
-			if(dest_tile.occupyingUnit.currentAction == ActionType.ReadyForOrders) {
-				switch(BUTTON_CLICKED_ON) {
-					case UNIT_ACTION.BUILD_ROAD:{
-						if(dest_tile.occupyingUnit.myType != UnitType.Peasant){
-							GameObject error = GameObject.Find ("Error");
-							error.GetComponent<Text>().text = "Only peasants can build roads.";
-							error.GetComponent<Text>().enabled = true;
-							StartCoroutine(DelayError (error));
-							return;
-						}
-						else{
-							dest_tile.occupyingUnit.currentAction = ActionType.BuildingRoad;
-							break;
-						}
-						
-					}
-					case UNIT_ACTION.COMBINE_UNIT: {
-														
-						dest_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; 
-						break;
-					}
-					case UNIT_ACTION.CULTIVATE_MEADOW: {
-					//only peasants will cultivate a meadow
-						if(dest_tile.occupyingUnit.myType != UnitType.Peasant){
-							GameObject error = GameObject.Find ("Error");
-							error.GetComponent<Text>().text = "Only peasants can cultivate meadows.";
-							error.GetComponent<Text>().enabled = true;
-							StartCoroutine(DelayError (error));
-							return;
-						}
-						else{
-							dest_tile.occupyingUnit.currentAction = ActionType.StartCultivating; 
-							break;
-						}
-					}
-					default: 
-						//dest_tile.occupyingUnit.currentAction = ActionType.Moved; 
-						break;
-				}
-			}
 			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0.1f, tile.position.z) + UNIT_OFFSET;
 			Clicker.MoveSelectionArrow (LAST_CLICKED_ON.position);
 		}
