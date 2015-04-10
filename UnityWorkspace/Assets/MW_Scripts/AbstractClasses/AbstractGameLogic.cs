@@ -10,7 +10,7 @@ public abstract class AbstractGameLogic
 	public abstract void buildRoad (AbstractUnit u);
 	public abstract bool buildTower(AbstractTile t);
 
-	public abstract bool buildCannon(AbstractTile t, AbstractVillage owner);
+	public abstract AbstractTile buildCannon(AbstractTile t, AbstractVillage owner);
 	public abstract bool isVillageStillAlive(AbstractVillage v); // for cannonball hits
 	public abstract bool isTileWithinCannonFiringRange(AbstractTile cannonLocation, AbstractTile targetLocation);
 

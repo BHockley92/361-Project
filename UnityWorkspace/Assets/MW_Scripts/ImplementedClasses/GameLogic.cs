@@ -91,7 +91,7 @@ public class GameLogic : AbstractGameLogic
 		return false;
 	}
 
-	public override bool buildCannon(AbstractTile t, AbstractVillage owner)
+	public override AbstractTile buildCannon(AbstractTile t, AbstractVillage owner)
 	{
 		if( t.myVillage == owner )
 		{
@@ -108,7 +108,7 @@ public class GameLogic : AbstractGameLogic
 					t.occupyingUnit = cannon;
 
 					owner.supportedUnits.Add(cannon);
-					return true;
+					return t;
 				}
 			}
 		}
