@@ -17,6 +17,7 @@ public class GUILogic : MonoBehaviour {
 	public Button ENDTURN;
 	public Transform LAST_CLICKED_ON { get; set;}
 	public InputField CHAT;
+	public bool BUILD_TOWER = false;
 	private Dictionary<Vector2,AbstractTile> BOARD_TILES = new Dictionary<Vector2,AbstractTile>();
 	private SerializeGame SERIALIZER = new SerializeGame();
 	private XmlDocument LOADED_GAME;
@@ -577,6 +578,79 @@ public class GUILogic : MonoBehaviour {
 		BUTTON_CLICKED_ON = UNIT_ACTION.CULTIVATE_MEADOW;
 	}
 
+	public void BuildTower() {
+		BUILD_TOWER = true;
+	}
+	*
+	public void buildTower(Transform build_spot) {
+		BUILD_TOWER = false;
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
+			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
+			return;
+		}
+		AbstractTile dest_tile;
+		BOARD_TILES.TryGetValue(new Vector2(build_spot.position.x, build_spot.position.z), out dest_tile);
+		AbstractTile village_tile;
+		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
+		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out village_tile);
+		if (!dest_tile.myVillage.myPlayer.username.Equals (NETWORK.GetLocalPlayerName ()) || !village_tile.myVillage.controlledRegion.Contains(dest_tile)) {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "You do not control that territory";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+		}
+		if(GAME.myGameLogic.buildTower (dest_tile)) {
+			GameObject tower_object = (GameObject)Resources.Load("structureTower");
+			GameObject tower = (GameObject)GameObject.Instantiate(tower_object ,new Vector3(dest_tile.gamePosition.x, 0, dest_tile.gamePosition.y), Quaternion.identity);
+			//Tower is the players thing
+			tower.AddComponent<BoxCollider>();
+			tower.AddComponent(typeof(Clicker));
+			tower.transform.parent = GameObject.Find ("map").transform;
+			LAST_CLICKED_ON = tower.transform;
+		}
+		else {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "Cannot build tower on enemy territory";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+		}
+	}
+
+	public void BuildCannon() {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
+			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
+			return;
+		}
+		AbstractTile building_tile;
+		Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
+		BOARD_TILES.TryGetValue (new Vector2 (tilepos.x, tilepos.z), out building_tile);
+		if (!building_tile.myVillage.myPlayer.username.Equals (NETWORK.GetLocalPlayerName ())) {
+			//TODO: Show error and stop
+			return;
+		}
+		AbstractTile hired_tile = GAME.myGameLogic.buildCannon(building_tile ,building_tile.myVillage);
+		if(hired_tile != null) {
+			GameObject new_unit = (GameObject)Resources.Load ("unitcannon");
+			Vector3 unit_location = new Vector3(hired_tile.boardPosition.x, 0.1f, hired_tile.boardPosition.y) + UNIT_OFFSET;
+			GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, unit_location, Quaternion.identity);
+			// don't need to check for player ownership: is purchase so of course it's player-owned
+			hired_villager.AddComponent<BoxCollider> ();
+			hired_villager.AddComponent (typeof(Clicker));
+			hired_villager.tag = "Unit";
+			//Set as child
+			hired_villager.transform.parent = GameObject.Find ("map").transform;
+			
+			//Set new last clicked on
+			LAST_CLICKED_ON = new_unit.transform;
+		}
+		else {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "That village does not have enough resources";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+		}
+	}
+
 	public void moveUnit(Transform tile) {
 		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit")) {
 			
@@ -589,7 +663,7 @@ public class GUILogic : MonoBehaviour {
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
 		if(unit_tile.occupyingUnit.currentAction != ActionType.ReadyForOrders) {
 			GameObject error = GameObject.Find ("Error");
-			error.GetComponent<Text>().text = "That unit has already been moved this turn";
+			error.GetComponent<Text>().text = "That unit is unable to perform another action this turn";
 			error.GetComponent<Text>().enabled = true;
 			StartCoroutine(DelayError (error));
 			return;
@@ -598,8 +672,14 @@ public class GUILogic : MonoBehaviour {
 		Debug.Log ("Dest board position: " + dest_tile.boardPosition.x.ToString () + " , " + dest_tile.boardPosition.y.ToString ());
 //		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
 //		Debug.Log ("Unit board position: " + unit_tile.boardPosition.x.ToString () + " , " + unit_tile.boardPosition.y.ToString ());
-		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
-		if (movedUnit) {
+		if (GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile)) {
+			//Make sure the unit's current action is changed
+			switch(BUTTON_CLICKED_ON) {
+				case UNIT_ACTION.BUILD_ROAD: dest_tile.occupyingUnit.currentAction = ActionType.BuildingRoad; break;
+				case UNIT_ACTION.COMBINE_UNIT: dest_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; break;
+				case UNIT_ACTION.CULTIVATE_MEADOW: dest_tile.occupyingUnit.currentAction = ActionType.StartCultivating; break;
+				default: dest_tile.occupyingUnit.currentAction = ActionType.Moved; break;
+			}
 			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0.1f, tile.position.z) + UNIT_OFFSET;
 			Clicker.MoveSelectionArrow (LAST_CLICKED_ON.position);
 		}
