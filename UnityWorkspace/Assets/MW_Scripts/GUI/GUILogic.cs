@@ -462,9 +462,9 @@ public class GUILogic : MonoBehaviour {
 			
 			//Load new unit if return true
 			if (hired_tile != null) {
-				//Debug.Log ("Unit Hired: at " + hired_tile.boardPosition.x + ", " + hired_tile.boardPosition.y);
+				//Debug.Log ("Unit Hired: at " + hired_tile.gamePosition.x + ", " + hired_tile.gamePosition.y);
 				GameObject new_unit = (GameObject)Resources.Load ("unitpeasant");
-				Vector3 unit_location = new Vector3(hired_tile.boardPosition.x, 0.1f, hired_tile.boardPosition.y) + UNIT_OFFSET;
+				Vector3 unit_location = new Vector3(hired_tile.gamePosition.x, 0.1f, hired_tile.gamePosition.y) + UNIT_OFFSET;
 				GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, unit_location, Quaternion.identity);
 		
 				// don't need to check for player ownership: is purchase so of course it's player-owned
@@ -498,10 +498,10 @@ public class GUILogic : MonoBehaviour {
 		AbstractTile unit_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
-//		Debug.Log ("Dest tile positon: " + tile.position.x.ToString () + " , " + tile.position.z.ToString ());
-		Debug.Log ("Dest board position: " + dest_tile.boardPosition.x.ToString () + " , " + dest_tile.boardPosition.y.ToString ());
-//		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
-//		Debug.Log ("Unit board position: " + unit_tile.boardPosition.x.ToString () + " , " + unit_tile.boardPosition.y.ToString ());
+		//Debug.Log ("Dest tile positon: " + tile.position.x.ToString () + " , " + tile.position.z.ToString ());
+		//Debug.Log ("Dest board position: " + dest_tile.gamePosition.x.ToString () + " , " + dest_tile.gamePosition.y.ToString ());
+		//Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
+		//Debug.Log ("Unit board position: " + unit_tile.gamePosition.x.ToString () + " , " + unit_tile.gamePosition.y.ToString ());
 		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
 		if (movedUnit) {
 			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0.1f, tile.position.z) + UNIT_OFFSET;
