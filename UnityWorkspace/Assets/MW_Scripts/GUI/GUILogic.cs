@@ -189,8 +189,10 @@ public class GUILogic : MonoBehaviour {
 	//Create a lobby and populate with information
 	public void HostGame() {
 		//Will grab room name from selected GUI object
-		LOADED_GAME = new XmlDocument();
-		LOADED_GAME.Load(GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().getSelected());
+		if(GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().getSelected() != null) {
+			LOADED_GAME = new XmlDocument();
+			LOADED_GAME.Load(GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().getSelected());
+		}
 		Debug.Log ("Host game called");
 		string room_name = GameObject.Find("RoomName").GetComponentsInChildren<Text>()[1].text;
 		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
