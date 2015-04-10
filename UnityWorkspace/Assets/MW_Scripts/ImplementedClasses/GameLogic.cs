@@ -439,9 +439,13 @@ public class GameLogic : AbstractGameLogic
 				AbstractPlayer destPlayer = null;
 				if( dest.myVillage == null )
 				{
+					Debug.Log((u.myVillage!= null).ToString());
+					dest.myVillage = u.myVillage;
+					u.myVillage.controlledRegion.Add(dest);
 					Debug.Log("Taking over netural land");
-					connectRegions( player.myVillages );
+					//connectRegions( player.myVillages );
 					u.currentAction = ActionType.Moved;
+					
 				}
 				else{ 
 				destPlayer = dest.myVillage.myPlayer;
@@ -478,8 +482,9 @@ public class GameLogic : AbstractGameLogic
 				u.myLocation.occupyingUnit = null;
 				u.myLocation = dest;
 				dest.occupyingUnit = u;
-				if(u.myVillage != dest.myVillage)
+				if(u.myVillage != dest.myVillage){
 					dest.myVillage = u.myVillage;
+				}
 				return true;
 			}
 			Debug.Log("Knight or Cannon can't move over tree");
