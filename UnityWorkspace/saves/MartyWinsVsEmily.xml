@@ -1336,7 +1336,7 @@
   <tile landType="Sea" boardPositionX="19" boardPositionY="17" gamePositionX="55" gamePositionY="25.5" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="18" gamePositionX="56" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="19" gamePositionX="57" gamePositionY="28.5" />
-  <game turnIndex="25" turnOf="emilyraso">
+  <game turnIndex="24" turnOf="martymcfly88">
     <participant username="martymcfly88" />
     <participant username="emilyraso" />
   </game>
