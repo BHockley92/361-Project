@@ -359,15 +359,16 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
 	private void OnLoginResult(LoginResult result)
 	{
+		Debug.Log("Login success!");
+		
+		gui.HandleLogin(true);
+		
 		PhotonNetwork.playerName = gui.PLAYER.username;
 		GameObject.Find("WrittenInfo").GetComponent<Text>().text = "Name: " + gui.PLAYER.username;
 		
 		PlayFabData.AuthKey = PlayFabClientAPI.AuthKey;
-		Debug.Log("Login success!");
 		
 		UpdateLocalPlayerStatistics();
-		
-		gui.HandleLogin(true);
 	}
 	
 	/*
@@ -416,13 +417,11 @@ public class MWNetwork : Photon.MonoBehaviour
 	/***************************************************************************************************
      * PHOTON CALLBACKS
      ***************************************************************************************************/
-	
-	
+
 	void OnPhotonPlayerConnected()
 	{
 		UpdateGUIPlayerList();
 	}
-	
 	
 	void OnCreatedRoom()
 	{
@@ -432,11 +431,20 @@ public class MWNetwork : Photon.MonoBehaviour
 		roomProps.Add("gameStarted", false);
 		PhotonNetwork.room.SetCustomProperties(roomProps);
 		
-//		gui.HandleRoomEvent(true);	// @Ben TODO uncomment when implemented
+//		gui.HandleCreateRoom(true);	// @Ben TODO uncomment when implemented
 	}
+	
+	void OnPhotonCreateRoomFailed()
+	{
+		Debug.Log("Could not create room, probably because room name is already taken.");
 
+//		gui.HandleCreateRoom(false);	// @Ben TODO uncomment when implemented
+	}
+	
 	void OnJoinedRoom()
 	{
+		Debug.Log("Joined room: " + PhotonNetwork.room.name);
+	
 		// Set player custom properties
 		Hashtable readyCheck = new Hashtable();
 		readyCheck.Add("ready", false);
@@ -444,24 +452,14 @@ public class MWNetwork : Photon.MonoBehaviour
 		
 		UpdateGUIPlayerList();
 		
-		Debug.Log("Joined room: " + PhotonNetwork.room.name);
-		
-//		gui.HandleRoomEvent(true);	// @Ben TODO uncomment when implemented
-	}
-
-
-	void OnPhotonCreateRoomFailed()
-	{
-		Debug.Log("Could not create room, probably because room name is already taken.");
-		
-//		gui.HandleRoomEvent(false);	// @Ben TODO uncomment when implemented
+//		gui.HandleJoinRoom(true);	// @Ben TODO uncomment when implemented
 	}
 	
 	void OnPhotonJoinRoomFailed()
 	{
 		Debug.Log("Could not join room, possibly because the room is full.");
 		
-//		gui.HandleRoomEvent(false);	// @Ben TODO uncomment when implemented
+//		gui.HandleJoinRoom(false);	// @Ben TODO uncomment when implemented
 	}
 	
 	void OnReceivedRoomListUpdate()
