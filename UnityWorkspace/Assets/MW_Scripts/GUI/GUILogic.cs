@@ -416,7 +416,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void UpgradeVillage() {
-		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: They need to have selected a village to upgrade so we should be hiding buttons until certain conditions are met
 			return;
 		}
@@ -462,7 +462,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void UpgradeUnit() {
-		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit")) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: They need to have selected a unit to upgrade so we should be hiding buttons until certain conditions are met
 			return;
 		}
@@ -508,7 +508,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void HireVillager() {
-		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
 			return;
 		}
@@ -558,19 +558,27 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void BuildRoad() {
-		BUTTON_CLICKED_ON = UNIT_ACTION.BUILD_ROAD;
+		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
+			BUTTON_CLICKED_ON = UNIT_ACTION.BUILD_ROAD;
+		}
 	}
 	
 	public void CombineUnit() {
-		BUTTON_CLICKED_ON = UNIT_ACTION.COMBINE_UNIT;
+		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
+			BUTTON_CLICKED_ON = UNIT_ACTION.COMBINE_UNIT;
+		}
 	}
 	
 	public void CultivateMeadow() {
-		BUTTON_CLICKED_ON = UNIT_ACTION.CULTIVATE_MEADOW;
+		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
+			BUTTON_CLICKED_ON = UNIT_ACTION.CULTIVATE_MEADOW;
+		}
 	}
 
 	public void BuildTower() {
-		BUILD_TOWER = true;
+		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
+			BUILD_TOWER = true;
+		}
 	}
 
 	public void buildTower(Transform build_spot) {
@@ -609,7 +617,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void BuildCannon() {
-		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
 			return;
 		}
@@ -644,7 +652,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void moveUnit(Transform tile) {
-		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit")) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			
 			return;
 		}
