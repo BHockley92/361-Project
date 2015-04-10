@@ -19,6 +19,9 @@ public class TileClicker : MonoBehaviour
 			else if(guiLogic.LAST_CLICKED_ON.tag.Equals("Structure") && guiLogic.BUILD_TOWER) {
 				GameObject.Find("GUILogic").GetComponent<GUILogic>().buildTower(this.transform);
 			}
+			else if(guiLogic.LAST_CLICKED_ON.tag.Equals("Unit") && guiLogic.COMBINE_UNIT) {
+				GameObject.Find("GUILogic").GetComponent<GUILogic>().combineUnit(this.transform);
+			}
 		}
 	}
 }

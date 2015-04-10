@@ -18,22 +18,15 @@ public class GUILogic : MonoBehaviour {
 	public Transform LAST_CLICKED_ON { get; set;}
 	public InputField CHAT;
 	public bool BUILD_TOWER = false;
+	public bool COMBINE_UNIT = false;
 	private Dictionary<Vector2,AbstractTile> BOARD_TILES = new Dictionary<Vector2,AbstractTile>();
 	private SerializeGame SERIALIZER = new SerializeGame();
 	private XmlDocument LOADED_GAME;
-	private UNIT_ACTION BUTTON_CLICKED_ON = UNIT_ACTION.NONE;
 	private GameObject[] VillageButtons;
 	private GameObject[] UnitButtons;
 	
 	private Vector3 VILLAGE_OFFSET = new Vector3(0.0f,0.5f,-0.7f);
 	private Vector3 UNIT_OFFSET = new Vector3(0.0f,0.5f,-0.71f);
-
-	private enum UNIT_ACTION {
-		NONE,
-		BUILD_ROAD,
-		COMBINE_UNIT,
-		CULTIVATE_MEADOW
-	};
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -703,11 +696,19 @@ public class GUILogic : MonoBehaviour {
     
     public void CombineUnit() {
 		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()) && LAST_CLICKED_ON != null) {
-			Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
-			AbstractTile unit_tile;
-			BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
-			unit_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; 
+			COMBINE_UNIT = true;
 		}
+	}
+
+	public void combineUnit(Transform dest) {
+		Vector3 upgrader = LAST_CLICKED_ON.position - UNIT_OFFSET;
+		AbstractTile unit_tile;
+		BOARD_TILES.TryGetValue(new Vector2(upgrader.x, upgrader.z), out unit_tile);
+		Vector3 sacrifice = dest.position - UNIT_OFFSET;
+		AbstractTile dest_tile;
+		BOARD_TILES.TryGetValue(new Vector2(sacrifice.x, sacrifice.z), out dest_tile);
+		GAME.myGameLogic.combineUnits(unit_tile.occupyingUnit, dest_tile.occupyingUnit);
+		LAST_CLICKED_ON.position = dest.position + UNIT_OFFSET;
 	}
 	
 	public void CultivateMeadow() {
@@ -730,7 +731,7 @@ public class GUILogic : MonoBehaviour {
     
     public void BuildTower() {
 		if(GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName()) && LAST_CLICKED_ON != null) {
-			//TODO: build tower
+			BUILD_TOWER = true;
 		}
 	}
 
