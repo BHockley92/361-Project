@@ -826,32 +826,27 @@ public class GUILogic : MonoBehaviour {
 			StartCoroutine(DelayError (error));
 			return;
 		}
-		if(GAME.myGameLogic.isTileWithinCannonFiringRange(unit_tile, dest_tile)) {
-			if(dest_tile.occupyingUnit != null) {
-				if(!GAME.myGameLogic.attackUnitWithCannon(dest_tile.occupyingUnit, unit_tile.occupyingUnit)) {
-					GameObject error = GameObject.Find ("Error");
-					error.GetComponent<Text>().text = "The cannon could not fire at the selected unit";
-					error.GetComponent<Text>().enabled = true;
-					StartCoroutine(DelayError (error));
-					return;
-				}
+		if(dest_tile.occupyingUnit != null) {
+			if(!GAME.myGameLogic.attackUnitWithCannon(dest_tile.occupyingUnit, unit_tile.occupyingUnit)) {
+				GameObject error = GameObject.Find ("Error");
+				error.GetComponent<Text>().text = "The cannon could not fire at the selected unit";
+				error.GetComponent<Text>().enabled = true;
+				StartCoroutine(DelayError (error));
+				return;
 			}
-			else {
-				if(!GAME.myGameLogic.attackVillageWithCannon(dest_tile.occupyingStructure, unit_tile.occupyingUnit)) {
-					GameObject error = GameObject.Find ("Error");
-					error.GetComponent<Text>().text = "The cannon could not fire at the selected village";
-					error.GetComponent<Text>().enabled = true;
-					StartCoroutine(DelayError (error));
-					return;
-				}
+		}
+		else if(dest_tile.occupyingStructure != null) {
+			if(!GAME.myGameLogic.attackVillageWithCannon(dest_tile.occupyingStructure, unit_tile.occupyingUnit)) {
+				GameObject error = GameObject.Find ("Error");
+				error.GetComponent<Text>().text = "The cannon could not fire at the selected village";
+				error.GetComponent<Text>().enabled = true;
+				StartCoroutine(DelayError (error));
+				return;
 			}
 		}
 		else {
-			GameObject error = GameObject.Find ("Error");
-			error.GetComponent<Text>().text = "That target is out of range";
-			error.GetComponent<Text>().enabled = true;
-			StartCoroutine(DelayError (error));
-			return;
+			//If we clicked on a tile that has no occupying structure or unit, then we should just move
+			moveUnit (target);
 		}
 	}
 
