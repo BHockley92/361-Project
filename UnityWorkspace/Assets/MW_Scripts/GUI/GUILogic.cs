@@ -835,7 +835,9 @@ public class GUILogic : MonoBehaviour {
 							break;
 						}
 					}
-					default: dest_tile.occupyingUnit.currentAction = ActionType.Moved; break;
+					default: 
+						//dest_tile.occupyingUnit.currentAction = ActionType.Moved; 
+						break;
 				}
 			}
 			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0.1f, tile.position.z) + UNIT_OFFSET;

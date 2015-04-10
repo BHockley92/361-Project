@@ -318,10 +318,10 @@ public class GameLogic : AbstractGameLogic
 		LandType landtype = dest.myType;
 		Debug.Log("Unit location : " + unitLocation.boardPosition.x.ToString()+ ", " +unitLocation.boardPosition.y.ToString());
 
-		foreach (Tile t in unitTileNeighbours) {
-			Debug.Log("Tile Neighbour at board position: " + t.boardPosition.x.ToString()+ ", " +t.boardPosition.y.ToString());
+		//foreach (Tile t in unitTileNeighbours) {
+		//	Debug.Log("Tile Neighbour at board position: " + t.boardPosition.x.ToString()+ ", " +t.boardPosition.y.ToString());
 
-		}
+		//}
 
 
 		if( unitTileNeighbours.Contains(dest) && u.currentAction == ActionType.ReadyForOrders)
