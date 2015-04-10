@@ -68,7 +68,6 @@
   <tile landType="Grass" boardPositionX="3" boardPositionY="4" gamePositionX="10" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
-  <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="3" unitY="4" isCannon="False" />
   <tile landType="Meadow" boardPositionX="3" boardPositionY="5" gamePositionX="11" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
@@ -357,7 +356,6 @@
   <tile landType="Tree" boardPositionX="9" boardPositionY="4" gamePositionX="22" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
-  <unit unitType="Infantry" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="9" unitY="4" isCannon="False" />
   <tile landType="Tree" boardPositionX="9" boardPositionY="5" gamePositionX="23" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
@@ -553,8 +551,8 @@
   <tile landType="Grass" boardPositionX="13" boardPositionY="5" gamePositionX="31" gamePositionY="7.5">
     <structure structureType="Tower" />
   </tile>
-  <tile landType="Tree" boardPositionX="13" boardPositionY="6" gamePositionX="32" gamePositionY="9">
-    <structure structureType="NONE" />
+  <tile landType="Grass" boardPositionX="13" boardPositionY="6" gamePositionX="32" gamePositionY="9">
+    <structure structureType="Tombstone" />
   </tile>
   <tile landType="Tree" boardPositionX="13" boardPositionY="7" gamePositionX="33" gamePositionY="10.5">
     <structure structureType="NONE" />
@@ -571,7 +569,7 @@
   <tile landType="Grass" boardPositionX="13" boardPositionY="11" gamePositionX="37" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="1483" wood="65" villageType="Castle" locationOfTileX="13" locationOfTileY="11" damageTaken="0" upgradeInProgress="False">
+  <village playerName="martymcfly88" gold="1200" wood="65" villageType="Fort" locationOfTileX="13" locationOfTileY="11" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="3" boardY="3" />
     <controlledTile boardX="4" boardY="3" />
     <controlledTile boardX="5" boardY="3" />
@@ -1104,13 +1102,19 @@
     <controlledTile boardX="4" boardY="4" />
     <controlledTile boardX="3" boardY="4" />
   </village>
+    <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="3" unitY="4" isCannon="False" />
+  <unit unitType="Knight" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="14" unitY="14" isCannon="False" />
+  <unit unitType="Infantry" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="9" unitY="4" isCannon="False" />
+  <unit unitType="Infantry" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="15" unitY="10" isCannon="False" />
+  <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="13" unitY="13" isCannon="False" />
+  <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="15" unitY="9" isCannon="False" />
+
   <tile landType="Grass" boardPositionX="13" boardPositionY="12" gamePositionX="38" gamePositionY="18">
     <structure structureType="Road" />
   </tile>
   <tile landType="Grass" boardPositionX="13" boardPositionY="13" gamePositionX="39" gamePositionY="19.5">
     <structure structureType="Road" />
   </tile>
-  <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="13" unitY="13" isCannon="False" />
   <tile landType="Grass" boardPositionX="13" boardPositionY="14" gamePositionX="40" gamePositionY="21">
     <structure structureType="Road" />
   </tile>
@@ -1150,7 +1154,6 @@
   <tile landType="Grass" boardPositionX="14" boardPositionY="10" gamePositionX="38" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="14" unitY="10" isCannon="False" />
   <tile landType="Grass" boardPositionX="14" boardPositionY="11" gamePositionX="39" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
@@ -1163,7 +1166,6 @@
   <tile landType="Grass" boardPositionX="14" boardPositionY="14" gamePositionX="42" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
-  <unit unitType="Knight" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="14" unitY="14" isCannon="False" />
   <tile landType="Grass" boardPositionX="14" boardPositionY="15" gamePositionX="43" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
@@ -1198,12 +1200,13 @@
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="15" boardPositionY="10" gamePositionX="40" gamePositionY="15">
-    <structure structureType="Tombstone" />
+    <structure structureType="NONE" />
   </tile>
+  <unit unitType="Peasant" unitAction="ReadyForOrders" villageOwnerX="15" villageOwnerY="11" unitX="15" unitY="10" isCannon="False" />
   <tile landType="Grass" boardPositionX="15" boardPositionY="11" gamePositionX="41" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="10" wood="25" villageType="Town" locationOfTileX="15" locationOfTileY="11" damageTaken="0" upgradeInProgress="False">
+    <village playerName="emilyraso" gold="10" wood="25" villageType="Town" locationOfTileX="15" locationOfTileY="11" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="15" boardY="10" />
     <controlledTile boardX="15" boardY="11" />
     <controlledTile boardX="16" boardY="11" />
@@ -1334,7 +1337,7 @@
   <tile landType="Sea" boardPositionX="19" boardPositionY="17" gamePositionX="55" gamePositionY="25.5" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="18" gamePositionX="56" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="19" gamePositionX="57" gamePositionY="28.5" />
-  <game turnIndex="28" turnOf="emilyraso">
+  <game turnIndex="25" turnOf="martymcfly">
     <participant username="emilyraso" />
     <participant username="martymcfly88" />
   </game>
