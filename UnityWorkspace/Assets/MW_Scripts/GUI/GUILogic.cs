@@ -70,7 +70,7 @@ public class GUILogic : MonoBehaviour {
 			}
 			else if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals ("Unit")) {
 				//Show Unit Buttons
-				foreach(GameObject button in VillageButtons) {
+				foreach(GameObject button in UnitButtons) {
 					button.SetActive (true);
 				}
 				//Hide Village Buttons
