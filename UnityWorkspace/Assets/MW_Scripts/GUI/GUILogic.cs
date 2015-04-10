@@ -673,12 +673,14 @@ public class GUILogic : MonoBehaviour {
 //		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
 //		Debug.Log ("Unit board position: " + unit_tile.boardPosition.x.ToString () + " , " + unit_tile.boardPosition.y.ToString ());
 		if (GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile)) {
-			//Make sure the unit's current action is changed
-			switch(BUTTON_CLICKED_ON) {
-				case UNIT_ACTION.BUILD_ROAD: dest_tile.occupyingUnit.currentAction = ActionType.BuildingRoad; break;
-				case UNIT_ACTION.COMBINE_UNIT: dest_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; break;
-				case UNIT_ACTION.CULTIVATE_MEADOW: dest_tile.occupyingUnit.currentAction = ActionType.StartCultivating; break;
-				default: dest_tile.occupyingUnit.currentAction = ActionType.Moved; break;
+			//Make sure the unit's current action is changed if it wasn't changed in moveUnit
+			if(dest_tile.occupyingUnit.currentAction == ActionType.ReadyForOrders) {
+				switch(BUTTON_CLICKED_ON) {
+					case UNIT_ACTION.BUILD_ROAD: dest_tile.occupyingUnit.currentAction = ActionType.BuildingRoad; break;
+					case UNIT_ACTION.COMBINE_UNIT: dest_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; break;
+					case UNIT_ACTION.CULTIVATE_MEADOW: dest_tile.occupyingUnit.currentAction = ActionType.StartCultivating; break;
+					default: dest_tile.occupyingUnit.currentAction = ActionType.Moved; break;
+				}
 			}
 			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0.1f, tile.position.z) + UNIT_OFFSET;
 			Clicker.MoveSelectionArrow (LAST_CLICKED_ON.position);
