@@ -112,7 +112,7 @@ public class GameLogic : AbstractGameLogic
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	public override bool isVillageStillAlive(AbstractVillage v)
