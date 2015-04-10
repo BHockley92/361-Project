@@ -701,6 +701,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void combineUnit(Transform dest) {
+		COMBINE_UNIT = false;
 		Vector3 upgrader = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		AbstractTile unit_tile;
 		BOARD_TILES.TryGetValue(new Vector2(upgrader.x, upgrader.z), out unit_tile);
