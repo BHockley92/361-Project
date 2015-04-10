@@ -234,7 +234,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		{
 			Debug.Log(PhotonPlayer.Find(senderId) + " has ended the game.");
 			
-//			gui.forceQuit(); // TODO BEN UNCOMMENT THIS WHEN IMPLEMENTED
+			gui.forceQuit();
 		}
 	}
 	

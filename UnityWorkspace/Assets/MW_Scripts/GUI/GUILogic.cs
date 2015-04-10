@@ -138,6 +138,11 @@ public class GUILogic : MonoBehaviour {
 
 	//Terminates the current game and sends to main menu
 	public void EndGame() {
+		NETWORK.EndGame();
+	}
+
+	
+	public void forceQuit() {
 		//Clear the map
 		GameObject map = GameObject.Find ("map");
 		List<GameObject> children = new List<GameObject>();
@@ -151,18 +156,20 @@ public class GUILogic : MonoBehaviour {
 
 	//Saves the current state of the game and informs all players
 	public void SaveGame() {
+		XmlDocument game = SERIALIZER.saveGameState(GAME);
 		if(GameObject.Find ("SaveName").GetComponentsInChildren<Text>()[1].text != "") {
-			//TODO: Need a way to save the game to a specific location
+			game.Save (@"saves\" + GameObject.Find ("SaveName").GetComponentsInChildren<Text>()[1].text);
 		}
 		//Otherwise they want to overwrite so find the file, delete it and save the game with the same name
 		else {
 			string selected_game = GameObject.Find ("SavedGamesInGame").GetComponent<GameSelect>().getSelected();
 			if(File.Exists(selected_game)) {
 				File.Delete(selected_game);
-				//TODO: Save the game to the path with the name
+				game.Save (GameObject.Find ("SavedGamesInGame").GetComponent<GameSelect>().getSelected());
 			}
 			else {
-				//TODO: Launch an error
+				//Should never occur since we only load in files that exist but save it anyway
+				game.Save (GameObject.Find ("SavedGamesInGame").GetComponent<GameSelect>().getSelected());
 			}
 		}
 		SERIALIZER.saveGameState(GAME);
@@ -536,7 +543,7 @@ public class GUILogic : MonoBehaviour {
 			
 			//Load new unit if return true
 			if (hired_tile != null) {
-				Debug.Log ("Unit Hired: at " + hired_tile.gamePosition.x + ", " + hired_tile.gamePosition.y);
+				//Debug.Log ("Unit Hired: at " + hired_tile.boardPosition.x + ", " + hired_tile.boardPosition.y);
 				GameObject new_unit = (GameObject)Resources.Load ("unitpeasant");
 				Vector3 unit_location = new Vector3(hired_tile.gamePosition.x, 0.1f, hired_tile.gamePosition.y) + UNIT_OFFSET;
 				GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, unit_location, Quaternion.identity);
