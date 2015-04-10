@@ -769,12 +769,14 @@ public class GameLogic : AbstractGameLogic
 		List<AbstractTile> valid_neighbours = new List<AbstractTile> ();
 		foreach(AbstractTile ti in neighbours)
 		{
-			if(ti.occupyingStructure == null)
-				ti.occupyingStructure = new Structure(ti, StructureType.NONE);
-			if(ti.myVillage == null && ti.occupyingStructure.myType == StructureType.NONE )
-				valid_neighbours.Add(t);
-			else if(ti.occupyingUnit == null && ti.occupyingStructure.myType == StructureType.NONE && ti.myVillage.location != ti)
-				valid_neighbours.Add(t);
+			if(!ti.myType.Equals(LandType.Tree)) {
+				if(ti.occupyingStructure == null)
+					ti.occupyingStructure = new Structure(ti, StructureType.NONE);
+				if(ti.myVillage == null && ti.occupyingStructure.myType == StructureType.NONE )
+					valid_neighbours.Add(t);
+				else if(ti.occupyingUnit == null && ti.occupyingStructure.myType == StructureType.NONE && ti.myVillage.location != ti)
+					valid_neighbours.Add(t);
+			}
 		}
 
 		if(valid_neighbours.Count > 0) 
