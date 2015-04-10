@@ -38,6 +38,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	private string     cachedGameState = "";
 	private const byte UPDATED_GAME_STATE = 1;
 	private const byte CHAT_MESSAGE_SENT = 2;
+	private const byte GAME_ENDED = 3;
 	private const int  GAME_STATE_SUBSTRINGS = 4;
 	private int        gameStateSubstringsReceived = 0;
 	
@@ -208,6 +209,32 @@ public class MWNetwork : Photon.MonoBehaviour
 		}
 		
 		return mwPlayers;
+	}
+	
+	
+	/***************************************************************************************************
+	 * GAME OVER
+	 ***************************************************************************************************/
+	 
+	public void EndGame()
+	{
+		if (!PhotonNetwork.RaiseEvent(GAME_ENDED,
+		                              null,
+		                              true,
+		                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others }))
+		{
+			Debug.Log("Error ending the game over the network.");
+		}
+	}
+	
+	public void GameEnded(byte eventCode, object content, int senderId)
+	{
+		if (eventCode == GAME_ENDED)
+		{
+			Debug.Log(PhotonPlayer.Find(senderId) + " has ended the game.");
+			
+//			gui.forceQuit(); // TODO BEN UNCOMMENT THIS WHEN IMPLEMENTED
+		}
 	}
 	
 	
