@@ -64,6 +64,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		Debug.Log("Connected to master server!");
 		PhotonNetwork.OnEventCall += OnGameStateReceived;
 		PhotonNetwork.OnEventCall += OnChatMessageReceived;
+		PhotonNetwork.OnEventCall += OnGameEnded;
 		
 		// Playfab initialization
 		statistics.Add("wins", 0);
@@ -227,7 +228,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		}
 	}
 	
-	public void GameEnded(byte eventCode, object content, int senderId)
+	public void OnGameEnded(byte eventCode, object content, int senderId)
 	{
 		if (eventCode == GAME_ENDED)
 		{
