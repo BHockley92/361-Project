@@ -845,7 +845,7 @@ public class GUILogic : MonoBehaviour {
 		}
 		else {
 			GameObject error = GameObject.Find ("Error");
-			error.GetComponent<Text>().text = "Some Error Message Here";
+			error.GetComponent<Text>().text = "Must move to adjacent tile.";
 			error.GetComponent<Text>().enabled = true;
 			StartCoroutine(DelayError (error));
 		}
