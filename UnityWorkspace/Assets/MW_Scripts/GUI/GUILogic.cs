@@ -21,12 +21,17 @@ public class GUILogic : MonoBehaviour {
 	private SerializeGame SERIALIZER = new SerializeGame();
 	private XmlDocument LOADED_GAME;
 	private bool FROM_LOADED = false;
+	private UNIT_ACTION BUTTON_CLICKED_ON = UNIT_ACTION.NONE;
 	
 	private Vector3 VILLAGE_OFFSET = new Vector3(0.0f,0.5f,-0.7f);
 	private Vector3 UNIT_OFFSET = new Vector3(0.0f,0.5f,-0.71f);
-	
-	// TEMPORARY: CHANGE THIS STRING TO A UNIQUE ROOM NAME
-	private const string ROOM_NAME = "thisIsAUniqueRoomName271346789ee3hfgh6912734"; 
+
+	private enum UNIT_ACTION {
+		NONE,
+		BUILD_ROAD,
+		COMBINE_UNIT,
+		CULTIVATE_MEADOW
+	};
 
 	//Exit to desktop/quit button
 	public void ExitApp() {
@@ -38,8 +43,17 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void OnGUI() {
-		//TODO: Should be changing what buttons we display based on what LAST_CLICKED_ON is
+		GameObject[] VillageButtons = GameObject.FindGameObjectsWithTag("ForStructures");
+		GameObject[] UnitButtons = GameObject.FindGameObjectsWithTag("ForUnits");
 		if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
+			//Show Village Buttons
+			foreach(GameObject button in VillageButtons) {
+				button.SetActive (true);
+			}
+			//Hide Unit Buttons
+			foreach(GameObject button in UnitButtons) {
+				button.SetActive (false);
+			}
 			AbstractTile building_tile;
 			Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
 			BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
@@ -50,6 +64,16 @@ public class GUILogic : MonoBehaviour {
 				GameObject.Find("Gold").GetComponent<Text>().text = "Gold: " + building_tile.myVillage.gold;
 				GameObject.Find("Wood").GetComponent<Text>().text = "Wood: " + building_tile.myVillage.gold;
 				GameObject.Find("Pop").GetComponent<Text>().text = "Population: " + building_tile.myVillage.supportedUnits;
+			}
+		}
+		else if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals ("Unit")) {
+			//Show Unit Buttons
+			foreach(GameObject button in VillageButtons) {
+				button.SetActive (true);
+			}
+			//Hide Village Buttons
+			foreach(GameObject button in VillageButtons) {
+				button.SetActive (false);
 			}
 		}
 	}
@@ -68,8 +92,9 @@ public class GUILogic : MonoBehaviour {
 
 	//Loads lobby info of selected game
 	public void JoinGame() {
-		//TODO: From the popup with the list of rooms, grab the room name and join it
-		NETWORK.joinRoom(ROOM_NAME);
+		string room_name = GameObject.Find ("Lobbies").GetComponent<GameSelect>().getSelected();
+		NETWORK.joinRoom(room_name);	// temporary fix for single room instances
+		GameObject.Find ("GameName").GetComponent<Text>().text = room_name;
 	}
 
 	//Populate popup with available maps
@@ -92,7 +117,9 @@ public class GUILogic : MonoBehaviour {
 			LOADED_GAME.Load (GameObject.Find("SavedGames").GetComponent<GameSelect>().getSelected());
 		}
 		Debug.Log ("Host game called");
-		NETWORK.hostRoom(ROOM_NAME);
+		string room_name = GameObject.Find("RoomName").GetComponentsInChildren<Text>()[1].text;
+		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
+		NETWORK.hostRoom(room_name);
 	}
 
 	//Sends message in input to all players
@@ -107,8 +134,25 @@ public class GUILogic : MonoBehaviour {
 
 	//Saves the current state of the game and informs all players
 	public void SaveGame() {
-		SERIALIZER.saveGameState (GAME);
-		//TODO: Show a window that says saving is happening, delay like 5 seconds and then go away
+		if(GameObject.Find ("SaveName").GetComponentsInChildren<Text>()[1].text != "") {
+			//We want to save a new file with the above as the name
+		}
+		//Otherwise they want to overwrite so find the file, delete it and save the game with the same name
+		else {
+			GameObject.Find ("SavedGames").GetComponent<GameSelect>().getSelected();
+		}
+		SERIALIZER.saveGameState(GAME);
+		//Fake that the game is saving
+		StartCoroutine(FakeSaving ());
+	}
+
+	//Will fake that the game is saving
+	private IEnumerator FakeSaving() {
+		yield return new WaitForSeconds(2);
+		CanvasGroup saving_text = GameObject.Find ("Saving").GetComponent<CanvasGroup>();
+		saving_text.alpha = 0;
+		saving_text.interactable = false;
+		saving_text.blocksRaycasts = false;
 	}
 
 	public void UpdateGameState(string gameState, int senderId) {
@@ -116,7 +160,6 @@ public class GUILogic : MonoBehaviour {
 		state.LoadXml(gameState); 
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		Debug.Log ("Received a state");
-		//TODO: Test this works
 		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: Covey it is your turn to the user (Need error message thingy)
@@ -144,7 +187,6 @@ public class GUILogic : MonoBehaviour {
 	public void EndTurn() {
 		//Clear old selection
 		Destroy(GameObject.Find("SelectionArrow(Clone)"));
-	
 		ENDTURN.enabled = false;
 		//Update game state with transitions
 		GAME.EndTurn ();
@@ -394,7 +436,10 @@ public class GUILogic : MonoBehaviour {
 		}
 		else {
 			//Show error
-			Debug.Log("Could not upgrade village from " + building_tile.myVillage.myType.ToString() + " to " + new_type.ToString());
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "You cannot upgrade that village";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
 		}
 	}
 
@@ -437,7 +482,10 @@ public class GUILogic : MonoBehaviour {
 			LAST_CLICKED_ON = upgraded_unit.transform;
 		}
 		else {
-			//Show error
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "You cannot upgrade that unit";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
 		}
 	}
 
@@ -483,8 +531,24 @@ public class GUILogic : MonoBehaviour {
 			}
 		} 
 		else {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "That village does not have enough resources";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
 			Debug.Log("Unit exists at this location already");
 		}
+	}
+
+	public void BuildRoad() {
+		BUTTON_CLICKED_ON = UNIT_ACTION.BUILD_ROAD;
+	}
+	
+	public void CombineUnit() {
+		BUTTON_CLICKED_ON = UNIT_ACTION.COMBINE_UNIT;
+	}
+	
+	public void CultivateMeadow() {
+		BUTTON_CLICKED_ON = UNIT_ACTION.CULTIVATE_MEADOW;
 	}
 
 	public void moveUnit(Transform tile) {
@@ -492,12 +556,18 @@ public class GUILogic : MonoBehaviour {
 			
 			return;
 		}
-		
 		AbstractTile dest_tile;
 		BOARD_TILES.TryGetValue(new Vector2(tile.position.x, tile.position.z), out dest_tile);
 		AbstractTile unit_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
+		if(unit_tile.occupyingUnit.currentAction != ActionType.ReadyForOrders) {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "That unit has already been moved this turn";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+			return;
+		}
 //		Debug.Log ("Dest tile positon: " + tile.position.x.ToString () + " , " + tile.position.z.ToString ());
 		Debug.Log ("Dest board position: " + dest_tile.boardPosition.x.ToString () + " , " + dest_tile.boardPosition.y.ToString ());
 //		Debug.Log ("Unit tile positon: " + tilepos.x.ToString () + " , " + tilepos.z.ToString ());
@@ -507,6 +577,19 @@ public class GUILogic : MonoBehaviour {
 			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0.1f, tile.position.z) + UNIT_OFFSET;
 			Clicker.MoveSelectionArrow (LAST_CLICKED_ON.position);
 		}
+		else {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "Some Error Message Here";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+		}
+	}
+
+	//Will fake that the game is saving
+	private IEnumerator DelayError(GameObject error) {
+		yield return new WaitForSeconds(3);
+		error.GetComponent<Text>().text = "";
+		error.GetComponent<Text>().enabled = false;
 	}
 
 	//The leave or disband button depending on host or player
