@@ -223,7 +223,7 @@ public class GUILogic : MonoBehaviour {
 			else {
 				GAME = mw.newGame (NETWORK.getPlayers());
 				Debug.Log ("Random map");
-				GAME.gameBoard = new Board(300,300,5);
+				GAME.gameBoard = new Board(20,20,5);
 				
 				// ALL THE ASSIGNMENT STUFF SHOULD BE DONE IN THE
 				// BACKEND YOU RETARDS
