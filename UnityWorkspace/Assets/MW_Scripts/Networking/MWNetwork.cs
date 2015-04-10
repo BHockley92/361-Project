@@ -102,6 +102,12 @@ public class MWNetwork : Photon.MonoBehaviour
 	 */
 	public void joinRoom(string roomName)
 	{
+		if (roomName == null)
+		{
+			OnPhotonJoinRoomFailed();
+			return;
+		}
+		
 		PhotonNetwork.JoinRoom(roomName);
 	}
 	
@@ -223,9 +229,9 @@ public class MWNetwork : Photon.MonoBehaviour
 		if (PhotonNetwork.isMasterClient)
 		{
 		    if (!PhotonNetwork.RaiseEvent(LEFT_DISBANDED,
-		                              null,
-		                              true,
-		                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All }))
+		                             	  null,
+		                             	  true,
+		                            	  new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All }))
 		    {
 				Debug.Log("Error disbanding.");
 			}
@@ -468,7 +474,8 @@ public class MWNetwork : Photon.MonoBehaviour
 	
 	void OnPhotonCreateRoomFailed()
 	{
-		Debug.Log("Could not create room, probably because room name is already taken.");
+		Debug.Log("Could not create room, probably because room name is already taken." + 
+		          " Might also be due to the room's game already having started");
 
 		gui.HandleCreateRoom(false);
 	}
@@ -484,14 +491,14 @@ public class MWNetwork : Photon.MonoBehaviour
 		
 		UpdateGUIPlayerList();
 		
-		gui.HandleJoinRoom(true);	// @Ben TODO uncomment when implemented
+		gui.HandleJoinRoom(true);
 	}
 	
 	void OnPhotonJoinRoomFailed()
 	{
 		Debug.Log("Could not join room, possibly because the room is full.");
 		
-		gui.HandleJoinRoom(false);	// @Ben TODO uncomment when implemented
+		gui.HandleJoinRoom(false);
 	}
 	
 	void OnReceivedRoomListUpdate()
