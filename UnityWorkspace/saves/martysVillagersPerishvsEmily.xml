@@ -65,7 +65,7 @@
   <tile landType="Grass" boardPositionX="3" boardPositionY="3" gamePositionX="9" gamePositionY="4.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="49" wood="0" villageType="Hovel" locationOfTileX="3" locationOfTileY="3" damageTaken="0" upgradeInProgress="False">
+  <village playerName="emilyraso" gold="28" wood="0" villageType="Hovel" locationOfTileX="3" locationOfTileY="3" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="3" boardY="3" />
     <controlledTile boardX="4" boardY="3" />
     <controlledTile boardX="3" boardY="4" />
@@ -127,7 +127,7 @@
   <tile landType="Grass" boardPositionX="3" boardPositionY="15" gamePositionX="21" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="19" wood="0" villageType="Hovel" locationOfTileX="3" locationOfTileY="15" damageTaken="0" upgradeInProgress="False">
+  <village playerName="emilyraso" gold="13" wood="0" villageType="Hovel" locationOfTileX="3" locationOfTileY="15" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="3" boardY="15" />
     <controlledTile boardX="4" boardY="14" />
     <controlledTile boardX="5" boardY="14" />
@@ -331,7 +331,7 @@
   <tile landType="Grass" boardPositionX="7" boardPositionY="16" gamePositionX="30" gamePositionY="24">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="17" wood="0" villageType="Hovel" locationOfTileX="7" locationOfTileY="16" damageTaken="0" upgradeInProgress="False">
+  <village playerName="emilyraso" gold="12" wood="0" villageType="Hovel" locationOfTileX="7" locationOfTileY="16" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="5" boardY="16" />
     <controlledTile boardX="6" boardY="16" />
     <controlledTile boardX="7" boardY="15" />
@@ -374,7 +374,7 @@
   <tile landType="Grass" boardPositionX="8" boardPositionY="12" gamePositionX="28" gamePositionY="18">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="39" wood="0" villageType="Hovel" locationOfTileX="8" locationOfTileY="12" damageTaken="0" upgradeInProgress="False">
+  <village playerName="martymcfly88" gold="0" wood="0" villageType="Hovel" locationOfTileX="8" locationOfTileY="12" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="3" boardY="13" />
     <controlledTile boardX="4" boardY="13" />
     <controlledTile boardX="5" boardY="13" />
@@ -489,7 +489,7 @@
   <tile landType="Grass" boardPositionX="10" boardPositionY="5" gamePositionX="25" gamePositionY="7.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="35" wood="0" villageType="Hovel" locationOfTileX="10" locationOfTileY="5" damageTaken="0" upgradeInProgress="False">
+  <village playerName="emilyraso" gold="21" wood="0" villageType="Hovel" locationOfTileX="10" locationOfTileY="5" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="8" boardY="6" />
     <controlledTile boardX="9" boardY="6" />
     <controlledTile boardX="10" boardY="5" />
@@ -575,12 +575,15 @@
   <tile landType="Grass" boardPositionX="11" boardPositionY="13" gamePositionX="35" gamePositionY="19.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="0" wood="0" villageType="Hovel" locationOfTileX="11" locationOfTileY="13" damageTaken="0" upgradeInProgress="False">
+  <village playerName="martymcfly88" gold="1" wood="0" villageType="Hovel" locationOfTileX="11" locationOfTileY="13" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="11" boardY="13" />
     <controlledTile boardX="12" boardY="12" />
     <controlledTile boardX="13" boardY="11" />
     <controlledTile boardX="13" boardY="10" />
   </village>
+    <unit unitType="Peasant" unitAction="ReadyForOrders" villageOwnerX="11" villageOwnerY="13" unitX="12" unitY="12" isCannon="False" />
+  <unit unitType="Infantry" unitAction="ReadyForOrders" villageOwnerX="11" villageOwnerY="13" unitX="13" unitY="10" isCannon="False" />
+
   <tile landType="Meadow" boardPositionX="11" boardPositionY="14" gamePositionX="36" gamePositionY="21">
     <structure structureType="NONE" />
   </tile>
@@ -624,7 +627,7 @@
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="12" boardPositionY="12" gamePositionX="36" gamePositionY="18">
-    <structure structureType="Tombstone" />
+    <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="12" boardPositionY="13" gamePositionX="37" gamePositionY="19.5">
     <structure structureType="NONE" />
@@ -666,7 +669,7 @@
     <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="13" boardPositionY="10" gamePositionX="36" gamePositionY="15">
-    <structure structureType="Tombstone" />
+    <structure structureType="NONE" />
   </tile>
   <tile landType="Tree" boardPositionX="13" boardPositionY="11" gamePositionX="37" gamePositionY="16.5">
     <structure structureType="NONE" />
@@ -683,7 +686,7 @@
   <tile landType="Grass" boardPositionX="13" boardPositionY="15" gamePositionX="41" gamePositionY="22.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="14" wood="0" villageType="Hovel" locationOfTileX="13" locationOfTileY="15" damageTaken="0" upgradeInProgress="False">
+  <village playerName="martymcfly88" gold="7" wood="0" villageType="Hovel" locationOfTileX="13" locationOfTileY="15" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="12" boardY="14" />
     <controlledTile boardX="13" boardY="14" />
     <controlledTile boardX="13" boardY="15" />
@@ -764,7 +767,7 @@
   <tile landType="Grass" boardPositionX="15" boardPositionY="7" gamePositionX="37" gamePositionY="10.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="162" wood="0" villageType="Hovel" locationOfTileX="15" locationOfTileY="7" damageTaken="0" upgradeInProgress="False">
+  <village playerName="emilyraso" gold="83" wood="0" villageType="Hovel" locationOfTileX="15" locationOfTileY="7" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="3" boardY="12" />
     <controlledTile boardX="4" boardY="11" />
     <controlledTile boardX="5" boardY="11" />
@@ -859,7 +862,7 @@
   <tile landType="Grass" boardPositionX="15" boardPositionY="10" gamePositionX="40" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="13" wood="0" villageType="Hovel" locationOfTileX="15" locationOfTileY="10" damageTaken="0" upgradeInProgress="False">
+  <village playerName="martymcfly88" gold="7" wood="0" villageType="Hovel" locationOfTileX="15" locationOfTileY="10" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="15" boardY="8" />
     <controlledTile boardX="15" boardY="9" />
     <controlledTile boardX="16" boardY="9" />
@@ -898,7 +901,7 @@
   <tile landType="Grass" boardPositionX="16" boardPositionY="4" gamePositionX="36" gamePositionY="6">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="emilyraso" gold="13" wood="0" villageType="Hovel" locationOfTileX="16" locationOfTileY="4" damageTaken="0" upgradeInProgress="False">
+  <village playerName="emilyraso" gold="10" wood="0" villageType="Hovel" locationOfTileX="16" locationOfTileY="4" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="16" boardY="3" />
     <controlledTile boardX="16" boardY="4" />
     <controlledTile boardX="16" boardY="5" />
@@ -909,7 +912,7 @@
   <tile landType="Grass" boardPositionX="16" boardPositionY="6" gamePositionX="38" gamePositionY="9">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="67" wood="0" villageType="Hovel" locationOfTileX="16" locationOfTileY="6" damageTaken="0" upgradeInProgress="False">
+  <village playerName="martymcfly88" gold="7" wood="0" villageType="Hovel" locationOfTileX="16" locationOfTileY="6" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="3" boardY="6" />
     <controlledTile boardX="3" boardY="7" />
     <controlledTile boardX="3" boardY="8" />
@@ -1081,7 +1084,7 @@
   <tile landType="Sea" boardPositionX="19" boardPositionY="17" gamePositionX="55" gamePositionY="25.5" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="18" gamePositionX="56" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="19" gamePositionX="57" gamePositionY="28.5" />
-  <game turnIndex="7" turnOf="emilyraso">
+  <game turnIndex="5" turnOf="emilyraso">
     <participant username="martymcfly88" />
     <participant username="emilyraso" />
   </game>
