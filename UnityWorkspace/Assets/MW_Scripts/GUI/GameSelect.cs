@@ -18,7 +18,7 @@ public class GameSelect : MonoBehaviour {
 		CanvasGroup show_menu = this.transform.parent.GetComponentInParent<CanvasGroup>();
 		//Only display this menu if we're showing it
 		if(show_menu.alpha == 1 && show_menu.interactable && show_menu.blocksRaycasts) {
-			GUILayout.BeginArea(new Rect(370, 235, 650, 500));
+			GUILayout.BeginArea(new Rect(Screen.width*0.2875f, Screen.height*0.2875f, Screen.width*0.425f, Screen.height*0.41f));
 			GUILayout.BeginScrollView(SCROLLPOS, false, true);
 			GUILayout.BeginVertical(GUILayout.Width(625));
 			SELECTION = GUILayout.SelectionGrid(SELECTION, GAMES, 1);
