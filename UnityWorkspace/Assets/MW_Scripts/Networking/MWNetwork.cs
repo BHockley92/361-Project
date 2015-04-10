@@ -529,7 +529,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		List<string> players = new List<string>();
 		foreach (PhotonPlayer player in PhotonNetwork.playerList)
 		{
-			players.Add(player.name);
+			players.Add(player.name + " \t\t\t\t\t\t\t\t\t\t\t\t" + statistics["wins"].ToString() + " wins, " + statistics["losses"].ToString() + " losses.");
 		}
 		GUIPlayerList.GetComponent<PlayerList>().PLAYERS = players.ToArray();
 	}
