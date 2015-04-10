@@ -708,8 +708,15 @@ public class GUILogic : MonoBehaviour {
 		Vector3 sacrifice = dest.position - UNIT_OFFSET;
 		AbstractTile dest_tile;
 		BOARD_TILES.TryGetValue(new Vector2(sacrifice.x, sacrifice.z), out dest_tile);
-		GAME.myGameLogic.combineUnits(unit_tile.occupyingUnit, dest_tile.occupyingUnit);
-		LAST_CLICKED_ON.position = dest.position + UNIT_OFFSET;
+		if(GAME.myGameLogic.combineUnits(unit_tile.occupyingUnit, dest_tile.occupyingUnit)) {
+			LAST_CLICKED_ON.position = dest.position + UNIT_OFFSET;
+		}
+		else {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "You cannot combine those two units";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+		}
 	}
 	
 	public void CultivateMeadow() {
