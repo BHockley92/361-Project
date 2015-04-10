@@ -94,7 +94,7 @@ public class GUILogic : MonoBehaviour {
 	public void JoinGame() {
 		string room_name = GameObject.Find ("Lobbies").GetComponent<GameSelect>().getSelected();
 		NETWORK.joinRoom(room_name);	// temporary fix for single room instances
-		GameObject.Find ("GameName").GetComponent<Text>().text = room_name;
+		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
 	}
 
 	//Populate popup with available maps
@@ -106,11 +106,11 @@ public class GUILogic : MonoBehaviour {
 	public void LoadGame() {
 		Debug.Log ("Load Game called");
 		FROM_LOADED = true;
-		GameObject.Find("SavedGames").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
+		GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 	}
 
 	public void ResetList() {
-		GameObject.Find("SavedGames").GetComponent<GameSelect>().GAMES = new List<string>().ToArray();
+		GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = new List<string>().ToArray();
 	}
 
 	//Create a lobby and populate with information
@@ -118,7 +118,7 @@ public class GUILogic : MonoBehaviour {
 		//Will grab room name from selected GUI object
 		if(FROM_LOADED) {
 			LOADED_GAME = new XmlDocument();
-			LOADED_GAME.Load (GameObject.Find("SavedGames").GetComponent<GameSelect>().getSelected());
+			LOADED_GAME.Load (GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().getSelected());
 		}
 		Debug.Log ("Host game called");
 		string room_name = GameObject.Find("RoomName").GetComponentsInChildren<Text>()[1].text;
@@ -144,7 +144,7 @@ public class GUILogic : MonoBehaviour {
 		}
 		//Otherwise they want to overwrite so find the file, delete it and save the game with the same name
 		else {
-			GameObject.Find ("SavedGames").GetComponent<GameSelect>().getSelected();
+			GameObject.Find ("SavedGamesInGame").GetComponent<GameSelect>().getSelected();
 		}
 		SERIALIZER.saveGameState(GAME);
 		//Fake that the game is saving
