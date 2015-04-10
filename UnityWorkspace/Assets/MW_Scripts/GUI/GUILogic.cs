@@ -442,7 +442,7 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void HireVillager() {
-		if (LAST_CLICKED_ON == null) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
 			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
 			return;
 		}
@@ -454,7 +454,7 @@ public class GUILogic : MonoBehaviour {
 			//TODO: Show error and stop
 			return;
 		}
-		//check if unit doesn't exist on tile alreadyf
+		//check if unit doesn't exist on tile already
 		if (building_tile.occupyingUnit == null) {
 			AbstractUnit new_villager = new Unit (building_tile.myVillage, building_tile);
 
@@ -462,9 +462,9 @@ public class GUILogic : MonoBehaviour {
 			
 			//Load new unit if return true
 			if (hired_tile != null) {
-				Debug.Log ("Unit Hired: at " + hired_tile.boardPosition.x + ", " + hired_tile.boardPosition.y);
+				//Debug.Log ("Unit Hired: at " + hired_tile.boardPosition.x + ", " + hired_tile.boardPosition.y);
 				GameObject new_unit = (GameObject)Resources.Load ("unitpeasant");
-				Vector3 unit_location = new Vector3(hired_tile.boardPosition.x, 0.0f, hired_tile.boardPosition.y) + UNIT_OFFSET;
+				Vector3 unit_location = new Vector3(hired_tile.boardPosition.x, 0.1f, hired_tile.boardPosition.y) + UNIT_OFFSET;
 				GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, unit_location, Quaternion.identity);
 		
 				// don't need to check for player ownership: is purchase so of course it's player-owned
@@ -488,6 +488,11 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void moveUnit(Transform tile) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit")) {
+			
+			return;
+		}
+		
 		AbstractTile dest_tile;
 		BOARD_TILES.TryGetValue(new Vector2(tile.position.x, tile.position.z), out dest_tile);
 		AbstractTile unit_tile;
@@ -499,7 +504,7 @@ public class GUILogic : MonoBehaviour {
 //		Debug.Log ("Unit board position: " + unit_tile.boardPosition.x.ToString () + " , " + unit_tile.boardPosition.y.ToString ());
 		bool movedUnit = GAME.myGameLogic.moveUnit(unit_tile.occupyingUnit,dest_tile);
 		if (movedUnit) {
-			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0, tile.position.z) + UNIT_OFFSET;
+			LAST_CLICKED_ON.position = new Vector3 (tile.position.x, 0.1f, tile.position.z) + UNIT_OFFSET;
 			Clicker.MoveSelectionArrow (LAST_CLICKED_ON.position);
 		}
 	}
