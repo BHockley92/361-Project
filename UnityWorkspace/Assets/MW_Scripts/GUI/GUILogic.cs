@@ -836,7 +836,7 @@ public class GUILogic : MonoBehaviour {
 			}
 		}
 		else if(dest_tile.occupyingStructure != null) {
-			if(!GAME.myGameLogic.attackVillageWithCannon(dest_tile.occupyingStructure, unit_tile.occupyingUnit)) {
+			if(!GAME.myGameLogic.attackVillageWithCannon(dest_tile.myVillage, unit_tile.occupyingUnit)) {
 				GameObject error = GameObject.Find ("Error");
 				error.GetComponent<Text>().text = "The cannon could not fire at the selected village";
 				error.GetComponent<Text>().enabled = true;
