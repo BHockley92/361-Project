@@ -22,16 +22,16 @@ public class CameraControl : MonoBehaviour {
 		Rect recright = new Rect (Screen.width-GUIsize, 0, GUIsize, Screen.height);
 		
 		//Camera panning handlers
-		if (enabled_camera && (recdown.Contains(Input.mousePosition) || Input.GetKey(KeyCode.DownArrow) ) && middleY - transform.position.z < boardY * 3.0f/17) {
+		if (enabled_camera && (recdown.Contains(Input.mousePosition) || Input.GetKey(KeyCode.DownArrow))) {
 			transform.Translate(0, 0, -CamSpeed, Space.World);
 		}
-		if (enabled_camera && (recup.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.UpArrow)) && middleY - transform.position.z > -boardY * 3.0f/22) {
+		if (enabled_camera && (recup.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.UpArrow))) {
 			transform.Translate(0, 0, CamSpeed, Space.World);
 		}
-		if (enabled_camera && (recleft.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.LeftArrow)) && middleX - transform.position.x < boardY * 9.0f/22) {
+		if (enabled_camera && (recleft.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.LeftArrow))) {
 			transform.Translate(-CamSpeed, 0, 0, Space.World);
 		}
-		if (enabled_camera && (recright.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.RightArrow)) && middleX - transform.position.x > -boardY * 9.0f/24) {
+		if (enabled_camera && (recright.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.RightArrow))) {
 			transform.Translate(CamSpeed, 0, 0, Space.World);
 		}
 	}
