@@ -8,7 +8,7 @@ public class Village : AbstractVillage
 	{
 		myType = VillageType.Hovel;
 		gold = 7;
-		wood = 20;//just so I can test upgradeVillage
+		wood = 0;
 		
 		controlledRegion = region;
 		supportedUnits = new List<AbstractUnit> ();

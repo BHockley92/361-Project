@@ -726,10 +726,8 @@ public class GameLogic : AbstractGameLogic
 	// Finishes combining units
 	private void readyForOrders(AbstractVillage v)
 	{
-		Debug.Log ("ready for orders 1");
 		foreach(AbstractUnit u in v.supportedUnits)
 		{
-			Debug.Log("ready for order2");
 			if( u.currentAction == ActionType.Moved)
 			{
 				u.currentAction = ActionType.ReadyForOrders;
