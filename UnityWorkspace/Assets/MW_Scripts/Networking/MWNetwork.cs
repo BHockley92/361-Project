@@ -330,6 +330,8 @@ public class MWNetwork : Photon.MonoBehaviour
 	private void OnLoginResult(LoginResult result)
 	{
 		PhotonNetwork.playerName = gui.PLAYER.username;
+		GameObject.Find("Main Camera/Canvas/GameGUI/SelectedInfo/WrittenInfo").GetComponent<Text>().text = "Name: " + gui.PLAYER.username;
+		
 		PlayFabData.AuthKey = PlayFabClientAPI.AuthKey;
 		Debug.Log("Login success!");
 		
