@@ -172,7 +172,9 @@ public class GUILogic : MonoBehaviour {
 
 	//Populate popup with available maps
 	public void NewGame() {
-		GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("premade");
+		/*
+			GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("premade");
+		*/
 	}
 
 	//Populate popup with saved maps
