@@ -367,7 +367,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		
 		UpdateLocalPlayerStatistics();
 		
-//		gui.HandleLogin(true); // TODO uncomment when implemented
+		gui.HandleLogin(true);
 	}
 	
 	/*
@@ -377,7 +377,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	{
 		Debug.Log("Login error: " + error.ErrorMessage);
 		
-//		gui.HangleLogin(false); // TODO uncomment when implemented
+		gui.HandleLogin(false);
 	}
 	
 	/* 

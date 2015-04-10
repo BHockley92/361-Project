@@ -65,7 +65,6 @@ public class GUILogic : MonoBehaviour {
 	public void OnGUI() {
 		//Only show the button when clicking on things if it's the players turn.
 		if (GAME != null && GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			Debug.Log ("My Turn");
 			if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
 				//Show Village Buttons
 				foreach(GameObject button in VillageButtons) {
@@ -109,18 +108,39 @@ public class GUILogic : MonoBehaviour {
 					button.GetComponent<CanvasGroup>().blocksRaycasts = false;
 				}
 			}
-			else {
-				Debug.Log ("Neither being hit");
-			}
 		}
 	}
 
 	//Authenticates the user to view stats
 	public void Authenticate() {
-		PLAYER = new MW_Player();
-		Debug.Log ("Authenticate Player has been called"); //only called once why?
-		PLAYER.setAttribute(USERNAME.text);
 		NETWORK.Authenticate(USERNAME.text, PASSWORD.text);
+	}
+
+	public void HandleLogin(bool result) {
+		//If we succeed
+		if(result) {
+			//Create the player and switch menus
+			PLAYER = new MW_Player();
+			PLAYER.setAttribute(USERNAME.text);
+			CanvasGroup play_menu = GameObject.Find ("PlayMenu").GetComponent<CanvasGroup>();
+			play_menu.alpha = 1;
+			play_menu.blocksRaycasts = true;
+			play_menu.interactable = true;
+			CanvasGroup main_menu = GameObject.Find ("MainMenu").GetComponent<CanvasGroup>();
+			main_menu.alpha = 0;
+			main_menu.blocksRaycasts = false;
+			main_menu.interactable = false;
+			CanvasGroup authentication = GameObject.Find ("Main Camera/Canvas/MainMenu/Popup").GetComponent<CanvasGroup>();
+			authentication.alpha = 0;
+			authentication.interactable = false;
+			authentication.blocksRaycasts = false;
+		}
+		else {
+			CanvasGroup failed = GameObject.Find ("Failure").GetComponent<CanvasGroup>();
+			failed.alpha = 1;
+			failed.interactable = true;
+			failed.blocksRaycasts = true;
+		}
 	}
 
 	public void ListRooms() {
