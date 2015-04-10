@@ -44,7 +44,7 @@ public class GUILogic : MonoBehaviour {
 
 	public void OnGUI() {
 		//Only show the button when clicking on things if it's the players turn.
-		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
+		if (GAME != null && GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			GameObject[] VillageButtons = GameObject.FindGameObjectsWithTag("ForStructures");
 			GameObject[] UnitButtons = GameObject.FindGameObjectsWithTag("ForUnits");
 			if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
