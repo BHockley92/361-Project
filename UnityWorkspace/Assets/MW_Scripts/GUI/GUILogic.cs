@@ -174,7 +174,7 @@ public class GUILogic : MonoBehaviour {
 	public void UpdateGameState(string gameState, int senderId) {
 		XmlDocument state = new XmlDocument();
 		state.LoadXml(gameState); 
-		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
+		GAME = SERIALIZER.loadGame(state);
 		Debug.Log ("Received a state");
 		if (GAME != null) Debug.Log(NETWORK.GetLocalPlayerName() + " is notified that it is " + GAME.turnOf.username + "'s turn.");				Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
@@ -261,8 +261,7 @@ public class GUILogic : MonoBehaviour {
 		}
 		else if (response == MWNetworkResponse.READY_CHECKED)
 		{
-			MedievalWarfare mw = new MedievalWarfare ();
-			GAME = mw.newGame (NETWORK.getPlayers());
+			Debug.Log("Ready checked.");
 		}
 		else {
 			//Check the other possible problems
