@@ -582,7 +582,7 @@ public class GUILogic : MonoBehaviour {
 	public void BuildTower() {
 		BUILD_TOWER = true;
 	}
-	*
+
 	public void buildTower(Transform build_spot) {
 		BUILD_TOWER = false;
 		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village")) {
