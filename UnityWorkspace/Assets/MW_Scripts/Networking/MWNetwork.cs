@@ -34,11 +34,12 @@ public class MWNetwork : Photon.MonoBehaviour
 	public GameObject GUIPlayerList;
 	public Text Chat;
 	
-	// Used for sending game state over network.
+	// Used for sending events over network.
 	private string     cachedGameState = "";
 	private const byte UPDATED_GAME_STATE = 1;
-	private const byte CHAT_MESSAGE_SENT = 2;
-	private const byte GAME_ENDED = 3;
+	private const byte CHAT_MESSAGE_SENT  = 2;
+	private const byte GAME_ENDED         = 3;
+	private const byte LEFT_DISBANDED     = 4;
 	private const int  GAME_STATE_SUBSTRINGS = 4;
 	private int        gameStateSubstringsReceived = 0;
 	
@@ -65,6 +66,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		PhotonNetwork.OnEventCall += OnGameStateReceived;
 		PhotonNetwork.OnEventCall += OnChatMessageReceived;
 		PhotonNetwork.OnEventCall += OnGameEnded;
+		PhotonNetwork.OnEventCall += OnLeftDisbanded;
 		
 		// Playfab initialization
 		statistics.Add("wins", 0);
@@ -212,6 +214,36 @@ public class MWNetwork : Photon.MonoBehaviour
 		return mwPlayers;
 	}
 	
+	/***************************************************************************************************
+	 * LEAVE_DISBAND
+	 ***************************************************************************************************/
+	
+	public void LeaveDisband()
+	{
+		if (PhotonNetwork.isMasterClient)
+		{
+		    if (!PhotonNetwork.RaiseEvent(LEFT_DISBANDED,
+		                              null,
+		                              true,
+		                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All }))
+		    {
+				Debug.Log("Error disbanding.");
+			}
+		}
+		else {
+			OnLeftDisbanded(LEFT_DISBANDED, null, true, PhotonNetwork.player.ID);
+		}
+	}
+	
+	public void OnLeftDisbanded(byte eventCode, object content, int senderId)
+	{
+		if (eventCode == LEFT_DISBANDED)
+		{
+			Debug.Log(PhotonPlayer.Find(senderId) + " has left the room.");
+			
+//			gui.HandleLeftDisbanded();	// @Ben TODO uncomment when implemented
+		}
+	}
 	
 	/***************************************************************************************************
 	 * GAME OVER
@@ -479,7 +511,7 @@ public class MWNetwork : Photon.MonoBehaviour
 	
 	void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
 	{
-		Debug.Log(otherPlayer.name + " left the room.");
+		Debug.Log(otherPlayer.name + " has disconnected.");
 		
 		gui.forceQuit();
 	}
