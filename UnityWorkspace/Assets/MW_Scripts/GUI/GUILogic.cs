@@ -380,7 +380,7 @@ public class GUILogic : MonoBehaviour {
 				Debug.Log ("Assigned villagers to players");
 			}
 			//Start the game
-			XmlDocument state = SERIALIZER.saveGameState(GAME); //TODO: Emily debug saveGameState
+			XmlDocument state = SERIALIZER.saveGameState(GAME);
 			Debug.Log ("board saved");
 			NETWORK.ShareGameState(state.OuterXml);
 			Debug.Log ("pushed board");
@@ -474,18 +474,13 @@ public class GUILogic : MonoBehaviour {
 			if(current.occupyingStructure.myType != StructureType.NONE) {
 				GameObject structure = null;
 				switch(current.occupyingStructure.myType) {
-				case StructureType.Road: GameObject road_tile = Instantiate((GameObject)Resources.Load("tileRoad"), instantiated_tile.transform.position + new Vector3(0,0.05f,0), Quaternion.identity) as GameObject; road_tile.GetComponent<HexTile>().InstantiateTile(); road_tile.transform.parent = instantiated_tile.transform; break;
+					case StructureType.Road: GameObject road_tile = Instantiate((GameObject)Resources.Load("tileRoad"), instantiated_tile.transform.position + new Vector3(0,0.05f,0), Quaternion.identity) as GameObject; road_tile.GetComponent<HexTile>().InstantiateTile(); road_tile.transform.parent = instantiated_tile.transform; break;
 					case StructureType.Tombstone: structure = (GameObject)Resources.Load("structureTombstone"); break;
 					case StructureType.Tower: structure = (GameObject)Resources.Load("structureTower"); break;
 					case StructureType.NONE: break;
 				}
 				if(structure != null) {
-					//TODO: Add to position to make sure the object appears naturally
 					GameObject instantiated_structure = (GameObject)GameObject.Instantiate(structure, pos + VILLAGE_OFFSET, Quaternion.identity);
-					
-					// TODO: do structures even need a clicker?
-					//instantiated_structure.AddComponent<BoxCollider>();
-					//instantiated_structure.AddComponent(typeof(Clicker));
 					instantiated_structure.tag = "Structure";
 					//Set as child
 					instantiated_structure.transform.parent = map.transform;
@@ -542,7 +537,7 @@ public class GUILogic : MonoBehaviour {
 
 	public void UpgradeVillage() {
 		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			//TODO: They need to have selected a village to upgrade so we should be hiding buttons until certain conditions are met
+			//Shouldn't need this
 			return;
 		}
 		//Finds the tile associated with the building
@@ -550,7 +545,6 @@ public class GUILogic : MonoBehaviour {
 		Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
 		if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
-			//TODO: Show error and stop
 			//Technically it shouldn't be possible to even see this
 			return;
 		}
@@ -588,7 +582,7 @@ public class GUILogic : MonoBehaviour {
 
 	public void UpgradeUnit() {
 		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			//TODO: They need to have selected a unit to upgrade so we should be hiding buttons until certain conditions are met
+			//Shouldn't need this check
 			return;
 		}
 
@@ -599,7 +593,7 @@ public class GUILogic : MonoBehaviour {
 		UnitType new_type = UnitType.Knight;
 		Debug.Log ((unit_tile != null).ToString ());
 		if(!unit_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
-			//TODO: Show error and stop
+			//Shouldn't need this check
 			return;
 		}
 		switch(unit_tile.occupyingUnit.myType) {
@@ -634,7 +628,7 @@ public class GUILogic : MonoBehaviour {
 
 	public void HireVillager() {
 		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
+			//Shouldn't need this check
 			return;
 		}
 		//Finds the tile associated with the village
@@ -642,7 +636,7 @@ public class GUILogic : MonoBehaviour {
 		Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
 		BOARD_TILES.TryGetValue (new Vector2 (tilepos.x, tilepos.z), out building_tile);
 		if (!building_tile.myVillage.myPlayer.username.Equals (NETWORK.GetLocalPlayerName ())) {
-			//TODO: Show error and stop
+			//Shouldnt need check
 			return;
 		}
 		//check if unit doesn't exist on tile already
@@ -782,14 +776,14 @@ public class GUILogic : MonoBehaviour {
 
 	public void BuildCannon() {
 		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Village") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			//TODO: They need to have selected a village to hire the unit so we should be hiding buttons until certain conditions are met
+			//Shouldn't need check
 			return;
 		}
 		AbstractTile building_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
 		BOARD_TILES.TryGetValue (new Vector2 (tilepos.x, tilepos.z), out building_tile);
 		if (!building_tile.myVillage.myPlayer.username.Equals (NETWORK.GetLocalPlayerName ())) {
-			//TODO: Show error and stop
+			//Shouldn't need check
 			return;
 		}
 		AbstractTile hired_tile = GAME.myGameLogic.buildCannon(building_tile ,building_tile.myVillage);
@@ -847,14 +841,14 @@ public class GUILogic : MonoBehaviour {
 		}
 	}
 
-	//Will fake that the game is saving
+	//Ensure the error stays up long enough to be useful
 	private IEnumerator DelayError(GameObject error) {
 		yield return new WaitForSeconds(3);
 		error.GetComponent<Text>().text = "";
 		error.GetComponent<Text>().enabled = false;
 	}
 
-	//The leave or disband button depending on host or player
+	//The leave or disband button
 	public void Leave_Disband() {
 		NETWORK.LeaveDisband();
 	}
