@@ -463,7 +463,8 @@ public class GameLogic : AbstractGameLogic
 				if( u.isCannon ){
 					u.currentAction = ActionType.Moved;
 				}
-
+				u.myLocation = dest;
+				dest.occupyingUnit = u;
 				return true;
 			}
 			Debug.Log("Knight or Cannon can't move over tree");
