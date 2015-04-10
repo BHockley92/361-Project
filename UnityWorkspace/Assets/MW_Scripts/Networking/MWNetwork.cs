@@ -406,10 +406,15 @@ public class MWNetwork : Photon.MonoBehaviour
 		
 		Debug.Log ("Room created");
 	}
-
-	void OnPhotonCreateRoomFailed(object[] codeAndMsg)
+	
+	void OnPhotonCreateRoomFailed()
 	{
 		Debug.Log("Could not create room, probably because room name is already taken.");
+	}
+	
+	void OnReceivedRoomListUpdate()
+	{
+		gui.ListRooms();
 	}
 	
 	void OnPhotonJoinRoomFailed()
