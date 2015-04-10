@@ -366,6 +366,8 @@ public class MWNetwork : Photon.MonoBehaviour
 		Debug.Log("Login success!");
 		
 		UpdateLocalPlayerStatistics();
+		
+//		gui.HandleLogin(true); // TODO uncomment when implemented
 	}
 	
 	/*
@@ -374,6 +376,8 @@ public class MWNetwork : Photon.MonoBehaviour
 	private void OnLoginError(PlayFabError error)
 	{
 		Debug.Log("Login error: " + error.ErrorMessage);
+		
+//		gui.HangleLogin(false); // TODO uncomment when implemented
 	}
 	
 	/* 
@@ -467,6 +471,8 @@ public class MWNetwork : Photon.MonoBehaviour
 	void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
 	{
 		Debug.Log(otherPlayer.name + " left the room.");
+		
+		gui.forceQuit();
 	}
 	
 	// Update player list on GUI
