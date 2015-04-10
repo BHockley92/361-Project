@@ -109,6 +109,10 @@ public class GUILogic : MonoBehaviour {
 		GameObject.Find("SavedGames").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 	}
 
+	public void ResetList() {
+		GameObject.Find("SavedGames").GetComponent<GameSelect>().GAMES = new List<string>().ToArray();
+	}
+
 	//Create a lobby and populate with information
 	public void HostGame() {
 		//Will grab room name from selected GUI object
@@ -120,6 +124,7 @@ public class GUILogic : MonoBehaviour {
 		string room_name = GameObject.Find("RoomName").GetComponentsInChildren<Text>()[1].text;
 		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
 		NETWORK.hostRoom(room_name);
+		ResetList ();
 	}
 
 	//Sends message in input to all players
