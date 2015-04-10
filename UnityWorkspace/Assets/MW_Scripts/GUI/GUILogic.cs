@@ -565,10 +565,12 @@ public class GUILogic : MonoBehaviour {
 			
 			return;
 		}
-		
 		AbstractTile dest_tile;
 		BOARD_TILES.TryGetValue(new Vector2(tile.position.x, tile.position.z), out dest_tile);
 		AbstractTile unit_tile;
+		if(unit_tile.occupyingUnit.currentAction == ActionType.Moved) {
+			return;
+		}
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
 //		Debug.Log ("Dest tile positon: " + tile.position.x.ToString () + " , " + tile.position.z.ToString ());
