@@ -431,14 +431,14 @@ public class MWNetwork : Photon.MonoBehaviour
 		roomProps.Add("gameStarted", false);
 		PhotonNetwork.room.SetCustomProperties(roomProps);
 		
-//		gui.HandleCreateRoom(true);	// @Ben TODO uncomment when implemented
+		gui.HandleCreateRoom(true);
 	}
 	
 	void OnPhotonCreateRoomFailed()
 	{
 		Debug.Log("Could not create room, probably because room name is already taken.");
 
-//		gui.HandleCreateRoom(false);	// @Ben TODO uncomment when implemented
+		gui.HandleCreateRoom(false);
 	}
 	
 	void OnJoinedRoom()

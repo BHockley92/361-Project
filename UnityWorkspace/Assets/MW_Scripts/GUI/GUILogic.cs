@@ -155,12 +155,30 @@ public class GUILogic : MonoBehaviour {
 		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
 	}
 
-	public void HandleJoinFail() {
-		GameObject.Find ("LobbyName").GetComponent<Text>().text = "";
-		CanvasGroup join_fail = GameObject.Find ("JoinFailure").GetComponent<CanvasGroup>();
-		join_fail.alpha = 1;
-		join_fail.interactable = true;
-		join_fail.blocksRaycasts = true;
+	public void HandleJoinRoom(bool result) {
+		if(result) {
+			//Continue with the next menus
+			CanvasGroup lobby_menu = GameObject.Find ("LobbyMenu").GetComponent<CanvasGroup>();
+			lobby_menu.alpha = 1;
+			lobby_menu.blocksRaycasts = true;
+			lobby_menu.interactable = true;
+			CanvasGroup play_menu = GameObject.Find ("PlayMenu").GetComponent<CanvasGroup>();
+			play_menu.alpha = 0;
+			play_menu.blocksRaycasts = false;
+			play_menu.interactable = false;
+			CanvasGroup room_join = GameObject.Find ("Main Camera/Canvas/PlayMenu/Popup").GetComponent<CanvasGroup>();
+			room_join.alpha = 0;
+			room_join.interactable = false;
+			room_join.blocksRaycasts = false;
+		}
+		else {
+			//Show the error popup
+			GameObject.Find ("LobbyName").GetComponent<Text>().text = "";
+			CanvasGroup join_fail = GameObject.Find ("JoinFailure").GetComponent<CanvasGroup>();
+			join_fail.alpha = 1;
+			join_fail.interactable = true;
+			join_fail.blocksRaycasts = true;
+		}
 	}
 
 	//Populate popup with available maps
@@ -193,12 +211,31 @@ public class GUILogic : MonoBehaviour {
 		ResetList ();
 	}
 
-	public void HandleHostFail() {
-		GameObject.Find ("LobbyName").GetComponent<Text>().text = "";
-		CanvasGroup host_fail = GameObject.Find ("HostFailure").GetComponent<CanvasGroup>();
-		host_fail.alpha = 1;
-		host_fail.interactable = true;
-		host_fail.blocksRaycasts = true;
+	public void HandleCreateRoom(bool result) {
+		if(result) {
+			//Continue with the next menus
+			CanvasGroup lobby_menu = GameObject.Find ("LobbyMenu").GetComponent<CanvasGroup>();
+			lobby_menu.alpha = 1;
+			lobby_menu.blocksRaycasts = true;
+			lobby_menu.interactable = true;
+			CanvasGroup host_menu = GameObject.Find ("HostMenu").GetComponent<CanvasGroup>();
+			host_menu.alpha = 0;
+			host_menu.blocksRaycasts = false;
+			host_menu.interactable = false;
+			CanvasGroup room_creation = GameObject.Find ("Main Camera/Canvas/HostMenu/Popup").GetComponent<CanvasGroup>();
+			room_creation.alpha = 0;
+			room_creation.interactable = false;
+			room_creation.blocksRaycasts = false;
+			GameObject.Find ("menu_background").GetComponent<SpriteRenderer>().enabled = false;
+		}
+		else {
+			//Show the error popup
+			GameObject.Find ("LobbyName").GetComponent<Text>().text = "";
+			CanvasGroup host_fail = GameObject.Find ("HostFailure").GetComponent<CanvasGroup>();
+			host_fail.alpha = 1;
+			host_fail.interactable = true;
+			host_fail.blocksRaycasts = true;
+		}
 	}
 
 	//Sends message in input to all players
