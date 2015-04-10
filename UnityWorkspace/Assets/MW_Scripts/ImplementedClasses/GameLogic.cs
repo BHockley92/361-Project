@@ -7,7 +7,7 @@ using System.Linq;
 public class GameLogic : AbstractGameLogic
 {
 
-	public override bool hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
+	public override AbstractTile hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
 	{
 		int unitcost = myValueManager.getUnitValue (u.myType);
 		// Check to make sure the village can afford it
@@ -30,7 +30,7 @@ public class GameLogic : AbstractGameLogic
 							// If there is a unit or watchtower there, you can't
 							// spawn the player here
 							if (t.occupyingUnit != null || t.occupyingStructure.myType == StructureType.Tower)
-								return false;
+								return null;
 						}
 					}
 				}
@@ -46,7 +46,7 @@ public class GameLogic : AbstractGameLogic
 				u.myLocation = spawnedTile;
 				spawnedTile.occupyingUnit = u;
 				Debug.Log ("made unit");
-				return true;
+				return spawnedTile;
 			}
 			//}
 		} 
@@ -55,7 +55,7 @@ public class GameLogic : AbstractGameLogic
 			Debug.Log("Not enough money");
 
 		}
-		return false;
+		return null;
 	}
 
 
@@ -73,6 +73,9 @@ public class GameLogic : AbstractGameLogic
 	{
 		if( t.myVillage != null)
 		{
+			if(t.myVillage.upgradeInProgress)
+				return false;
+
 			if( t.myVillage.wood >= 5 && (int) t.myVillage.myType >= (int) VillageType.Town)
 			{
 				t.myVillage.wood -= 5;
@@ -211,23 +214,28 @@ public class GameLogic : AbstractGameLogic
 	// returns true upon successful upgrade
 	public override bool upgradeVillage(AbstractVillage v, VillageType newType)
 	{
-		int gold = v.gold;
+		if (v.upgradeInProgress)
+			return false;
+
+		int wood = v.wood;
 		int newValue = myValueManager.getVillageValue (newType);
 		int oldValue = myValueManager.getVillageValue (v.myType);
 		int upgradeValue = newValue - oldValue;
-		
+		Debug.Log ("Want to upgrade to:" + newType.ToString () + "from " + v.myType.ToString ());
 		// >= 0 because presumably higher levels cost more, so you don't want
 		// to downgrade a unit
-		if (upgradeValue <= gold && upgradeValue >= 0)
+		if (upgradeValue <= wood && upgradeValue >= 0)
 		{
-			v.gold = gold - upgradeValue;
+			v.wood = wood - upgradeValue;
 			//Update the GUI
 			foreach(GUIText current in GameObject.FindObjectsOfType<GUIText>()) {
-				if(current.name == "Gold") {
-					current.text = "Gold: " + v.gold;
+				if(current.name == "Wood") {
+					current.text = "Wood: " + v.wood;
 				}
 			}
 			v.myType = newType;
+			v.upgradeInProgress = true;
+
 			return true;
 		}
 		return false;
@@ -311,7 +319,7 @@ public class GameLogic : AbstractGameLogic
 			{
 				// no stacking units or moving onto occupied spaces
 				if(dest.myVillage == u.myVillage){
-					Debug.Log("Moving onto village - Illegal");
+					Debug.Log("Moving onto another unit - Illegal");
 					return false;
 				}
 				if(dest.occupyingUnit.isCannon && u.myType != UnitType.Knight){
@@ -408,13 +416,16 @@ public class GameLogic : AbstractGameLogic
 				AbstractPlayer destPlayer = null;
 				if( dest.myVillage == null )
 				{
+					Debug.Log("Taking over netural land");
 					connectRegions( player.myVillages );
 					u.currentAction = ActionType.Moved;
 				}
-				else destPlayer = dest.myVillage.myPlayer;
+				else{ 
+				destPlayer = dest.myVillage.myPlayer;
 				u.myLocation.occupyingUnit = null;
 				u.myLocation = dest;
 				dest.occupyingUnit = u; //was not being set!!!!
+				}
 
 				if( destPlayer != player && destPlayer != null)
 				{
@@ -438,14 +449,16 @@ public class GameLogic : AbstractGameLogic
 					dest.myType = LandType.Grass;
 
 				// cannons can only move once
-				if( u.isCannon )
+				if( u.isCannon ){
 					u.currentAction = ActionType.Moved;
+				}
 
 				return true;
 			}
 			Debug.Log("Knight or Cannon can't move over tree");
 
 		}
+		Debug.Log ("Destination is not a neghbour OR unit is busy working");
 		return false;
 	}
 
@@ -674,6 +687,8 @@ public class GameLogic : AbstractGameLogic
 
 		foreach(AbstractVillage v in myVillages)
 		{
+			v.upgradeInProgress = false;
+
 			tombStonePhase(v);
 			buildPhase(v);
 			incomePhase(v);
@@ -761,16 +776,23 @@ public class GameLogic : AbstractGameLogic
 				AbstractUnit occupyingUnit = myTile.occupyingUnit;
 				UnitType myType = occupyingUnit.myType;
 				ActionType currentAction = occupyingUnit.currentAction;
-		
-				if (myType == UnitType.Peasant) {
-						if (currentAction == ActionType.BuildingRoad) {
+			//knights don't do labour, the rest all gather wood(chop trees), only peasant builds roads and cultivates
+				if (myType != UnitType.Knight) {
+						if (currentAction == ActionType.BuildingRoad && myType == UnitType.Peasant) {
 								myTile.occupyingStructure.myType = StructureType.Road;
 								occupyingUnit.currentAction = ActionType.ReadyForOrders;
-						} else if (currentAction == ActionType.FinishCultivating) {
+						} else if (currentAction == ActionType.FinishCultivating && UnitType.Peasant == myType) {
 								myTile.myType = LandType.Meadow;
 								occupyingUnit.currentAction = ActionType.ReadyForOrders;
-						} else if (currentAction == ActionType.StartCultivating) {
+						} else if (currentAction == ActionType.StartCultivating && myType == UnitType.Peasant) {
 								occupyingUnit.currentAction = ActionType.FinishCultivating;
+						}
+						else if(currentAction == ActionType.ChoppingTree){
+								occupyingUnit.currentAction = ActionType.ReadyForOrders;
+								myTile.myType = LandType.Grass;
+								myTile.myVillage.wood+= 1;
+								Debug.Log("Forest cleared, wood Added");
+
 						}
 				}
 		}
@@ -784,6 +806,9 @@ public class GameLogic : AbstractGameLogic
 		{
 			peasantBuild(t);
 		}
+
+
+
 	}
 	
 	protected override void incomePhase(AbstractVillage myVillage)

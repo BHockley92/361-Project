@@ -22,7 +22,7 @@ public class CameraControl : MonoBehaviour {
 		Rect recright = new Rect (Screen.width-GUIsize, 0, GUIsize, Screen.height);
 		
 		//Camera panning handlers
-		if (enabled_camera && (recdown.Contains(Input.mousePosition) || Input.GetKey(KeyCode.DownArrow) ) && middleY - transform.position.z < boardY * 3.0f/22	) {
+		if (enabled_camera && (recdown.Contains(Input.mousePosition) || Input.GetKey(KeyCode.DownArrow) ) && middleY - transform.position.z < boardY * 3.0f/17) {
 			transform.Translate(0, 0, -CamSpeed, Space.World);
 		}
 		if (enabled_camera && (recup.Contains(Input.mousePosition)|| Input.GetKey(KeyCode.UpArrow)) && middleY - transform.position.z > -boardY * 3.0f/22) {
