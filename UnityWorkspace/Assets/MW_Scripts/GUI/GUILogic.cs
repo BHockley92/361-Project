@@ -113,15 +113,16 @@ public class GUILogic : MonoBehaviour {
 
 	//Authenticates the user to view stats
 	public void Authenticate() {
+		//Create the player
+		PLAYER = new MW_Player();
+		PLAYER.setAttribute(USERNAME.text);
 		NETWORK.Authenticate(USERNAME.text, PASSWORD.text);
 	}
 
 	public void HandleLogin(bool result) {
 		//If we succeed
 		if(result) {
-			//Create the player and switch menus
-			PLAYER = new MW_Player();
-			PLAYER.setAttribute(USERNAME.text);
+			//Continue with the next menus
 			CanvasGroup play_menu = GameObject.Find ("PlayMenu").GetComponent<CanvasGroup>();
 			play_menu.alpha = 1;
 			play_menu.blocksRaycasts = true;
