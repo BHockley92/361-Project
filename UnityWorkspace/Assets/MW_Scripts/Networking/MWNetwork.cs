@@ -222,7 +222,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		if (!PhotonNetwork.RaiseEvent(GAME_ENDED,
 		                              null,
 		                              true,
-		                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.Others }))
+		                              new RaiseEventOptions() { Receivers = ExitGames.Client.Photon.Lite.ReceiverGroup.All }))
 		{
 			Debug.Log("Error ending the game over the network.");
 		}
