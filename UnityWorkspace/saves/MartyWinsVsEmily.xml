@@ -1105,7 +1105,7 @@
     <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="3" unitY="4" isCannon="False" />
   <unit unitType="Knight" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="14" unitY="14" isCannon="False" />
   <unit unitType="Infantry" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="9" unitY="4" isCannon="False" />
-  <unit unitType="Infantry" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="15" unitY="10" isCannon="False" />
+  <unit unitType="Infantry" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="15" unitY="8" isCannon="False" />
   <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="13" unitY="13" isCannon="False" />
   <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="15" unitY="9" isCannon="False" />
 
@@ -1202,7 +1202,6 @@
   <tile landType="Grass" boardPositionX="15" boardPositionY="10" gamePositionX="40" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <unit unitType="Peasant" unitAction="ReadyForOrders" villageOwnerX="15" villageOwnerY="11" unitX="15" unitY="10" isCannon="False" />
   <tile landType="Grass" boardPositionX="15" boardPositionY="11" gamePositionX="41" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
@@ -1338,7 +1337,7 @@
   <tile landType="Sea" boardPositionX="19" boardPositionY="18" gamePositionX="56" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="19" gamePositionX="57" gamePositionY="28.5" />
   <game turnIndex="25" turnOf="martymcfly">
-    <participant username="emilyraso" />
     <participant username="martymcfly88" />
+    <participant username="emilyraso" />
   </game>
 </map>

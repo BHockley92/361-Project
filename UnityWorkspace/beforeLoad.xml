@@ -553,8 +553,8 @@
   <tile landType="Grass" boardPositionX="13" boardPositionY="5" gamePositionX="31" gamePositionY="7.5">
     <structure structureType="Tower" />
   </tile>
-  <tile landType="Tree" boardPositionX="13" boardPositionY="6" gamePositionX="32" gamePositionY="9">
-    <structure structureType="NONE" />
+  <tile landType="Grass" boardPositionX="13" boardPositionY="6" gamePositionX="32" gamePositionY="9">
+    <structure structureType="Tombstone" />
   </tile>
   <tile landType="Tree" boardPositionX="13" boardPositionY="7" gamePositionX="33" gamePositionY="10.5">
     <structure structureType="NONE" />
@@ -571,7 +571,7 @@
   <tile landType="Grass" boardPositionX="13" boardPositionY="11" gamePositionX="37" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
-  <village playerName="martymcfly88" gold="1483" wood="65" villageType="Castle" locationOfTileX="13" locationOfTileY="11" damageTaken="0" upgradeInProgress="False">
+  <village playerName="martymcfly88" gold="1200" wood="65" villageType="Fort" locationOfTileX="13" locationOfTileY="11" damageTaken="0" upgradeInProgress="False">
     <controlledTile boardX="3" boardY="3" />
     <controlledTile boardX="4" boardY="3" />
     <controlledTile boardX="5" boardY="3" />
@@ -1150,7 +1150,6 @@
   <tile landType="Grass" boardPositionX="14" boardPositionY="10" gamePositionX="38" gamePositionY="15">
     <structure structureType="NONE" />
   </tile>
-  <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="14" unitY="10" isCannon="False" />
   <tile landType="Grass" boardPositionX="14" boardPositionY="11" gamePositionX="39" gamePositionY="16.5">
     <structure structureType="NONE" />
   </tile>
@@ -1194,11 +1193,13 @@
   <tile landType="Tree" boardPositionX="15" boardPositionY="8" gamePositionX="38" gamePositionY="12">
     <structure structureType="NONE" />
   </tile>
+  <unit unitType="Infantry" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="15" unitY="8" isCannon="False" />
   <tile landType="Grass" boardPositionX="15" boardPositionY="9" gamePositionX="39" gamePositionY="13.5">
     <structure structureType="NONE" />
   </tile>
+  <unit unitType="Soldier" unitAction="ReadyForOrders" villageOwnerX="13" villageOwnerY="11" unitX="15" unitY="9" isCannon="False" />
   <tile landType="Grass" boardPositionX="15" boardPositionY="10" gamePositionX="40" gamePositionY="15">
-    <structure structureType="Tombstone" />
+    <structure structureType="NONE" />
   </tile>
   <tile landType="Grass" boardPositionX="15" boardPositionY="11" gamePositionX="41" gamePositionY="16.5">
     <structure structureType="NONE" />
@@ -1334,8 +1335,8 @@
   <tile landType="Sea" boardPositionX="19" boardPositionY="17" gamePositionX="55" gamePositionY="25.5" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="18" gamePositionX="56" gamePositionY="27" />
   <tile landType="Sea" boardPositionX="19" boardPositionY="19" gamePositionX="57" gamePositionY="28.5" />
-  <game turnIndex="28" turnOf="emilyraso">
-    <participant username="emilyraso" />
+  <game turnIndex="25" turnOf="martymcfly88">
     <participant username="martymcfly88" />
+    <participant username="emilyraso" />
   </game>
 </map>
