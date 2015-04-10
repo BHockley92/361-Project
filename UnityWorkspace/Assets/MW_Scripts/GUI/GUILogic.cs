@@ -43,37 +43,40 @@ public class GUILogic : MonoBehaviour {
 	}
 
 	public void OnGUI() {
-		GameObject[] VillageButtons = GameObject.FindGameObjectsWithTag("ForStructures");
-		GameObject[] UnitButtons = GameObject.FindGameObjectsWithTag("ForUnits");
-		if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
-			//Show Village Buttons
-			foreach(GameObject button in VillageButtons) {
-				button.SetActive (true);
+		//Only show the button when clicking on things if it's the players turn.
+		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
+			GameObject[] VillageButtons = GameObject.FindGameObjectsWithTag("ForStructures");
+			GameObject[] UnitButtons = GameObject.FindGameObjectsWithTag("ForUnits");
+			if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
+				//Show Village Buttons
+				foreach(GameObject button in VillageButtons) {
+					button.SetActive (true);
+				}
+				//Hide Unit Buttons
+				foreach(GameObject button in UnitButtons) {
+					button.SetActive (false);
+				}
+				AbstractTile building_tile;
+				Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
+				BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
+				if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
+					return;
+				}
+				else {
+					GameObject.Find("Gold").GetComponent<Text>().text = "Gold: " + building_tile.myVillage.gold;
+					GameObject.Find("Wood").GetComponent<Text>().text = "Wood: " + building_tile.myVillage.gold;
+					GameObject.Find("Pop").GetComponent<Text>().text = "Population: " + building_tile.myVillage.supportedUnits;
+				}
 			}
-			//Hide Unit Buttons
-			foreach(GameObject button in UnitButtons) {
-				button.SetActive (false);
-			}
-			AbstractTile building_tile;
-			Vector3 tilepos = LAST_CLICKED_ON.position - VILLAGE_OFFSET;
-			BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
-			if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
-				return;
-			}
-			else {
-				GameObject.Find("Gold").GetComponent<Text>().text = "Gold: " + building_tile.myVillage.gold;
-				GameObject.Find("Wood").GetComponent<Text>().text = "Wood: " + building_tile.myVillage.gold;
-				GameObject.Find("Pop").GetComponent<Text>().text = "Population: " + building_tile.myVillage.supportedUnits;
-			}
-		}
-		else if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals ("Unit")) {
-			//Show Unit Buttons
-			foreach(GameObject button in VillageButtons) {
-				button.SetActive (true);
-			}
-			//Hide Village Buttons
-			foreach(GameObject button in VillageButtons) {
-				button.SetActive (false);
+			else if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals ("Unit")) {
+				//Show Unit Buttons
+				foreach(GameObject button in VillageButtons) {
+					button.SetActive (true);
+				}
+				//Hide Village Buttons
+				foreach(GameObject button in VillageButtons) {
+					button.SetActive (false);
+				}
 			}
 		}
 	}
@@ -99,7 +102,8 @@ public class GUILogic : MonoBehaviour {
 
 	//Populate popup with available maps
 	public void NewGame() {
-		//TODO: Do we have presets or are we just doing a random no matter what?
+		FROM_LOADED = false;
+		GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("premade");
 	}
 
 	//Populate popup with saved maps
@@ -140,11 +144,18 @@ public class GUILogic : MonoBehaviour {
 	//Saves the current state of the game and informs all players
 	public void SaveGame() {
 		if(GameObject.Find ("SaveName").GetComponentsInChildren<Text>()[1].text != "") {
-			//We want to save a new file with the above as the name
+			//TODO: Need a way to save the game to a specific location
 		}
 		//Otherwise they want to overwrite so find the file, delete it and save the game with the same name
 		else {
-			GameObject.Find ("SavedGamesInGame").GetComponent<GameSelect>().getSelected();
+			string selected_game = GameObject.Find ("SavedGamesInGame").GetComponent<GameSelect>().getSelected();
+			if(File.Exists(selected_game)) {
+				File.Delete(selected_game);
+				//TODO: Save the game to the path with the name
+			}
+			else {
+				//TODO: Launch an error
+			}
 		}
 		SERIALIZER.saveGameState(GAME);
 		//Fake that the game is saving
@@ -167,7 +178,6 @@ public class GUILogic : MonoBehaviour {
 		Debug.Log ("Received a state");
 		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
-			//TODO: Covey it is your turn to the user (Need error message thingy)
 			end_turn.text = "End Turn";
 			BeginTurn ();
 		}
@@ -185,14 +195,14 @@ public class GUILogic : MonoBehaviour {
 	public void BeginTurn() {
 		Debug.Log ("my turn");
 		GAME.myGameLogic.beginTurn(GAME.turnOf,GAME);
-		ENDTURN.enabled = true;
+		ENDTURN.interactable = true;
 	}
 
 	//Ends current turn and goes to next player
 	public void EndTurn() {
 		//Clear old selection
 		Destroy(GameObject.Find("SelectionArrow(Clone)"));
-		ENDTURN.enabled = false;
+		ENDTURN.interactable = false;
 		//Update game state with transitions
 		GAME.EndTurn ();
 		//Serialize the state of the game now
@@ -213,7 +223,7 @@ public class GUILogic : MonoBehaviour {
 			else {
 				GAME = mw.newGame (NETWORK.getPlayers());
 				Debug.Log ("Random map");
-				GAME.gameBoard = new Board(20,20,2);
+				GAME.gameBoard = new Board(300,300,5);
 				
 				// ALL THE ASSIGNMENT STUFF SHOULD BE DONE IN THE
 				// BACKEND YOU RETARDS
@@ -239,7 +249,6 @@ public class GUILogic : MonoBehaviour {
 						t.myType = LandType.Grass;
 					}
 				}
-				
 				Debug.Log ("Assigned villagers to players");
 			}
 			//Start the game
@@ -414,6 +423,7 @@ public class GUILogic : MonoBehaviour {
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out building_tile);
 		if(!building_tile.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
 			//TODO: Show error and stop
+			//Technically it shouldn't be possible to even see this
 			return;
 		}
 		VillageType new_type = VillageType.Fort;
