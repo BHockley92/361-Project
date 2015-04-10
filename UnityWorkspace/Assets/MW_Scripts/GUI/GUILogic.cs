@@ -534,7 +534,6 @@ public class GUILogic : MonoBehaviour {
 			AbstractUnit new_villager = new Unit (building_tile.myVillage, building_tile);
 
 			Tile hired_tile = GAME.myGameLogic.hireVillager (new_villager, building_tile.myVillage) as Tile;
-			Debug.Log("Hired unit at " + hired_tile.gamePosition.x + "," + hired_tile.gamePosition.y);
 			
 			//Load new unit if return true
 			if (hired_tile != null) {
@@ -594,11 +593,12 @@ public class GUILogic : MonoBehaviour {
 		AbstractTile village_tile;
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
 		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out village_tile);
-		if (!dest_tile.myVillage.myPlayer.username.Equals (NETWORK.GetLocalPlayerName ()) || !village_tile.myVillage.controlledRegion.Contains(dest_tile)) {
+		if (!village_tile.myVillage.controlledRegion.Contains(dest_tile)) {
 			GameObject error = GameObject.Find ("Error");
 			error.GetComponent<Text>().text = "You do not control that territory";
 			error.GetComponent<Text>().enabled = true;
 			StartCoroutine(DelayError (error));
+			return;
 		}
 		if(GAME.myGameLogic.buildTower (dest_tile)) {
 			GameObject tower_object = (GameObject)Resources.Load("structureTower");
