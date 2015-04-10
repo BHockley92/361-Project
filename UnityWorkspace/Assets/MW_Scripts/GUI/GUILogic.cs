@@ -487,7 +487,7 @@ public class GUILogic : MonoBehaviour {
 				}
 				if(structure != null) {
 					//TODO: Add to position to make sure the object appears naturally
-					GameObject instantiated_structure = (GameObject)GameObject.Instantiate(structure, pos, Quaternion.identity);
+					GameObject instantiated_structure = (GameObject)GameObject.Instantiate(structure, pos + VILLAGE_OFFSET, Quaternion.identity);
 					
 					// TODO: do structures even need a clicker?
 					//instantiated_structure.AddComponent<BoxCollider>();
@@ -532,7 +532,6 @@ public class GUILogic : MonoBehaviour {
 				else {
 					unit = (GameObject)Resources.Load("unitCannon");
 				}
-				//TODO: Add to position to make sure the object appears naturally
 				GameObject instantiated_unit = (GameObject)GameObject.Instantiate(unit, pos + UNIT_OFFSET, Quaternion.identity);
 				
 				if(current.myVillage.myPlayer.username.Equals(NETWORK.GetLocalPlayerName())) {
@@ -571,7 +570,7 @@ public class GUILogic : MonoBehaviour {
 		if(GAME.myGameLogic.upgradeVillage(building_tile.myVillage, new_type)) {
 			//Create new village
 			GameObject upgraded_village = (GameObject)Resources.Load("building"+new_type.ToString().ToLower());
-			GameObject new_village = (GameObject)GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y), Quaternion.identity);
+			GameObject new_village = (GameObject)GameObject.Instantiate(upgraded_village,new Vector3(building_tile.gamePosition.x, 0, building_tile.gamePosition.y) + VILLAGE_OFFSET, Quaternion.identity);
 			
 			// don't need to check for player ownership: is upgrade so of course it's player-owned
 			new_village.AddComponent<BoxCollider>();
@@ -618,7 +617,7 @@ public class GUILogic : MonoBehaviour {
 		if(GAME.myGameLogic.upgradeUnit(unit_tile.occupyingUnit, new_type)) {
 			//Generate the new unit
 			GameObject upgraded_unit = (GameObject)Resources.Load("unit"+new_type.ToString().ToLower());
-			GameObject new_unit = (GameObject)GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position, Quaternion.identity);
+			GameObject new_unit = (GameObject)GameObject.Instantiate(upgraded_unit,LAST_CLICKED_ON.position + UNIT_OFFSET, Quaternion.identity);
 			
 			// don't need to check for player ownership: is upgrade so of course it's player-owned
 			new_unit.AddComponent<BoxCollider>();
@@ -729,7 +728,7 @@ public class GUILogic : MonoBehaviour {
 		}
 		if(GAME.myGameLogic.buildTower (dest_tile)) {
 			GameObject tower_object = (GameObject)Resources.Load("structureTower");
-			GameObject tower = (GameObject)GameObject.Instantiate(tower_object ,new Vector3(dest_tile.gamePosition.x, 0, dest_tile.gamePosition.y), Quaternion.identity);
+			GameObject tower = (GameObject)GameObject.Instantiate(tower_object ,new Vector3(dest_tile.gamePosition.x, 0, dest_tile.gamePosition.y) + VILLAGE_OFFSET, Quaternion.identity);
 			//Tower is the players thing
 			tower.AddComponent<BoxCollider>();
 			tower.AddComponent(typeof(Clicker));
