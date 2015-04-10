@@ -21,7 +21,6 @@ public class GUILogic : MonoBehaviour {
 	private Dictionary<Vector2,AbstractTile> BOARD_TILES = new Dictionary<Vector2,AbstractTile>();
 	private SerializeGame SERIALIZER = new SerializeGame();
 	private XmlDocument LOADED_GAME;
-	private bool FROM_LOADED = false;
 	private UNIT_ACTION BUTTON_CLICKED_ON = UNIT_ACTION.NONE;
 	private GameObject[] VillageButtons;
 	private GameObject[] UnitButtons;
@@ -180,13 +179,11 @@ public class GUILogic : MonoBehaviour {
 
 	//Populate popup with available maps
 	public void NewGame() {
-		FROM_LOADED = false;
 		GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("premade");
 	}
 
 	//Populate popup with saved maps
 	public void LoadGame() {
-		FROM_LOADED = true;
 		GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 	}
 
@@ -197,10 +194,8 @@ public class GUILogic : MonoBehaviour {
 	//Create a lobby and populate with information
 	public void HostGame() {
 		//Will grab room name from selected GUI object
-		if(FROM_LOADED) {
-			LOADED_GAME = new XmlDocument();
-			LOADED_GAME.Load (GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().getSelected());
-		}
+		LOADED_GAME = new XmlDocument();
+		LOADED_GAME.Load(GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().getSelected());
 		Debug.Log ("Host game called");
 		string room_name = GameObject.Find("RoomName").GetComponentsInChildren<Text>()[1].text;
 		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
