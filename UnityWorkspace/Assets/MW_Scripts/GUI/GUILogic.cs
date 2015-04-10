@@ -68,14 +68,12 @@ public class GUILogic : MonoBehaviour {
 			if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals("Village")) {
 				//Show Village Buttons
 				foreach(GameObject button in VillageButtons) {
-					button.AddComponent<CanvasGroup>();
 					button.GetComponent<CanvasGroup>().alpha = 1;
 					button.GetComponent<CanvasGroup>().interactable = true;
 					button.GetComponent<CanvasGroup>().blocksRaycasts = true;
 				}
 				//Hide Unit Buttons
 				foreach(GameObject button in UnitButtons) {
-					button.AddComponent<CanvasGroup>();
 					button.GetComponent<CanvasGroup>().alpha = 0;
 					button.GetComponent<CanvasGroup>().interactable = false;
 					button.GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -95,14 +93,12 @@ public class GUILogic : MonoBehaviour {
 			else if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals ("Unit")) {
 				//Show Unit Buttons
 				foreach(GameObject button in UnitButtons) {
-					button.AddComponent<CanvasGroup>();
 					button.GetComponent<CanvasGroup>().alpha = 1;
 					button.GetComponent<CanvasGroup>().interactable = true;
 					button.GetComponent<CanvasGroup>().blocksRaycasts = true;
 				}
 				//Hide Village Buttons
 				foreach(GameObject button in VillageButtons) {
-					button.AddComponent<CanvasGroup>();
 					button.GetComponent<CanvasGroup>().alpha = 0;
 					button.GetComponent<CanvasGroup>().interactable = false;
 					button.GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -260,6 +256,19 @@ public class GUILogic : MonoBehaviour {
 		children.ForEach(child => Destroy (child));
 		//Remove the old tiles since I'm loading in the new ones
 		BOARD_TILES.Clear();
+		CanvasGroup main_menu = GameObject.Find ("MainMenu").GetComponent<CanvasGroup>();
+		main_menu.alpha = 1;
+		main_menu.blocksRaycasts = true;
+		main_menu.interactable = true;
+		CanvasGroup in_game_menu = GameObject.Find ("Main Camera/Canvas/GameGUI/Popup").GetComponent<CanvasGroup>();
+		in_game_menu.alpha = 0;
+		in_game_menu.blocksRaycasts = false;
+		in_game_menu.interactable = false;
+		CanvasGroup game_gui = GameObject.Find ("GameGUI").GetComponent<CanvasGroup>();
+		game_gui.alpha = 0;
+		game_gui.interactable = false;
+		game_gui.blocksRaycasts = false;
+		GameObject.Find ("menu_background").GetComponent<SpriteRenderer>().enabled = true;
 	}
 
 	//Saves the current state of the game and informs all players
