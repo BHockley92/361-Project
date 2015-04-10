@@ -282,16 +282,8 @@ public class GUILogic : MonoBehaviour {
 		//Load in the current map
 		foreach(Tile current in GAME.gameBoard.board) {
 			//Calculate it's game coordinates
-			float x = 0;
-			float y = 0;
-			if(current.boardPosition.y%2==0) {
-				x = 2*current.boardPosition.x;
-				y = (2*current.boardPosition.y)-(current.boardPosition.y/2.0f);
-			}
-			else {
-				x = 2*current.boardPosition.x+1;
-				y = current.boardPosition.y + (current.boardPosition.y/2.0f);
-			}
+			float x = current.boardPosition.y + current.boardPosition.x * 2;
+			float y = current.boardPosition.y + 0.5f * current.boardPosition.y;
 			//Update the tile object
 			current.gamePosition = new Vector2(x,y);
 			//Store it for easier lookup later
