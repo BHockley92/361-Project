@@ -241,7 +241,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		{
 			Debug.Log(PhotonPlayer.Find(senderId) + " has left the room.");
 			
-//			gui.HandleLeftDisbanded();	// @Ben TODO uncomment when implemented
+			gui.HandleLeftDisbanded();
 		}
 	}
 	
@@ -484,14 +484,14 @@ public class MWNetwork : Photon.MonoBehaviour
 		
 		UpdateGUIPlayerList();
 		
-//		gui.HandleJoinRoom(true);	// @Ben TODO uncomment when implemented
+		gui.HandleJoinRoom(true);	// @Ben TODO uncomment when implemented
 	}
 	
 	void OnPhotonJoinRoomFailed()
 	{
 		Debug.Log("Could not join room, possibly because the room is full.");
 		
-//		gui.HandleJoinRoom(false);	// @Ben TODO uncomment when implemented
+		gui.HandleJoinRoom(false);	// @Ben TODO uncomment when implemented
 	}
 	
 	void OnReceivedRoomListUpdate()
