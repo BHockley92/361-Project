@@ -809,6 +809,52 @@ public class GUILogic : MonoBehaviour {
 		}
 	}
 
+	public void fireCannon(Transform target) {
+		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
+			//Shouldn't need check
+			return;
+		}
+		AbstractTile dest_tile;
+		BOARD_TILES.TryGetValue(new Vector2(target.position.x, target.position.z), out dest_tile);
+		AbstractTile unit_tile;
+		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
+		BOARD_TILES.TryGetValue(new Vector2(tilepos.x, tilepos.z), out unit_tile);
+		if(unit_tile.occupyingUnit.currentAction != ActionType.ReadyForOrders) {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "That unit is unable to perform another action this turn";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+			return;
+		}
+		if(GAME.myGameLogic.isTileWithinCannonFiringRange(unit_tile, dest_tile)) {
+			if(dest_tile.occupyingUnit != null) {
+				if(!GAME.myGameLogic.attackUnitWithCannon(dest_tile.occupyingUnit, unit_tile.occupyingUnit)) {
+					GameObject error = GameObject.Find ("Error");
+					error.GetComponent<Text>().text = "The cannon could not fire at the selected unit";
+					error.GetComponent<Text>().enabled = true;
+					StartCoroutine(DelayError (error));
+					return;
+				}
+			}
+			else {
+				if(!GAME.myGameLogic.attackVillageWithCannon(dest_tile.occupyingStructure, unit_tile.occupyingUnit)) {
+					GameObject error = GameObject.Find ("Error");
+					error.GetComponent<Text>().text = "The cannon could not fire at the selected village";
+					error.GetComponent<Text>().enabled = true;
+					StartCoroutine(DelayError (error));
+					return;
+				}
+			}
+		}
+		else {
+			GameObject error = GameObject.Find ("Error");
+			error.GetComponent<Text>().text = "That target is out of range";
+			error.GetComponent<Text>().enabled = true;
+			StartCoroutine(DelayError (error));
+			return;
+		}
+	}
+
 	public void moveUnit(Transform tile) {
 		if(LAST_CLICKED_ON == null || !LAST_CLICKED_ON.tag.Equals("Unit") || !GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			return;
