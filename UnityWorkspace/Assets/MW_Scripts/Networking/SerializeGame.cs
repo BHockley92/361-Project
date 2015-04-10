@@ -512,10 +512,13 @@ public class SerializeGame
 		gameNode.Attributes.Append (turnOf);
 		rootNode.AppendChild (gameNode);
 
-		foreach(AbstractPlayer myPlayer in myGame.participants){
+		//foreach(AbstractPlayer myPlayer in myGame.participants)
+		for(int i =0; i<myGame.participants.Count; i++)
+		{
 			XmlNode participantNode = doc.CreateElement("participant");
 			XmlAttribute username = doc.CreateAttribute("username");
-			username.Value = myPlayer.username;
+			//username.Value = myPlayer.username;
+			username.Value = myGame.participants[i].username;
 			participantNode.Attributes.Append(username);
 			gameNode.AppendChild(participantNode);
 		}

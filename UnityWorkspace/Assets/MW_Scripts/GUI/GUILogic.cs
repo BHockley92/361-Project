@@ -175,7 +175,7 @@ public class GUILogic : MonoBehaviour {
 		state.LoadXml(gameState); 
 		GAME.gameBoard = SERIALIZER.loadGameState(state, GAME);
 		Debug.Log ("Received a state");
-		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
+		if (GAME != null) Debug.Log(NETWORK.GetLocalPlayerName() + " is notified that it is " + GAME.turnOf.username + "'s turn.");				Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			end_turn.text = "End Turn";
 			Debug.Log ("My turn");
