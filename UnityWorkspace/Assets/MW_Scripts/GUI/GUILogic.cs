@@ -170,6 +170,7 @@ public class GUILogic : MonoBehaviour {
 			room_join.alpha = 0;
 			room_join.interactable = false;
 			room_join.blocksRaycasts = false;
+			GameObject.Find ("menu_background").GetComponent<SpriteRenderer>().enabled = false;
 		}
 		else {
 			//Show the error popup
