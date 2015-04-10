@@ -155,6 +155,14 @@ public class GUILogic : MonoBehaviour {
 		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
 	}
 
+	public void HandleJoinFail() {
+		GameObject.Find ("LobbyName").GetComponent<Text>().text = "";
+		CanvasGroup join_fail = GameObject.Find ("JoinFailure").GetComponent<CanvasGroup>();
+		join_fail.alpha = 1;
+		join_fail.interactable = true;
+		join_fail.blocksRaycasts = true;
+	}
+
 	//Populate popup with available maps
 	public void NewGame() {
 		FROM_LOADED = false;
@@ -183,6 +191,14 @@ public class GUILogic : MonoBehaviour {
 		GameObject.Find ("LobbyName").GetComponent<Text>().text = room_name;
 		NETWORK.hostRoom(room_name);
 		ResetList ();
+	}
+
+	public void HandleHostFail() {
+		GameObject.Find ("LobbyName").GetComponent<Text>().text = "";
+		CanvasGroup host_fail = GameObject.Find ("HostFailure").GetComponent<CanvasGroup>();
+		host_fail.alpha = 1;
+		host_fail.interactable = true;
+		host_fail.blocksRaycasts = true;
 	}
 
 	//Sends message in input to all players

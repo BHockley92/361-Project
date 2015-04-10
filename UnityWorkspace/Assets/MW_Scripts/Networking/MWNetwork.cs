@@ -417,16 +417,6 @@ public class MWNetwork : Photon.MonoBehaviour
      * PHOTON CALLBACKS
      ***************************************************************************************************/
 	
-	void OnJoinedRoom()
-	{
-		// Set player custom properties
-		Hashtable readyCheck = new Hashtable();
-		readyCheck.Add("ready", false);
-		PhotonNetwork.SetPlayerCustomProperties(readyCheck);
-		
-		UpdateGUIPlayerList();
-	}
-	
 	
 	void OnPhotonPlayerConnected()
 	{
@@ -444,13 +434,21 @@ public class MWNetwork : Photon.MonoBehaviour
 		
 //		gui.HandleRoomEvent(true);	// @Ben TODO uncomment when implemented
 	}
-	
+
 	void OnJoinedRoom()
 	{
+		// Set player custom properties
+		Hashtable readyCheck = new Hashtable();
+		readyCheck.Add("ready", false);
+		PhotonNetwork.SetPlayerCustomProperties(readyCheck);
+		
+		UpdateGUIPlayerList();
+		
 		Debug.Log("Joined room: " + PhotonNetwork.room.name);
 		
 //		gui.HandleRoomEvent(true);	// @Ben TODO uncomment when implemented
 	}
+
 
 	void OnPhotonCreateRoomFailed()
 	{
