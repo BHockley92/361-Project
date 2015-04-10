@@ -794,9 +794,39 @@ public class GUILogic : MonoBehaviour {
 			//Make sure the unit's current action is changed if it wasn't changed in moveUnit
 			if(dest_tile.occupyingUnit.currentAction == ActionType.ReadyForOrders) {
 				switch(BUTTON_CLICKED_ON) {
-					case UNIT_ACTION.BUILD_ROAD: dest_tile.occupyingUnit.currentAction = ActionType.BuildingRoad; break;
-					case UNIT_ACTION.COMBINE_UNIT: dest_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; break;
-					case UNIT_ACTION.CULTIVATE_MEADOW: dest_tile.occupyingUnit.currentAction = ActionType.StartCultivating; break;
+					case UNIT_ACTION.BUILD_ROAD:{
+						if(dest_tile.occupyingUnit.myType != UnitType.Peasant){
+							GameObject error = GameObject.Find ("Error");
+							error.GetComponent<Text>().text = "Only peasants can build roads.";
+							error.GetComponent<Text>().enabled = true;
+							StartCoroutine(DelayError (error));
+							return;
+						}
+						else{
+							dest_tile.occupyingUnit.currentAction = ActionType.BuildingRoad;
+							break;
+						}
+						
+					}
+					case UNIT_ACTION.COMBINE_UNIT: {
+														
+						dest_tile.occupyingUnit.currentAction = ActionType.UpgradingCombining; 
+						break;
+					}
+					case UNIT_ACTION.CULTIVATE_MEADOW: {
+					//only peasants will cultivate a meadow
+						if(dest_tile.occupyingUnit.myType != UnitType.Peasant){
+							GameObject error = GameObject.Find ("Error");
+							error.GetComponent<Text>().text = "Only peasants can cultivate meadows.";
+							error.GetComponent<Text>().enabled = true;
+							StartCoroutine(DelayError (error));
+							return;
+						}
+						else{
+							dest_tile.occupyingUnit.currentAction = ActionType.StartCultivating; 
+							break;
+						}
+					}
 					default: dest_tile.occupyingUnit.currentAction = ActionType.Moved; break;
 				}
 			}

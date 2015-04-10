@@ -185,7 +185,8 @@ public class SerializeGame
 				myUnit.myType = uType;
 				myUnit.isCannon = Convert.ToBoolean(isCannon);
 				myTiles [Convert.ToInt32 (unitX), Convert.ToInt32 (unitY)].occupyingUnit = myUnit;
-				
+				myTiles [Convert.ToInt32 (villageOwnerX), Convert.ToInt32 (villageOwnerY)].myVillage.supportedUnits.Add(myUnit);
+
 			}
 			
 		}//end iterating over each node
