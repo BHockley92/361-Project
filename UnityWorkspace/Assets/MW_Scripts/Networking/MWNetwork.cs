@@ -231,7 +231,7 @@ public class MWNetwork : Photon.MonoBehaviour
 			}
 		}
 		else {
-			OnLeftDisbanded(LEFT_DISBANDED, null, true, PhotonNetwork.player.ID);
+			OnLeftDisbanded(LEFT_DISBANDED, null, PhotonNetwork.player.ID);
 		}
 	}
 	
