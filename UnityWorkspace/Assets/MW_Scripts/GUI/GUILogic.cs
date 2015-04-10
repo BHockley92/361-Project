@@ -568,7 +568,7 @@ public class GUILogic : MonoBehaviour {
 		AbstractTile dest_tile;
 		BOARD_TILES.TryGetValue(new Vector2(tile.position.x, tile.position.z), out dest_tile);
 		AbstractTile unit_tile;
-		if(unit_tile.occupyingUnit.currentAction == ActionType.Moved) {
+		if(unit_tile.occupyingUnit.currentAction == ActionType.ReadyForOrders) {
 			return;
 		}
 		Vector3 tilepos = LAST_CLICKED_ON.position - UNIT_OFFSET;
