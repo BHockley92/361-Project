@@ -436,21 +436,34 @@ public class MWNetwork : Photon.MonoBehaviour
 	
 	void OnCreatedRoom()
 	{
+		Debug.Log ("Room created");
+		
 		Hashtable roomProps = new Hashtable();
 		roomProps.Add("gameStarted", false);
 		PhotonNetwork.room.SetCustomProperties(roomProps);
 		
-		Debug.Log ("Room created");
+//		gui.HandleRoomEvent(true);	// @Ben TODO uncomment when implemented
+	}
+	
+	void OnJoinedRoom()
+	{
+		Debug.Log("Joined room: " + PhotonNetwork.room.name);
+		
+//		gui.HandleRoomEvent(true);	// @Ben TODO uncomment when implemented
 	}
 
 	void OnPhotonCreateRoomFailed()
 	{
 		Debug.Log("Could not create room, probably because room name is already taken.");
+		
+//		gui.HandleRoomEvent(false);	// @Ben TODO uncomment when implemented
 	}
 	
 	void OnPhotonJoinRoomFailed()
 	{
 		Debug.Log("Could not join room, possibly because the room is full.");
+		
+//		gui.HandleRoomEvent(false);	// @Ben TODO uncomment when implemented
 	}
 	
 	void OnReceivedRoomListUpdate()
