@@ -369,20 +369,25 @@ public class GameLogic : AbstractGameLogic
 							neighbourIsFort = true;
 					}
 
-					AbstractPlayer neighbourPlayer = neighbourVillage.myPlayer;
+					AbstractPlayer neighbourPlayer = null;
+					if(neighbourVillage != null)
+						neighbourPlayer = neighbourVillage.myPlayer;
 
-					AbstractStructure neighbourStructure = destNeighbour.occupyingStructure;
-					if( neighbourPlayer != player && 
-					   ( (neighbourUnit != null && (int) neighbourUnit.myType > (int) unitType) ||
-					 		( (int) unitType < (int) UnitType.Soldier && 
-					 			( neighbourVillage != null || neighbourStructure.myType == StructureType.Tower)
-					 		) ||
-					 		( (int) unitType < (int) UnitType.Knight && neighbourIsFort )
-					 	)
-					  )
+					if( neighbourPlayer != null)
 					{
-						Debug.Log("Crazy if statement evaluated to true");
-						return false;
+						AbstractStructure neighbourStructure = destNeighbour.occupyingStructure;
+						if( neighbourPlayer != player && 
+						   ( (neighbourUnit != null && (int) neighbourUnit.myType > (int) unitType) ||
+						 		( (int) unitType < (int) UnitType.Soldier && 
+						 			( neighbourVillage != null || neighbourStructure.myType == StructureType.Tower)
+						 		) ||
+						 		( (int) unitType < (int) UnitType.Knight && neighbourIsFort )
+						 	)
+						  )
+						{
+							Debug.Log("Crazy if statement evaluated to true");
+							return false;
+						}
 					}
 				}
 
