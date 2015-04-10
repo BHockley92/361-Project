@@ -407,7 +407,7 @@ public class MWNetwork : Photon.MonoBehaviour
 		Debug.Log ("Room created");
 	}
 
-	void OnPhotonCreateRoomFailed(object[] codeAndMsg)
+	void OnPhotonCreateRoomFailed()
 	{
 		Debug.Log("Could not create room, probably because room name is already taken.");
 	}
@@ -415,6 +415,11 @@ public class MWNetwork : Photon.MonoBehaviour
 	void OnPhotonJoinRoomFailed()
 	{
 		Debug.Log("Could not join room, possibly because the room is full.");
+	}
+	
+	void OnReceivedRoomListUpdate()
+	{
+		gui.ListRooms();
 	}
 	
 	void OnFailedToConnectToPhoton(DisconnectCause cause)
