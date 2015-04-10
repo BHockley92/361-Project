@@ -6,9 +6,18 @@ using System.Linq;
 
 public class GameLogic : AbstractGameLogic
 {
-
-	public override AbstractTile hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile) 
+	public override AbstractTile hireVillager(AbstractUnit u, AbstractVillage commandingVillage) 
 	{
+		Tile spawnedTile = null;
+		foreach( Tile t in commandingVillage.controlledRegion) {
+			if(!t.hasVillage && t.occupyingUnit != null && t.getNeighbours().Any(x => x.occupyingUnit != null && (int)x.occupyingUnit.myType >= (int)u.myType)) {
+				spawnedTile = t;
+			}
+		}
+		
+		if(spawnedTile == null)
+			return null;
+	
 		int unitcost = myValueManager.getUnitValue (u.myType);
 		// Check to make sure the village can afford it
 		if (commandingVillage.gold >= unitcost) {

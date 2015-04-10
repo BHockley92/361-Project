@@ -6,7 +6,7 @@ public abstract class AbstractGameLogic
 {
 	public ValueManager myValueManager { get; set; }
 
-	public abstract AbstractTile hireVillager(AbstractUnit u, AbstractVillage commandingVillage, AbstractTile spawnedTile);
+	public abstract AbstractTile hireVillager(AbstractUnit u, AbstractVillage commandingVillage);
 	public abstract void buildRoad (AbstractUnit u);
 	public abstract bool buildTower(AbstractTile t);
 

@@ -533,13 +533,14 @@ public class GUILogic : MonoBehaviour {
 		if (building_tile.occupyingUnit == null) {
 			AbstractUnit new_villager = new Unit (building_tile.myVillage, building_tile);
 
-			Tile hired_tile = GAME.myGameLogic.hireVillager (new_villager, building_tile.myVillage, building_tile) as Tile;
+			Tile hired_tile = GAME.myGameLogic.hireVillager (new_villager, building_tile.myVillage) as Tile;
+			Debug.Log("Hired unit at " + hired_tile.gamePosition.x + "," + hired_tile.gamePosition.y);
 			
 			//Load new unit if return true
 			if (hired_tile != null) {
 				//Debug.Log ("Unit Hired: at " + hired_tile.boardPosition.x + ", " + hired_tile.boardPosition.y);
 				GameObject new_unit = (GameObject)Resources.Load ("unitpeasant");
-				Vector3 unit_location = new Vector3(hired_tile.boardPosition.x, 0.1f, hired_tile.boardPosition.y) + UNIT_OFFSET;
+				Vector3 unit_location = new Vector3(hired_tile.gamePosition.x, 0.1f, hired_tile.gamePosition.y) + UNIT_OFFSET;
 				GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, unit_location, Quaternion.identity);
 		
 				// don't need to check for player ownership: is purchase so of course it's player-owned

@@ -12,5 +12,7 @@ public class Unit : AbstractUnit
 		{
 			startLocation.occupyingUnit = this;
 		}
+		
+		currentAction = GameEnums.ActionType.ReadyForOrders;
 	}
 }
