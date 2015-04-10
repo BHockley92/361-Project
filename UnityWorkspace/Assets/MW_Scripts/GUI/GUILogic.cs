@@ -138,7 +138,15 @@ public class GUILogic : MonoBehaviour {
 
 	//Terminates the current game and sends to main menu
 	public void EndGame() {
-		//TODO: How do we want to handle when a player ends the game? Does it do it differently if one is the host or not
+		//Clear the map
+		GameObject map = GameObject.Find ("map");
+		List<GameObject> children = new List<GameObject>();
+		foreach(Transform child in map.transform) {
+			children.Add (child.gameObject);
+		}
+		children.ForEach(child => Destroy (child));
+		//Remove the old tiles since I'm loading in the new ones
+		BOARD_TILES.Clear();
 	}
 
 	//Saves the current state of the game and informs all players
