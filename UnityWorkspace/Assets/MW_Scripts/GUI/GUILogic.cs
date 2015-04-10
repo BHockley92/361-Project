@@ -474,7 +474,7 @@ public class GUILogic : MonoBehaviour {
 			if(current.occupyingStructure.myType != StructureType.NONE) {
 				GameObject structure = null;
 				switch(current.occupyingStructure.myType) {
-					case StructureType.Road: GameObject road_tile = Instantiate((GameObject)Resources.Load("tileRoad"), instantiated_tile.transform.position + new Vector3(0,0.05f,0), Quaternion.identity) as GameObject; road_tile.GetComponent<HexTile>().InstantiateTile();  break;
+				case StructureType.Road: GameObject road_tile = Instantiate((GameObject)Resources.Load("tileRoad"), instantiated_tile.transform.position + new Vector3(0,0.05f,0), Quaternion.identity) as GameObject; road_tile.GetComponent<HexTile>().InstantiateTile(); road_tile.transform.parent = instantiated_tile.transform; break;
 					case StructureType.Tombstone: structure = (GameObject)Resources.Load("structureTombstone"); break;
 					case StructureType.Tower: structure = (GameObject)Resources.Load("structureTower"); break;
 					case StructureType.NONE: break;
