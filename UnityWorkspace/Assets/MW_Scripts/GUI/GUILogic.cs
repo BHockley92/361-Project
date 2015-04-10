@@ -80,7 +80,7 @@ public class GUILogic : MonoBehaviour {
 				else {
 					GameObject.Find("Gold").GetComponent<Text>().text = "Gold: " + building_tile.myVillage.gold;
 					GameObject.Find("Wood").GetComponent<Text>().text = "Wood: " + building_tile.myVillage.wood;
-					GameObject.Find("Pop").GetComponent<Text>().text = "Population: " + building_tile.myVillage.supportedUnits;
+					GameObject.Find("Pop").GetComponent<Text>().text = "Population: " + building_tile.myVillage.supportedUnits.Count;
 				}
 			}
 			else if(LAST_CLICKED_ON != null && LAST_CLICKED_ON.tag.Equals ("Unit")) {
