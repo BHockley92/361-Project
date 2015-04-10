@@ -247,6 +247,8 @@ public class MWNetwork : Photon.MonoBehaviour
 		{
 			Debug.Log(PhotonPlayer.Find(senderId) + " has left the room.");
 			
+			PhotonNetwork.LeaveRoom();
+			
 			gui.HandleLeftDisbanded();
 		}
 	}
@@ -519,6 +521,8 @@ public class MWNetwork : Photon.MonoBehaviour
 	void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
 	{
 		Debug.Log(otherPlayer.name + " has disconnected.");
+		
+		PhotonNetwork.LeaveRoom();
 		
 		gui.forceQuit();
 	}
