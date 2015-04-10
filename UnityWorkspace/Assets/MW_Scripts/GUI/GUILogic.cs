@@ -860,6 +860,18 @@ public class GUILogic : MonoBehaviour {
 
 	//The leave or disband button depending on host or player
 	public void Leave_Disband() {
-		NETWORK.EndGame();
+		NETWORK.LeaveDisband();
+	}
+
+	public void HandleLeftDisbanded() {
+		CanvasGroup lobby_menu = GameObject.Find("LobbyMenu").GetComponent<CanvasGroup>();
+		lobby_menu.alpha = 0;
+		lobby_menu.blocksRaycasts = false;
+		lobby_menu.interactable = false;
+		CanvasGroup play_menu = GameObject.Find ("PlayMenu").GetComponent<CanvasGroup>();
+		play_menu.alpha = 1;
+		play_menu.blocksRaycasts = true;
+		play_menu.interactable = true;
+		GameObject.Find ("menu_background").GetComponent<SpriteRenderer>().enabled = true;
 	}
 }
