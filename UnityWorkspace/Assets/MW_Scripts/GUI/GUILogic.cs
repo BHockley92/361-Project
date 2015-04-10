@@ -528,7 +528,7 @@ public class GUILogic : MonoBehaviour {
 			
 			//Load new unit if return true
 			if (hired_tile != null) {
-				//Debug.Log ("Unit Hired: at " + hired_tile.boardPosition.x + ", " + hired_tile.boardPosition.y);
+				Debug.Log ("Unit Hired: at " + hired_tile.gamePosition.x + ", " + hired_tile.gamePosition.y);
 				GameObject new_unit = (GameObject)Resources.Load ("unitpeasant");
 				Vector3 unit_location = new Vector3(hired_tile.gamePosition.x, 0.1f, hired_tile.gamePosition.y) + UNIT_OFFSET;
 				GameObject hired_villager = (GameObject)GameObject.Instantiate (new_unit, unit_location, Quaternion.identity);

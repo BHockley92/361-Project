@@ -10,13 +10,15 @@ public class GameLogic : AbstractGameLogic
 	{
 		Tile spawnedTile = null;
 		foreach( Tile t in commandingVillage.controlledRegion) {
-			if(!t.hasVillage && t.occupyingUnit != null && t.getNeighbours().Any(x => x.occupyingUnit != null && (int)x.occupyingUnit.myType >= (int)u.myType)) {
+			if(!t.hasVillage && t.occupyingUnit == null && t.getNeighbours().Any(x => x.occupyingUnit != null && (int)x.occupyingUnit.myType >= (int)u.myType)) {
 				spawnedTile = t;
 			}
-		}
+		}			
 		
 		if(spawnedTile == null)
 			return null;
+		else
+			Debug.Log("Tile to spawn hired villager: " + spawnedTile.boardPosition.x + "," + spawnedTile.boardPosition.y);
 	
 		int unitcost = myValueManager.getUnitValue (u.myType);
 		// Check to make sure the village can afford it
