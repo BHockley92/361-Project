@@ -8,8 +8,7 @@ public class HexTile : MonoBehaviour {
 	public int[] 	  TRIANGLES;
 	public Texture    TEXTURE;
 	
-	public void MeshSetup(Color playerColour)
-	{
+	public void InstantiateTile() {
 		float floorLevel = 0;
 		VERTICES  = new Vector3 []
 		{
@@ -41,7 +40,7 @@ public class HexTile : MonoBehaviour {
 
 		MeshFilter  meshFilter = gameObject.AddComponent<MeshFilter>();
 		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-		Mesh  mesh = new Mesh ();
+		Mesh mesh = new Mesh ();
 
 		mesh.vertices  = VERTICES ;
 
@@ -53,19 +52,5 @@ public class HexTile : MonoBehaviour {
 		meshFilter.mesh = mesh;
 
 		meshRenderer.material.mainTexture = TEXTURE;
-		
-		// make border tile
-		GameObject tile = (GameObject)Resources.Load("Tile");
-		GameObject border = Instantiate(tile, transform.position, Quaternion.identity) as GameObject;
-		HexTile ht = border.GetComponent<HexTile>();
-		
-		
-		MeshFilter  meshFilter2 = border.AddComponent<MeshFilter>();
-		MeshRenderer meshRenderer2 = border.AddComponent<MeshRenderer>();
-		
-		meshFilter2.mesh = mesh;
-		meshRenderer2.material.mainTexture = (Texture)Resources.Load ("border-white");
-		meshRenderer2.material.shader = Shader.Find ("Transparent/Diffuse");
-		meshRenderer2.material.color = playerColour;
 	}
 }

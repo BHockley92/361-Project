@@ -108,7 +108,6 @@ public class GUILogic : MonoBehaviour {
 
 	//Populate popup with saved maps
 	public void LoadGame() {
-		Debug.Log ("Load Game called");
 		FROM_LOADED = true;
 		GameObject.Find("SavedGamesMenu").GetComponent<GameSelect>().GAMES = Directory.GetFiles("saves");
 	}
@@ -179,10 +178,12 @@ public class GUILogic : MonoBehaviour {
 		Text end_turn = GameObject.Find("ButtonEndTurn").GetComponentsInChildren<Text>()[0]; // not sure if this is ben's intent
 		if (GAME.turnOf.username.Equals(NETWORK.GetLocalPlayerName())) {
 			end_turn.text = "End Turn";
+			Debug.Log ("My turn");
 			BeginTurn ();
 		}
 		else {
 			end_turn.text = "Waiting for " + GAME.turnOf.username;
+			Debug.Log ("Other player's turn");
 		}
 		//Always do this
 		Debug.Log ("turned camera on");
@@ -223,7 +224,7 @@ public class GUILogic : MonoBehaviour {
 			else {
 				GAME = mw.newGame (NETWORK.getPlayers());
 				Debug.Log ("Random map");
-				GAME.gameBoard = new Board(20,20,5);
+				GAME.gameBoard = new Board(20,20,3);
 				
 				// ALL THE ASSIGNMENT STUFF SHOULD BE DONE IN THE
 				// BACKEND YOU RETARDS
@@ -309,7 +310,8 @@ public class GUILogic : MonoBehaviour {
 			//Create the game representation of the tile
 			Vector3 pos = new Vector3(x, 0.1f, y); // based on the above position
 			GameObject instantiated_tile = (GameObject)GameObject.Instantiate(tile, pos, Quaternion.identity);
-			// set it up here because we change the colour below
+			//Spawn all the shit
+			instantiated_tile.GetComponent<HexTile>().InstantiateTile();
 		
 			Color playerColour = new Color(1,1,1);
 			//set colour as fn of player
@@ -332,13 +334,22 @@ public class GUILogic : MonoBehaviour {
 						break;
 				}
 			}
-			
-			instantiated_tile.GetComponent<HexTile>().MeshSetup(playerColour);
+			//Add collider and click script
 			instantiated_tile.AddComponent<BoxCollider>();
 			instantiated_tile.AddComponent(typeof(TileClicker));
+			//Add a border
+			GameObject border = Instantiate(tile, instantiated_tile.transform.position, Quaternion.identity) as GameObject;
+			//Make border a child of the tile so it doesn't spawn billions of them
+			border.transform.parent = instantiated_tile.transform;
+			//Setup components of border
+			MeshFilter  meshFilter = border.AddComponent<MeshFilter>();
+			MeshRenderer meshRenderer = border.AddComponent<MeshRenderer>();
+			meshFilter.mesh = instantiated_tile.GetComponent<MeshFilter>().mesh;
+			meshRenderer.material.mainTexture = (Texture)Resources.Load ("border-white");
+			meshRenderer.material.shader = Shader.Find ("Transparent/Diffuse");
+			meshRenderer.material.color = playerColour;
+			//Add tag
 			instantiated_tile.tag = "Tile";
-			
-			
 			//Set as child
 			instantiated_tile.transform.parent = map.transform;
 
