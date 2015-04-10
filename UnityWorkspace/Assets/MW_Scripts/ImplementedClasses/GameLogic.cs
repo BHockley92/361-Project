@@ -10,7 +10,7 @@ public class GameLogic : AbstractGameLogic
 	{
 		Tile spawnedTile = null;
 		foreach( Tile t in commandingVillage.controlledRegion) {
-			if(!t.hasVillage && t.occupyingUnit == null && t.myType.Equals(LandType.Tree) && t.getNeighbours().Any(x => x.occupyingUnit != null && (int)x.occupyingUnit.myType >= (int)u.myType)) {
+			if(!t.hasVillage && t.occupyingUnit == null && t.myType != LandType.Tree && t.getNeighbours().Any(x => x.occupyingUnit != null && (int)x.occupyingUnit.myType >= (int)u.myType)) {
 				spawnedTile = t;
 			}
 		}			
